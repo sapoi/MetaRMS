@@ -1,0 +1,12 @@
+/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.csproj.CoreCompileInputs.cache
+/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.AssemblyInfoInputs.cache
+/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.AssemblyInfo.cs
+/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.deps.json
+/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.runtimeconfig.json
+/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.runtimeconfig.dev.json
+/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.dll
+/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.pdb
+/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/RazorWebApp/bin/Debug/netcoreapp2.0/SharedLibrary.dll
+/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/RazorWebApp/bin/Debug/netcoreapp2.0/SharedLibrary.pdb
+/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.dll
+/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.pdb
