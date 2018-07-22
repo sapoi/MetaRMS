@@ -7752,11 +7752,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/SharedLibrary/SharedLibrary.csproj",
+      "projectUniqueName": "/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/SharedLibrary/SharedLibrary.csproj",
       "projectName": "SharedLibrary",
-      "projectPath": "/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/SharedLibrary/SharedLibrary.csproj",
+      "projectPath": "/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/SharedLibrary/SharedLibrary.csproj",
       "packagesPath": "/Users/sapoi/.nuget/packages/",
-      "outputPath": "/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/SharedLibrary/obj/",
+      "outputPath": "/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/SharedLibrary/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"

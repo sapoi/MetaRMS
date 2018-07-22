@@ -22,10 +22,17 @@ namespace RazorWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(typeof(IAppInitService), typeof(AppInitService));
             services.AddSingleton(typeof(IAccountService), typeof(AccountService));
             services.AddSingleton(typeof(ISecretService), typeof(SecretService));
+            services.AddSingleton(typeof(IDataService), typeof(DataService));
 
             services.AddMvc();
+
+            // cache for storing active application descriptors
+            services.AddMemoryCache();
+            //services.AddDistributedMemoryCache(); // uz nevim proc to tady bylo
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +47,7 @@ namespace RazorWebApp
                 app.UseExceptionHandler("/Error");
             }
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvc();
         }
     }

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using SharedLibrary.Helpers;
 using SharedLibrary.Models;
 
 namespace Server.Controllers
@@ -18,7 +19,7 @@ namespace Server.Controllers
     [Route("api/[controller]")]
     public class LoginController : Controller
     {
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public IActionResult Login()
         {
@@ -66,10 +67,11 @@ namespace Server.Controllers
         private readonly DatabaseContext _context;
         async Task<bool> IsAuthenticated(LoginCredentials loginCredentials)
         {
-            return (_context.UsersDbSet.Where(u => (u.ApplicationName == loginCredentials.ApplicationName && 
-                                                    u.Username == loginCredentials.Username && 
-                                                    u.Password == loginCredentials.Password)).Count() 
-                                                        == 1);
+            UserModel user = _context.UsersDbSet.Where(u => (u.Application.Name == loginCredentials.ApplicationName && 
+                                                    u.Username == loginCredentials.Username)).FirstOrDefault();
+            if (user == null)
+                return false;
+            return PasswordHelper.CheckHash(loginCredentials.Password, user.Password);
         }
 
         // sem se dostane kdokoli
@@ -98,12 +100,12 @@ namespace Server.Controllers
                     issuer: _configuration["TokenAuthentication:Issuer"],
                     audience: _configuration["TokenAuthentication:Audience"],
                     claims: claims,
-                    expires: DateTime.UtcNow.AddDays(60),
+                    expires: DateTime.UtcNow.AddHours(1),//.AddDays(60),
                     notBefore: DateTime.UtcNow,
                     signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["TokenAuthentication:SecretKey"])),
                             SecurityAlgorithms.HmacSha256)
                 );
-                var tmptoken = new JwtSecurityTokenHandler().WriteToken(token);
+                //var tmptoken = new JwtSecurityTokenHandler().WriteToken(token);
                 // a ten token se mu pošle zpátky
                return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
                //return token;
@@ -111,31 +113,6 @@ namespace Server.Controllers
 
             //return null;
             return BadRequest("Could not create token");
-
-
-
-            // var user = await _userManager.FindByEmailAsync(email);
-            // if (user == null)
-            // {
-            //     ModelState.AddModelError(string.Empty, "Invalid login");
-            //     return View();
-            // }
-            // if (!user.EmailConfirmed)
-            // {
-            //     ModelState.AddModelError(string.Empty, "Confirm your email first");
-            //     return View();
-            // }
-
-            // var passwordSignInResult = await _signInManager.PasswordSignInAsync(user, password, isPersistent: rememberMe, lockoutOnFailure: false);
-
-            // if (!passwordSignInResult.Succeeded)
-            // {
-            //     await _userManager.AccessFailedAsync(user);
-            //     ModelState.AddModelError(string.Empty, "Invalid login");
-            //     return View();
-            // }
-
-            // return Redirect("~/");
         }
     }
 }

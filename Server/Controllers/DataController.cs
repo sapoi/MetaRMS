@@ -1,12 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Xml.Serialization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.Sqlite;
-using Newtonsoft.Json;
 using SharedLibrary.Models;
+using System.Linq;
+using SharedLibrary.Helpers;
 
 namespace Server.Controllers
 {
@@ -20,11 +16,20 @@ namespace Server.Controllers
             _context = context;
         }
         [HttpPost]
-        public IActionResult Create(string appName, string dataset, string data)
+        public IActionResult Create(string appName, string datasetName, string data)
         {
-            Data d = new Data{ ApplicationName = appName, DatasetName = dataset, JsonData = data };
-            d.LoadFromJson();
-            foreach (var item in d.data)
+            var application = (from p in _context.ApplicationsDbSet
+                                 where p.Name == appName
+                                 select p).FirstOrDefault();
+            if (application == null)
+                return BadRequest(); // aplikace nenalazena
+            ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
+            var datasetId = adh.GetDatasetIdByName(datasetName);
+            if (datasetId == null)
+                return BadRequest(); // dataset nenalazen
+            DataModel d = new DataModel{ Application = application, DatasetId = (long)datasetId, Data = data };
+            //d.LoadFromJson();
+            foreach (var item in d.DataDictionary)
             {
                 Console.WriteLine(item.Key + " : " + item.Value);
             }

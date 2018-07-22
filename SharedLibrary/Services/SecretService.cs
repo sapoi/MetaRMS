@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -20,11 +21,12 @@ namespace SharedLibrary.Services
             //_client.DefaultRequestHeaders.Add("Authorization", headerValue);
         }
 
-        public async Task<HttpResponseMessage> Get(string cookieData)
+        // GET password  protected controller on server side with JWT token
+        public async Task<HttpResponseMessage> Get(string token)
         {
-            // odesílání tokenu na server
-            var headerValue = "Bearer " + cookieData;
-            _client.DefaultRequestHeaders.Add("Authorization", headerValue);
+            // adding JWT token value to authorization header
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            // GET request to server with authorization header containing JWT token value
             var response = await _client.GetAsync(_client.BaseAddress);
 
 

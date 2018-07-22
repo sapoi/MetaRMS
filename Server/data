@@ -4,6 +4,7 @@
   [
     {
       "Name":"User",
+      "Id":1,
       "Attributes": 
       [
         {
@@ -37,6 +38,7 @@
     },
     {
       "Name":"Person",
+      "Id":2,
       "Attributes": 
       [
         {
@@ -79,6 +81,7 @@
     },
     {
       "Name":"Cup",
+      "Id":3,
       "Attributes": 
       [
         {

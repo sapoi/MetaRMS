@@ -1,0 +1,53 @@
+@page 
+@model RazorWebApp.Pages.Account.GetModel 
+@{ 
+    ViewData["Title"] = @Model.ActiveDatasetDescriptor.Name; 
+}
+
+<div class="row">
+    <div class="col-sm-3">
+        @foreach (var item in Model.ApplicationDescriptor.Datasets) {
+        <form method="post" asp-route-datasetName="@item.Name" asp-page-handler="datasetSelect">
+            <button class="btn btn-default">@item.Name</button>
+        </form>
+        <br> }
+
+    </div>
+    <div class="col-sm-9">
+        <h2>@ViewData["Title"]</h2>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        @foreach (var item in Model.Keys) {
+                        <th>
+                            @item
+                        </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Data) {
+                    <tr>
+                        @foreach (var key in Model.Keys) {
+                        <td>
+                            @item[key]
+                        </td>
+                        }
+                        <td>
+                            <form method="post" asp-route-dataId="@item["DBId"]" asp-page-handler="dataEdit">
+                                <button class="btn btn-default">Edit</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post" asp-route-datasetName="@Model.ActiveDatasetDescriptor.Name" asp-route-dataId="@item["DBId"]" asp-page-handler="dataDelete">
+                                <button class="btn btn-default">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

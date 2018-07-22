@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,12 @@ namespace SharedLibrary.Services
         {
             //TODO
             return null;
+        }
+        public async Task<HttpResponseMessage> GetApplicationDescriptor(string appName, string token)
+        {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var address = new Uri("http://localhost:5000/api/applicationdescriptor" + '/' + appName);
+            return await _client.GetAsync(address);
         }
     }
 }

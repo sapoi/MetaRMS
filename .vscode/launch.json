@@ -9,7 +9,7 @@
         "name": "Server - .NET Core Launch (web)",
         "type": "coreclr",
         "request": "launch",
-        "preLaunchTask": "build",
+        "preLaunchTask": "build server",
         // If you have changed target frameworks, make sure to update the program path.
         "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp2.0/Server.dll",
         "args": [],
@@ -41,7 +41,7 @@
             "name": "RazorWebApp - .NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "build razorWebApp",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.dll",
             "args": [],

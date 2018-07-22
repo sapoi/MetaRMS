@@ -12564,11 +12564,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/RazorWebApp/RazorWebApp.csproj",
+      "projectUniqueName": "/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/RazorWebApp.csproj",
       "projectName": "RazorWebApp",
-      "projectPath": "/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/RazorWebApp/RazorWebApp.csproj",
+      "projectPath": "/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/RazorWebApp.csproj",
       "packagesPath": "/Users/sapoi/.nuget/packages/",
-      "outputPath": "/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/RazorWebApp/obj/",
+      "outputPath": "/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -12585,8 +12585,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/SharedLibrary/SharedLibrary.csproj": {
-              "projectPath": "/Users/sapoi/Dropbox/bakalarka/180321/MetaRMS/SharedLibrary/SharedLibrary.csproj"
+            "/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/SharedLibrary/SharedLibrary.csproj": {
+              "projectPath": "/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/SharedLibrary/SharedLibrary.csproj"
             }
           }
         }

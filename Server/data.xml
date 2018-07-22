@@ -1,0 +1,49 @@
+<!-- person-cup.png -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE system-model SYSTEM "system-model.dtd">
+
+<system-model> <!-- root element -->
+	<!-- list of datasets -->
+	<datasets> 
+		<dataset name="User"> <!-- obligatory dataset named Users for storing application users -->
+			<attributes>
+				<attribute name="id" type="long" allows-null="false" auto-increment="true"/> <!-- attirbute id is obligatory for every dataset -->
+				<!-- login, password and rights obligatory for User dataset -->
+				<attribute name="login" type="string" description="Uživatelské jméno"/>
+				<attribute name="password" type="string"/>
+				<attribute name="rights" type="string"/>
+			</attributes>
+		</dataset>
+		<dataset name="Person"> <!-- dataset named Person -->
+			<attributes>
+				<attribute name="id" type="long" allows-null="false" auto-increment="true"/>
+				<attribute name="name" type="string" description="Person's name"/> <!-- string attribute of dataset Person named name -->
+				<attribute name="section" type="string"/>
+				<attribute name="item" type="Cup"/> <!-- dataset reference attribute named item -->
+				<attribute name="fatigue" type="boolean"/>
+			</attributes>
+		</dataset>
+		<dataset name="Cup">
+			<attributes>
+				<attribute name="id" type="long" allows-null="false" auto-increment="true"/>
+				<attribute name="owner" type="Person" relationship="one"/>
+				<attribute name="material" type="string"/>
+				<attribute name="totalVolume" type="double"/>
+				<attribute name="amountFull" type="double"/>
+			</attributes>
+			<subdatasets>
+				<subdataset name="Coffee cup"> <!-- "Coffee cup" dataset inheriting from Cup dataset -->
+					<attributes>
+						<attribute name="handle" type="boolean"/>
+					</attributes>
+				</subdataset>
+				<subdataset name="Plastic cup">
+					<attributes>
+						<attribute name="straw" type="boolean"/>
+					</attributes>
+				</subdataset>
+			</subdatasets>
+		</dataset>
+	</datasets>
+</system-model>

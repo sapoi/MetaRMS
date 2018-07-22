@@ -13,16 +13,22 @@ using SharedLibrary.Services;
 using SharedLibrary.Models;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
+using System.Net;
+using Newtonsoft.Json;
+using SharedLibrary.Descriptors;
 
 namespace RazorWebApp.Pages.Account
 {
     public class LoginModel : PageModel
     {
         private readonly IAccountService _accountService;
+        private IMemoryCache _cache;
 
-        public LoginModel(IAccountService accountService)
+        public LoginModel(IAccountService accountService, IMemoryCache memoryCache)
         {
             this._accountService = accountService;
+            this._cache = memoryCache;
         }
 
         [BindProperty]
@@ -30,8 +36,6 @@ namespace RazorWebApp.Pages.Account
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var aa = TempData.Peek("klic");
-
             return Page();
         }
 
@@ -41,13 +45,21 @@ namespace RazorWebApp.Pages.Account
             {
                 // zisk tokenu, pokud jsou přihlašovací údaje správné
                 var response = await _accountService.Login(Input);
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    //TODO a vypsat chybovou hlasku
+                    return Page();
+                }
                 var jsonToken = response.Content.ReadAsStringAsync().Result;
-
-                if (!TempData.ContainsKey("klic"))
-                    TempData.Add("klic", "hodnota");
-                else 
-                    TempData["klic"] = jsonToken;
+                // ulozeni tokenu do session storage
+                HttpContext.Session.SetString("sessionJWT", jsonToken);
+                var token = AuthorizationHelper.GetToken(this);
+                // pokud jiz neni v cahe, nacist appliction descriptor a ulozit ho do ni
+                await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, Input.ApplicationName, token.token);
+                //return RedirectToPage("/Account/Secret");
+                return RedirectToPage("/Data/Get");
             }
+            //TODO vypsat nejakou chybu
             return Page();
         }
     }

@@ -9,5 +9,6 @@ namespace SharedLibrary.Services
     {           
         Task<HttpResponseMessage> Login(LoginCredentials data); 
         Task<IActionResult> Logout(); 
+        Task<HttpResponseMessage> GetApplicationDescriptor(string appName, string token);
     }
 }

@@ -33,7 +33,10 @@ namespace RazorWebApp.Pages.Account
         }
         public async Task<IActionResult> OnGetAsync()
         {
-            var cookieData = (string)TempData.Peek("klic");
+            //var cookieData = (string)TempData.Peek("klic");
+            
+            // get token from session storage
+            var cookieData = HttpContext.Session.GetString("sessionJWT");
 
             var token = JsonConvert.DeserializeObject<AccessToken>(cookieData);
 
