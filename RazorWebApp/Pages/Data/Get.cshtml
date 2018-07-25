@@ -1,4 +1,4 @@
-@page 
+@page "{datasetName?}/{handler?}"
 @model RazorWebApp.Pages.Account.GetModel 
 @{ 
     ViewData["Title"] = @Model.ActiveDatasetDescriptor.Name; 
@@ -15,6 +15,9 @@
     </div>
     <div class="col-sm-9">
         <h2>@ViewData["Title"]</h2>
+        <form method="post" asp-route-datasetName="@Model.ActiveDatasetDescriptor.Name" asp-page-handler="dataCreate">
+            <button class="btn btn-default">Create</button>
+        </form>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -35,7 +38,7 @@
                         </td>
                         }
                         <td>
-                            <form method="post" asp-route-dataId="@item["DBId"]" asp-page-handler="dataEdit">
+                            <form method="post" asp-route-datasetName="@Model.ActiveDatasetDescriptor.Name" asp-route-dataId="@item["DBId"]" asp-page-handler="dataEdit">
                                 <button class="btn btn-default">Edit</button>
                             </form>
                         </td>

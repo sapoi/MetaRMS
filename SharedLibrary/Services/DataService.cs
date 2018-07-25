@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -32,6 +33,17 @@ namespace SharedLibrary.Services
             return response;
         }
 
+        public async Task<HttpResponseMessage> GetById(string appName, string dataset, long id, string token)
+        {
+            // adding JWT token value to authorization header
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            // GET request to server with authorization header containing JWT token value
+            var address = new Uri(_client.BaseAddress.OriginalString + "/get/" + appName + '/' + dataset + '/' + id);
+            var response = await _client.GetAsync(address);
+
+            return response;
+        }
+
         public async Task<HttpResponseMessage> DeleteById(string appName, string dataset, long id, string token)
         {
             // adding JWT token value to authorization header
@@ -39,6 +51,34 @@ namespace SharedLibrary.Services
             // GET request to server with authorization header containing JWT token value
             var address = new Uri(_client.BaseAddress.OriginalString + "/delete/" + appName + '/' + dataset + '/' + id);
             var response = await _client.GetAsync(address);
+
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> PatchById(string appName, string dataset, long id, Dictionary<string, object> dataDict, string token)
+        {
+            // adding JWT token value to authorization header
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            // odesílání dat na server
+            string jsonData = JsonConvert.SerializeObject(dataDict);
+            var jsonDataContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            // GET request to server with authorization header containing JWT token value
+            var address = new Uri(_client.BaseAddress.OriginalString + "/patch/" + appName + '/' + dataset + '/' + id);
+            var response = await _client.PostAsync(address, jsonDataContent);
+
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> Create(string appName, string dataset, Dictionary<string, object> dataDict, string token)
+        {
+            // adding JWT token value to authorization header
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            // odesílání dat na server
+            string jsonData = JsonConvert.SerializeObject(dataDict);
+            var jsonDataContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            // GET request to server with authorization header containing JWT token value
+            var address = new Uri(_client.BaseAddress.OriginalString + "/create/" + appName + '/' + dataset);
+            var response = await _client.PostAsync(address, jsonDataContent);
 
             return response;
         }

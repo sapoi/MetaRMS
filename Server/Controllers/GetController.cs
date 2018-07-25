@@ -22,7 +22,7 @@ namespace Server.Controllers
         {
             _context = context;
         }
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         [Route("{appName}/{datasetName}")]
         public IActionResult GetAll(string appName, string datasetName)
@@ -48,6 +48,30 @@ namespace Server.Controllers
                 result.Add(tmpDict);
             }
             return Ok(result);
+        }
+        [HttpGet]
+        [Route("{appName}/{datasetName}/{id}")]
+        public IActionResult GetById(string appName, string datasetName, long id)
+        {
+            ApplicationModel application = (from a in _context.ApplicationsDbSet
+                                   where (a.Name == appName)
+                                   select a).FirstOrDefault();
+            if (application == null)
+                return BadRequest("spatny nazev aplikace neexistuje");
+            ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
+            var datasetId = adh.GetDatasetIdByName(datasetName);
+            if (datasetId == null)
+                return BadRequest("spatny nazev datasetu");
+            DataModel query = (from p in _context.DataDbSet
+                                   where (p.Application.Name == appName && p.DatasetId == datasetId && p.Id == id)
+                                   select p).FirstOrDefault();
+            if (query == null)
+                return BadRequest("neexistujici kombinace jmena aplikace, datasetu a id");
+
+            
+
+
+            return Ok(query.DataDictionary);
         }
     }
 }

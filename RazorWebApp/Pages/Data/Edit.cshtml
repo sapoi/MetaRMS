@@ -1,5 +1,5 @@
-@page "{datasetName?}"
-@model RazorWebApp.Pages.Account.CreateModel 
+@page "{datasetName?}/{id?}"
+@model RazorWebApp.Pages.Account.EditModel 
 @{ 
     ViewData["Title"] = @Model.DatasetDescriptor.Name; 
 }
@@ -17,12 +17,13 @@
         <h2>@ViewData["Title"]</h2>
         <form method="post">
             <input type="hidden" asp-for="DatasetName"/>
+            <input type="hidden" asp-for="DataId"/>
             @for (int i = 0; i < Model.DatasetDescriptor.Attributes.Count; i++){
                 <input type="hidden" asp-for="Keys[i]"/>
                 <div class="form-group">
                      @{ var attribute = Model.DatasetDescriptor.Attributes[i]; }
                     <label>@attribute.Name</label>
-                    <input name="ValueList[@i]" class="form-control">
+                    <input value="@Model.Data[attribute.Name].ToString()" name="ValueList[@i]" class="form-control">
                     <!--<span asp-validation-for="Model.ValueList[@i]" class="text-danger"></span>-->
                 </div>
             }

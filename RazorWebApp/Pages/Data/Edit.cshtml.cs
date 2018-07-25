@@ -14,13 +14,13 @@ using SharedLibrary.Descriptors;
 
 namespace RazorWebApp.Pages.Account
 {
-    public class GetModel : PageModel
+    public class EditModel : PageModel
     {
         private readonly IDataService _dataService;
         private readonly IAccountService _accountService;
         private IMemoryCache _cache;
 
-        public GetModel(IDataService dataService, IAccountService accountService, IMemoryCache memoryCache)
+        public EditModel(IDataService dataService, IAccountService accountService, IMemoryCache memoryCache)
         {
             this._dataService = dataService;
             this._accountService = accountService;
@@ -29,11 +29,19 @@ namespace RazorWebApp.Pages.Account
 
         [BindProperty]
         public ApplicationDescriptor ApplicationDescriptor { get; set; }
-        public DatasetDescriptor ActiveDatasetDescriptor { get; set; }
-        public List<Dictionary<String, Object>> Data { get; set; }
+        public DatasetDescriptor DatasetDescriptor { get; set; }
+        public Dictionary<String, Object> Data { get; set; }
+        //public Dictionary<String, Object> InputData { get; set; }
+        [BindProperty]
         public List<string> Keys { get; set; }
+        [BindProperty]
+        public List<string> ValueList { get; set; }
+        [BindProperty]
+        public string DatasetName { get; set; }
+        [BindProperty]
+        public long DataId { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string datasetName = null)
+        public async Task<IActionResult> OnGetAsync(string datasetName, long id)
         {
             var token = AuthorizationHelper.GetToken(this);
             if (token == null)
@@ -41,47 +49,44 @@ namespace RazorWebApp.Pages.Account
                 Console.WriteLine("neni token");
                 return RedirectToPage("/Account/Login");
             }
-
             var appName = AuthorizationHelper.GetAppNameFromToken(token);
             if (appName == null)
             {
-                Console.WriteLine("v tokenu nebzl calim co se jmenuje ApplicationName");
+                Console.WriteLine("v tokenu nebyl claim co se jmenuje ApplicationName");
                 return RedirectToPage("/Account/Login");
             }
-
             ApplicationDescriptor = await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, appName, token.token);
-            if (datasetName == null)
+            DatasetDescriptor = ApplicationDescriptor.Datasets.Where(d => d.Name == datasetName).FirstOrDefault();
+            if (DatasetDescriptor == null)
             {
-                datasetName = ApplicationDescriptor.Datasets[0].Name;
+                Console.WriteLine("dataset neexistuje");
+                return RedirectToPage("/Account/Login");
             }
-            ActiveDatasetDescriptor = ApplicationDescriptor.Datasets.Where(d => d.Name == datasetName).FirstOrDefault();
-            if (ActiveDatasetDescriptor == null)
-                ActiveDatasetDescriptor = ApplicationDescriptor.Datasets[0];
+            DatasetName = datasetName;
+            DataId = id;
             if (ModelState.IsValid)
             {
-                var response = await _dataService.GetAll(appName, datasetName, token.token);
+                var response = await _dataService.GetById(appName, datasetName, id, token.token);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
-                Data = JsonConvert.DeserializeObject<List<Dictionary<String, Object>>>(stringResponse);
+                Data = JsonConvert.DeserializeObject<Dictionary<String, Object>>(stringResponse);
                 Keys = new List<string>();
-                foreach (var key in ActiveDatasetDescriptor.Attributes)
+                //InputData = new Dictionary<string, object>();
+                foreach (var key in DatasetDescriptor.Attributes)
                 {
+                    //InputData.Add(key.Name, new object());
                     Keys.Add(key.Name);
                 }
             }
             return Page();
         }
-        public async Task<IActionResult> OnPostDatasetSelectAsync(string datasetName)
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            return await OnGetAsync(datasetName);
-        }
-        public async Task<IActionResult> OnPostDataEditAsync(string datasetName, string dataId)
-        {
-            return RedirectToPage("Edit", "", new {datasetName = datasetName, id = dataId});
-            //return RedirectToPage("/Data/Edit/", );
-        }
-        public async Task<IActionResult> OnPostDataDeleteAsync(string datasetName, long dataId)
-        {
+            Dictionary<String, Object> inputData = new Dictionary<string, object>();
+            for (int i = 0; i < Keys.Count; i++)
+            {
+                inputData.Add(Keys[i], ValueList[i]);
+            }
             var token = AuthorizationHelper.GetToken(this);
             if (token == null)
             {
@@ -91,22 +96,21 @@ namespace RazorWebApp.Pages.Account
             var appName = AuthorizationHelper.GetAppNameFromToken(token);
             if (appName == null)
             {
-                Console.WriteLine("v tokenu nebzl claim co se jmenuje ApplicationName");
+                Console.WriteLine("v tokenu nebyl claim co se jmenuje ApplicationName");
                 return RedirectToPage("/Account/Login");
             }
-            if (datasetName == null)
+            if (DatasetName == null)
             {
                 Console.WriteLine("neni aktivni dataset");
                 return RedirectToPage("/Account/Login");
             }
-
-            await _dataService.DeleteById(appName, datasetName, dataId, token.token);
-            return await OnGetAsync(datasetName);
+            await _dataService.PatchById(appName, DatasetName, DataId, inputData, token.token);
+            return RedirectToPage("/Data/Get");
         }
-
-        public async Task<IActionResult> OnPostDataCreateAsync(string datasetName)
+        
+        public async Task<IActionResult> OnPostDatasetSelectAsync(string datasetName)
         {
-            return RedirectToPage("Create", "", new {datasetName = datasetName});
+            return RedirectToPage("Get", "", new {datasetName = datasetName});
         }
     }
 }
