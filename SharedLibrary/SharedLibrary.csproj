@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.2" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.2.4" />
   </ItemGroup>
 
   <ItemGroup>

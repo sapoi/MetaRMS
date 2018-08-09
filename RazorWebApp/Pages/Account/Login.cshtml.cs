@@ -17,6 +17,8 @@ using Microsoft.Extensions.Caching.Memory;
 using System.Net;
 using Newtonsoft.Json;
 using SharedLibrary.Descriptors;
+using SharedLibrary.Structures;
+using RazorWebApp.Helpers;
 
 namespace RazorWebApp.Pages.Account
 {
@@ -53,9 +55,9 @@ namespace RazorWebApp.Pages.Account
                 var jsonToken = response.Content.ReadAsStringAsync().Result;
                 // ulozeni tokenu do session storage
                 HttpContext.Session.SetString("sessionJWT", jsonToken);
-                var token = AuthorizationHelper.GetToken(this);
+                var token = AuthorizationHelper.GetTokenFromPageModel(this);
                 // pokud jiz neni v cahe, nacist appliction descriptor a ulozit ho do ni
-                await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, Input.ApplicationName, token.token);
+                await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, Input.ApplicationName, token.Value);
                 //return RedirectToPage("/Account/Secret");
                 return RedirectToPage("/Data/Get");
             }

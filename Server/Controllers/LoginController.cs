@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SharedLibrary.Helpers;
 using SharedLibrary.Models;
+using SharedLibrary.Structures;
 
 namespace Server.Controllers
 {
@@ -65,13 +66,10 @@ namespace Server.Controllers
             _context = context;
         }
         private readonly DatabaseContext _context;
-        async Task<bool> IsAuthenticated(LoginCredentials loginCredentials)
+        async Task<UserModel> getUserModel(LoginCredentials loginCredentials)
         {
-            UserModel user = _context.UsersDbSet.Where(u => (u.Application.Name == loginCredentials.ApplicationName && 
+            return _context.UsersDbSet.Where(u => (u.Application.Name == loginCredentials.ApplicationName && 
                                                     u.Username == loginCredentials.Username)).FirstOrDefault();
-            if (user == null)
-                return false;
-            return PasswordHelper.CheckHash(loginCredentials.Password, user.Password);
         }
 
         // sem se dostane kdokoli
@@ -81,16 +79,18 @@ namespace Server.Controllers
         {
             if (ModelState.IsValid)
             {
-                var isAuthenticated = await IsAuthenticated(loginCredentials);
-                if (!isAuthenticated)
+                var user = await getUserModel(loginCredentials);
+                if (user == null)
+                    return Unauthorized(); //"kombinace jmena aplikace a username"
+                if (!PasswordHelper.CheckHash(loginCredentials.Password, user.Password))
                 {
                     return Unauthorized();
-                    //return null;
                 }
                 // a když jsou platné přihlašovací údaje, vytvoří se token
                 var claims = new[]
                 {
                     new Claim(ClaimTypes.Name, loginCredentials.Username),
+                    new Claim("UserId", user.Id.ToString()),
                     new Claim("ApplicationName", loginCredentials.ApplicationName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
@@ -100,19 +100,19 @@ namespace Server.Controllers
                     issuer: _configuration["TokenAuthentication:Issuer"],
                     audience: _configuration["TokenAuthentication:Audience"],
                     claims: claims,
-                    expires: DateTime.UtcNow.AddHours(1),//.AddDays(60),
+                    expires: DateTime.UtcNow.AddHours(1),//.AddDays(60), //TODO
                     notBefore: DateTime.UtcNow,
                     signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["TokenAuthentication:SecretKey"])),
                             SecurityAlgorithms.HmacSha256)
                 );
                 //var tmptoken = new JwtSecurityTokenHandler().WriteToken(token);
                 // a ten token se mu pošle zpátky
-               return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+               return Ok(new { Value = new JwtSecurityTokenHandler().WriteToken(token) });
                //return token;
             }
 
             //return null;
-            return BadRequest("Could not create token");
+            return BadRequest("Could not create token - model state not valid");
         }
     }
 }

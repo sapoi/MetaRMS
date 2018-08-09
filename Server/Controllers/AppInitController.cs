@@ -14,6 +14,8 @@ using SharedLibrary;
 using SharedLibrary.Descriptors;
 using SharedLibrary.Models;
 using SharedLibrary.Helpers;
+using SharedLibrary.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Server.Controllers
 {
@@ -26,6 +28,7 @@ namespace Server.Controllers
         {
             _context = context;
         }
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Create(string email, IFormFile file)
         {
@@ -56,17 +59,25 @@ namespace Server.Controllers
             if (applicationDescriptor.Datasets.Any(d => d.Attributes.Any(a => a.Name == "DBId")))
                 return BadRequest("Nepovoleny nazev atributu DBId");
                 //TODO otestovat
-
+            // add unique Id for each dataset
+            for (int i = 0; i < applicationDescriptor.Datasets.Count; i++)
+            {
+                applicationDescriptor.Datasets[i].Id = i + 1;
+            }
             using (var transaction = _context.Database.BeginTransaction())
             {
                 try
                 {
                     // create new application and add it to DB
-                    ApplicationModel newApplication = new ApplicationModel { Name = applicationDescriptor.AppName, ApplicationDescriptorJSON = stringFile };
+                    string serializedApplicationDescriptor = JsonConvert.SerializeObject(applicationDescriptor);
+                    ApplicationModel newApplication = new ApplicationModel { 
+                        Name = applicationDescriptor.AppName, 
+                        ApplicationDescriptorJSON = serializedApplicationDescriptor
+                        };
                     _context.ApplicationsDbSet.Add(newApplication);
                     // create new admin account for new application and add it to DB
                     string newPassword = PasswordHelper.GenerateRandomPassword(8);
-                    RightsModel newRights = getAdminRights(newApplication);
+                    RightsModel newRights = getAdminRights(newApplication, applicationDescriptor);
                     _context.RightsDbSet.Add(newRights);
                     UserModel newUser = new UserModel
                     {
@@ -90,14 +101,24 @@ namespace Server.Controllers
             _context.SaveChangesAsync();
             return Ok();
         }
-        RightsModel getAdminRights(ApplicationModel application)
+        RightsModel getAdminRights(ApplicationModel appModel, ApplicationDescriptor appDescriptor)
         {
             RightsModel rights = new RightsModel();
-            rights.Application = application;
+            rights.Application = appModel;
             rights.Name = "admin";
-            rights.Data = "";
-            //TODO
 
+            Dictionary<long, RightsEnum> rightsDict = new Dictionary<long, RightsEnum>();
+            // key -1 is representing table users
+            rightsDict[-1] = RightsEnum.CRUD;
+            // key -2 is representing table rights
+            rightsDict[-2] = RightsEnum.CRUD;
+            // positive integers are representing datasets
+            foreach (var dataset in appDescriptor.Datasets)
+            {
+                rightsDict[dataset.Id] = RightsEnum.CRUD;
+            }
+            // serialize rights to JSON
+            rights.Data = JsonConvert.SerializeObject(rightsDict);
             return rights;
         }
         void sendEmailWithCredentials(string email, string password)

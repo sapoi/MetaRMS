@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SharedLibrary.Models;
+using SharedLibrary.Structures;
 
 namespace SharedLibrary.Services
 {
@@ -32,10 +33,16 @@ namespace SharedLibrary.Services
             //TODO
             return null;
         }
-        public async Task<HttpResponseMessage> GetApplicationDescriptor(string appName, string token)
+        public async Task<HttpResponseMessage> GetApplicationDescriptorByAppName(string token)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var address = new Uri("http://localhost:5000/api/applicationdescriptor" + '/' + appName);
+            var address = new Uri("http://localhost:5000/api/applicationdescriptor");
+            return await _client.GetAsync(address);
+        }
+        public async Task<HttpResponseMessage> GetUserRightsById(string token)
+        {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var address = new Uri("http://localhost:5000/api/account/rights");
             return await _client.GetAsync(address);
         }
     }

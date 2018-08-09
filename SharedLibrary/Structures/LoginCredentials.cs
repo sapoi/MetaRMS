@@ -1,4 +1,4 @@
-namespace SharedLibrary.Models
+namespace SharedLibrary.Structures
 {
     public class LoginCredentials 
         {

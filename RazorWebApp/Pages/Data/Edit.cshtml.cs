@@ -11,6 +11,7 @@ using Microsoft.Extensions.Caching.Memory;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using SharedLibrary.Descriptors;
+using RazorWebApp.Helpers;
 
 namespace RazorWebApp.Pages.Account
 {
@@ -43,30 +44,31 @@ namespace RazorWebApp.Pages.Account
 
         public async Task<IActionResult> OnGetAsync(string datasetName, long id)
         {
-            var token = AuthorizationHelper.GetToken(this);
+            var token = AuthorizationHelper.GetTokenFromPageModel(this);
             if (token == null)
             {
-                Console.WriteLine("neni token");
+                Logger.Log(DateTime.Now, "neni token");
                 return RedirectToPage("/Account/Login");
             }
-            var appName = AuthorizationHelper.GetAppNameFromToken(token);
+            TokenHelper tokenHelper = new TokenHelper(token);
+            var appName = tokenHelper.GetAppName();
             if (appName == null)
             {
-                Console.WriteLine("v tokenu nebyl claim co se jmenuje ApplicationName");
+                Logger.Log(DateTime.Now, "v tokenu nebyl claim co se jmenuje ApplicationName");
                 return RedirectToPage("/Account/Login");
             }
-            ApplicationDescriptor = await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, appName, token.token);
+            ApplicationDescriptor = await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, appName, token.Value);
             DatasetDescriptor = ApplicationDescriptor.Datasets.Where(d => d.Name == datasetName).FirstOrDefault();
             if (DatasetDescriptor == null)
             {
-                Console.WriteLine("dataset neexistuje");
+                Logger.Log(DateTime.Now, "dataset neexistuje");
                 return RedirectToPage("/Account/Login");
             }
             DatasetName = datasetName;
             DataId = id;
             if (ModelState.IsValid)
             {
-                var response = await _dataService.GetById(appName, datasetName, id, token.token);
+                var response = await _dataService.GetById(appName, datasetName, id, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 Data = JsonConvert.DeserializeObject<Dictionary<String, Object>>(stringResponse);
@@ -87,24 +89,25 @@ namespace RazorWebApp.Pages.Account
             {
                 inputData.Add(Keys[i], ValueList[i]);
             }
-            var token = AuthorizationHelper.GetToken(this);
+            var token = AuthorizationHelper.GetTokenFromPageModel(this);
             if (token == null)
             {
-                Console.WriteLine("neni token");
+                Logger.Log(DateTime.Now, "neni token");
                 return RedirectToPage("/Account/Login");
             }
-            var appName = AuthorizationHelper.GetAppNameFromToken(token);
+            TokenHelper tokenHelper = new TokenHelper(token);
+            var appName = tokenHelper.GetAppName();
             if (appName == null)
             {
-                Console.WriteLine("v tokenu nebyl claim co se jmenuje ApplicationName");
+                Logger.Log(DateTime.Now, "v tokenu nebyl claim co se jmenuje ApplicationName");
                 return RedirectToPage("/Account/Login");
             }
             if (DatasetName == null)
             {
-                Console.WriteLine("neni aktivni dataset");
+                Logger.Log(DateTime.Now, "neni aktivni dataset");
                 return RedirectToPage("/Account/Login");
             }
-            await _dataService.PatchById(appName, DatasetName, DataId, inputData, token.token);
+            await _dataService.PatchById(appName, DatasetName, DataId, inputData, token.Value);
             return RedirectToPage("/Data/Get");
         }
         
