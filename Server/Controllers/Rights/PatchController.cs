@@ -11,9 +11,9 @@ using SharedLibrary.Models;
 using System.Linq;
 using SharedLibrary.Helpers;
 
-namespace Server.Controllers
+namespace Server.Controllers.Rights
 {
-    [Route("api/[controller]")]
+    [Route("api/rights/[controller]")]
     public class PatchController : Controller
     {
         private readonly DatabaseContext _context;
@@ -24,9 +24,8 @@ namespace Server.Controllers
         }
         [Authorize]
         [HttpPost]
-        [Route("{appName}/{datasetName}/{id}")]
-        public IActionResult PatchById(string appName, string datasetName, long id, 
-                                      [FromBody] Dictionary<string, object> data)
+        [Route("{appName}/{id}")]
+        public IActionResult PatchById(string appName, long id,  [FromBody] RightsModel fromBodyRightsModel)
         {
             ApplicationModel application = (from a in _context.ApplicationsDbSet
                                    where (a.Name == appName)
@@ -34,26 +33,29 @@ namespace Server.Controllers
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
-            var datasetId = adh.GetDatasetIdByName(datasetName);
-            if (datasetId == null)
-                return BadRequest("spatny nazev datasetu");
-            DataModel query = (from p in _context.DataDbSet
-                                   where (p.Application.Name == appName && p.DatasetId == datasetId && p.Id == id)
+            RightsModel query = (from p in _context.RightsDbSet
+                                   where (p.Application.Name == appName && p.Id == id)
                                    select p).FirstOrDefault();
             if (query == null)
-                return BadRequest("neexistujici kombinace jmena aplikace, datasetu a id");
-            string JsonData = JsonConvert.SerializeObject(data);
-            query.Data = JsonData;
+                return BadRequest("neexistujici kombinace jmena aplikace a id");
+
+            // string rightsName = "";
+            // Dictionary<string, object> rightsData = new Dictionary<string, object>();
+            // foreach (var item in fromBodyData)
+            // {
+            //     if(item.Key == "Name")
+            //         rightsName = item.Value.ToString();
+            //     else
+            //     {
+            //         rightsData.Add(item.Key, item.Value);
+            //     }
+            // }
+
+
+            // string JsonData = JsonConvert.SerializeObject(rightsData);
+            query.Name = fromBodyRightsModel.Name;
+            query.Data = JsonConvert.SerializeObject(fromBodyRightsModel.DataDictionary);
             _context.SaveChanges();
-
-
-            // _context.DataDbSet.Remove(query);
-
-            // //string JsonData = JsonConvert.SerializeObject(data);
-            // DataModel dataModel = new DataModel{Id = id, ApplicationId=application.Id, DatasetId=(long)datasetId, Data=JsonData};
-            // _context.DataDbSet.Add(dataModel);
-
-            //_context.SaveChanges();
             return Ok("saved successfully");
         }
     }

@@ -12,33 +12,40 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using SharedLibrary.Descriptors;
 using RazorWebApp.Helpers;
+using SharedLibrary.Enums;
 
-namespace RazorWebApp.Pages.Data
+namespace RazorWebApp.Pages.Rights
 {
-    public class CreateModel : PageModel
+    public class EditModel : PageModel
     {
-        private readonly IDataService _dataService;
+        private readonly IRightsService _rightsService;
         private readonly IAccountService _accountService;
         private IMemoryCache _cache;
 
-        public CreateModel(IDataService dataService, IAccountService accountService, IMemoryCache memoryCache)
+        public EditModel(IRightsService rightsService, IAccountService accountService, IMemoryCache memoryCache)
         {
-            this._dataService = dataService;
+            this._rightsService = rightsService;
             this._accountService = accountService;
             this._cache = memoryCache;
         }
 
         [BindProperty]
         public ApplicationDescriptor ApplicationDescriptor { get; set; }
-        public DatasetDescriptor DatasetDescriptor { get; set; }
+        //public DatasetDescriptor DatasetDescriptor { get; set; }
+        public RightsModel Data { get; set; }
+        //public Dictionary<String, Object> InputData { get; set; }
         [BindProperty]
-        public List<string> Keys { get; set; }
+        public List<long> Keys { get; set; }
         [BindProperty]
         public List<string> ValueList { get; set; }
+        // [BindProperty]
+        // public string DatasetName { get; set; }
         [BindProperty]
-        public string DatasetName { get; set; }
+        public long DataId { get; set; }
+        [BindProperty]
+        public string RightsName { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string datasetName)
+        public async Task<IActionResult> OnGetAsync(long id)
         {
             var token = AuthorizationHelper.GetTokenFromPageModel(this);
             if (token == null)
@@ -54,35 +61,35 @@ namespace RazorWebApp.Pages.Data
                 return RedirectToPage("/Account/Login");
             }
             ApplicationDescriptor = await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, appName, token.Value);
-            DatasetDescriptor = ApplicationDescriptor.Datasets.Where(d => d.Name == datasetName).FirstOrDefault();
-            if (DatasetDescriptor == null)
-            {
-                Logger.Log(DateTime.Now, "dataset neexistuje");
-                return RedirectToPage("/Account/Login");
-            }
-            DatasetName = datasetName;
+        
+            DataId = id;
             if (ModelState.IsValid)
             {
-                //var response = await _dataService.GetById(appName, datasetName, id, token.token);
+                var response = await _rightsService.GetById(appName, id, token.Value);
                 //TODO kontrolovat chyby v response
-                //string stringResponse = await response.Content.ReadAsStringAsync();
-                //Data = JsonConvert.DeserializeObject<Dictionary<String, Object>>(stringResponse);
-                Keys = new List<string>();
+                string stringResponse = await response.Content.ReadAsStringAsync();
+                Data = JsonConvert.DeserializeObject<RightsModel>(stringResponse);
+                Keys = new List<long>();
                 //InputData = new Dictionary<string, object>();
-                foreach (var key in DatasetDescriptor.Attributes)
+                foreach (var key in ApplicationDescriptor.Datasets)
                 {
                     //InputData.Add(key.Name, new object());
-                    Keys.Add(key.Name);
+                    Keys.Add(key.Id);
                 }
+                Keys.Add((long)SystemDatasetsEnum.Users);
+                Keys.Add((long)SystemDatasetsEnum.Rights);
             }
             return Page();
         }
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             Dictionary<String, Object> inputData = new Dictionary<string, object>();
-            for (int i = 0; i < Keys.Count; i++)
+            //inputData.Add("Name", RightsName);
+            inputData.Add(((long)SystemDatasetsEnum.Users).ToString(), ValueList[0]);
+            inputData.Add(((long)SystemDatasetsEnum.Rights).ToString(), ValueList[1]);
+            for (int i = 2; i < Keys.Count + 2; i++)
             {
-                inputData.Add(Keys[i], ValueList[i]);
+                inputData.Add(Keys[i - 2].ToString(), ValueList[i]);
             }
             var token = AuthorizationHelper.GetTokenFromPageModel(this);
             if (token == null)
@@ -97,18 +104,11 @@ namespace RazorWebApp.Pages.Data
                 Logger.Log(DateTime.Now, "v tokenu nebyl claim co se jmenuje ApplicationName");
                 return RedirectToPage("/Account/Login");
             }
-            if (DatasetName == null)
-            {
-                Logger.Log(DateTime.Now, "neni aktivni dataset");
-                return RedirectToPage("/Account/Login");
-            }
-            await _dataService.Create(appName, DatasetName, inputData, token.Value);
-            return RedirectToPage("/Data/Get");
-        }
-        
-        public async Task<IActionResult> OnPostDatasetSelectAsync(string datasetName)
-        {
-            return RedirectToPage("Get", "", new {datasetName = datasetName});
+            RightsModel patchedRightsModel = new RightsModel() { Name = RightsName, Data = JsonConvert.SerializeObject(inputData) };
+            await _rightsService.PatchById(appName, DataId, patchedRightsModel, token.Value);
+            // delete old rights from cache
+            CacheAccessHelper.RemoveRightsFromCache(_cache, appName, DataId);
+            return RedirectToPage("/Rights/Get");
         }
     }
 }

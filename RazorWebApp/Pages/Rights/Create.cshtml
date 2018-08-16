@@ -1,0 +1,58 @@
+@page 
+@using SharedLibrary.Enums 
+@model RazorWebApp.Pages.Rights.CreateModel 
+@{ 
+    ViewData["Title"] = "Rights"; 
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h2>@ViewData["Title"]</h2>
+        <form method="post">
+            <input type="hidden" asp-for="ApplicationDescriptor" />
+
+            <div class="form-group">
+                <label>Name</label>
+                <input name="RightsName" class="form-control">
+            </div>
+             
+            @for (int i = 2; i < Model.ApplicationDescriptor.Datasets.Count + 2; i++){ 
+            <input type="hidden" asp-for="Keys[i-2]" />
+            <div class="form-group">
+                @{ var dataset = Model.ApplicationDescriptor.Datasets[i-2]; }
+                <label>@dataset.Name</label>
+                <select name="ValueList[@i]" 
+                        asp-items="Html.GetEnumSelectList<RightsEnum>()" 
+                        class="form-control"
+                        >
+                </select>
+            </div>
+            }
+            <hr>
+            <div class="form-group">
+                <label>Users</label>
+                <select name="ValueList[0]" 
+                        asp-items="Html.GetEnumSelectList<RightsEnum>()"
+                        class="form-control"
+                        >
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label>Rights</label>
+                <select name="ValueList[1]" 
+                        asp-items="Html.GetEnumSelectList<RightsEnum>()"
+                        class="form-control"
+                        >
+                </select>
+
+            </div>
+
+
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

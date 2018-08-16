@@ -1,8 +1,11 @@
-@page
-@model AboutModel
-@{
-    ViewData["Title"] = "About";
+@page "{handler?}"
+@using SharedLibrary.Enums
+@model RazorWebApp.Pages.Rights.GetModel 
+@{ 
+    ViewData["Title"] = "Rights"; 
 }
+
+
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
@@ -13,18 +16,98 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-page="/Index" class="navbar-brand">MetaRMS</a>
+                <a asp-page="/Index" class="navbar-brand">@Model.ApplicationDescriptor.AppName</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-page="/AppInit/Index" class="navbar-brand">Create new application</a></li>
+                    <li><a asp-page="/Index" class="navbar-brand">Logout</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Model.NavbarRights[(long)SystemDatasetsEnum.Users] >= RightsEnum.R)
+                    {
+                        <li><a asp-page="../Users/Get">Users</a></li>
+                    }
+                    @if (Model.NavbarRights[(long)SystemDatasetsEnum.Rights] >= RightsEnum.R)
+                    {
+                        <li><a asp-page="../Rights/Get">Rights</a></li>
+                    }
+                    <li><a asp-page="/Account/Settings">Settings</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
 
-<h2>@ViewData["Title"]</h2>
-<h3>@Model.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <h2>@ViewData["Title"]</h2>
+        @if (Model.RightsRights >= RightsEnum.CRU)
+        {
+            <form method="post" asp-page-handler="rightsCreate">
+                <button class="btn btn-default">Create</button>
+            </form>
+        }
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        @foreach (var dataset in Model.ApplicationDescriptor.Datasets) {
+                        <th>
+                            @dataset.Name
+                        </th>
+                        }
+                        <th>
+                            Users
+                        </th>
+                        <th>
+                            Rights
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Data) {
+                    <tr>
+                        <td>
+                            @item.Name
+                        </td>
+                        @foreach (var dataset in Model.ApplicationDescriptor.Datasets) {
+                        <td>
+                            @((RightsEnum)int.Parse(item.DataDictionary[dataset.Id.ToString()].ToString()))
+                        </td>
+                        }
+                        <td>
+                            @((RightsEnum)int.Parse(item.DataDictionary[((long)SystemDatasetsEnum.Users).ToString()].ToString()))
+                        </td>
+                        <td>
+                            @((RightsEnum)int.Parse(item.DataDictionary[((long)SystemDatasetsEnum.Rights).ToString()].ToString()))
+                        </td>
+                        @if (Model.RightsRights >= RightsEnum.RU)
+                        {
+                        <td>
+                            <form method="post" asp-route-dataId="@item.Id" asp-page-handler="rightsEdit">
+                                <button class="btn btn-default">Edit</button>
+                            </form>
+                        </td>
+                        }
+                        @if (Model.RightsRights >= RightsEnum.CRUD)
+                        {
+                        <td>
+                            <form method="post" asp-route-dataId="@item.Id" asp-page-handler="rightsDelete">
+                                <button class="btn btn-default">Delete</button>
+                            </form>
+                        </td>
+                        }
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

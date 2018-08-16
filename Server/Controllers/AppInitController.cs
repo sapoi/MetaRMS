@@ -109,9 +109,9 @@ namespace Server.Controllers
 
             Dictionary<long, RightsEnum> rightsDict = new Dictionary<long, RightsEnum>();
             // key -1 is representing table users
-            rightsDict[-1] = RightsEnum.CRUD;
+            rightsDict[(long)SystemDatasetsEnum.Users] = RightsEnum.CRUD;
             // key -2 is representing table rights
-            rightsDict[-2] = RightsEnum.CRUD;
+            rightsDict[(long)SystemDatasetsEnum.Rights] = RightsEnum.CRUD;
             // positive integers are representing datasets
             foreach (var dataset in appDescriptor.Datasets)
             {

@@ -14,7 +14,7 @@ using SharedLibrary.Descriptors;
 using RazorWebApp.Helpers;
 using SharedLibrary.Enums;
 
-namespace RazorWebApp.Pages.Account
+namespace RazorWebApp.Pages.Data
 {
     public class GetModel : PageModel
     {
@@ -78,21 +78,22 @@ namespace RazorWebApp.Pages.Account
 
 
 //TODO comments
-
+            //TODO chytat vyjimky
             NavbarRights = new Dictionary<long, RightsEnum>();
             NavbarRights = rights.Where(r => r.Key == -1 || r.Key == -2).ToDictionary(pair => pair.Key, pair => pair.Value);
 
             // get dataset with rights at least Read
-            var readAuthorizedDatasets = rights.Where(r => r.Value >= RightsEnum.R && r.Key != -1 && r.Key != -2).ToList();
-            Dictionary<long, RightsEnum> readAuthorizedDatasetsDict = readAuthorizedDatasets.ToDictionary(pair => pair.Key, pair => pair.Value);                                           
+            var readAuthorizedDatasets = rights.Where(r => r.Value >= RightsEnum.R && r.Key != -1 && r.Key != -2)
+                                               .ToDictionary(pair => pair.Key, pair => pair.Value);                                           
+                                                      
             // and if there are any
-            if (readAuthorizedDatasets.Count != 0)
+            if (readAuthorizedDatasets.Count() != 0)
             {
                 DatasetDescriptor dataset;
                 // if no dataset was specified in parameter, select first dataset with at least read right (>= 1)
                 if (datasetName == null)
                 {
-                    dataset = ApplicationDescriptor.Datasets.Where(d => d.Id == (int)readAuthorizedDatasets[0].Key).FirstOrDefault();
+                    dataset = ApplicationDescriptor.Datasets.Where(d => d.Id == readAuthorizedDatasets.Keys.FirstOrDefault()).FirstOrDefault();
                     if (dataset != null)
                     {
                         datasetName = dataset.Name;
@@ -100,11 +101,11 @@ namespace RazorWebApp.Pages.Account
                 }
                 dataset = ApplicationDescriptor.Datasets.Where(d => d.Name == datasetName).FirstOrDefault();
                 if (dataset != null)
-                    if (readAuthorizedDatasetsDict.ContainsKey(dataset.Id))
+                    if (readAuthorizedDatasets.ContainsKey(dataset.Id))
                         ActiveDatasetDescriptor = ApplicationDescriptor.Datasets.Where(d => d.Name == datasetName).FirstOrDefault();
             }
             ReadAuthorizedDatasetsNames = (from dataset in ApplicationDescriptor.Datasets
-                                          where readAuthorizedDatasetsDict.ContainsKey(dataset.Id)
+                                          where readAuthorizedDatasets.ContainsKey(dataset.Id)
                                           select dataset.Name).ToList();
             //ReadAuthorizedDatasetsNames = from ApplicationDescriptor.Datasets.Where(d.Name => readAuthorizedDatasetsDict.ContainsKey(d.Id)).ToList();
 

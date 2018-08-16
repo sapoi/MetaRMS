@@ -1,0 +1,12 @@
+- prava nemi jit samayt, pokud je nekdo pouziva
+
+- metoda na kontrolu tokenu a appname
+- partial na menu
+
+- dodelat [Authorize] nad controllery
+- misto hesla zobrazovat *
+
+
+- mazani rights z cache jen pro konkretni id
+
+- pocitani referenci pro mazani

@@ -11,6 +11,6 @@ namespace SharedLibrary.Services
         Task<HttpResponseMessage> Login(LoginCredentials data); 
         Task<IActionResult> Logout(); 
         Task<HttpResponseMessage> GetApplicationDescriptorByAppName(string token);
-        Task<HttpResponseMessage> GetUserRightsById(string token);
+        Task<HttpResponseMessage> GetRightsByUserId(string token);
     }
 }

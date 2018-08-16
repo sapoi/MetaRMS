@@ -13,7 +13,7 @@ using System.Linq;
 using SharedLibrary.Descriptors;
 using RazorWebApp.Helpers;
 
-namespace RazorWebApp.Pages.Account
+namespace RazorWebApp.Pages.Data
 {
     public class EditModel : PageModel
     {

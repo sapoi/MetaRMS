@@ -1,6 +1,6 @@
 @page "{datasetName?}/{handler?}"
 @using SharedLibrary.Enums
-@model RazorWebApp.Pages.Account.GetModel 
+@model RazorWebApp.Pages.Data.GetModel 
 @{ 
     ViewData["Title"] = @Model.ActiveDatasetDescriptor.Name; 
 }
@@ -23,11 +23,11 @@
                     <li><a asp-page="/Index" class="navbar-brand">Logout</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    @if (Model.NavbarRights[-1] >= RightsEnum.R)
+                    @if (Model.NavbarRights[(long)SystemDatasetsEnum.Users] >= RightsEnum.R)
                     {
                         <li><a asp-page="../Users/Get">Users</a></li>
                     }
-                    @if (Model.NavbarRights[-2] >= RightsEnum.R)
+                    @if (Model.NavbarRights[(long)SystemDatasetsEnum.Rights] >= RightsEnum.R)
                     {
                         <li><a asp-page="../Rights/Get">Rights</a></li>
                     }
