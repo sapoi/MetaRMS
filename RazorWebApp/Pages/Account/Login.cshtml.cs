@@ -57,7 +57,7 @@ namespace RazorWebApp.Pages.Account
                 HttpContext.Session.SetString("sessionJWT", jsonToken);
                 var token = AuthorizationHelper.GetTokenFromPageModel(this);
                 // pokud jiz neni v cahe, nacist appliction descriptor a ulozit ho do ni
-                await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, Input.ApplicationName, token.Value);
+                await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, token);
                 //return RedirectToPage("/Account/Secret");
                 return RedirectToPage("/Data/Get");
             }

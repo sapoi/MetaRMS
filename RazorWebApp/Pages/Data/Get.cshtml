@@ -5,53 +5,12 @@
     ViewData["Title"] = @Model.ActiveDatasetDescriptor.Name; 
 }
 
-
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-page="/Index" class="navbar-brand">@Model.ApplicationDescriptor.AppName</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-page="/Index" class="navbar-brand">Logout</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    @if (Model.NavbarRights[(long)SystemDatasetsEnum.Users] >= RightsEnum.R)
-                    {
-                        <li><a asp-page="../Users/Get">Users</a></li>
-                    }
-                    @if (Model.NavbarRights[(long)SystemDatasetsEnum.Rights] >= RightsEnum.R)
-                    {
-                        <li><a asp-page="../Rights/Get">Rights</a></li>
-                    }
-                    <li><a asp-page="/Account/Settings">Settings</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-
-
-
-
+@{Html.RenderPartial("Shared/_LoggedMenuPartial", Model.MenuData); }
 
 <div class="row">
-    <div class="col-sm-3">
-        <h2>Datasets</h2>
-        @foreach (var item in Model.ReadAuthorizedDatasetsNames) {
-        <form method="post" asp-route-datasetName="@item" asp-page-handler="datasetSelect">
-            <button class="btn btn-default">@item</button>
-        </form>
-        <br> }
 
-    </div>
+    @{Html.RenderPartial("Shared/_ReadAuthorizedDatasetsMenuPartial", Model.ReadAuthorizedDatasets); }
+
     <div class="col-sm-9">
         <h2>@ViewData["Title"]</h2>
         @if (Model.ActiveDatasetRights >= RightsEnum.CRU)
@@ -64,9 +23,9 @@
             <table class="table">
                 <thead>
                     <tr>
-                        @foreach (var item in Model.Keys) {
+                        @foreach (var attribute in Model.ActiveDatasetDescriptor.Attributes) {
                         <th>
-                            @item
+                            @attribute.Name
                         </th>
                         }
                     </tr>
@@ -74,9 +33,9 @@
                 <tbody>
                     @foreach (var item in Model.Data) {
                     <tr>
-                        @foreach (var key in Model.Keys) {
+                        @foreach (var attribute in Model.ActiveDatasetDescriptor.Attributes) {
                         <td>
-                            @item[key]
+                            @item[attribute.Name]
                         </td>
                         }
                         @if (Model.ActiveDatasetRights >= RightsEnum.RU)

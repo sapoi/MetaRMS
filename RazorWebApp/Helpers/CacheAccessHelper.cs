@@ -7,38 +7,40 @@ using SharedLibrary.Descriptors;
 using SharedLibrary.Enums;
 using SharedLibrary.Models;
 using SharedLibrary.Services;
+using static SharedLibrary.Structures.JWTToken;
 
 namespace RazorWebApp.Helpers
 {
     public class CacheAccessHelper
     {
         static List<string> cacheKeys = new List<string>();
-        public static async Task<ApplicationDescriptor> GetApplicationDescriptorFromCacheAsync(IMemoryCache cache, IAccountService _accountService, string appName, string token)
+        public static async Task<ApplicationDescriptor> GetApplicationDescriptorFromCacheAsync(IMemoryCache cache, IAccountService _accountService, AccessToken token)
         {
+            TokenHelper tokenHelper = new TokenHelper(token);
+            // get application name from token
+            var appName = tokenHelper.GetAppName();
+
             return await cache.GetOrCreateAsync("Descriptor_" + appName, async entry =>
               {
                   entry.SlidingExpiration = TimeSpan.FromMinutes(2);
-                  var response = await _accountService.GetApplicationDescriptorByAppName(token);
+                  var response = await _accountService.GetApplicationDescriptorByAppName(token.Value);
                   var stringResponse = await response.Content.ReadAsStringAsync();
                   cacheKeys.Add("Descriptor_" + appName);
-              // var aa = new ApplicationDescriptor();
-              // aa.AppName = "Person-Cup App";
-              // aa.Datasets = new List<DatasetDescriptor>();
-              // aa.Datasets.Add(new DatasetDescriptor());
-              // aa.Datasets.Add(new DatasetDescriptor());
-              // var bb = JsonConvert.SerializeObject(aa);
-              // JsonConvert.DeserializeObject<ApplicationDescriptor>(bb);
               return JsonConvert.DeserializeObject<ApplicationDescriptor>(stringResponse);
               });
         }
-        public static async Task<Dictionary<long, RightsEnum>> GetRightsFromCacheAsync(IMemoryCache cache, IAccountService _accountService, string appName, long userId, string token)
+        public static async Task<Dictionary<long, RightsEnum>> GetRightsFromCacheAsync(IMemoryCache cache, IAccountService _accountService, AccessToken token)
         {
+            TokenHelper tokenHelper = new TokenHelper(token);
+            // get application name and user id from token
+            var appName = tokenHelper.GetAppName();
+            var userId = tokenHelper.GetUserId();
             
             return await
                 cache.GetOrCreateAsync("Rights_" + appName + '_' + userId, async entry =>
               {
                   entry.SlidingExpiration = TimeSpan.FromMinutes(2);
-                  var response = await _accountService.GetRightsByUserId(token);
+                  var response = await _accountService.GetRightsByUserId(token.Value);
                   var stringResponse = await response.Content.ReadAsStringAsync();
                   cacheKeys.Add("Rights_" + appName + '_' + userId);
                   return JsonConvert.DeserializeObject<Dictionary<long, RightsEnum>>(stringResponse);

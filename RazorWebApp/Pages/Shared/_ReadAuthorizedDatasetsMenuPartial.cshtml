@@ -1,0 +1,12 @@
+@using SharedLibrary.Descriptors;
+@model List<DatasetDescriptor>
+
+<div class="col-sm-3">
+	<h2>Datasets</h2>
+	@foreach (var dataset in Model) {
+		<form method="post" asp-route-datasetName="@dataset.Name" asp-page-handler="datasetSelect">
+			<button class="btn btn-default">@dataset.Name</button>
+		</form>
+		<br> 
+	}
+</div>

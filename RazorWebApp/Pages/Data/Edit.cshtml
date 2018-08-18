@@ -1,30 +1,31 @@
 @page "{datasetName?}/{id?}"
 @model RazorWebApp.Pages.Data.EditModel 
 @{ 
-    ViewData["Title"] = @Model.DatasetDescriptor.Name; 
+    ViewData["Title"] = @Model.ActiveDatasetDescriptor.Name; 
 }
 
-<div class="row">
-    <div class="col-sm-3">
-        @foreach (var item in Model.ApplicationDescriptor.Datasets) {
-        <form method="post" asp-route-datasetName="@item.Name" asp-page-handler="datasetSelect">
-            <button class="btn btn-default">@item.Name</button>
-        </form>
-        <br> }
+@{Html.RenderPartial("Shared/_LoggedMenuPartial", Model.MenuData); }
 
-    </div>
+<div class="row">
+    
+    @{Html.RenderPartial("Shared/_ReadAuthorizedDatasetsMenuPartial", Model.ReadAuthorizedDatasets); }
+
     <div class="col-sm-9">
         <h2>@ViewData["Title"]</h2>
         <form method="post">
             <input type="hidden" asp-for="DatasetName"/>
             <input type="hidden" asp-for="DataId"/>
-            @for (int i = 0; i < Model.DatasetDescriptor.Attributes.Count; i++){
-                <input type="hidden" asp-for="Keys[i]"/>
+
+            @for (int i = 0; i < Model.ActiveDatasetDescriptor.Attributes.Count; i++){
+                <input type="hidden" asp-for="AttributesNames[i]"/>
                 <div class="form-group">
-                     @{ var attribute = Model.DatasetDescriptor.Attributes[i]; }
+                     @{ var attribute = Model.ActiveDatasetDescriptor.Attributes[i]; }
                     <label>@attribute.Name</label>
-                    <input value="@Model.Data[attribute.Name].ToString()" name="ValueList[@i]" class="form-control">
-                    <span asp-validation-for="Model.ValueList[@i]" class="text-danger"></span>
+                    <input value="@Model.Data[attribute.Name].ToString()" 
+                           name="ValueList[@i]" 
+                           class="form-control">
+                    <span asp-validation-for="Model.ValueList[@i]" 
+                          class="text-danger"></span>
                 </div>
             }
             <div class="form-group">

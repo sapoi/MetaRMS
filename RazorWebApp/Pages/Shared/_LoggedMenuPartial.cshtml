@@ -1,0 +1,29 @@
+@using SharedLibrary.Enums 
+@model RazorWebApp.Structures.LoggedMenuPartialData
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            <a asp-page="/Index" class="navbar-brand">@Model.AppName</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a asp-page="/Index" class="navbar-brand">Logout</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @if (Model.NavbarRights[(long)SystemDatasetsEnum.Users] >= RightsEnum.R) {
+                <li><a asp-page="../Users/Get">Users</a></li>
+                } @if (Model.NavbarRights[(long)SystemDatasetsEnum.Rights] >= RightsEnum.R) {
+                <li><a asp-page="../Rights/Get">Rights</a></li>
+                }
+                <li><a asp-page="/Account/Settings">Settings</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

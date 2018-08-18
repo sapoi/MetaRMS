@@ -68,7 +68,7 @@ namespace RazorWebApp.Pages.Rights
                 return RedirectToPage("/Account/Login");
             }
             // get application descriptor from cache
-            this.ApplicationDescriptor = await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, appName, token.Value);
+            this.ApplicationDescriptor = await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, token);
             // if no application descriptor was found in token, log info and redirect user to login page
             if (this.ApplicationDescriptor == null)
             {
@@ -76,7 +76,7 @@ namespace RazorWebApp.Pages.Rights
                 return RedirectToPage("/Account/Login");
             }
             // get user rights from cache
-            var rights = await CacheAccessHelper.GetRightsFromCacheAsync(_cache, _accountService, appName, (long)userId, token.Value);
+            var rights = await CacheAccessHelper.GetRightsFromCacheAsync(_cache, _accountService, token);
             // var rightsIdDict = rights.Where(r => r.Key == "DBId").FirstOrDefault();
             // if (rightsIdDict.Equals(default(KeyValuePair<string, object>)))
             // {

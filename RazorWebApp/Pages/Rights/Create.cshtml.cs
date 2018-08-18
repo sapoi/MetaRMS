@@ -60,7 +60,7 @@ namespace RazorWebApp.Pages.Rights
                 Logger.Log(DateTime.Now, "v tokenu nebyl claim co se jmenuje ApplicationName");
                 return RedirectToPage("/Account/Login");
             }
-            ApplicationDescriptor = await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, appName, token.Value);
+            ApplicationDescriptor = await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, token);
         
             //DataId = id;
             if (ModelState.IsValid)

@@ -1,7 +1,12 @@
-- prava nemi jit samayt, pokud je nekdo pouziva
+- prava nemi jit samzat, pokud je nekdo pouziva
 
-- metoda na kontrolu tokenu a appname
+- metoda na kontrolu tokenu a appname do Validations
 - partial na menu
+- partial na read auth datasets
+
+- vyzkouset data delete
+
+- nisto return to login page by melo byt nejprve odhlaseni a pak return
 
 - dodelat [Authorize] nad controllery
 - misto hesla zobrazovat *
@@ -10,3 +15,5 @@
 - mazani rights z cache jen pro konkretni id
 
 - pocitani referenci pro mazani
+
+- servererror.cshtml.cs
