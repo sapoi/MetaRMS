@@ -100,6 +100,7 @@ namespace RazorWebApp.Helpers
             var readAuthorizedDatasets = AccessHelper.GetReadAuthorizedDatasets(applicationDescriptor, rights);                                      
             if (readAuthorizedDatasets.Count() == 0)
             {
+                Logger.Log(DateTime.Now, "uzivatel nema zadne read authorized descriptory");
                 return null;
             }
             // if no dataset was specified in parameter, select first dataset with at least read right (>= 1)

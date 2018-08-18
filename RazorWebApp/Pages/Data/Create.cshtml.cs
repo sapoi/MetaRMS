@@ -43,27 +43,6 @@ namespace RazorWebApp.Pages.Data
 
         public async Task<IActionResult> OnGetAsync(string datasetName)
         {
-            // var token = AuthorizationHelper.GetTokenFromPageModel(this);
-            // if (token == null)
-            // {
-            //     Logger.Log(DateTime.Now, "neni token");
-            //     return RedirectToPage("/Account/Login");
-            // }
-            // TokenHelper tokenHelper = new TokenHelper(token);
-            // var appName = tokenHelper.GetAppName();
-            // if (appName == null)
-            // {
-            //     Logger.Log(DateTime.Now, "v tokenu nebyl claim co se jmenuje ApplicationName");
-            //     return RedirectToPage("/Account/Login");
-            // }
-            // ApplicationDescriptor = await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, token);
-            // ActiveDatasetDescriptor = ApplicationDescriptor.Datasets.Where(d => d.Name == datasetName).FirstOrDefault();
-            // if (ActiveDatasetDescriptor == null)
-            // {
-            //     Logger.Log(DateTime.Now, "dataset neexistuje");
-            //     return RedirectToPage("/Account/Login");
-            // }
-            // DatasetName = datasetName;
             if (ModelState.IsValid)
             {
                 // get token if valid
@@ -87,63 +66,40 @@ namespace RazorWebApp.Pages.Data
                 {
                     // dummy
                     ActiveDatasetDescriptor = new DatasetDescriptor { Name = "", Id = 0, Attributes = new List<AttributeDescriptor>() };
-                    //this.Data = new List<Dictionary<string, object>>();
                     return Page();
                 }
-                //ActiveDatasetRights = AccessHelper.GetActiveDatasetRights(ActiveDatasetDescriptor, rights);
                 DatasetName = datasetName;
-                //DataId = id;
                 AttributesNames = new List<string>();
                 foreach (var attribute in ActiveDatasetDescriptor.Attributes)
-                {
                     AttributesNames.Add(attribute.Name);
-                }
-
-
-
-
-
-
-                //var response = await _dataService.GetById(appName, datasetName, id, token.token);
-                //TODO kontrolovat chyby v response
-                //string stringResponse = await response.Content.ReadAsStringAsync();
-                //Data = JsonConvert.DeserializeObject<Dictionary<String, Object>>(stringResponse);
-                AttributesNames = new List<string>();
-                //InputData = new Dictionary<string, object>();
-                foreach (var key in ActiveDatasetDescriptor.Attributes)
-                {
-                    //InputData.Add(key.Name, new object());
-                    AttributesNames.Add(key.Name);
-                }
             }
             return Page();
         }
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            // validation
+            var token = AccessHelper.ValidateAuthentication(this);
+            // if token is not valid, return to login page
+            if (token == null)
+                return RedirectToPage("/Account/Login");
+            // get application descriptor
+            ApplicationDescriptor = await AccessHelper.GetApplicationDescriptor(_cache, _accountService, token);
+            if (ApplicationDescriptor == null)
+                return RedirectToPage("/Errors/ServerError");
+            // get rights
+            var rights = await AccessHelper.GetUserRights(_cache, _accountService, token);
+            if (rights == null)
+                return RedirectToPage("/Errors/ServerError");
+            ActiveDatasetDescriptor = AccessHelper.GetActiveDatasetDescriptor(ApplicationDescriptor, rights, DatasetName);
+            if (ActiveDatasetDescriptor == null)
+                return RedirectToPage("/Errors/ServerError");
+
+            // data prepare
             Dictionary<String, Object> inputData = new Dictionary<string, object>();
             for (int i = 0; i < AttributesNames.Count; i++)
-            {
                 inputData.Add(AttributesNames[i], ValueList[i]);
-            }
-            var token = AuthorizationHelper.GetTokenFromPageModel(this);
-            if (token == null)
-            {
-                Logger.Log(DateTime.Now, "neni token");
-                return RedirectToPage("/Account/Login");
-            }
-            TokenHelper tokenHelper = new TokenHelper(token);
-            var appName = tokenHelper.GetAppName();
-            if (appName == null)
-            {
-                Logger.Log(DateTime.Now, "v tokenu nebyl claim co se jmenuje ApplicationName");
-                return RedirectToPage("/Account/Login");
-            }
-            if (DatasetName == null)
-            {
-                Logger.Log(DateTime.Now, "neni aktivni dataset");
-                return RedirectToPage("/Account/Login");
-            }
-            await _dataService.Create(appName, DatasetName, inputData, token.Value);
+            
+            await _dataService.Create(ApplicationDescriptor.AppName, DatasetName, inputData, token.Value);
             return RedirectToPage("/Data/Get");
         }
         
