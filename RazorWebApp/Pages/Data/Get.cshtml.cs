@@ -38,7 +38,6 @@ namespace RazorWebApp.Pages.Data
         public List<DatasetDescriptor> ReadAuthorizedDatasets { get; set; }
         public RightsEnum ActiveDatasetRights { get; set; }
         public LoggedMenuPartialData MenuData { get; set; }
-        //public Dictionary<long, RightsEnum> NavbarRights { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string datasetName = null)
         {
@@ -68,7 +67,10 @@ namespace RazorWebApp.Pages.Data
                     this.Data = new List<Dictionary<string, object>>();
                     return Page();
                 }
-                ActiveDatasetRights = AccessHelper.GetActiveDatasetRights(ActiveDatasetDescriptor, rights);
+                var activeDatasetRights = AccessHelper.GetActiveDatasetRights(ActiveDatasetDescriptor, rights);
+                if (activeDatasetRights == null)
+                    return RedirectToPage("/Errors/ServerError");
+                ActiveDatasetRights = (RightsEnum)activeDatasetRights;
 
 
                 // getting real data
@@ -99,12 +101,12 @@ namespace RazorWebApp.Pages.Data
             if (ApplicationDescriptor == null)
                 return RedirectToPage("/Errors/ServerError");
             // get rights
-            var rights = await AccessHelper.GetUserRights(_cache, _accountService, token);
-            if (rights == null)
-                return RedirectToPage("/Errors/ServerError");
-            ActiveDatasetDescriptor = AccessHelper.GetActiveDatasetDescriptor(ApplicationDescriptor, rights, datasetName);
-            if (ActiveDatasetDescriptor == null)
-                return RedirectToPage("/Errors/ServerError");
+            // var rights = await AccessHelper.GetUserRights(_cache, _accountService, token);
+            // if (rights == null)
+            //     return RedirectToPage("/Errors/ServerError");
+            // ActiveDatasetDescriptor = AccessHelper.GetActiveDatasetDescriptor(ApplicationDescriptor, rights, datasetName);
+            // if (ActiveDatasetDescriptor == null)
+            //     return RedirectToPage("/Errors/ServerError");
                 
             await _dataService.DeleteById(ApplicationDescriptor.AppName, datasetName, dataId, token.Value);
             return await OnGetAsync(datasetName);

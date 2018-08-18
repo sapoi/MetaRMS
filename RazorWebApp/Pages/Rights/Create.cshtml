@@ -5,6 +5,8 @@
     ViewData["Title"] = "Rights"; 
 }
 
+@{Html.RenderPartial("Shared/_LoggedMenuPartial", Model.MenuData); }
+
 <div class="row">
     <div class="col-sm-12">
         <h2>@ViewData["Title"]</h2>
@@ -17,7 +19,7 @@
             </div>
              
             @for (int i = 2; i < Model.ApplicationDescriptor.Datasets.Count + 2; i++){ 
-            <input type="hidden" asp-for="Keys[i-2]" />
+            <input type="hidden" asp-for="DatasetsIds[i-2]" />
             <div class="form-group">
                 @{ var dataset = Model.ApplicationDescriptor.Datasets[i-2]; }
                 <label>@dataset.Name</label>

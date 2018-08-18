@@ -1,10 +1,13 @@
 - prava nemi jit samzat, pokud je nekdo pouziva
+- odhlaseni
 
 - metoda na kontrolu tokenu a appname do Validations
-- partial na menu
-- partial na read auth datasets
+- partial na menu logged ✅
+- partial menu unlogged
+- partial na read auth datasets ✅
+- u dat vracet unauthorized pokud rights = none
 
-- vyzkouset data delete
+- vyzkouset data delete ✅
 
 - nisto return to login page by melo byt nejprve odhlaseni a pak return
 

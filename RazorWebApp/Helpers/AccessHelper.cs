@@ -111,13 +111,25 @@ namespace RazorWebApp.Helpers
                 return readAuthorizedDatasets[0];
             return activeDatasetDescriptor;
         }
-        public static RightsEnum GetActiveDatasetRights(DatasetDescriptor datasetDescriptor, Dictionary<long, RightsEnum> rights)
+        public static RightsEnum? GetActiveDatasetRights(DatasetDescriptor datasetDescriptor, Dictionary<long, RightsEnum> rights)
         {
             var rightsKeyValuePair = rights.Where(r => r.Key == datasetDescriptor.Id).FirstOrDefault();
             if (rightsKeyValuePair.Equals(default(KeyValuePair<long, RightsEnum>)))
-                //TODO
-                return RightsEnum.None;
+            {
+                Logger.Log(DateTime.Now, "nenalezena prava na dataset");
+                return null;
+            }
             return rightsKeyValuePair.Value;
+        }
+        public static RightsEnum? GetSystemRights(SystemDatasetsEnum dataset, Dictionary<long, RightsEnum> rights)
+        {
+            var systemRights = rights.Where(r => r.Key == ((long)dataset)).FirstOrDefault();
+            if (systemRights.Equals(default(KeyValuePair<long, RightsEnum>)))
+            {
+                Logger.Log(DateTime.Now, "nenalezena prava na prava");
+                return null;
+            }
+            return systemRights.Value;
         }
     }
 }
