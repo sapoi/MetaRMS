@@ -1,17 +1,37 @@
-- prava nemi jit samzat, pokud je nekdo pouziva
+- ✅ prava nemi jit samzat, pokud je nekdo pouziva 
+- ✅ zobrazit mesage ze prava nebyla smazana 
+- ✅ crud uzivatele 
 - odhlaseni
+- edit user nezobrazovat hash
 
 - metoda na kontrolu tokenu a appname do Validations
-- partial na menu logged ✅
+- ✅ partial na menu logged 
 - partial menu unlogged
-- partial na read auth datasets ✅
+- ✅ partial na read auth datasets 
 - u dat vracet unauthorized pokud rights = none
+- rozdelit accesshepler
+- ✅ db ondelete restrict 
+- ✅ odkomentovat posilani mailu 
+- pomocne app init metody z kontrolleru nekam jinam
+- proc je post u login controlleru
+- app name validator pred app init
+- rights patch messages
+- rights unique name
+- data controllers do slozky
+- spojit rights, user a data servicy do jedne -> pridat basemodel
+- rozne druhy message - info, warneni, error
+- user additional data
+- username unique
+- if user deleted, log him out first
+- zobrazovat nekde jmeno prohlaseneho uzivatele
 
-- vyzkouset data delete ✅
+- na serveru validace u controlleru dat zvlast
+
+- ✅ vyzkouset data delete 
 
 - nisto return to login page by melo byt nejprve odhlaseni a pak return
 
-- dodelat [Authorize] nad controllery
+- ✅ dodelat [Authorize] nad controllery 
 - misto hesla zobrazovat *
 
 

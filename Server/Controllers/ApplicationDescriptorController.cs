@@ -36,7 +36,7 @@ namespace Server.Controllers
             // get value for ApplicationName claim
             var appNameFromJWT = identity.FindFirst("ApplicationName").Value;
             // try to look for application descriptor in database
-            var query = (from p in _context.ApplicationsDbSet
+            var query = (from p in _context.ApplicationDbSet
                          where p.Name == appNameFromJWT
                          select p.ApplicationDescriptorJSON).FirstOrDefault();
             // application descriptor not found

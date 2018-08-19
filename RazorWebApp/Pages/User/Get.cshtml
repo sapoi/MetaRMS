@@ -1,8 +1,8 @@
 @page "{handler?}"
 @using SharedLibrary.Enums
-@model RazorWebApp.Pages.Rights.GetModel 
+@model RazorWebApp.Pages.User.GetModel 
 @{ 
-    ViewData["Title"] = "Rights"; 
+    ViewData["Title"] = "Users"; 
 }
 
 @{Html.RenderPartial("Shared/_LoggedMenuPartial", Model.MenuData); }
@@ -15,9 +15,9 @@
                 </div>
         }
         <h2>@ViewData["Title"]</h2>
-        @if (Model.RightsRights >= RightsEnum.CRU)
+        @if (Model.UsersRights >= RightsEnum.CRU)
         {
-            <form method="post" asp-page-handler="rightsCreate">
+            <form method="post" asp-page-handler="userCreate">
                 <button class="btn btn-default">Create</button>
             </form>
         }
@@ -26,50 +26,54 @@
                 <thead>
                     <tr>
                         <th>
-                            Name
+                            Username
                         </th>
-                        @foreach (var dataset in Model.ApplicationDescriptor.Datasets) {
                         <th>
-                            @dataset.Name
-                        </th>
-                        }
-                        <th>
-                            Users
+                            Password
                         </th>
                         <th>
                             Rights
                         </th>
+                    @*
+                        @foreach (var data in Model.ApplicationDescriptor.Datasets) {
+                        <th>
+                            @data.Key
+                        </th>
+                        }
+                    *@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Data) {
+                    @foreach (var user in Model.Data) {
                     <tr>
                         <td>
-                            @item.Name
+                            @user.Username
                         </td>
+                        <td>
+                            @user.Password
+                        </td>
+                        <td>
+                            @user.Rights.Name
+                        </td>
+                    @*
                         @foreach (var dataset in Model.ApplicationDescriptor.Datasets) {
                         <td>
                             @((RightsEnum)int.Parse(item.DataDictionary[dataset.Id.ToString()].ToString()))
                         </td>
                         }
-                        <td>
-                            @((RightsEnum)int.Parse(item.DataDictionary[((long)SystemDatasetsEnum.Users).ToString()].ToString()))
-                        </td>
-                        <td>
-                            @((RightsEnum)int.Parse(item.DataDictionary[((long)SystemDatasetsEnum.Rights).ToString()].ToString()))
-                        </td>
-                        @if (Model.RightsRights >= RightsEnum.RU)
+                    *@
+                        @if (Model.UsersRights >= RightsEnum.RU)
                         {
                         <td>
-                            <form method="post" asp-route-dataId="@item.Id" asp-page-handler="rightsEdit">
+                            <form method="post" asp-route-dataId="@user.Id" asp-page-handler="userEdit">
                                 <button class="btn btn-default">Edit</button>
                             </form>
                         </td>
                         }
-                        @if (Model.RightsRights >= RightsEnum.CRUD)
+                        @if (Model.UsersRights >= RightsEnum.CRUD)
                         {
                         <td>
-                            <form method="post" asp-route-dataId="@item.Id" asp-page-handler="rightsDelete">
+                            <form method="post" asp-route-dataId="@user.Id" asp-page-handler="userDelete">
                                 <button class="btn btn-default">Delete</button>
                             </form>
                         </td>

@@ -43,7 +43,7 @@ namespace Server.Controllers
             if (!long.TryParse(userIdString, out userId))
                 return BadRequest("UserId claim could not be parsed");
             // try to look for user in DB
-            var user = (from u in _context.UsersDbSet
+            var user = (from u in _context.UserDbSet
                         where u.Id == userId
                         select u).FirstOrDefault();
             if (user == null)

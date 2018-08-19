@@ -68,7 +68,7 @@ namespace Server.Controllers
         private readonly DatabaseContext _context;
         async Task<UserModel> getUserModel(LoginCredentials loginCredentials)
         {
-            return _context.UsersDbSet.Where(u => (u.Application.Name == loginCredentials.ApplicationName && 
+            return _context.UserDbSet.Where(u => (u.Application.Name == loginCredentials.ApplicationName && 
                                                     u.Username == loginCredentials.Username)).FirstOrDefault();
         }
 

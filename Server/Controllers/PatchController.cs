@@ -28,7 +28,7 @@ namespace Server.Controllers
         public IActionResult PatchById(string appName, string datasetName, long id, 
                                       [FromBody] Dictionary<string, object> data)
         {
-            ApplicationModel application = (from a in _context.ApplicationsDbSet
+            ApplicationModel application = (from a in _context.ApplicationDbSet
                                    where (a.Name == appName)
                                    select a).FirstOrDefault();
             if (application == null)

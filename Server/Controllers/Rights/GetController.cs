@@ -41,7 +41,7 @@ namespace Server.Controllers.Rights
                 // user is not authorized to access application appName
                 return Unauthorized();
 
-            ApplicationModel application = (from a in _context.ApplicationsDbSet
+            ApplicationModel application = (from a in _context.ApplicationDbSet
                                             where (a.Name == appName)
                                             select a).FirstOrDefault();
             if (application == null)
@@ -55,7 +55,7 @@ namespace Server.Controllers.Rights
             long userId;
             if (!long.TryParse(claim.Value, out userId))
                 return BadRequest("value pro userid neni ve spravnem formatu");
-            var user = (from u in _context.UsersDbSet
+            var user = (from u in _context.UserDbSet
                         where u.Id == userId && u.ApplicationId == application.Id
                         select u).FirstOrDefault();
             if (user == null)
@@ -92,11 +92,12 @@ namespace Server.Controllers.Rights
             // }
             // return Ok(result);
         }
+        [Authorize]
         [HttpGet]
         [Route("{appName}/{id}")]
         public IActionResult GetById(string appName, long id)
         {
-            ApplicationModel application = (from a in _context.ApplicationsDbSet
+            ApplicationModel application = (from a in _context.ApplicationDbSet
                                             where (a.Name == appName)
                                             select a).FirstOrDefault();
             if (application == null)

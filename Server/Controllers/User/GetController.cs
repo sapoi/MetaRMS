@@ -12,10 +12,12 @@ using System.Linq;
 using SharedLibrary.Helpers;
 using System.Security.Claims;
 using SharedLibrary.Enums;
+using JsonDotNet.CustomContractResolvers;
+using Microsoft.EntityFrameworkCore;
 
-namespace Server.Controllers
+namespace Server.Controllers.User
 {
-    [Route("api/[controller]")]
+    [Route("api/user/[controller]")]
     public class GetController : Controller
     {
         private readonly DatabaseContext _context;
@@ -25,13 +27,13 @@ namespace Server.Controllers
             _context = context;
         }
         ///
-        /// if user from HttpContext has at least Read rights to dataset from parameter returns all dataset data
+        /// if user from HttpContext has at least Read rights to rights table returns all rights data
         //TODO handle BadRequest, Forbid, Unauthorized
         ///
         [Authorize]
         [HttpGet]
-        [Route("{appName}/{datasetName}")]
-        public IActionResult GetAll(string appName, string datasetName)
+        [Route("{appName}")]
+        public IActionResult GetAll(string appName)
         {
             // get logged user's identity from HttpContext
             var identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -46,9 +48,6 @@ namespace Server.Controllers
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
-            var datasetId = adh.GetDatasetIdByName(datasetName);
-            if (datasetId == null)
-                return BadRequest("spatny nazev datasetu");
             // check if user has rights to see dataset datasetName
             // get user id from identity
             var claim = identity.FindFirst("UserId"); //TODO muze spadnout
@@ -62,6 +61,8 @@ namespace Server.Controllers
                         select u).FirstOrDefault();
             if (user == null)
                 return BadRequest("TODO");
+
+
             // read user's rights from DB
             var rights = (from r in _context.RightsDbSet
                           where r.Id == user.RightsId
@@ -69,27 +70,29 @@ namespace Server.Controllers
             if (rights == null)
                 return BadRequest("prava neexistuji");
             var rightsDict = JsonConvert.DeserializeObject<Dictionary<long, RightsEnum>>(rights.Data);
-            var datasetRights = rightsDict.Where(r => r.Key == (long)datasetId).FirstOrDefault();
-            if (datasetRights.Equals(default(KeyValuePair<long, RightsEnum>)))
-                return BadRequest("v pravech neni dataset s datasetId");
-            if (datasetRights.Value <= RightsEnum.None)
+            var rightsRights = rightsDict.Where(r => r.Key == (long)SystemDatasetsEnum.Rights).FirstOrDefault();
+            if (rightsRights.Equals(default(KeyValuePair<long, RightsEnum>)))
+                return BadRequest("v pravech neni rights");
+            if (rightsRights.Value <= RightsEnum.None)
                 return Forbid();
-            List<DataModel> query = (from p in _context.DataDbSet
-                                     where (p.Application.Name == appName && p.DatasetId == datasetId)
-                                     select p).ToList();
-            List<Dictionary<String, Object>> result = new List<Dictionary<String, Object>>();
-            foreach (var d in query)
+
+            List<UserModel> query = _context.UserDbSet.Where(u => u.Application.Name == appName)
+                                                      .Include(u => u.Rights)
+                                                      .ToList();
+                                                      
+            // ignore large JSON data
+            foreach (var row in query)
             {
-                var tmpDict = d.DataDictionary;
-                tmpDict.Add("DBId", d.Id);
-                result.Add(tmpDict);
+                row.Application = null;
+                row.Rights.Application = null;
+                row.Rights.Users = null;
             }
-            return Ok(result);
+            return Ok(query);
         }
         [Authorize]
         [HttpGet]
-        [Route("{appName}/{datasetName}/{id}")]
-        public IActionResult GetById(string appName, string datasetName, long id)
+        [Route("{appName}/{id}")]
+        public IActionResult GetById(string appName, long id)
         {
             ApplicationModel application = (from a in _context.ApplicationDbSet
                                             where (a.Name == appName)
@@ -97,19 +100,19 @@ namespace Server.Controllers
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
-            var datasetId = adh.GetDatasetIdByName(datasetName);
-            if (datasetId == null)
-                return BadRequest("spatny nazev datasetu");
-            DataModel query = (from p in _context.DataDbSet
-                               where (p.Application.Name == appName && p.DatasetId == datasetId && p.Id == id)
-                               select p).FirstOrDefault();
+            
+            var query = _context.UserDbSet.Where(u => u.Application.Name == appName && u.Id ==id)
+                                          .Include(u => u.Rights)
+                                          .FirstOrDefault();
             if (query == null)
                 return BadRequest("neexistujici kombinace jmena aplikace, datasetu a id");
 
-
-
-
-            return Ok(query.DataDictionary);
+            // ignore large JSON data
+            query.Application = null;
+            query.Rights.Application = null;
+            query.Rights.Users = null;
+            
+            return Ok(query);
         }
     }
 }

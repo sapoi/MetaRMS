@@ -11,9 +11,9 @@ using SharedLibrary.Models;
 using System.Linq;
 using SharedLibrary.Helpers;
 
-namespace Server.Controllers.Rights
+namespace Server.Controllers.User
 {
-    [Route("api/rights/[controller]")]
+    [Route("api/user/[controller]")]
     public class PatchController : Controller
     {
         private readonly DatabaseContext _context;
@@ -25,7 +25,7 @@ namespace Server.Controllers.Rights
         [Authorize]
         [HttpPost]
         [Route("{appName}/{id}")]
-        public IActionResult PatchById(string appName, long id,  [FromBody] RightsModel fromBodyRightsModel)
+        public IActionResult PatchById(string appName, long id,  [FromBody] UserModel fromBodyUserModel)
         {
             ApplicationModel application = (from a in _context.ApplicationDbSet
                                    where (a.Name == appName)
@@ -33,30 +33,17 @@ namespace Server.Controllers.Rights
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
-            RightsModel query = (from p in _context.RightsDbSet
-                                   where (p.Application.Name == appName && p.Id == id)
-                                   select p).FirstOrDefault();
+            UserModel query = (from p in _context.UserDbSet
+                               where (p.Application.Name == appName && p.Id == id)
+                               select p).FirstOrDefault();
             if (query == null)
                 return BadRequest("neexistujici kombinace jmena aplikace a id");
 
-            // string rightsName = "";
-            // Dictionary<string, object> rightsData = new Dictionary<string, object>();
-            // foreach (var item in fromBodyData)
-            // {
-            //     if(item.Key == "Name")
-            //         rightsName = item.Value.ToString();
-            //     else
-            //     {
-            //         rightsData.Add(item.Key, item.Value);
-            //     }
-            // }
-
-
-            // string JsonData = JsonConvert.SerializeObject(rightsData);
-            query.Name = fromBodyRightsModel.Name;
-            query.Data = JsonConvert.SerializeObject(fromBodyRightsModel.DataDictionary);
+            query.Username = fromBodyUserModel.Username;
+            query.Data = JsonConvert.SerializeObject(fromBodyUserModel.DataDictionary);
+            query.RightsId = fromBodyUserModel.RightsId;
             _context.SaveChanges();
-            return Ok("saved successfully");
+            return Ok($"User {fromBodyUserModel.Username} editted successfully.");
         }
     }
 }

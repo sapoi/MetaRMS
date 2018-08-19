@@ -24,9 +24,10 @@ namespace RazorWebApp
         {
             services.AddSingleton(typeof(IAppInitService), typeof(AppInitService));
             services.AddSingleton(typeof(IAccountService), typeof(AccountService));
-            services.AddSingleton(typeof(ISecretService), typeof(SecretService));
+            //services.AddSingleton(typeof(ISecretService), typeof(SecretService));
             services.AddSingleton(typeof(IDataService), typeof(DataService));
             services.AddSingleton(typeof(IRightsService), typeof(RightsService));
+            services.AddSingleton(typeof(IUserService), typeof(UserService));
 
             services.AddMvc();
 

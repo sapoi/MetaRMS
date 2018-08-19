@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Server.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,7 @@ namespace Server.Migrations
                         column: x => x.application_id,
                         principalTable: "applications",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,7 +61,7 @@ namespace Server.Migrations
                         column: x => x.application_id,
                         principalTable: "applications",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -84,13 +84,13 @@ namespace Server.Migrations
                         column: x => x.application_id,
                         principalTable: "applications",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_users_rights_rights_id",
                         column: x => x.rights_id,
                         principalTable: "rights",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

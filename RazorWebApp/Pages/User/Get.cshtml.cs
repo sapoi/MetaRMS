@@ -15,38 +15,32 @@ using RazorWebApp.Helpers;
 using SharedLibrary.Enums;
 using RazorWebApp.Structures;
 
-namespace RazorWebApp.Pages.Rights
+namespace RazorWebApp.Pages.User
 {
-    public class EditModel : PageModel
+    public class GetModel : PageModel
     {
-        private readonly IRightsService _rightsService;
+        private readonly IUserService _userService;
         private readonly IAccountService _accountService;
         private IMemoryCache _cache;
 
-        public EditModel(IRightsService rightsService, IAccountService accountService, IMemoryCache memoryCache)
+        public GetModel(IUserService userService, IAccountService accountService, IMemoryCache memoryCache)
         {
-            this._rightsService = rightsService;
+            this._userService = userService;
             this._accountService = accountService;
             this._cache = memoryCache;
         }
 
         public ApplicationDescriptor ApplicationDescriptor { get; set; }
-        public RightsModel Data { get; set; }
-        [BindProperty]
-        public List<long> DatasetsIds { get; set; }
-        [BindProperty]
-        public List<string> ValueList { get; set; }
+        public List<UserModel> Data { get; set; }
+        // logged user's rights to system dataset Users
+        public RightsEnum UsersRights { get; set; }
         public LoggedMenuPartialData MenuData { get; set; }
-        [BindProperty]
-        public long DataId { get; set; }
-        [BindProperty]
-        public string RightsName { get; set; }
+        public string Message { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(long id)
+        public async Task<IActionResult> OnGetAsync(string message = null)
         {
             if (ModelState.IsValid)
             {
-                // get token if valid
                 var token = AccessHelper.ValidateAuthentication(this);
                 // if token is not valid, return to login page
                 if (token == null)
@@ -61,24 +55,31 @@ namespace RazorWebApp.Pages.Rights
                     return RedirectToPage("/Errors/ServerError");
 
                 MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
-                DataId = id;
 
-                DatasetsIds = new List<long>();
-                foreach (var key in ApplicationDescriptor.Datasets)
-                    DatasetsIds.Add(key.Id);
-                DatasetsIds.Add((long)SystemDatasetsEnum.Users);
-                DatasetsIds.Add((long)SystemDatasetsEnum.Rights);
+                var userRights = AccessHelper.GetSystemRights(SystemDatasetsEnum.Users, rights);
+                if (userRights == null)
+                    return RedirectToPage("/Errors/ServerError");
+                if (userRights == RightsEnum.None)
+                    return RedirectToPage("/Errors/Unauthorized");
+                UsersRights = (RightsEnum)userRights;
 
-                var response = await _rightsService.GetById(ApplicationDescriptor.AppName, id, token.Value);
+                if (message != null)
+                    Message = message;
+
+                var response = await _userService.GetAll(ApplicationDescriptor.AppName, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
-                Data = JsonConvert.DeserializeObject<RightsModel>(stringResponse);
+                List<UserModel> data = JsonConvert.DeserializeObject<List<UserModel>>(stringResponse);
+                Data = data;//JsonConvert.DeserializeObject<RightsModel>(stringResponse);
             }
             return Page();
         }
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public IActionResult OnPostUserEditAsync(string dataId)
         {
-            // validation
+            return RedirectToPage("Edit", "", new { id = dataId });
+        }
+        public async Task<IActionResult> OnPostUserDeleteAsync(long dataId)
+        {
             var token = AccessHelper.ValidateAuthentication(this);
             // if token is not valid, return to login page
             if (token == null)
@@ -88,20 +89,15 @@ namespace RazorWebApp.Pages.Rights
             if (ApplicationDescriptor == null)
                 return RedirectToPage("/Errors/ServerError");
 
-            // data prepare
-            Dictionary<String, Object> inputData = new Dictionary<string, object>();
-            inputData.Add(((long)SystemDatasetsEnum.Users).ToString(), ValueList[0]);
-            inputData.Add(((long)SystemDatasetsEnum.Rights).ToString(), ValueList[1]);
-            for (int i = 2; i < DatasetsIds.Count + 2; i++)
-            {
-                inputData.Add(DatasetsIds[i - 2].ToString(), ValueList[i]);
-            }
-    
-            RightsModel patchedRightsModel = new RightsModel() { Name = RightsName, Data = JsonConvert.SerializeObject(inputData) };
-            await _rightsService.PatchById(ApplicationDescriptor.AppName, DataId, patchedRightsModel, token.Value);
-            // delete old rights from cache
-            CacheAccessHelper.RemoveRightsFromCache(_cache, ApplicationDescriptor.AppName, DataId);
-            return RedirectToPage("/Rights/Get");
+            var response = await _userService.DeleteById(ApplicationDescriptor.AppName, dataId, token.Value);
+            string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            // remove " form beginning and end of message
+            return await OnGetAsync(message.Substring(1, message.Length - 2));
+        }
+
+        public IActionResult OnPostUserCreateAsync()
+        {
+            return RedirectToPage("Create", "");
         }
     }
 }

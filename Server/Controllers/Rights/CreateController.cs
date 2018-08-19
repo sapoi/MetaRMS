@@ -27,7 +27,7 @@ namespace Server.Controllers.Rights
         [Route("{appName}")]
         public IActionResult CreateById(string appName, [FromBody] RightsModel fromBodyRightsModel)
         {
-            ApplicationModel application = (from a in _context.ApplicationsDbSet
+            ApplicationModel application = (from a in _context.ApplicationDbSet
                                    where (a.Name == appName)
                                    select a).FirstOrDefault();
             if (application == null)

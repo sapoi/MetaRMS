@@ -11,9 +11,9 @@ using SharedLibrary.Models;
 using System.Linq;
 using SharedLibrary.Helpers;
 
-namespace Server.Controllers
+namespace Server.Controllers.User
 {
-    [Route("api/[controller]")]
+    [Route("api/user/[controller]")]
     public class CreateController : Controller
     {
         private readonly DatabaseContext _context;
@@ -24,26 +24,26 @@ namespace Server.Controllers
         }
         [Authorize]
         [HttpPost]
-        [Route("{appName}/{datasetName}")]
-        public IActionResult PatchById(string appName, string datasetName, 
-                                      [FromBody] Dictionary<string, object> data)
+        [Route("{appName}")]
+        public IActionResult CreateById(string appName, [FromBody] UserModel fromBodyUserModel)
         {
             ApplicationModel application = (from a in _context.ApplicationDbSet
                                    where (a.Name == appName)
                                    select a).FirstOrDefault();
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
-            ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
-            var datasetId = adh.GetDatasetIdByName(datasetName);
-            if (datasetId == null)
-                return BadRequest("spatny nazev datasetu");
 
-            string JsonData = JsonConvert.SerializeObject(data);
-            DataModel dataModel = new DataModel{ApplicationId=application.Id, DatasetId=(long)datasetId, Data=JsonData};
-            _context.DataDbSet.Add(dataModel);
-
+            string JsonData = JsonConvert.SerializeObject(fromBodyUserModel.DataDictionary);
+            string hashedPassword = PasswordHelper.ComputeHash(fromBodyUserModel.Password);
+            UserModel dataModel = new UserModel{ ApplicationId=application.Id, 
+                                                 Username = fromBodyUserModel.Username, 
+                                                 Password = hashedPassword,
+                                                 Data = JsonData,
+                                                 RightsId = fromBodyUserModel.RightsId
+                                                };
+            _context.UserDbSet.Add(dataModel);
             _context.SaveChanges();
-            return Ok("saved successfully");
+            return Ok($"New user {dataModel.Username} created successfully.");
         }
     }
 }

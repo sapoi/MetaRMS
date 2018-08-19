@@ -48,7 +48,7 @@ namespace Server.Controllers
                 return BadRequest("Soubor neni ve spravnem formatu.");
             }
             // check if AppName is unique
-            if (_context.ApplicationsDbSet.Where(app => app.Name == applicationDescriptor.AppName).Count() != 0)
+            if (_context.ApplicationDbSet.Where(app => app.Name == applicationDescriptor.AppName).Count() != 0)
             {
                 //TODO error
                 //ModelState.AddModelError("ErrorCode", "001");
@@ -74,7 +74,7 @@ namespace Server.Controllers
                         Name = applicationDescriptor.AppName, 
                         ApplicationDescriptorJSON = serializedApplicationDescriptor
                         };
-                    _context.ApplicationsDbSet.Add(newApplication);
+                    _context.ApplicationDbSet.Add(newApplication);
                     // create new admin account for new application and add it to DB
                     string newPassword = PasswordHelper.GenerateRandomPassword(8);
                     RightsModel newRights = getAdminRights(newApplication, applicationDescriptor);
@@ -87,7 +87,7 @@ namespace Server.Controllers
                         Data = "",
                         Rights = newRights
                     };
-                    _context.UsersDbSet.Add(newUser);
+                    _context.UserDbSet.Add(newUser);
                     // try to send login details to admin account to email from parametres
                     sendEmailWithCredentials(email, newPassword);
                     transaction.Commit();

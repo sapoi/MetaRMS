@@ -10,8 +10,8 @@ using System;
 namespace Server.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20180721143632_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20180819091212_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,7 +25,7 @@ namespace Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id");
 
-                    b.Property<string>("ApplicationDescriptor")
+                    b.Property<string>("ApplicationDescriptorJSON")
                         .IsRequired()
                         .HasColumnName("descriptor");
 
@@ -51,7 +51,7 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnName("data");
 
-                    b.Property<long>("Dataset")
+                    b.Property<long>("DatasetId")
                         .HasColumnName("dataset_id");
 
                     b.HasKey("Id");
@@ -123,7 +123,7 @@ namespace Server.Migrations
                     b.HasOne("SharedLibrary.Models.ApplicationModel", "Application")
                         .WithMany("Datas")
                         .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SharedLibrary.Models.RightsModel", b =>
@@ -131,7 +131,7 @@ namespace Server.Migrations
                     b.HasOne("SharedLibrary.Models.ApplicationModel", "Application")
                         .WithMany("Rights")
                         .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SharedLibrary.Models.UserModel", b =>
@@ -139,12 +139,12 @@ namespace Server.Migrations
                     b.HasOne("SharedLibrary.Models.ApplicationModel", "Application")
                         .WithMany("Users")
                         .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SharedLibrary.Models.RightsModel", "Rights")
                         .WithMany("Users")
                         .HasForeignKey("RightsId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

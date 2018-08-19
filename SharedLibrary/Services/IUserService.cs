@@ -6,12 +6,12 @@ using SharedLibrary.Models;
 
 namespace SharedLibrary.Services
 {
-    public interface IRightsService  
+    public interface IUserService  
     {           
         Task<HttpResponseMessage> GetAll(string appName, string token);
         Task<HttpResponseMessage> GetById(string appName, long id, string token);
         Task<HttpResponseMessage> DeleteById(string appName, long id, string token);
-        Task<HttpResponseMessage> PatchById(string appName, long id, RightsModel patchedRightsModel, string token);
-        Task<HttpResponseMessage> Create(string appName, RightsModel newRightsModel, string token);
+        Task<HttpResponseMessage> PatchById(string appName, long id, UserModel patchedUserModel, string token);
+        Task<HttpResponseMessage> Create(string appName, UserModel newUserModel, string token);
     }
 }

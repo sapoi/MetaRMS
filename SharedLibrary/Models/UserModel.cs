@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace SharedLibrary.Models
 {
@@ -23,6 +26,14 @@ namespace SharedLibrary.Models
         [Required]
         [Column("data")]
         public string Data { get; set; }
+        [JsonIgnore]
+        public Dictionary<String, Object> DataDictionary
+         {
+             get
+             {
+                return JsonConvert.DeserializeObject<Dictionary<String,Object>>(Data);
+             }
+         }
         [Required]
         [Column("rights_id")]
         public long RightsId { get; set; }

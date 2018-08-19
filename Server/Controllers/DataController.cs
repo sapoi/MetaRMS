@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.Models;
 using System.Linq;
 using SharedLibrary.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Server.Controllers
 {
@@ -15,10 +16,11 @@ namespace Server.Controllers
         {
             _context = context;
         }
+        [Authorize]
         [HttpPost]
         public IActionResult Create(string appName, string datasetName, string data)
         {
-            var application = (from p in _context.ApplicationsDbSet
+            var application = (from p in _context.ApplicationDbSet
                                  where p.Name == appName
                                  select p).FirstOrDefault();
             if (application == null)

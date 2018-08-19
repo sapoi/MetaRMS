@@ -18,7 +18,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if (Model.NavbarRights[(long)SystemDatasetsEnum.Users] >= RightsEnum.R) {
-                <li><a asp-page="../Users/Get">Users</a></li>
+                <li><a asp-page="../User/Get">Users</a></li>
                 } @if (Model.NavbarRights[(long)SystemDatasetsEnum.Rights] >= RightsEnum.R) {
                 <li><a asp-page="../Rights/Get">Rights</a></li>
                 }

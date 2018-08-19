@@ -27,20 +27,31 @@ namespace Server.Controllers.Rights
         [Route("{appName}/{id}")]
         public IActionResult DeleteById(string appName, long id)
         {
-            ApplicationModel application = (from a in _context.ApplicationsDbSet
+            ApplicationModel application = (from a in _context.ApplicationDbSet
                                    where (a.Name == appName)
                                    select a).FirstOrDefault();
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
-            RightsModel query = (from p in _context.RightsDbSet
+            RightsModel rights = (from p in _context.RightsDbSet
                                where (p.ApplicationId == application.Id && p.Id == id)
                                select p).FirstOrDefault();
-            if (query == null)
+            if (rights == null)
                 return BadRequest("neexistujici kombinace jmena aplikace a id");
-            _context.RightsDbSet.Remove(query);
+            // check if no users are using rights to delete
+            List<UserModel> users = (from u in _context.UserDbSet
+                                     where (u.RightsId == rights.Id)
+                                     select u).ToList();
+            if (users.Count > 0)
+            {
+                string usernames = users[0].Username;
+                for (int i = 1; i < users.Count; i++)
+                    usernames += ", " + users[i].Username;
+                return BadRequest($"Can't delete - rights {rights.Name} are used by one or more users: {usernames}.");
+            }
+            _context.RightsDbSet.Remove(rights);
             _context.SaveChanges();
-            return Ok("deleted successfully");
+            return Ok($"Rights {rights.Name} deleted successfully.");
         }
     }
 }

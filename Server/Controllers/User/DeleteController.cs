@@ -11,9 +11,9 @@ using SharedLibrary.Models;
 using System.Linq;
 using SharedLibrary.Helpers;
 
-namespace Server.Controllers
+namespace Server.Controllers.User
 {
-    [Route("api/[controller]")]
+    [Route("api/user/[controller]")]
     public class DeleteController : Controller
     {
         private readonly DatabaseContext _context;
@@ -24,8 +24,8 @@ namespace Server.Controllers
         }
         [Authorize]
         [HttpGet]
-        [Route("{appName}/{datasetName}/{id}")]
-        public IActionResult DeleteById(string appName, string datasetName, long id)
+        [Route("{appName}/{id}")]
+        public IActionResult DeleteById(string appName, long id)
         {
             ApplicationModel application = (from a in _context.ApplicationDbSet
                                    where (a.Name == appName)
@@ -33,17 +33,16 @@ namespace Server.Controllers
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
-            var datasetId = adh.GetDatasetIdByName(datasetName);
-            if (datasetId == null)
-                return BadRequest("spatny nazev datasetu");
-            DataModel query = (from p in _context.DataDbSet
-                                   where (p.Application.Name == appName && p.DatasetId == datasetId && p.Id == id)
-                                   select p).FirstOrDefault();
-            if (query == null)
-                return BadRequest("neexistujici kombinace jmena aplikace, datasetu a id");
-            _context.DataDbSet.Remove(query);
+
+            UserModel user = (from p in _context.UserDbSet
+                               where (p.ApplicationId == application.Id && p.Id == id)
+                               select p).FirstOrDefault();
+            if (user == null)
+                return BadRequest("neexistujici kombinace jmena aplikace a id");
+        
+            _context.UserDbSet.Remove(user);
             _context.SaveChanges();
-            return Ok("deleted successfully");
+            return Ok($"User {user.Username} deleted successfully.");
         }
     }
 }
