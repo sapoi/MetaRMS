@@ -131,5 +131,9 @@ namespace RazorWebApp.Helpers
             }
             return systemRights.Value;
         }
+        public static void Logout(PageModel model)
+        {
+            
+        }
     }
 }

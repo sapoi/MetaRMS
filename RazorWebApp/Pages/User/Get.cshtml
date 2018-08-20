@@ -9,10 +9,12 @@
 
 <div class="row">
     <div class="col-sm-12">
-        @if (Model.Message != null){
+        @if (Model.Message != null || Model.Message != ""){
+            <div class="row">
                 <div class="modal-body col-sm-12 center-block text-center">
                     <span><b>@Model.Message</b></span>
                 </div>
+            </div>
         }
         <h2>@ViewData["Title"]</h2>
         @if (Model.UsersRights >= RightsEnum.CRU)
@@ -28,9 +30,11 @@
                         <th>
                             Username
                         </th>
+                    @*    
                         <th>
                             Password
                         </th>
+                    *@
                         <th>
                             Rights
                         </th>
@@ -49,9 +53,11 @@
                         <td>
                             @user.Username
                         </td>
+                    @*
                         <td>
                             @user.Password
                         </td>
+                    *@
                         <td>
                             @user.Rights.Name
                         </td>

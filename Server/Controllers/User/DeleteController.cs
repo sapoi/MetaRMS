@@ -39,6 +39,11 @@ namespace Server.Controllers.User
                                select p).FirstOrDefault();
             if (user == null)
                 return BadRequest("neexistujici kombinace jmena aplikace a id");
+            
+            // zajistit ze posledni uzivatel nepujde smazat - vzdy musi byt alespon 1 uzivatel aplikace
+            var allAppUsers = _context.UserDbSet.Where(u => u.ApplicationId == application.Id).ToList();
+            if (allAppUsers.Count <= 1)
+                return BadRequest("ERROR: Cannot delete last user in application. There has to be always at least one.");
         
             _context.UserDbSet.Remove(user);
             _context.SaveChanges();

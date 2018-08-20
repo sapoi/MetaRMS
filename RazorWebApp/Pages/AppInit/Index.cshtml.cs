@@ -27,6 +27,7 @@ namespace RazorWebApp.Pages.Appinit
 
         [BindProperty]
         public string Email { get; set; }
+        public string Message { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -39,8 +40,13 @@ namespace RazorWebApp.Pages.Appinit
             {
                 // 
                 var response = await _appInitService.InitApp(Email, FileUpload);
-
-                return RedirectToPage("/Account/Login");
+                string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                // remove " form beginning and end of message
+                Message = message.Substring(1, message.Length - 2);
+                if (!response.IsSuccessStatusCode)
+                    return Page();
+                else
+                    return RedirectToPage("/Index", new {message = Message});
             }
             //TODO vypsat nejakou chybu
             return Page();

@@ -99,8 +99,10 @@ namespace RazorWebApp.Pages.Data
             for (int i = 0; i < AttributesNames.Count; i++)
                 inputData.Add(AttributesNames[i], ValueList[i]);
             
-            await _dataService.Create(ApplicationDescriptor.AppName, DatasetName, inputData, token.Value);
-            return RedirectToPage("/Data/Get");
+            var response = await _dataService.Create(ApplicationDescriptor.AppName, DatasetName, inputData, token.Value);
+            string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            return RedirectToPage("/Data/Get", new {message = message.Substring(1, message.Length - 2)});
         }
         
         public async Task<IActionResult> OnPostDatasetSelectAsync(string datasetName)

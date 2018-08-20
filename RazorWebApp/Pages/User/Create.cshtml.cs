@@ -40,8 +40,7 @@ namespace RazorWebApp.Pages.User
         [BindProperty]
         public List<string> ValueList { get; set; }
         public IEnumerable<SelectListItem> UserRightsList { get; set; }
-        // [BindProperty]
-        // public string RightsName { get; set; }
+        public string Message { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -97,6 +96,8 @@ namespace RazorWebApp.Pages.User
             var rights = await AccessHelper.GetUserRights(_cache, _accountService, token);
             if (rights == null)
                 return RedirectToPage("/Errors/ServerError");
+
+            MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
             
             // data prepare
             long newRightsId;
@@ -118,6 +119,12 @@ namespace RazorWebApp.Pages.User
                                                          Data = JsonConvert.SerializeObject(inputData) };
             var response = await _userService.Create(ApplicationDescriptor.AppName, newUserModel, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                Message = message.Substring(1, message.Length - 2);
+                return Page();
+            }
 
             return RedirectToPage("/User/Get", new {message = message.Substring(1, message.Length - 2)});
         }

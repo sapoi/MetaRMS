@@ -12,6 +12,13 @@
     @{Html.RenderPartial("Shared/_ReadAuthorizedDatasetsMenuPartial", Model.ReadAuthorizedDatasets); }
 
     <div class="col-sm-9">
+        @if (Model.Message != null || Model.Message != ""){
+            <div class="row">
+                <div class="modal-body col-sm-9 center-block text-center">
+                    <span><b>@Model.Message</b></span>
+                </div>
+            </div>
+        }
         <h2>@ViewData["Title"]</h2>
         @if (Model.ActiveDatasetRights >= RightsEnum.CRU)
         {

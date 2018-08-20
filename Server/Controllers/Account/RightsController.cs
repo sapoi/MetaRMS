@@ -9,7 +9,7 @@ using SharedLibrary.Descriptors;
 using System.Collections.Generic;
 using SharedLibrary.Enums;
 
-namespace Server.Controllers
+namespace Server.Controllers.Account
 {
     [Route("api/account/[controller]")]
     public class RightsController : Controller

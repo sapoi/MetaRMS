@@ -35,6 +35,7 @@ namespace RazorWebApp.Pages.Account
 
         [BindProperty]
         public LoginCredentials Input { get; set; }
+        public string Message { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -47,9 +48,10 @@ namespace RazorWebApp.Pages.Account
             {
                 // zisk tokenu, pokud jsou přihlašovací údaje správné
                 var response = await _accountService.Login(Input);
-                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                if (!response.IsSuccessStatusCode)
                 {
-                    //TODO a vypsat chybovou hlasku
+                    string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                    Message = message.Substring(1, message.Length - 2);
                     return Page();
                 }
                 var jsonToken = response.Content.ReadAsStringAsync().Result;

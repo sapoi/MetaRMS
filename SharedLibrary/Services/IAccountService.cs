@@ -9,8 +9,9 @@ namespace SharedLibrary.Services
     public interface IAccountService  
     {           
         Task<HttpResponseMessage> Login(LoginCredentials data); 
-        Task<IActionResult> Logout(); 
+        Task<HttpResponseMessage> Logout(string token); 
         Task<HttpResponseMessage> GetApplicationDescriptorByAppName(string token);
         Task<HttpResponseMessage> GetRightsByUserId(string token);
+        // Task<HttpResponseMessage> ChangePassword(string appName, string oldPassword, string newPassword, string token);
     }
 }

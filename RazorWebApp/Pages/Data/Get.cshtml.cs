@@ -4,12 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using SharedLibrary.Services;
-using SharedLibrary.Models;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Caching.Memory;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using SharedLibrary.Descriptors;
 using RazorWebApp.Helpers;
 using SharedLibrary.Enums;
@@ -34,12 +30,12 @@ namespace RazorWebApp.Pages.Data
         public ApplicationDescriptor ApplicationDescriptor { get; set; }
         public DatasetDescriptor ActiveDatasetDescriptor { get; set; }
         public List<Dictionary<String, Object>> Data { get; set; }
-        //public List<string> Keys { get; set; }
         public List<DatasetDescriptor> ReadAuthorizedDatasets { get; set; }
         public RightsEnum ActiveDatasetRights { get; set; }
         public LoggedMenuPartialData MenuData { get; set; }
+        public string Message { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string datasetName = null)
+        public async Task<IActionResult> OnGetAsync(string datasetName = null, string message = null)
         {
             // only if ActiveDatasetDescriptor is valid, check for model validity
             if (ModelState.IsValid)
@@ -72,6 +68,8 @@ namespace RazorWebApp.Pages.Data
                     return RedirectToPage("/Errors/ServerError");
                 ActiveDatasetRights = (RightsEnum)activeDatasetRights;
 
+                if (message != null)
+                    Message = message;
 
                 // getting real data
                 var response = await _dataService.GetAll(ApplicationDescriptor.AppName, ActiveDatasetDescriptor.Name, token.Value);
@@ -100,16 +98,11 @@ namespace RazorWebApp.Pages.Data
             ApplicationDescriptor = await AccessHelper.GetApplicationDescriptor(_cache, _accountService, token);
             if (ApplicationDescriptor == null)
                 return RedirectToPage("/Errors/ServerError");
-            // get rights
-            // var rights = await AccessHelper.GetUserRights(_cache, _accountService, token);
-            // if (rights == null)
-            //     return RedirectToPage("/Errors/ServerError");
-            // ActiveDatasetDescriptor = AccessHelper.GetActiveDatasetDescriptor(ApplicationDescriptor, rights, datasetName);
-            // if (ActiveDatasetDescriptor == null)
-            //     return RedirectToPage("/Errors/ServerError");
-                
-            await _dataService.DeleteById(ApplicationDescriptor.AppName, datasetName, dataId, token.Value);
-            return await OnGetAsync(datasetName);
+
+            var response = await _dataService.DeleteById(ApplicationDescriptor.AppName, datasetName, dataId, token.Value);
+            string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            // remove " form beginning and end of message
+            return await OnGetAsync(datasetName, message.Substring(1, message.Length - 2));
         }
 
         public async Task<IActionResult> OnPostDataCreateAsync(string datasetName)

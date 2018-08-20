@@ -11,39 +11,39 @@ using SharedLibrary.Models;
 using System.Linq;
 using SharedLibrary.Helpers;
 
-namespace Server.Controllers
+namespace Server.Controllers.Data
 {
-    [Route("api/[controller]")]
-    public class DeleteController : Controller
+    [Route("api/data/[controller]")]
+    public class CreateController : Controller
     {
         private readonly DatabaseContext _context;
 
-        public DeleteController(DatabaseContext context)
+        public CreateController(DatabaseContext context)
         {
             _context = context;
         }
         [Authorize]
-        [HttpGet]
-        [Route("{appName}/{datasetName}/{id}")]
-        public IActionResult DeleteById(string appName, string datasetName, long id)
+        [HttpPost]
+        [Route("{appName}/{datasetName}")]
+        public IActionResult Create(string appName, string datasetName, 
+                                      [FromBody] Dictionary<string, object> data)
         {
             ApplicationModel application = (from a in _context.ApplicationDbSet
                                    where (a.Name == appName)
                                    select a).FirstOrDefault();
             if (application == null)
-                return BadRequest("spatny nazev aplikace neexistuje");
+                return BadRequest($"ERROR: Application name {appName} does not exist.");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
             var datasetId = adh.GetDatasetIdByName(datasetName);
             if (datasetId == null)
-                return BadRequest("spatny nazev datasetu");
-            DataModel query = (from p in _context.DataDbSet
-                                   where (p.Application.Name == appName && p.DatasetId == datasetId && p.Id == id)
-                                   select p).FirstOrDefault();
-            if (query == null)
-                return BadRequest("neexistujici kombinace jmena aplikace, datasetu a id");
-            _context.DataDbSet.Remove(query);
+                return BadRequest($"ERROR: Dataset name {datasetName} does not exist.");
+
+            string JsonData = JsonConvert.SerializeObject(data);
+            DataModel dataModel = new DataModel{ApplicationId=application.Id, DatasetId=(long)datasetId, Data=JsonData};
+            _context.DataDbSet.Add(dataModel);
+
             _context.SaveChanges();
-            return Ok("deleted successfully");
+            return Ok($"New data in dataset {datasetName} created successfully.");
         }
     }
 }

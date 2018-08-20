@@ -4,4 +4,11 @@
     ViewData["Title"] = "Unauthorized";
 }
 
-<h2>Unauthorized</h2>
+@{Html.RenderPartial("Shared/_LogoutMenuPartial"); }
+
+<div class="modal-body col-sm-12 center-block text-center">
+    <span><b>Unauthorized</b></span>
+    <br>
+    <span>Your permissions are not sufficient for this operation, return back to previous page or log in as another user.</span>
+</div>
+

@@ -10,6 +10,11 @@
 <div class="row">
     <div class="col-sm-12">
         <h2>@ViewData["Title"]</h2>
+        @if (Model.Message != null || Model.Message != ""){
+                <div class="modal-body col-sm-12 center-block text-center">
+                    <span><b>@Model.Message</b></span>
+                </div>
+        }
         <form method="post">
             <input type="hidden" asp-for="ApplicationDescriptor" />
 

@@ -1,30 +1,38 @@
-@page
-@model RazorWebApp.Pages.Account.SettingsModel
-@{
-    ViewData["Title"] = "About";
+@page "{handler?}"
+@using SharedLibrary.Enums
+@model RazorWebApp.Pages.Account.Settings
+@{ 
+    ViewData["Title"] = "Settings"; 
 }
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-page="/Index" class="navbar-brand">MetaRMS</a>
+@{Html.RenderPartial("Shared/_LoggedMenuPartial", Model.MenuData); }
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <h2>@ViewData["Title"]</h2>
+        @if (Model.Message != null || Model.Message != ""){
+                <div class="modal-body col-sm-12 center-block text-center">
+                    <span><b>@Model.Message</b></span>
+                </div>
+        }
+        <form method="post">
+            <h2>Password</h2>
+            <div class="form-group">
+                <label>Old password</label>
+                <input name="ValueList[0]" class="form-control" type="password">
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-page="/AppInit/Index" class="navbar-brand">Create new application</a></li>
-                </ul>
+            <div class="form-group">
+                <label>Old password once again</label>
+                <input name="ValueList[1]" class="form-control" type="password">
             </div>
-        </div>
-    </nav>
-
-
-<h2>@ViewData["Title"]</h2>
-<h3>@Model.Message</h3>
-
-<p>Use this area to provide additional information.</p>
+            <div class="form-group">
+                <label>New password</label>
+                <input name="ValueList[2]" class="form-control" type="password">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">Change</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,35 +1,22 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "MetaRMS";
 }
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-page="/Index" class="navbar-brand">MetaRMS</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-page="/AppInit/Index" class="navbar-brand">Create new application</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-page="/About">About</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+@{Html.RenderPartial("Shared/_LogoutMenuPartial"); }
 
 <div class="container-fluid">
 <div class="row">
     <div class="col-md-4 mx-auto mh-10"  style="float: none; margin: 0 auto;">
         <h2>Log in</h2>
+        
+        @if (Model.Message != null || Model.Message != ""){
+            <div class="modal-body col-sm-12 center-block text-center">
+                <span><b>@Model.Message</b></span>
+            </div>
+        }
+        
         <form method="post">
             
             <div asp-validation-summary="All" class="text-danger"></div>

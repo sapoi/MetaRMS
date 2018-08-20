@@ -45,7 +45,7 @@ namespace Server.Controllers
             catch
             {
                 //TODO detekovat, kde je chyba
-                return BadRequest("Soubor neni ve spravnem formatu.");
+                return BadRequest("JSON file is in incorrect format, please read again about page.");
             }
             // check if AppName is unique
             if (_context.ApplicationDbSet.Where(app => app.Name == applicationDescriptor.AppName).Count() != 0)
@@ -53,11 +53,11 @@ namespace Server.Controllers
                 //TODO error
                 //ModelState.AddModelError("ErrorCode", "001");
                 //return BadRequest(ModelState);
-                return BadRequest("Jmeno aplikace jiz existuje.");
+                return BadRequest($"Application name {applicationDescriptor.AppName} already exists, please choose another.");
             }
             // check if no dataset atribute has name BDId
             if (applicationDescriptor.Datasets.Any(d => d.Attributes.Any(a => a.Name == "DBId")))
-                return BadRequest("Nepovoleny nazev atributu DBId");
+                return BadRequest($"Application descriptor contains invalid attribute name \"DBId\"");
                 //TODO otestovat
             // add unique Id for each dataset
             for (int i = 0; i < applicationDescriptor.Datasets.Count; i++)
@@ -89,7 +89,7 @@ namespace Server.Controllers
                     };
                     _context.UserDbSet.Add(newUser);
                     // try to send login details to admin account to email from parametres
-                    sendEmailWithCredentials(email, newPassword);
+                    //sendEmailWithCredentials(email, newPassword);
                     transaction.Commit();
                 }
                 catch
@@ -99,7 +99,7 @@ namespace Server.Controllers
             }
             // if everythong was ok, save changes to DB and return Ok
             _context.SaveChangesAsync();
-            return Ok();
+            return Ok($"Application {applicationDescriptor.AppName} was created successfully and login credentials were sent to email {email}.");
         }
         RightsModel getAdminRights(ApplicationModel appModel, ApplicationDescriptor appDescriptor)
         {

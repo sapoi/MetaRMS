@@ -5,10 +5,19 @@
     ViewData["Title"] = "Schedules";
 }
 
-<h2>Schedules</h2>
-<hr />
+@{Html.RenderPartial("Shared/_LogoutMenuPartial"); }
 
-<h3>Upload Schedules</h3>
+<h3>Create new application</h3>
+<div class="modal-body col-sm-12 center-block text-center">
+    <span><b>Make sure you have read the about page and that you are inserting application descriptor in correct format.</b></span>
+</div>
+<br><br>
+@if (Model.Message != null || Model.Message != ""){
+    <div class="modal-body col-sm-12 center-block text-center">
+        <span><b>@Model.Message</b></span>
+    </div>
+}
+<br>    
 <div class="row">
     <div class="col-md-4">
         <form method="post" enctype="multipart/form-data">

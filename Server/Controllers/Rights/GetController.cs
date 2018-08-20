@@ -82,15 +82,6 @@ namespace Server.Controllers.Rights
                 row.Users = null;
             }
             return Ok(query);
-            // List<Dictionary<String, Object>> result = new List<Dictionary<String, Object>>();
-            // foreach (var d in query)
-            // {
-            //     var tmpDict = d.DataDictionary;
-            //     tmpDict.Add("DBId", d.Id);
-            //     tmpDict.Add("Name", d.Name);
-            //     result.Add(tmpDict);
-            // }
-            // return Ok(result);
         }
         [Authorize]
         [HttpGet]
@@ -115,13 +106,6 @@ namespace Server.Controllers.Rights
             query.Users = null;
             
             return Ok(query);
-
-            // Dictionary<String, Object> result = query.DataDictionary;
-            // result.Add("Name", query.Name);
-
-
-
-            // return Ok(result);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace SharedLibrary.Services
         public DataService()
         {
             _client = new HttpClient();
-            _client.BaseAddress = new Uri("http://localhost:5000/api");
+            _client.BaseAddress = new Uri("http://localhost:5000/api/data");
             _client.DefaultRequestHeaders.Clear();
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
         }

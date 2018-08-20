@@ -109,9 +109,10 @@ namespace RazorWebApp.Pages.Data
             Dictionary<String, Object> inputData = new Dictionary<string, object>();
             for (int i = 0; i < AttributesNames.Count; i++)
                 inputData.Add(AttributesNames[i], ValueList[i]);
-                
-            await _dataService.PatchById(ApplicationDescriptor.AppName, DatasetName, DataId, inputData, token.Value);
-            return RedirectToPage("/Data/Get");
+
+            var response = await _dataService.PatchById(ApplicationDescriptor.AppName, DatasetName, DataId, inputData, token.Value);
+            string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return RedirectToPage("/Data/Get",  new {message = message.Substring(1, message.Length - 2)});
         }
 
         public async Task<IActionResult> OnPostDatasetSelectAsync(string datasetName)

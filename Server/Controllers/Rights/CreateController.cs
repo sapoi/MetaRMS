@@ -25,34 +25,26 @@ namespace Server.Controllers.Rights
         [Authorize]
         [HttpPost]
         [Route("{appName}")]
-        public IActionResult CreateById(string appName, [FromBody] RightsModel fromBodyRightsModel)
+        public IActionResult Create(string appName, [FromBody] RightsModel fromBodyRightsModel)
         {
             ApplicationModel application = (from a in _context.ApplicationDbSet
                                    where (a.Name == appName)
                                    select a).FirstOrDefault();
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
-            // ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
-            // // separate rights name from data
-            // string rightsName = "";
-            // Dictionary<string, object> rightsData = new Dictionary<string, object>();
-            // foreach (var item in fromBodyData)
-            // {
-            //     if(item.Key == "Name")
-            //         rightsName = item.Value.ToString();
-            //     else
-            //     {
-            //         rightsData.Add(item.Key, item.Value);
-            //     }
-            // }
             string JsonData = JsonConvert.SerializeObject(fromBodyRightsModel.DataDictionary);
             
-            //TODO posilat rights name
             RightsModel dataModel = new RightsModel{ApplicationId=application.Id, Name=fromBodyRightsModel.Name, Data=JsonData};
+            // check if rights name is unique
+            var sameNameRights = _context.RightsDbSet.Where(r => r.ApplicationId == application.Id && 
+                                                                 r.Name == dataModel.Name).ToList();
+            if (sameNameRights.Count > 0)
+                return BadRequest($"Rights named {dataModel.Name} already exists, please choose another name.");
+                
             _context.RightsDbSet.Add(dataModel);
 
             _context.SaveChanges();
-            return Ok("saved successfully");
+            return Ok($"New rights {dataModel.Name} created successfully.");
         }
     }
 }

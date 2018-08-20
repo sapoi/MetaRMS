@@ -38,8 +38,9 @@ namespace RazorWebApp.Pages.Rights
         public List<string> ValueList { get; set; }
         [BindProperty]
         public string RightsName { get; set; }
+        public string Message { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(string message = null)
         {
             if (ModelState.IsValid)
             {
@@ -83,6 +84,8 @@ namespace RazorWebApp.Pages.Rights
             if (rights == null)
                 return RedirectToPage("/Errors/ServerError");
             
+            MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
+            
             // data prepare
             Dictionary<String, Object> inputData = new Dictionary<string, object>();
             inputData.Add(((long)SystemDatasetsEnum.Users).ToString(), ValueList[0]);
@@ -95,6 +98,12 @@ namespace RazorWebApp.Pages.Rights
             RightsModel newRightsModel = new RightsModel() { Name = RightsName, Data = JsonConvert.SerializeObject(inputData) };
             var response = await _rightsService.Create(ApplicationDescriptor.AppName, newRightsModel, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                Message = message.Substring(1, message.Length - 2);
+                return Page();
+            }
 
             return RedirectToPage("/Rights/Get", new {message = message.Substring(1, message.Length - 2)});
         }

@@ -26,13 +26,16 @@ namespace RazorWebApp.Pages
 
         [BindProperty]
         public LoginCredentials Input { get; set; }
-        public async Task<IActionResult> OnGet()
+        public string Message { get; set; }
+        public async Task<IActionResult> OnGet(string message = null)
         {
             // get AccessToken from PageModel
             var token = AuthorizationHelper.GetTokenFromPageModel(this);
             // if there is no token, log info and redirect user to login page
             if (token == null)
             {
+                Message = message;
+                //TODO
                 return Page();
             }
             return RedirectToPage("/Data/Get");
@@ -44,9 +47,10 @@ namespace RazorWebApp.Pages
             {
                 // zisk tokenu, pokud jsou přihlašovací údaje správné
                 var response = await _accountService.Login(Input);
-                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                if (!response.IsSuccessStatusCode)
                 {
-                    //TODO a vypsat chybovou hlasku
+                    string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                    Message = message.Substring(1, message.Length - 2);
                     return Page();
                 }
                 var jsonToken = response.Content.ReadAsStringAsync().Result;
@@ -55,7 +59,7 @@ namespace RazorWebApp.Pages
                 var token = AuthorizationHelper.GetTokenFromPageModel(this);
                 // pokud jiz neni v cahe, nacist appliction descriptor a ulozit ho do ni
                 await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, token);
-                //return RedirectToPage("/Account/Secret");
+
                 return RedirectToPage("/Data/Get");
             }
             //TODO vypsat nejakou chybu

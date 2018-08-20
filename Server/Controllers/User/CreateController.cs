@@ -25,7 +25,7 @@ namespace Server.Controllers.User
         [Authorize]
         [HttpPost]
         [Route("{appName}")]
-        public IActionResult CreateById(string appName, [FromBody] UserModel fromBodyUserModel)
+        public IActionResult Create(string appName, [FromBody] UserModel fromBodyUserModel)
         {
             ApplicationModel application = (from a in _context.ApplicationDbSet
                                    where (a.Name == appName)
@@ -41,6 +41,13 @@ namespace Server.Controllers.User
                                                  Data = JsonData,
                                                  RightsId = fromBodyUserModel.RightsId
                                                 };
+
+            // check if user name is unique
+            var sameNameUsers = _context.UserDbSet.Where(u => u.ApplicationId == application.Id && 
+                                                              u.Username == dataModel.Username).ToList();
+            if (sameNameUsers.Count > 0)
+                return BadRequest($"User named {dataModel.Username} already exists, please chhose another username.");
+
             _context.UserDbSet.Add(dataModel);
             _context.SaveChanges();
             return Ok($"New user {dataModel.Username} created successfully.");

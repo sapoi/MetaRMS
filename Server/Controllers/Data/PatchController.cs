@@ -11,9 +11,9 @@ using SharedLibrary.Models;
 using System.Linq;
 using SharedLibrary.Helpers;
 
-namespace Server.Controllers
+namespace Server.Controllers.Data
 {
-    [Route("api/[controller]")]
+    [Route("api/data/[controller]")]
     public class PatchController : Controller
     {
         private readonly DatabaseContext _context;
@@ -46,15 +46,7 @@ namespace Server.Controllers
             query.Data = JsonData;
             _context.SaveChanges();
 
-
-            // _context.DataDbSet.Remove(query);
-
-            // //string JsonData = JsonConvert.SerializeObject(data);
-            // DataModel dataModel = new DataModel{Id = id, ApplicationId=application.Id, DatasetId=(long)datasetId, Data=JsonData};
-            // _context.DataDbSet.Add(dataModel);
-
-            //_context.SaveChanges();
-            return Ok("saved successfully");
+            return Ok($"Data in dataset {datasetName} editted successfully.");
         }
     }
 }

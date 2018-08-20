@@ -13,9 +13,9 @@ using SharedLibrary.Helpers;
 using System.Security.Claims;
 using SharedLibrary.Enums;
 
-namespace Server.Controllers
+namespace Server.Controllers.Data
 {
-    [Route("api/[controller]")]
+    [Route("api/data/[controller]")]
     public class GetController : Controller
     {
         private readonly DatabaseContext _context;

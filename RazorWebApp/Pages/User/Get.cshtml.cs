@@ -89,6 +89,13 @@ namespace RazorWebApp.Pages.User
             if (ApplicationDescriptor == null)
                 return RedirectToPage("/Errors/ServerError");
 
+            // get rights
+            var rights = await AccessHelper.GetUserRights(_cache, _accountService, token);
+            if (rights == null)
+                return RedirectToPage("/Errors/ServerError");
+
+            MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
+
             var response = await _userService.DeleteById(ApplicationDescriptor.AppName, dataId, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             // remove " form beginning and end of message

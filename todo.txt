@@ -1,42 +1,58 @@
+- ❗️ refresh token (https://www.blinkingcaret.com/2018/05/30/refresh-tokens-in-asp-net-core-web-api/)
+- ❗️ odhlaseni na serveru
+- ❗️ user additional data
+
+DETAILY
+    - 🔸 edit user nezobrazovat hash u edit
+- 🔸 napsat popis do about page
+    - 🔸 user settings zmena hesla
+- 🔸 misto hesla zobrazovat * index a login -> type="password"
+- if user deleted, log him out first
+- zobrazovat nekde jmeno prihlaseneho uzivatele
+- u dat vracet unauthorized pokud rights = none
+- ruzne druhy message - info, warneni, error
+- mazani rights z cache jen pro konkretni id
+- pocitani referenci pro mazani
+- pred redirectto error dat log
+- udelat a dat app name validator nekam zvlast
+- message preparer
+
+KONTROLA VALIDITY vstupu
+- ❗️ validace vstupu na klientovi podle app deskriptoru
+- 🔸 app init kontrola validity mailu
+- 🔸 app init kontrola ze je vzdy soubor
+
+REFAKTORING
+- AccountService.GetApplicationDescriptorByAppName dat nekam jinam
+- metoda na kontrolu tokenu a appname do Validations
+- odstranit login stranku - misto ni je index
+- rozdelit accesshepler 
+- pomocne app init metody z kontrolleru nekam jinam
+- proc je post u login controlleru
+- spojit rights, user a data servicy do jedne -> pridat basemodel
+- na serveru validace u controlleru dat zvlast
+
+HOTOVO
 - ✅ prava nemi jit samzat, pokud je nekdo pouziva 
 - ✅ zobrazit mesage ze prava nebyla smazana 
 - ✅ crud uzivatele 
-- odhlaseni
-- edit user nezobrazovat hash
-
-- metoda na kontrolu tokenu a appname do Validations
 - ✅ partial na menu logged 
-- partial menu unlogged
-- ✅ partial na read auth datasets 
-- u dat vracet unauthorized pokud rights = none
-- rozdelit accesshepler
+- ✅ partial menu unlogged
 - ✅ db ondelete restrict 
-- ✅ odkomentovat posilani mailu 
-- pomocne app init metody z kontrolleru nekam jinam
-- proc je post u login controlleru
-- app name validator pred app init
-- rights patch messages
-- rights unique name
-- data controllers do slozky
-- spojit rights, user a data servicy do jedne -> pridat basemodel
-- rozne druhy message - info, warneni, error
-- user additional data
-- username unique
-- if user deleted, log him out first
-- zobrazovat nekde jmeno prohlaseneho uzivatele
-
-- na serveru validace u controlleru dat zvlast
-
+- ✅ odkomentovat posilani mailu
+- ✅ partial na read auth datasets 
+- ✅ data controllers do slozky
 - ✅ vyzkouset data delete 
-
-- nisto return to login page by melo byt nejprve odhlaseni a pak return
-
-- ✅ dodelat [Authorize] nad controllery 
-- misto hesla zobrazovat *
-
-
-- mazani rights z cache jen pro konkretni id
-
-- pocitani referenci pro mazani
-
-- servererror.cshtml.cs
+- ✅ dodelat [Authorize] nad controllery
+- ✅ prodlouzit token
+- ✅ message pro data
+- ✅ rights patch messages
+- ✅ servererror.cshtml.cs - error stranky 2x
+- ✅ misto return to login page by melo byt nejprve odhlaseni a pak return
+- ✅ napsat varovani k init page
+- ✅ app name validator pred app init
+- ✅ posledni user nesmazatelny
+- ✅ chyba pri spatne zadanem hesle login
+- ✅ rights unique name
+- ✅ username unique
+- ✅ message o vytvoreni app z appinit do index

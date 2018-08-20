@@ -14,15 +14,18 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a asp-page="/Index" class="navbar-brand">Logout</a></li>
+                <li><a asp-page="../Account/Logout" class="navbar-brand">Logout</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if (Model.NavbarRights[(long)SystemDatasetsEnum.Users] >= RightsEnum.R) {
                 <li><a asp-page="../User/Get">Users</a></li>
-                } @if (Model.NavbarRights[(long)SystemDatasetsEnum.Rights] >= RightsEnum.R) {
+                } 
+                @if (Model.NavbarRights[(long)SystemDatasetsEnum.Rights] >= RightsEnum.R) {
                 <li><a asp-page="../Rights/Get">Rights</a></li>
                 }
-                <li><a asp-page="/Account/Settings">Settings</a></li>
+                <li>
+                    <a asp-page="/Account/Settings">Settings</a>
+                </li>
             </ul>
         </div>
     </div>

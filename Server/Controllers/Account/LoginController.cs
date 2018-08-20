@@ -15,49 +15,17 @@ using SharedLibrary.Helpers;
 using SharedLibrary.Models;
 using SharedLibrary.Structures;
 
-namespace Server.Controllers
+namespace Server.Controllers.Account
 {
-    [Route("api/[controller]")]
+    [Route("api/account/[controller]")]
     public class LoginController : Controller
     {
-        //[Authorize]
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return Ok(new LoginCredentials {ApplicationName = "applicationName", Username = "username", Password = "password"});
-            //return View();
-        }
-
-        // [HttpPost]
-        // public async Task<IActionResult> Login([FromBody] LoginCredentials loginCredentials)
+        // //[Authorize]
+        // [HttpGet]
+        // public IActionResult Login()
         // {
-        //     if (!ModelState.IsValid)
-        //         return BadRequest(ModelState);
-
-        //     if (LoginUser(loginCredentials.Username, loginCredentials.Password))
-        //     {
-        //         var claims = new List<Claim>
-        //         {
-        //             new Claim(ClaimTypes.Name, loginCredentials.Username)
-        //         };
-
-        //         var userIdentity = new ClaimsIdentity(claims, "login");
-
-        //         ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
-        //         await HttpContext.SignInAsync(principal);
-
-        //         //Just redirect to our index after logging in. 
-        //         return Redirect("/");
-        //     }
-        //     return View();
-        // }
-
-        // private readonly UserManager<IdentityUser> _userManager;
-        // private readonly SignInManager<IdentityUser> _signInManager;
-        // public LoginController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
-        // {
-        //     this._userManager = userManager;
-        //     this._signInManager = signInManager;
+        //     return Ok(new LoginCredentials {ApplicationName = "applicationName", Username = "username", Password = "password"});
+        //     //return View();
         // }
         private readonly IConfiguration _configuration;
         public LoginController(IConfiguration configuration, DatabaseContext context)
@@ -81,10 +49,10 @@ namespace Server.Controllers
             {
                 var user = await getUserModel(loginCredentials);
                 if (user == null)
-                    return Unauthorized(); //"kombinace jmena aplikace a username"
+                    return BadRequest($"ERROR: User {loginCredentials.Username} does not exist in application {loginCredentials.ApplicationName}."); //"kombinace jmena aplikace a username"
                 if (!PasswordHelper.CheckHash(loginCredentials.Password, user.Password))
                 {
-                    return Unauthorized();
+                    return BadRequest($"ERROR: Could not log in: combination of application name {loginCredentials.ApplicationName}, username {loginCredentials.Username} and password does not exist.");
                 }
                 // a když jsou platné přihlašovací údaje, vytvoří se token
                 var claims = new[]
@@ -100,7 +68,7 @@ namespace Server.Controllers
                     issuer: _configuration["TokenAuthentication:Issuer"],
                     audience: _configuration["TokenAuthentication:Audience"],
                     claims: claims,
-                    expires: DateTime.UtcNow.AddHours(1),//.AddDays(60), //TODO
+                    expires: DateTime.UtcNow.AddDays(60), //TODO
                     notBefore: DateTime.UtcNow,
                     signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["TokenAuthentication:SecretKey"])),
                             SecurityAlgorithms.HmacSha256)

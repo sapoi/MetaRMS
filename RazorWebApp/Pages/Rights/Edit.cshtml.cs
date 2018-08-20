@@ -98,10 +98,11 @@ namespace RazorWebApp.Pages.Rights
             }
     
             RightsModel patchedRightsModel = new RightsModel() { Name = RightsName, Data = JsonConvert.SerializeObject(inputData) };
-            await _rightsService.PatchById(ApplicationDescriptor.AppName, DataId, patchedRightsModel, token.Value);
+            var response = await _rightsService.PatchById(ApplicationDescriptor.AppName, DataId, patchedRightsModel, token.Value);
+            string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             // delete old rights from cache
             CacheAccessHelper.RemoveRightsFromCache(_cache, ApplicationDescriptor.AppName, DataId);
-            return RedirectToPage("/Rights/Get");
+            return RedirectToPage("/Rights/Get",  new {message = message.Substring(1, message.Length - 2)});
         }
     }
 }
