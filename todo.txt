@@ -3,7 +3,6 @@
 - ❗️ user additional data
 
 DETAILY
-- password reguired
 - user edit check box na zmenu hesla
 - if user deleted, log him out first
 - zobrazovat nekde jmeno prihlaseneho uzivatele
@@ -63,3 +62,4 @@ HOTOVO
 - ✅ edit user nezobrazovat hash u edit
 - ✅ app init kontrola validity mailu
 - ✅ napsat popis do about page
+- ✅ password reguired

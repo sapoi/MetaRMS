@@ -40,6 +40,12 @@ namespace Server.Controllers.Account
         {
             if (ModelState.IsValid)
             {
+                if (loginCredentials.ApplicationName == null)
+                    return BadRequest($"Application name is required.");
+                if (loginCredentials.Username == null)
+                    return BadRequest($"Username is required.");
+                if (loginCredentials.Password == null)
+                    return BadRequest($"Password is required.");
                 var user = await getUserModel(loginCredentials);
                 if (user == null)
                     return BadRequest($"ERROR: User {loginCredentials.Username} does not exist in application {loginCredentials.ApplicationName}."); //"kombinace jmena aplikace a username"
