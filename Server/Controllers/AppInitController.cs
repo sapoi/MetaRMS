@@ -89,12 +89,12 @@ namespace Server.Controllers
                     };
                     _context.UserDbSet.Add(newUser);
                     // try to send login details to admin account to email from parametres
-                    //sendEmailWithCredentials(email, newPassword);
+                    sendEmailWithCredentials(email, newPassword);
                     transaction.Commit();
                 }
                 catch
                 {
-                    return BadRequest(" ??? ");
+                    return BadRequest("Email address is not valid, please choose another.");
                 }
             }
             // if everythong was ok, save changes to DB and return Ok

@@ -47,13 +47,13 @@ namespace SharedLibrary.Services
             var address = new Uri(_client.BaseAddress.OriginalString + "/rights");
             return await _client.GetAsync(address);
         }
-        // public async Task<HttpResponseMessage> ChangePassword(string appName, string oldPassword, string newPassword, string token)
-        // {
-        //     string jsonLoginData = JsonConvert.SerializeObject(oldPassword, newPassword);
-        //     var jsonLoginDataContent = new StringContent(jsonLoginData, Encoding.UTF8, "application/json");
-        //     _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-        //     var address = new Uri(_client.BaseAddress.OriginalString + "/settings/password");
-        //     return await _client.PostAsync(address, new {oldPassword = oldPassword, newPassword = newPassword });
-        // }
+        public async Task<HttpResponseMessage> ChangePassword(string appName, PasswordChange passwords, string token)
+        {
+            string jsonPasswordsData = JsonConvert.SerializeObject(passwords);
+            var jsonDataContent = new StringContent(jsonPasswordsData, Encoding.UTF8, "application/json");
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var address = new Uri(_client.BaseAddress.OriginalString + "/settings/password");
+            return await _client.PostAsync(address, jsonDataContent);
+        }
     }
 }

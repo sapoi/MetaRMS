@@ -20,13 +20,6 @@ namespace Server.Controllers.Account
     [Route("api/account/[controller]")]
     public class LoginController : Controller
     {
-        // //[Authorize]
-        // [HttpGet]
-        // public IActionResult Login()
-        // {
-        //     return Ok(new LoginCredentials {ApplicationName = "applicationName", Username = "username", Password = "password"});
-        //     //return View();
-        // }
         private readonly IConfiguration _configuration;
         public LoginController(IConfiguration configuration, DatabaseContext context)
         {

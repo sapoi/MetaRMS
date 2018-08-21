@@ -3,10 +3,8 @@
 - ❗️ user additional data
 
 DETAILY
-    - 🔸 edit user nezobrazovat hash u edit
-- 🔸 napsat popis do about page
-    - 🔸 user settings zmena hesla
-- 🔸 misto hesla zobrazovat * index a login -> type="password"
+- password reguired
+- user edit check box na zmenu hesla
 - if user deleted, log him out first
 - zobrazovat nekde jmeno prihlaseneho uzivatele
 - u dat vracet unauthorized pokud rights = none
@@ -16,11 +14,15 @@ DETAILY
 - pred redirectto error dat log
 - udelat a dat app name validator nekam zvlast
 - message preparer
+- gdpr neposilat heslo na mail, ale zobrazit ho v message
+- podminky hesla (helka, znaky, ...)
 
 KONTROLA VALIDITY vstupu
 - ❗️ validace vstupu na klientovi podle app deskriptoru
-- 🔸 app init kontrola validity mailu
-- 🔸 app init kontrola ze je vzdy soubor
+- 🔸 app init kontrola ze je vzdy soubor v service a controlleru
+
+ZRYCHLENI
+- posilat appinit mail nekdy jindy
 
 REFAKTORING
 - AccountService.GetApplicationDescriptorByAppName dat nekam jinam
@@ -28,7 +30,6 @@ REFAKTORING
 - odstranit login stranku - misto ni je index
 - rozdelit accesshepler 
 - pomocne app init metody z kontrolleru nekam jinam
-- proc je post u login controlleru
 - spojit rights, user a data servicy do jedne -> pridat basemodel
 - na serveru validace u controlleru dat zvlast
 
@@ -56,3 +57,9 @@ HOTOVO
 - ✅ rights unique name
 - ✅ username unique
 - ✅ message o vytvoreni app z appinit do index
+- ✅ proc je get u login controlleru
+- ✅ user settings zmena hesla
+- ✅ misto hesla zobrazovat * index a login -> type="password"
+- ✅ edit user nezobrazovat hash u edit
+- ✅ app init kontrola validity mailu
+- ✅ napsat popis do about page

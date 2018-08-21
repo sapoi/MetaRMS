@@ -7,6 +7,67 @@
 @{Html.RenderPartial("Shared/_LogoutMenuPartial"); }
 
 <h2>@ViewData["Title"]</h2>
-<h3>@Model.Message</h3>
+@* <h3>@Model.Message</h3> *@
 
-<p>Use this area to provide additional information.</p>
+<p>Welcome to MetaRMS About page.</p>
+
+<hr>
+<h3>What is MetaRMS</h3>
+<p>Imagine system where you can easily define your own application structure, system whith which you can start using custom made application in just a few clicks, system </p>
+
+<hr>
+<h3>How can I join</h3>
+<p>Read first the following section, to be sure how to write application descriptor. Then just click on Create new application in upper right corner and you are ready to start!</p>
+
+<hr>
+<h3>Application descriptor</h3>
+<p>MetaRMS is based on application descriptors, so to be able to create new application, you need to know how to create one.</p>
+
+<p>Application already contains Users and Rights datasets, so you do not have to include them in the descriptor. Also application name has to be unique, so if your name is already taken, you will be informed to change it.</p>
+
+<h4>Keywords</h4>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">Dataset - something like datasabe table - it contains information about one entity</li>
+  <li class="list-group-item">Dataset attribute - something like column in database table - it contains one piece of information about entity</li>
+</ul>
+<h4>Syntax definition</h4>
+<p>
+	<pre>
+		<code>
+{
+	"AppName":"name of your application",   
+	"Datasets":   
+	[   
+		{
+			"Name":"dataset name",
+			"Attributes":
+			[
+				{
+					"Name":"first dataset attribute",
+					"Type":"type of attribute - string, int, double, bool, reference to another dataset",
+					"Description":"mor info about attribute",
+					"Nullable":false, (if attribute is nullable)
+					"AutoIncrement":false, (if attribute value should increment automatically)
+					"Unique":true (if attribute should be unique)
+				},
+				(more dataset attributes)
+			]
+		},
+		(more datasets)
+	]
+}
+		</code>
+	</pre>
+</p>
+<h4>Examples</h4>
+<p>To be done.</p>
+
+<hr>
+<h3>Contact</h3>
+<p>If you have any additional questions feel free to write me an email to <a href="mailto:sapoiapps@gmail.com">sapoiapps@gmail.com</a></p>
+
+@*
+<hr>
+<h3>Even more information</h3>
+<p>If you want to read a little bit more about used background of this project, read <a href="file:///Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/Files/specifikace.pdf ">project specification</a> (in Czech only).</p>
+*@

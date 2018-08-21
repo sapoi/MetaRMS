@@ -38,6 +38,11 @@ namespace RazorWebApp.Pages.Appinit
         {
             if (ModelState.IsValid)
             {
+                if (FileUpload == null)
+                {
+                    Message = "File with application description is required.";
+                    return Page();
+                }
                 // 
                 var response = await _appInitService.InitApp(Email, FileUpload);
                 string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
