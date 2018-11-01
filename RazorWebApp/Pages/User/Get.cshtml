@@ -10,41 +10,40 @@
 <div class="row">
     <div class="col-sm-12">
         @if (Model.Message != null || Model.Message != ""){
-            <div class="row">
-                <div class="modal-body col-sm-12 center-block text-center">
-                    <span><b>@Model.Message</b></span>
-                </div>
+        <div class="row">
+            <div class="modal-body col-sm-12 center-block text-center">
+                <span><b>@Model.Message</b></span>
             </div>
+        </div>
         }
         <h2>@ViewData["Title"]</h2>
-        @if (Model.UsersRights >= RightsEnum.CRU)
-        {
-            <form method="post" asp-page-handler="userCreate">
-                <button class="btn btn-default">Create</button>
-            </form>
+        @if (Model.UsersRights >= RightsEnum.CRU) {
+        <form method="post" asp-page-handler="userCreate">
+            <button class="btn btn-default">Create</button>
+        </form>
         }
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
                         <th>
-                            Username
+                            @Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.UsernameAttributes.Name
                         </th>
-                    @*    
+                        @*
                         <th>
-                            Password
+                            @Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.PasswordAttributes.Name
                         </th>
-                    *@
+                        *@
                         <th>
                             Rights
                         </th>
-                    @*
-                        @foreach (var data in Model.ApplicationDescriptor.Datasets) {
+
+                        @foreach (var attribute in Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes) {
                         <th>
-                            @data.Key
+                            @attribute.Name
                         </th>
                         }
-                    *@
+
                     </tr>
                 </thead>
                 <tbody>
@@ -53,31 +52,26 @@
                         <td>
                             @user.Username
                         </td>
-                    @*
+                        @*
                         <td>
                             @user.Password
                         </td>
-                    *@
+                        *@
                         <td>
                             @user.Rights.Name
                         </td>
-                    @*
-                        @foreach (var dataset in Model.ApplicationDescriptor.Datasets) {
+
+                        @foreach (var attribute in Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes) {
                         <td>
-                            @((RightsEnum)int.Parse(item.DataDictionary[dataset.Id.ToString()].ToString()))
+                            @user.DataDictionary[attribute.Name]
                         </td>
-                        }
-                    *@
-                        @if (Model.UsersRights >= RightsEnum.RU)
-                        {
+                        } @if (Model.UsersRights >= RightsEnum.RU) {
                         <td>
                             <form method="post" asp-route-dataId="@user.Id" asp-page-handler="userEdit">
                                 <button class="btn btn-default">Edit</button>
                             </form>
                         </td>
-                        }
-                        @if (Model.UsersRights >= RightsEnum.CRUD)
-                        {
+                        } @if (Model.UsersRights >= RightsEnum.CRUD) {
                         <td>
                             <form method="post" asp-route-dataId="@user.Id" asp-page-handler="userDelete">
                                 <button class="btn btn-default">Delete</button>

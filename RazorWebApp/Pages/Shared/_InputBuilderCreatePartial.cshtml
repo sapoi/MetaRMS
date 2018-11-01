@@ -1,0 +1,151 @@
+@using SharedLibrary.Enums 
+@model RazorWebApp.Structures.InputBuilderPartialData
+
+<!-- For types that use input tag -->
+@if (@Model.Attribute.Type == "color" || 
+	 @Model.Attribute.Type == "date" || @Model.Attribute.Type == "datetime" || 
+	 @Model.Attribute.Type == "email" || @Model.Attribute.Type == "month" || 
+	 @Model.Attribute.Type == "int" || @Model.Attribute.Type == "float" || 
+	 @Model.Attribute.Type == "year" || @Model.Attribute.Type == "tel" || 
+	 @Model.Attribute.Type == "string" || @Model.Attribute.Type == "time" || 
+	 @Model.Attribute.Type == "url") {
+	<input 	name="@Model.OutValue"
+			value="@Model.InValue" 
+	       	class="form-control"
+	       	@switch (@Model.Attribute.Type) {
+	       		case "color":
+	       			<text>type="color"</text>
+	       			break;	
+	       		case "date":
+	       			<text>type="date"</text>
+	       			break;
+	       		case "datetime":
+	       			<text>type="datetime-local"</text>
+	       			break;
+	       		case "email":
+	       			<text>type="email"</text>
+	       			break;
+	       		case "month":
+	       			<text>type="month"</text>
+	       			break;	
+	       		case "int":
+	       			<text>type="number" step="1"</text>
+	       			break;
+	       		case "float":
+	       			<text>type="number" step=any</text>
+	       			break;
+	       		case "year":
+	       			<text>type="text" pattern="-?[0-9][0-9]?[0-9]?[0-9]?"</text>
+	       			break;
+	       		case "tel":
+	       			<text>type="tel"</text>
+	       			break;
+	       		case "string":
+	       			<text>type="text"</text>
+	       			break;
+	       		case "time":
+	       			<text>type="time"</text>
+	       			break;
+	       		case "url":
+	       			<text>type="url"</text>
+	       			break;
+	       		default:
+	       			break;
+	       	}
+
+	       	@if (Model.Attribute.Type == "int" || Model.Attribute.Type == "float") {
+	       		if (Model.Attribute.Min != null) {
+	       			<text>min="@Model.Attribute.Min"</text>
+	       		}
+	       		if (Model.Attribute.Max != null) {
+	       			<text>max="@Model.Attribute.Max"</text>
+	       		}
+	       	}
+
+	       	@if (Model.Attribute.Nullable == false) {
+	          	<text>required</text>
+	       	}
+
+	    >
+} else if (@Model.Attribute.Type == "bool"){
+	<text>
+		<input 	type="radio"
+				class="form-control"
+				name="@Model.OutValue"
+				value="0"
+				required
+	</text>
+   	@if (Model.InValue == "0")
+   	{
+   		<text>checked</text>
+   	}
+	<text>
+		> ❌<br>
+		<input 	type="radio"
+				class="form-control"
+				name="@Model.OutValue"
+				value="1"
+	</text>
+	@if (Model.InValue == "1")
+   	{
+   		<text>checked</text>
+   	}
+	<text>
+		> ✅<br>
+	</text>
+	@if (Model.Attribute.Nullable == true) {
+		<text>
+			<input 	type="radio"
+					class="form-control"
+					name="@Model.OutValue"
+					value="null"
+		</text>
+				@if (Model.InValue == "null")
+			   	{
+			   		<text>checked</text>
+			   	}
+		<text>
+			> ?<br>	
+		</text>
+	}
+	
+
+} else if (@Model.Attribute.Type == "text"){
+<!-- For types using textarea tag -->
+	<textarea 	name="@Model.OutValue"
+				value="@Model.InValue"
+	       	  	class="form-control"
+	       	  	rows="8"
+	       	  	@if (Model.Attribute.Nullable == false) {
+	          		<text>required</text>
+	       		}
+	>@Model.InValue</textarea>
+} else {
+<!-- For types using select tag -->
+	<select @if (Model.Attribute.Max == null || Model.Attribute.Max < 1) {
+          		<text>multiple</text>
+       		}
+			name="@Model.OutValue"
+		  	value="@Model.InValue" 
+       	  	class="form-control"
+			asp-items="Model.SelectData[Model.Attribute.Name]"
+
+       	  	@if (Model.Attribute.Nullable == false) {
+          		<text>required</text>
+       		}
+	></select>
+}
+
+
+
+<!-- scripts onkeypress="return AllowIntegersOnly(event)" -->
+@if (@Model.Attribute.Type == "year" || @Model.Attribute.Type == "int"){
+	<script type="text/javascript">
+	  function AllowIntegersOnly(e) {
+	    var code = (e.which) ? e.which : e.keyCode;
+	    if (code > 31 && (code < 48 || code > 57) && code != 45) {
+	      e.preventDefault();
+	    }
+	  }
+	</script>
+}

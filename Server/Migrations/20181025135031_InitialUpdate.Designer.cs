@@ -10,8 +10,8 @@ using System;
 namespace Server.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20180819091212_init")]
-    partial class init
+    [Migration("20181025135031_InitialUpdate")]
+    partial class InitialUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,9 +29,9 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnName("descriptor");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("LoginApplicationName")
                         .IsRequired()
-                        .HasColumnName("name");
+                        .HasColumnName("login_application_name");
 
                     b.HasKey("Id");
 

@@ -41,7 +41,7 @@ namespace Server.Controllers.Data
                 return Unauthorized();
 
             ApplicationModel application = (from a in _context.ApplicationDbSet
-                                            where (a.Name == appName)
+                                            where (a.LoginApplicationName == appName)
                                             select a).FirstOrDefault();
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
@@ -75,7 +75,7 @@ namespace Server.Controllers.Data
             if (datasetRights.Value <= RightsEnum.None)
                 return Forbid();
             List<DataModel> query = (from p in _context.DataDbSet
-                                     where (p.Application.Name == appName && p.DatasetId == datasetId)
+                                     where (p.Application.LoginApplicationName == appName && p.DatasetId == datasetId)
                                      select p).ToList();
             List<Dictionary<String, Object>> result = new List<Dictionary<String, Object>>();
             foreach (var d in query)
@@ -92,7 +92,7 @@ namespace Server.Controllers.Data
         public IActionResult GetById(string appName, string datasetName, long id)
         {
             ApplicationModel application = (from a in _context.ApplicationDbSet
-                                            where (a.Name == appName)
+                                            where (a.LoginApplicationName == appName)
                                             select a).FirstOrDefault();
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
@@ -101,7 +101,7 @@ namespace Server.Controllers.Data
             if (datasetId == null)
                 return BadRequest("spatny nazev datasetu");
             DataModel query = (from p in _context.DataDbSet
-                               where (p.Application.Name == appName && p.DatasetId == datasetId && p.Id == id)
+                               where (p.Application.LoginApplicationName == appName && p.DatasetId == datasetId && p.Id == id)
                                select p).FirstOrDefault();
             if (query == null)
                 return BadRequest("neexistujici kombinace jmena aplikace, datasetu a id");

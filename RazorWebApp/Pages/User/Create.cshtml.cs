@@ -36,8 +36,6 @@ namespace RazorWebApp.Pages.User
         public ApplicationDescriptor ApplicationDescriptor { get; set; }
         public LoggedMenuPartialData MenuData { get; set; }
         [BindProperty]
-        public List<string> UserDataKeys { get; set; }
-        [BindProperty]
         public List<string> ValueList { get; set; }
         public IEnumerable<SelectListItem> UserRightsList { get; set; }
         public string Message { get; set; }
@@ -62,7 +60,7 @@ namespace RazorWebApp.Pages.User
 
                 MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
 
-                var response = await _rightsService.GetAll(ApplicationDescriptor.AppName, token.Value);
+                var response = await _rightsService.GetAll(ApplicationDescriptor.LoginAppName, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 List<RightsModel> data = JsonConvert.DeserializeObject<List<RightsModel>>(stringResponse);
@@ -74,7 +72,6 @@ namespace RazorWebApp.Pages.User
                                                  Text = x.Name
                                              });
                 
-                UserDataKeys = new List<string>();
                 //TODO
                 // foreach (var key in ApplicationDescriptor.Datasets)
                 //     DatasetsIds.Add(key.Id);
@@ -108,16 +105,16 @@ namespace RazorWebApp.Pages.User
             //TODO bude z enumu
             long newRights = newRightsId;
             Dictionary<String, Object> inputData = new Dictionary<string, object>();
-            for (int i = 3; i < UserDataKeys.Count + 3; i++)
+            for (int i = 3; i < ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes.Count + 3; i++)
             {
-                inputData.Add(UserDataKeys[i - 3], ValueList[i]);
+                inputData.Add(ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes[i - 3].Name, ValueList[i]);
             }
             
             UserModel newUserModel = new UserModel() { Username = newUsername, 
                                                          Password = newPassword,
                                                          RightsId = newRightsId,
                                                          Data = JsonConvert.SerializeObject(inputData) };
-            var response = await _userService.Create(ApplicationDescriptor.AppName, newUserModel, token.Value);
+            var response = await _userService.Create(ApplicationDescriptor.LoginAppName, newUserModel, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             if (!response.IsSuccessStatusCode)

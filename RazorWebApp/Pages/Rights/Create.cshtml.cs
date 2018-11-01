@@ -96,7 +96,7 @@ namespace RazorWebApp.Pages.Rights
             }
             
             RightsModel newRightsModel = new RightsModel() { Name = RightsName, Data = JsonConvert.SerializeObject(inputData) };
-            var response = await _rightsService.Create(ApplicationDescriptor.AppName, newRightsModel, token.Value);
+            var response = await _rightsService.Create(ApplicationDescriptor.LoginAppName, newRightsModel, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             if (!response.IsSuccessStatusCode)

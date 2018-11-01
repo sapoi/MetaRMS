@@ -48,6 +48,7 @@
             "cwd": "${workspaceFolder}/RazorWebApp",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
+            "requireExactSource": false,
             "launchBrowser": {
                 "enabled": true,
                 "args": "${auto-detect-url}",

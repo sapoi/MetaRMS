@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Server.Migrations
 {
-    public partial class init : Migration
+    public partial class InitialUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,7 @@ namespace Server.Migrations
                     id = table.Column<long>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     descriptor = table.Column<string>(nullable: false),
-                    name = table.Column<string>(nullable: false)
+                    login_application_name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

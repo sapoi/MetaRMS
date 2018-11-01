@@ -79,7 +79,7 @@ namespace RazorWebApp.Pages.Data
                 }
 
                 // getting real data
-                var response = await _dataService.GetById(ApplicationDescriptor.AppName, datasetName, id, token.Value);
+                var response = await _dataService.GetById(ApplicationDescriptor.LoginAppName, datasetName, id, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 Data = JsonConvert.DeserializeObject<Dictionary<String, Object>>(stringResponse);
@@ -110,7 +110,7 @@ namespace RazorWebApp.Pages.Data
             for (int i = 0; i < AttributesNames.Count; i++)
                 inputData.Add(AttributesNames[i], ValueList[i]);
 
-            var response = await _dataService.PatchById(ApplicationDescriptor.AppName, DatasetName, DataId, inputData, token.Value);
+            var response = await _dataService.PatchById(ApplicationDescriptor.LoginAppName, DatasetName, DataId, inputData, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             return RedirectToPage("/Data/Get",  new {message = message.Substring(1, message.Length - 2)});
         }

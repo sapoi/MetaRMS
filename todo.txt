@@ -1,24 +1,78 @@
+TEXT
+- ➡️ zkusit napsat uvod k bp v anglictine
+- 🔥 ➡️ bodova osnova
+    - ta 1. kapitola v budoucim case (plan toho, co se bude delat)
+- 🔥 ➡️ konkurence?
+- dokumentacni komentare
+- konkurence
+- uziv dok jako tutorial
+- 2 ukazkove aplikace
+- 3 uzivatele - programatori co chcou pripojit aplikaci (mobilni), admini, knihovnice
+! pustit nekde na webu
+- ➡️ verejne zpristupnit nekolik ukazkovych aplikaci s jsonem a prihlasovacimi udaji na R prava ke vsem datasetum
+
+🔥🔥🔥
 - ❗️ refresh token (https://www.blinkingcaret.com/2018/05/30/refresh-tokens-in-asp-net-core-web-api/)
 - ❗️ odhlaseni na serveru
-- ❗️ user additional data
+- ✅ user additional data 
 
 DETAILY
-- user edit check box na zmenu hesla
+- preklady se budou moct delat v app 
+    - bude tam form na odeslani zadosti o pridani noveho jayzka
+- 🅾️ pridat defalut enumy a dat je mezi podporovane typy - countries, currency, 
 - if user deleted, log him out first
-- zobrazovat nekde jmeno prihlaseneho uzivatele
+- ➡️ zobrazovat nekde jmeno prihlaseneho uzivatele
 - u dat vracet unauthorized pokud rights = none
 - ruzne druhy message - info, warneni, error
 - mazani rights z cache jen pro konkretni id
-- pocitani referenci pro mazani
+- ➡️ pocitani referenci pro mazani
 - pred redirectto error dat log
 - udelat a dat app name validator nekam zvlast
 - message preparer
 - gdpr neposilat heslo na mail, ale zobrazit ho v message
+- vyresit async await
+- pridat stranku, na kterou si admin muze napsat co chce - navod na pouzivani konkretni aplikace 
+- pridat do db k datasetum created_by a modified_by
+- ❓ co vsechno muze prihlaseny uzivatel menit na svych user data?
+- odhlasovat pri erroru jako napr nenalayen deskriptor aplikace uyivatele?
+- v Users dat rights tak, aby si ho mohl kazdy pojmenovat podle sebe
+- settings zmena hesla - zmenit aby tam bylo puvodni heslo 1x a nove heslo 2x
+- user edit check box na zmenu hesla 
+- pridat prava CRUD+user password change -> bude je mit jen admin a bude je moct nastavovat jen admin -> jinak se da heslo zmenit poj v nastaveni prihlaseneho uzivatele
+- do db a app user.language
+- do db dat countries a currencies
+    - allow data.application_id NULL
+- co vsechno je potreba spustit pro inicializovani celeho projektu
+    - vytvorit db
+    - naplnit currencies a countries
+    - ukazkove aplikace
+- javascript popup okna pri delete, ...
+- ukladat JSON do DB pekne zformatovany
+
+PODPORA TYPU
+- prilinkovat skripty 1.10. str 20
+- ✅ zmenit int na type number a min 0
+- ✅ klient zobrazovat vstupy podle typu
+- validace user data na klientovi
+- validace pri vytvareni dat na serveru
+- ✅ validace pri vytvareni dat na klientovi - pomoci html
+- validace pri editu dat na serveru
+- ✅ validace pri editu dat na klientovi  - pomoci html 
+- ✅ app init vytvareni user dat admina
 - podminky hesla (helka, znaky, ...)
 
 KONTROLA VALIDITY vstupu
 - ❗️ validace vstupu na klientovi podle app deskriptoru
 - 🔸 app init kontrola ze je vzdy soubor v service a controlleru
+
+JSON VALIDACE
+- validace deskriptoru ye obsahuje app name a vsechno ostatni co je povinne ... pokud to nebude obsahovta (napr max delka hesla, ...), nastavit default a nekde rict, co je defalut
+- validace DefaultLang - vytvorit enum a kontrolovat proti nemu
+- validace/ pripadne doplnit u username a password type string
+- kazdy atribut datasetu se mui jmenovat jinak
+- pro typ bool je nullable vzdy true
+
+- temer jakakoli hodnota atributu muze byt null!!!
 
 ZRYCHLENI
 - posilat appinit mail nekdy jindy
@@ -31,6 +85,10 @@ REFAKTORING
 - pomocne app init metody z kontrolleru nekam jinam
 - spojit rights, user a data servicy do jedne -> pridat basemodel
 - na serveru validace u controlleru dat zvlast
+- 🔥 ➡️ repozitare
+- ✅ pouzivat description z jsonu
+- pridani jayzka do descriptoru
+- lokalizovat zobrazeni data nebo to dat do nastaveni
 
 HOTOVO
 - ✅ prava nemi jit samzat, pokud je nekdo pouziva 
@@ -62,4 +120,62 @@ HOTOVO
 - ✅ edit user nezobrazovat hash u edit
 - ✅ app init kontrola validity mailu
 - ✅ napsat popis do about page
-- ✅ password reguired
+- ✅ 
+
+
+password reguired
+
+
+
+---------
+
+JSON requirements
+- minimal required structure:
+    - AppName (one)
+    - DefaultLanguage (one) - z nejakeho oficialniho enumu, pokusim se na nej napasovat preklad, pokud preklad pro ten jazyk nebude existovat, bere se en
+    - Users (one)
+        - Attributes
+            - Username
+            - Password
+    - Datasets (one)
+        - 
+- pokud nebude v atributu nullable, bere se jako true
+- pokud nebude v atributu unique, bere se jako false
+- pokud nebude uvedena u atributu max hodnota, bere se jako null, tedy nekonecno
+- v podstate se nemusi uvadet zadna false hodnota, protoze ta se nastavi default
+- atribut Name nesmi byt nazev podporovaneho typu (jako treba bool, int, currency (ale muze byt Currency)) - kvuli if v _InputBuilderCreatePartial
+
+
+
+
+- podporované typy dat:
+    - string🆗, int🆗, float🆗
+    - date🆗, time🆗, datetime🆗 (kalendare a timepickery)
+    - year🆗 
+    - systémový dataset Users
+    - uživatelské datasety (=dají se pomocí nich vyjádřit enumy) - v roletce bude zobrazeno 1. - 2. sloupec
+    - text🆗 - multiline
+    - url🆗
+    - color🆗 - na zmenu barvy prostredi?
+    - email🆗
+
+    - required pro libovolny typ
+
+    - min/max pro int, float ... TODO pro date, time, datetime
+
+
+
+- podminky
+    - zadne datasety se nesmi jmenovat stejne
+
+- system datasety
+    - uz obsahuji prava
+
+
+
+
+
+
+
+
+

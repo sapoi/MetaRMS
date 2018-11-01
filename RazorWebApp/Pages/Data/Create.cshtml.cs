@@ -13,6 +13,7 @@ using System.Linq;
 using SharedLibrary.Descriptors;
 using RazorWebApp.Helpers;
 using RazorWebApp.Structures;
+using SharedLibrary.Enums;
 
 namespace RazorWebApp.Pages.Data
 {
@@ -33,6 +34,7 @@ namespace RazorWebApp.Pages.Data
         public ApplicationDescriptor ApplicationDescriptor { get; set; }
         public DatasetDescriptor ActiveDatasetDescriptor { get; set; }
         public LoggedMenuPartialData MenuData { get; set; }
+        public Dictionary<string, List<Object>> SelectData { get; set; }
         public List<DatasetDescriptor> ReadAuthorizedDatasets { get; set; }
         [BindProperty]
         public List<string> AttributesNames { get; set; }
@@ -72,6 +74,17 @@ namespace RazorWebApp.Pages.Data
                 AttributesNames = new List<string>();
                 foreach (var attribute in ActiveDatasetDescriptor.Attributes)
                     AttributesNames.Add(attribute.Name);
+
+                // fill SelectData
+                SelectData = new Dictionary<string, List<Object>>();
+                foreach (var attribute in ActiveDatasetDescriptor.Attributes)
+                {
+                    if (!SelectData.ContainsKey(attribute.Name))
+                    {
+                        // else TODO
+                        //     SelectData.Add(attribute.Name, getDatasetSelectData(attribute.Type));
+                    }
+                }
             }
             return Page();
         }
@@ -99,7 +112,7 @@ namespace RazorWebApp.Pages.Data
             for (int i = 0; i < AttributesNames.Count; i++)
                 inputData.Add(AttributesNames[i], ValueList[i]);
             
-            var response = await _dataService.Create(ApplicationDescriptor.AppName, DatasetName, inputData, token.Value);
+            var response = await _dataService.Create(ApplicationDescriptor.LoginAppName, DatasetName, inputData, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             return RedirectToPage("/Data/Get", new {message = message.Substring(1, message.Length - 2)});

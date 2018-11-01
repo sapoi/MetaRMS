@@ -37,7 +37,7 @@ namespace Server.Controllers
             var appNameFromJWT = identity.FindFirst("ApplicationName").Value;
             // try to look for application descriptor in database
             var query = (from p in _context.ApplicationDbSet
-                         where p.Name == appNameFromJWT
+                         where p.LoginApplicationName == appNameFromJWT
                          select p.ApplicationDescriptorJSON).FirstOrDefault();
             // application descriptor not found
             if (query == null)

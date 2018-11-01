@@ -43,7 +43,7 @@ namespace Server.Controllers.Account.Settings
                 return Unauthorized(); //TODO zmanit na bad request s message
             string appName = identity.FindFirst("ApplicationName").Value;
 
-            UserModel user = _context.UserDbSet.Where(u=> u.Application.Name == appName &&
+            UserModel user = _context.UserDbSet.Where(u=> u.Application.LoginApplicationName == appName &&
                                                           u.Id == userId).FirstOrDefault();
             if (user.Password != PasswordHelper.ComputeHash(passwords.OldPassword))
                 return BadRequest("Old password is incorrect.");

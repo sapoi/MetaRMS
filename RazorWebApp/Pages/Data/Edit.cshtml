@@ -1,4 +1,5 @@
 @page "{datasetName?}/{id?}"
+@using RazorWebApp.Structures
 @model RazorWebApp.Pages.Data.EditModel 
 @{ 
     ViewData["Title"] = @Model.ActiveDatasetDescriptor.Name; 
@@ -19,13 +20,27 @@
             @for (int i = 0; i < Model.ActiveDatasetDescriptor.Attributes.Count; i++){
                 <input type="hidden" asp-for="AttributesNames[i]"/>
                 <div class="form-group">
-                     @{ var attribute = Model.ActiveDatasetDescriptor.Attributes[i]; }
+                    @{ var attribute = Model.ActiveDatasetDescriptor.Attributes[i]; }
+                     @{ Model.ValueList = Enumerable.Repeat("", Model.ActiveDatasetDescriptor.Attributes.Count).ToList(); }
                     <label>@attribute.Name</label>
+                    <small>@attribute.Description</small>
+                    @{Html.RenderPartial("Shared/_InputBuilderCreatePartial", 
+                                          new InputBuilderPartialData {
+                                                                        Attribute = attribute, 
+                                                                        OutValue = "ValueList[" + i + "]", 
+                                                                        InValue = Model.Data[attribute.Name].ToString()
+                                                                       }
+                                        );
+                    }
+
+<!--
+                    <label>@attribute.Name</label>
+                    <small>@attribute.Description</small>
                     <input value="@Model.Data[attribute.Name].ToString()" 
                            name="ValueList[@i]" 
                            class="form-control">
                     <span asp-validation-for="Model.ValueList[@i]" 
-                          class="text-danger"></span>
+                          class="text-danger"></span> -->
                 </div>
             }
             <div class="form-group">

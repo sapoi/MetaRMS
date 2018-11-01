@@ -66,7 +66,7 @@ namespace RazorWebApp.Pages.User
                 if (message != null)
                     Message = message;
 
-                var response = await _userService.GetAll(ApplicationDescriptor.AppName, token.Value);
+                var response = await _userService.GetAll(ApplicationDescriptor.LoginAppName, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 List<UserModel> data = JsonConvert.DeserializeObject<List<UserModel>>(stringResponse);
@@ -96,7 +96,7 @@ namespace RazorWebApp.Pages.User
 
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
 
-            var response = await _userService.DeleteById(ApplicationDescriptor.AppName, dataId, token.Value);
+            var response = await _userService.DeleteById(ApplicationDescriptor.LoginAppName, dataId, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             // remove " form beginning and end of message
             return await OnGetAsync(message.Substring(1, message.Length - 2));

@@ -7,6 +7,7 @@ namespace SharedLibrary.Descriptors
     public class DatasetDescriptor
     {
         public string Name { get; set; }
+        public string Description { get; set; }
         public long Id { get; set; }
         public List<AttributeDescriptor> Attributes { get; set; }
     }

@@ -16,6 +16,7 @@ using SharedLibrary.Models;
 using SharedLibrary.Helpers;
 using SharedLibrary.Enums;
 using Microsoft.AspNetCore.Authorization;
+using System.Text;
 
 namespace Server.Controllers
 {
@@ -47,13 +48,13 @@ namespace Server.Controllers
                 //TODO detekovat, kde je chyba
                 return BadRequest("JSON file is in incorrect format, please read again about page.");
             }
-            // check if AppName is unique
-            if (_context.ApplicationDbSet.Where(app => app.Name == applicationDescriptor.AppName).Count() != 0)
+            // check if LoginAppName is unique
+            if (_context.ApplicationDbSet.Where(app => app.LoginApplicationName == applicationDescriptor.LoginAppName).Count() != 0)
             {
                 //TODO error
                 //ModelState.AddModelError("ErrorCode", "001");
                 //return BadRequest(ModelState);
-                return BadRequest($"Application name {applicationDescriptor.AppName} already exists, please choose another.");
+                return BadRequest($"Application name {applicationDescriptor.LoginAppName} already exists, please choose another.");
             }
             // check if no dataset atribute has name BDId
             if (applicationDescriptor.Datasets.Any(d => d.Attributes.Any(a => a.Name == "DBId")))
@@ -71,7 +72,7 @@ namespace Server.Controllers
                     // create new application and add it to DB
                     string serializedApplicationDescriptor = JsonConvert.SerializeObject(applicationDescriptor);
                     ApplicationModel newApplication = new ApplicationModel { 
-                        Name = applicationDescriptor.AppName, 
+                        LoginApplicationName = applicationDescriptor.LoginAppName, 
                         ApplicationDescriptorJSON = serializedApplicationDescriptor
                         };
                     _context.ApplicationDbSet.Add(newApplication);
@@ -84,12 +85,12 @@ namespace Server.Controllers
                         Application = newApplication,
                         Username = "admin",
                         Password = PasswordHelper.ComputeHash(newPassword),
-                        Data = "",
+                        Data = getEmptyUserDataDictionary(applicationDescriptor.SystemDatasets.UsersDatasetDescriptor),
                         Rights = newRights
                     };
                     _context.UserDbSet.Add(newUser);
                     // try to send login details to admin account to email from parametres
-                    sendEmailWithCredentials(email, newPassword);
+                    sendEmailWithCredentials(email, newApplication.LoginApplicationName, newPassword);
                     transaction.Commit();
                 }
                 catch
@@ -100,6 +101,20 @@ namespace Server.Controllers
             // if everythong was ok, save changes to DB and return Ok
             _context.SaveChangesAsync();
             return Ok($"Application {applicationDescriptor.AppName} was created successfully and login credentials were sent to email {email}.");
+        }
+        // creates empty user data based on application descriptor
+        string getEmptyUserDataDictionary(UsersDatasetDescriptor usersDatasetDescriptor)
+        {
+            StringBuilder sb = new StringBuilder("{");
+            foreach (var attribute in usersDatasetDescriptor.Attributes)
+            {
+                sb.Append($"\"{attribute.Name}\":");
+                //TODO podpora typu
+                sb.Append("\"\",");
+            }
+            // last domma is not a problem for parsing
+            sb.Append("}");
+            return sb.ToString();
         }
         RightsModel getAdminRights(ApplicationModel appModel, ApplicationDescriptor appDescriptor)
         {
@@ -121,7 +136,7 @@ namespace Server.Controllers
             rights.Data = JsonConvert.SerializeObject(rightsDict);
             return rights;
         }
-        void sendEmailWithCredentials(string email, string password)
+        void sendEmailWithCredentials(string email, string loginApplicationName, string password)
         {
             var client = new SmtpClient
                 {
@@ -136,7 +151,7 @@ namespace Server.Controllers
             MailMessage mailMessage = new MailMessage();
             mailMessage.From = new MailAddress("sapoiapps@gmail.com");
             mailMessage.To.Add(email);
-            mailMessage.Body = "Username: admin \nPassword: " + password;
+            mailMessage.Body = $"Application Name: {loginApplicationName} \nUsername: admin \nPassword: {password}";
             mailMessage.Subject = "Admin login credentials";
             client.Send(mailMessage);
         }

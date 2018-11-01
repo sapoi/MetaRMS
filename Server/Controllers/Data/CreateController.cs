@@ -29,7 +29,7 @@ namespace Server.Controllers.Data
                                       [FromBody] Dictionary<string, object> data)
         {
             ApplicationModel application = (from a in _context.ApplicationDbSet
-                                   where (a.Name == appName)
+                                   where (a.LoginApplicationName == appName)
                                    select a).FirstOrDefault();
             if (application == null)
                 return BadRequest($"ERROR: Application name {appName} does not exist.");

@@ -28,13 +28,13 @@ namespace Server.Controllers.User
         public IActionResult PatchById(string appName, long id,  [FromBody] UserModel fromBodyUserModel)
         {
             ApplicationModel application = (from a in _context.ApplicationDbSet
-                                   where (a.Name == appName)
+                                   where (a.LoginApplicationName == appName)
                                    select a).FirstOrDefault();
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
             UserModel query = (from p in _context.UserDbSet
-                               where (p.Application.Name == appName && p.Id == id)
+                               where (p.Application.LoginApplicationName == appName && p.Id == id)
                                select p).FirstOrDefault();
             if (query == null)
                 return BadRequest("neexistujici kombinace jmena aplikace a id");

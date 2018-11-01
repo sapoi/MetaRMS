@@ -28,7 +28,7 @@ namespace Server.Controllers.Rights
         public IActionResult DeleteById(string appName, long id)
         {
             ApplicationModel application = (from a in _context.ApplicationDbSet
-                                   where (a.Name == appName)
+                                   where (a.LoginApplicationName == appName)
                                    select a).FirstOrDefault();
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");

@@ -28,9 +28,9 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnName("descriptor");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("LoginApplicationName")
                         .IsRequired()
-                        .HasColumnName("name");
+                        .HasColumnName("login_application_name");
 
                     b.HasKey("Id");
 

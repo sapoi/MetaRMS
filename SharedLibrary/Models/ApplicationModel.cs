@@ -12,8 +12,8 @@ namespace SharedLibrary.Models
         [Column("id")]
         public long Id { get; set; }
         [Required]
-        [Column("name")]
-        public string Name { get; set; }
+        [Column("login_application_name")]
+        public string LoginApplicationName { get; set; }
         [Required]
         [Column("descriptor")]
         public string ApplicationDescriptorJSON { get; set; }

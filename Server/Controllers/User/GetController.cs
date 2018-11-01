@@ -43,7 +43,7 @@ namespace Server.Controllers.User
                 return Unauthorized();
 
             ApplicationModel application = (from a in _context.ApplicationDbSet
-                                            where (a.Name == appName)
+                                            where (a.LoginApplicationName == appName)
                                             select a).FirstOrDefault();
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
@@ -76,7 +76,7 @@ namespace Server.Controllers.User
             if (rightsRights.Value <= RightsEnum.None)
                 return Forbid();
 
-            List<UserModel> query = _context.UserDbSet.Where(u => u.Application.Name == appName)
+            List<UserModel> query = _context.UserDbSet.Where(u => u.Application.LoginApplicationName == appName)
                                                       .Include(u => u.Rights)
                                                       .ToList();
                                                       
@@ -95,13 +95,13 @@ namespace Server.Controllers.User
         public IActionResult GetById(string appName, long id)
         {
             ApplicationModel application = (from a in _context.ApplicationDbSet
-                                            where (a.Name == appName)
+                                            where (a.LoginApplicationName == appName)
                                             select a).FirstOrDefault();
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
             
-            var query = _context.UserDbSet.Where(u => u.Application.Name == appName && u.Id ==id)
+            var query = _context.UserDbSet.Where(u => u.Application.LoginApplicationName == appName && u.Id ==id)
                                           .Include(u => u.Rights)
                                           .FirstOrDefault();
             if (query == null)

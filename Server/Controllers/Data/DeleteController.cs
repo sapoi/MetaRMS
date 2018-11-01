@@ -28,7 +28,7 @@ namespace Server.Controllers.Data
         public IActionResult DeleteById(string appName, string datasetName, long id)
         {
             ApplicationModel application = (from a in _context.ApplicationDbSet
-                                   where (a.Name == appName)
+                                   where (a.LoginApplicationName == appName)
                                    select a).FirstOrDefault();
             if (application == null)
                 return BadRequest($"ERROR: Application name {appName} does not exist.");
@@ -37,7 +37,7 @@ namespace Server.Controllers.Data
             if (datasetId == null)
                 return BadRequest($"ERROR: Dataset name {datasetName} does not exist.");
             DataModel query = (from p in _context.DataDbSet
-                                   where (p.Application.Name == appName && p.DatasetId == datasetId && p.Id == id)
+                                   where (p.Application.LoginApplicationName == appName && p.DatasetId == datasetId && p.Id == id)
                                    select p).FirstOrDefault();
             if (query == null)
                 return BadRequest($"ERROR: Combination of application name {appName}, dataset {datasetName} and id {id} does not exist.");

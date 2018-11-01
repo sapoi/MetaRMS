@@ -18,11 +18,13 @@
         <form method="post">
 
             <div class="form-group">
-                <label>Username</label>
+                <label>@Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.UsernameAttributes.Name</label>
+                <small>@Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.UsernameAttributes.Description</small>
                 <input name="ValueList[0]" class="form-control">
             </div>
             <div class="form-group">
-                <label>Password</label>
+                <label>@Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.PasswordAttributes.Name</label>
+                <small>@Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.PasswordAttributes.Description</small>
                 <input name="ValueList[1]" class="form-control">
             </div>
             <div class="form-group">
@@ -33,15 +35,16 @@
                         >
                 </select>
             </div>
-             
-            @for (int i = 3; i < Model.UserDataKeys.Count + 3; i++){ 
-            <input type="hidden" asp-for="UserDataKeys[i-3]" />
-            <div class="form-group">
-                <label>@Model.UserDataKeys[i-3]</label>
-                <input name="ValueList[@i]" 
-                       class="form-control"
-                        >
-            </div>
+
+            @for (int i = 3; i < Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes.Count + 3; i++){
+                <div class="form-group">
+                     @{ var attribute = Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes[i - 3]; }
+                    <label>@attribute.Name</label>
+                    <small>@attribute.Description</small>
+                    <input name="ValueList[@i]" 
+                           class="form-control">
+                    <!--<span asp-validation-for="Model.ValueList[@i]" class="text-danger"></span>-->
+                </div>
             }
             
             <div class="form-group">

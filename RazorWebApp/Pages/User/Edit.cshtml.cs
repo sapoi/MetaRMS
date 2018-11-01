@@ -36,8 +36,6 @@ namespace RazorWebApp.Pages.User
         public ApplicationDescriptor ApplicationDescriptor { get; set; }
         public UserModel Data { get; set; }
         [BindProperty]
-        public List<string> UserDataKeys { get; set; }
-        [BindProperty]
         public List<string> ValueList { get; set; }
         public LoggedMenuPartialData MenuData { get; set; }
         [BindProperty]
@@ -67,7 +65,7 @@ namespace RazorWebApp.Pages.User
                 MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
                 UserId = id;
 
-                var rightsResponse = await _rightsService.GetAll(ApplicationDescriptor.AppName, token.Value);
+                var rightsResponse = await _rightsService.GetAll(ApplicationDescriptor.LoginAppName, token.Value);
                 //TODO kontrolovat chyby v response
                 string rightsStringResponse = await rightsResponse.Content.ReadAsStringAsync();
                 List<RightsModel> data = JsonConvert.DeserializeObject<List<RightsModel>>(rightsStringResponse);
@@ -79,11 +77,10 @@ namespace RazorWebApp.Pages.User
                                                  Text = x.Name
                                              });
 
-                UserDataKeys = new List<string>();
                 // foreach (var key in ApplicationDescriptor.Datasets)
                 //     DatasetsIds.Add(key.Id);
 
-                var response = await _userService.GetById(ApplicationDescriptor.AppName, id, token.Value);
+                var response = await _userService.GetById(ApplicationDescriptor.LoginAppName, id, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 Data = JsonConvert.DeserializeObject<UserModel>(stringResponse);
@@ -110,16 +107,16 @@ namespace RazorWebApp.Pages.User
             string newPassword = ValueList[1];
             long newRights = long.Parse(ValueList[2]);
             Dictionary<String, Object> inputData = new Dictionary<string, object>();
-            for (int i = 3; i < UserDataKeys.Count + 3; i++)
+            for (int i = 3; i < ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes.Count + 3; i++)
             {
-                inputData.Add(UserDataKeys[i - 3], ValueList[i]);
+                inputData.Add(ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes[i - 3].Name, ValueList[i]);
             }
             
             UserModel patchedUserModel = new UserModel() { Username = newUsername, 
                                                            Password = newPassword,
                                                            RightsId = newRightsId,
                                                            Data = JsonConvert.SerializeObject(inputData) };
-            var response = await _userService.PatchById(ApplicationDescriptor.AppName, UserId, patchedUserModel, token.Value);
+            var response = await _userService.PatchById(ApplicationDescriptor.LoginAppName, UserId, patchedUserModel, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             return RedirectToPage("/User/Get", new {message = message.Substring(1, message.Length - 2)});
