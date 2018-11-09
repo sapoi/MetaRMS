@@ -29,7 +29,7 @@ namespace RazorWebApp.Pages.Data
         [BindProperty]
         public ApplicationDescriptor ApplicationDescriptor { get; set; }
         public DatasetDescriptor ActiveDatasetDescriptor { get; set; }
-        public List<Dictionary<String, Object>> Data { get; set; }
+        public List<Dictionary<String, List<Object>>> Data { get; set; }
         public List<DatasetDescriptor> ReadAuthorizedDatasets { get; set; }
         public RightsEnum ActiveDatasetRights { get; set; }
         public LoggedMenuPartialData MenuData { get; set; }
@@ -60,7 +60,7 @@ namespace RazorWebApp.Pages.Data
                 {
                     // dummy
                     ActiveDatasetDescriptor = new DatasetDescriptor { Name = "", Id = 0, Attributes = new List<AttributeDescriptor>() };
-                    this.Data = new List<Dictionary<string, object>>();
+                    this.Data = new List<Dictionary<string, List<object>>>();
                     return Page();
                 }
                 var activeDatasetRights = AccessHelper.GetActiveDatasetRights(ActiveDatasetDescriptor, rights);
@@ -75,7 +75,7 @@ namespace RazorWebApp.Pages.Data
                 var response = await _dataService.GetAll(ApplicationDescriptor.LoginAppName, ActiveDatasetDescriptor.Name, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
-                Data = JsonConvert.DeserializeObject<List<Dictionary<String, Object>>>(stringResponse);
+                Data = JsonConvert.DeserializeObject<List<Dictionary<String, List<Object>>>>(stringResponse);
             }
             return Page();
         }

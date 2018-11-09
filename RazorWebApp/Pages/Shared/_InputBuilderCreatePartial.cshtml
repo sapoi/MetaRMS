@@ -10,7 +10,7 @@
 	 @Model.Attribute.Type == "string" || @Model.Attribute.Type == "time" || 
 	 @Model.Attribute.Type == "url") {
 	<input 	name="@Model.OutValue"
-			value="@Model.InValue" 
+			value="@(Model.InValue != null ? Model.InValue[0] : "")"
 	       	class="form-control"
 	       	@switch (@Model.Attribute.Type) {
 	       		case "color":
@@ -75,7 +75,7 @@
 				value="0"
 				required
 	</text>
-   	@if (Model.InValue == "0")
+   	@if (Model.InValue != null && Model.InValue[0] == "0")
    	{
    		<text>checked</text>
    	}
@@ -86,7 +86,7 @@
 				name="@Model.OutValue"
 				value="1"
 	</text>
-	@if (Model.InValue == "1")
+	@if (Model.InValue != null && Model.InValue[0] == "1")
    	{
    		<text>checked</text>
    	}
@@ -100,7 +100,7 @@
 					name="@Model.OutValue"
 					value="null"
 		</text>
-				@if (Model.InValue == "null")
+				@if (Model.InValue != null && Model.InValue[0] == "null")
 			   	{
 			   		<text>checked</text>
 			   	}
@@ -113,27 +113,41 @@
 } else if (@Model.Attribute.Type == "text"){
 <!-- For types using textarea tag -->
 	<textarea 	name="@Model.OutValue"
-				value="@Model.InValue"
 	       	  	class="form-control"
 	       	  	rows="8"
 	       	  	@if (Model.Attribute.Nullable == false) {
 	          		<text>required</text>
 	       		}
-	>@Model.InValue</textarea>
+	>
+		@(Model.InValue != null ? Model.InValue[0] : "")
+	</textarea>
 } else {
 <!-- For types using select tag -->
-	<select @if (Model.Attribute.Max == null || Model.Attribute.Max < 1) {
-          		<text>multiple</text>
+	<select name="@Model.OutValue"
+			class="selectpicker form-control"
+			data-live-search="true"
+			@if (Model.Attribute.Max == null || Model.Attribute.Max > 1) {
+          		<text>
+          			multiple
+          			data-max-options="@Model.Attribute.Max"
+          		</text>
        		}
-			name="@Model.OutValue"
-		  	value="@Model.InValue" 
-       	  	class="form-control"
-			asp-items="Model.SelectData[Model.Attribute.Name]"
 
        	  	@if (Model.Attribute.Nullable == false) {
           		<text>required</text>
        		}
-	></select>
+    >
+	    @foreach (var item in (new SelectList(Model.SelectData[Model.Attribute.Type], "Value", "Text")))
+	    {
+			
+	        <option value="@item.Value" 
+	        		data-subtext="Heinz"
+					selected="@(Model.InValue != null ? Model.InValue.Contains(item.Value) : false)"
+	        >
+	        	@item.Text
+	        </option>
+	    }
+	</select>
 }
 
 

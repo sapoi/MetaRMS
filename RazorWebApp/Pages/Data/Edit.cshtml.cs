@@ -14,6 +14,7 @@ using SharedLibrary.Descriptors;
 using RazorWebApp.Helpers;
 using RazorWebApp.Structures;
 using SharedLibrary.Enums;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RazorWebApp.Pages.Data
 {
@@ -34,15 +35,17 @@ namespace RazorWebApp.Pages.Data
         public DatasetDescriptor ActiveDatasetDescriptor { get; set; }
         public List<DatasetDescriptor> ReadAuthorizedDatasets { get; set; }
         public LoggedMenuPartialData MenuData { get; set; }
-        public Dictionary<String, Object> Data { get; set; }
+        public Dictionary<String, List<Object>> Data { get; set; }
         [BindProperty]
         public List<string> AttributesNames { get; set; }
         [BindProperty]
-        public List<string> ValueList { get; set; }
+        public List<List<string>> ValueList { get; set; }
         [BindProperty]
         public string DatasetName { get; set; }
         [BindProperty]
         public long DataId { get; set; }
+        [BindProperty]
+        public Dictionary<string, List<SelectListItem>> SelectData { get; set; }
         public async Task<IActionResult> OnGetAsync(string datasetName, long id)
         {
             if (ModelState.IsValid)
@@ -78,11 +81,40 @@ namespace RazorWebApp.Pages.Data
                     AttributesNames.Add(attribute.Name);
                 }
 
+                // fill SelectData
+                SelectData = new Dictionary<string, List<SelectListItem>>();
+                foreach (var attribute in ActiveDatasetDescriptor.Attributes)
+                {
+                    if (attribute.Type != "color" && attribute.Type != "date" && attribute.Type != "datetime" && 
+                        attribute.Type != "email" && attribute.Type != "month" && attribute.Type != "int" && 
+                        attribute.Type != "float" && attribute.Type != "year" && attribute.Type != "tel" && 
+                        attribute.Type != "string" && attribute.Type != "time" && attribute.Type != "url" &&
+                        attribute.Type != "bool" && attribute.Type != "text")
+                        if (!SelectData.ContainsKey(attribute.Type))
+                        {
+                            // getting real data
+                            var selectResponse = await _dataService.GetAll(ApplicationDescriptor.LoginAppName, attribute.Type, token.Value);
+                            //TODO kontrolovat chyby v response
+                            string selectStringResponse = await selectResponse.Content.ReadAsStringAsync();
+                            var data = JsonConvert.DeserializeObject<List<Dictionary<String, Object>>>(selectStringResponse);
+                            SelectData[attribute.Type] = data.Select(x => new SelectListItem { Value = JsonConvert.DeserializeObject<List<string>>
+                                                                                                            (x["DBId"].ToString()).First(), 
+                                                                                               Text =  JsonConvert.DeserializeObject<List<string>>
+                                                                                                            (x[ApplicationDescriptor.Datasets.Where(d => d.Name == attribute.Type)
+                                                                                                                                      .First()
+                                                                                                                             .Attributes[0].Name
+                                                                                                                ].ToString()).First() 
+                                                                                             } 
+                                                                    )
+                                                             .ToList();
+                        }
+                }
+
                 // getting real data
                 var response = await _dataService.GetById(ApplicationDescriptor.LoginAppName, datasetName, id, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
-                Data = JsonConvert.DeserializeObject<Dictionary<String, Object>>(stringResponse);
+                Data = JsonConvert.DeserializeObject<Dictionary<String, List<Object>>>(stringResponse);
             }
             return Page();
         }

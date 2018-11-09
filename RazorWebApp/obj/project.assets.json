@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.0": {
+      "bootstrap/3.0.0": {
+        "type": "package",
+        "dependencies": {
+          "jquery": "1.9.0"
+        }
+      },
+      "bootstrap-select/1.13.3": {
+        "type": "package",
+        "dependencies": {
+          "bootstrap": "3.0.0",
+          "jQuery": "[1.9.1, 4.0.0)"
+        }
+      },
+      "jQuery/1.9.1": {
+        "type": "package"
+      },
       "Libuv/1.10.0": {
         "type": "package",
         "dependencies": {
@@ -4806,6 +4822,132 @@
     }
   },
   "libraries": {
+    "bootstrap/3.0.0": {
+      "sha512": "U9BwUwZs3IykigVUouyEWUzs/P0gjgLgjuZJ3OHoAKcgNdbHH7ryZtRpgp4e7uMr4CjLIECcTIxF25zBGJjR3g==",
+      "type": "package",
+      "path": "bootstrap/3.0.0",
+      "files": [
+        ".signature.p7s",
+        "Content/Content/bootstrap-theme.css",
+        "Content/Content/bootstrap-theme.min.css",
+        "Content/Content/bootstrap.css",
+        "Content/Content/bootstrap.min.css",
+        "Content/Scripts/bootstrap.js",
+        "Content/Scripts/bootstrap.min.js",
+        "Content/fonts/glyphicons-halflings-regular.eot",
+        "Content/fonts/glyphicons-halflings-regular.svg",
+        "Content/fonts/glyphicons-halflings-regular.ttf",
+        "Content/fonts/glyphicons-halflings-regular.woff",
+        "bootstrap.3.0.0.nupkg.sha512",
+        "bootstrap.nuspec"
+      ]
+    },
+    "bootstrap-select/1.13.3": {
+      "sha512": "wLMAXqzrYryb/n2B2Ko9zAY3nma8qvrfJ+8cL+Cs8rp6sWO87oEimZhBQfG2DGnTrW8JCnJoj8m0+Q3XKrs8Sw==",
+      "type": "package",
+      "path": "bootstrap-select/1.13.3",
+      "files": [
+        ".signature.p7s",
+        "bootstrap-select.1.13.3.nupkg.sha512",
+        "bootstrap-select.nuspec",
+        "content/Content/bootstrap-select.css",
+        "content/Content/bootstrap-select.css.map",
+        "content/Content/bootstrap-select.min.css",
+        "content/Scripts/bootstrap-select.js",
+        "content/Scripts/bootstrap-select.js.map",
+        "content/Scripts/bootstrap-select.min.js",
+        "content/Scripts/i18n/defaults-ar_AR.js",
+        "content/Scripts/i18n/defaults-ar_AR.min.js",
+        "content/Scripts/i18n/defaults-bg_BG.js",
+        "content/Scripts/i18n/defaults-bg_BG.min.js",
+        "content/Scripts/i18n/defaults-cs_CZ.js",
+        "content/Scripts/i18n/defaults-cs_CZ.min.js",
+        "content/Scripts/i18n/defaults-da_DK.js",
+        "content/Scripts/i18n/defaults-da_DK.min.js",
+        "content/Scripts/i18n/defaults-de_DE.js",
+        "content/Scripts/i18n/defaults-de_DE.min.js",
+        "content/Scripts/i18n/defaults-en_US.js",
+        "content/Scripts/i18n/defaults-en_US.min.js",
+        "content/Scripts/i18n/defaults-es_CL.js",
+        "content/Scripts/i18n/defaults-es_CL.min.js",
+        "content/Scripts/i18n/defaults-es_ES.js",
+        "content/Scripts/i18n/defaults-es_ES.min.js",
+        "content/Scripts/i18n/defaults-et_EE.js",
+        "content/Scripts/i18n/defaults-et_EE.min.js",
+        "content/Scripts/i18n/defaults-eu.js",
+        "content/Scripts/i18n/defaults-eu.min.js",
+        "content/Scripts/i18n/defaults-fa_IR.js",
+        "content/Scripts/i18n/defaults-fa_IR.min.js",
+        "content/Scripts/i18n/defaults-fi_FI.js",
+        "content/Scripts/i18n/defaults-fi_FI.min.js",
+        "content/Scripts/i18n/defaults-fr_FR.js",
+        "content/Scripts/i18n/defaults-fr_FR.min.js",
+        "content/Scripts/i18n/defaults-hr_HR.js",
+        "content/Scripts/i18n/defaults-hr_HR.min.js",
+        "content/Scripts/i18n/defaults-hu_HU.js",
+        "content/Scripts/i18n/defaults-hu_HU.min.js",
+        "content/Scripts/i18n/defaults-id_ID.js",
+        "content/Scripts/i18n/defaults-id_ID.min.js",
+        "content/Scripts/i18n/defaults-it_IT.js",
+        "content/Scripts/i18n/defaults-it_IT.min.js",
+        "content/Scripts/i18n/defaults-ja_JP.js",
+        "content/Scripts/i18n/defaults-ja_JP.min.js",
+        "content/Scripts/i18n/defaults-kh_KM.js",
+        "content/Scripts/i18n/defaults-kh_KM.min.js",
+        "content/Scripts/i18n/defaults-ko_KR.js",
+        "content/Scripts/i18n/defaults-ko_KR.min.js",
+        "content/Scripts/i18n/defaults-lt_LT.js",
+        "content/Scripts/i18n/defaults-lt_LT.min.js",
+        "content/Scripts/i18n/defaults-nb_NO.js",
+        "content/Scripts/i18n/defaults-nb_NO.min.js",
+        "content/Scripts/i18n/defaults-nl_NL.js",
+        "content/Scripts/i18n/defaults-nl_NL.min.js",
+        "content/Scripts/i18n/defaults-pl_PL.js",
+        "content/Scripts/i18n/defaults-pl_PL.min.js",
+        "content/Scripts/i18n/defaults-pt_BR.js",
+        "content/Scripts/i18n/defaults-pt_BR.min.js",
+        "content/Scripts/i18n/defaults-pt_PT.js",
+        "content/Scripts/i18n/defaults-pt_PT.min.js",
+        "content/Scripts/i18n/defaults-ro_RO.js",
+        "content/Scripts/i18n/defaults-ro_RO.min.js",
+        "content/Scripts/i18n/defaults-ru_RU.js",
+        "content/Scripts/i18n/defaults-ru_RU.min.js",
+        "content/Scripts/i18n/defaults-sk_SK.js",
+        "content/Scripts/i18n/defaults-sk_SK.min.js",
+        "content/Scripts/i18n/defaults-sl_SI.js",
+        "content/Scripts/i18n/defaults-sl_SI.min.js",
+        "content/Scripts/i18n/defaults-sv_SE.js",
+        "content/Scripts/i18n/defaults-sv_SE.min.js",
+        "content/Scripts/i18n/defaults-tr_TR.js",
+        "content/Scripts/i18n/defaults-tr_TR.min.js",
+        "content/Scripts/i18n/defaults-ua_UA.js",
+        "content/Scripts/i18n/defaults-ua_UA.min.js",
+        "content/Scripts/i18n/defaults-vi_VN.js",
+        "content/Scripts/i18n/defaults-vi_VN.min.js",
+        "content/Scripts/i18n/defaults-zh_CN.js",
+        "content/Scripts/i18n/defaults-zh_CN.min.js",
+        "content/Scripts/i18n/defaults-zh_TW.js",
+        "content/Scripts/i18n/defaults-zh_TW.min.js"
+      ]
+    },
+    "jQuery/1.9.1": {
+      "sha512": "fhILbP37t5mmKMGAaFSp+E0Wv8r4WWzRh0OQOCandjGWT+aa8apzfihmGRpdAMD6quC+8inownvUxQfTcR8rnA==",
+      "type": "package",
+      "path": "jquery/1.9.1",
+      "files": [
+        ".signature.p7s",
+        "Content/Scripts/jquery-1.9.1-vsdoc.js",
+        "Content/Scripts/jquery-1.9.1.js",
+        "Content/Scripts/jquery-1.9.1.min.js",
+        "Content/Scripts/jquery-1.9.1.min.map",
+        "Tools/common.ps1",
+        "Tools/install.ps1",
+        "Tools/jquery-1.9.1.intellisense.js",
+        "Tools/uninstall.ps1",
+        "jquery.1.9.1.nupkg.sha512",
+        "jquery.nuspec"
+      ]
+    },
     "Libuv/1.10.0": {
       "sha512": "GsCf4q+eyaI49rCPlgYxdxa1SQCysXFFdSJWdstrwxytg4+VPYLYrXD4AT2rjHVJ+UF7SSWX9CapWEYaU4ejVQ==",
       "type": "package",
@@ -12694,7 +12836,8 @@
     ".NETCoreApp,Version=v2.0": [
       "Microsoft.AspNetCore.All >= 2.0.5",
       "Microsoft.NETCore.App >= 2.0.0",
-      "SharedLibrary >= 1.0.0"
+      "SharedLibrary >= 1.0.0",
+      "bootstrap-select >= 1.13.3"
     ]
   },
   "packageFolders": {
@@ -12748,6 +12891,10 @@
             "target": "Package",
             "version": "[2.0.0, )",
             "autoReferenced": true
+          },
+          "bootstrap-select": {
+            "target": "Package",
+            "version": "[1.13.3, )"
           }
         },
         "imports": [

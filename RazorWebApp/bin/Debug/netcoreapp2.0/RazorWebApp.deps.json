@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "6cc7337bf8d04b1a22dfad19882fada13682da33"
+    "signature": "8a2723acf2fd9778ccf7910e8383215994b9fd07"
   },
   "compilationOptions": {
     "defines": [
@@ -25,7 +25,8 @@
         "dependencies": {
           "Microsoft.AspNetCore.All": "2.0.5",
           "Microsoft.NETCore.App": "2.0.0",
-          "SharedLibrary": "1.0.0"
+          "SharedLibrary": "1.0.0",
+          "bootstrap-select": "1.13.3"
         },
         "runtime": {
           "RazorWebApp.dll": {}
@@ -34,6 +35,18 @@
           "RazorWebApp.dll": {}
         }
       },
+      "bootstrap/3.0.0": {
+        "dependencies": {
+          "jQuery": "1.9.1"
+        }
+      },
+      "bootstrap-select/1.13.3": {
+        "dependencies": {
+          "bootstrap": "3.0.0",
+          "jQuery": "1.9.1"
+        }
+      },
+      "jQuery/1.9.1": {},
       "Libuv/1.10.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.0.0"
@@ -4024,6 +4037,27 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "bootstrap/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-U9BwUwZs3IykigVUouyEWUzs/P0gjgLgjuZJ3OHoAKcgNdbHH7ryZtRpgp4e7uMr4CjLIECcTIxF25zBGJjR3g==",
+      "path": "bootstrap/3.0.0",
+      "hashPath": "bootstrap.3.0.0.nupkg.sha512"
+    },
+    "bootstrap-select/1.13.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wLMAXqzrYryb/n2B2Ko9zAY3nma8qvrfJ+8cL+Cs8rp6sWO87oEimZhBQfG2DGnTrW8JCnJoj8m0+Q3XKrs8Sw==",
+      "path": "bootstrap-select/1.13.3",
+      "hashPath": "bootstrap-select.1.13.3.nupkg.sha512"
+    },
+    "jQuery/1.9.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fhILbP37t5mmKMGAaFSp+E0Wv8r4WWzRh0OQOCandjGWT+aa8apzfihmGRpdAMD6quC+8inownvUxQfTcR8rnA==",
+      "path": "jquery/1.9.1",
+      "hashPath": "jquery.1.9.1.nupkg.sha512"
     },
     "Libuv/1.10.0": {
       "type": "package",

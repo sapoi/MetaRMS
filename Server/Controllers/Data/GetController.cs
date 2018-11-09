@@ -81,7 +81,8 @@ namespace Server.Controllers.Data
             foreach (var d in query)
             {
                 var tmpDict = d.DataDictionary;
-                tmpDict.Add("DBId", d.Id);
+                // serializing list containing DBId, because every data is expected to be in a list
+                tmpDict.Add("DBId", new List<object>() { d.Id } );
                 result.Add(tmpDict);
             }
             return Ok(result);

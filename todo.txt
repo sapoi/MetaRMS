@@ -10,6 +10,17 @@ TEXT
 - 3 uzivatele - programatori co chcou pripojit aplikaci (mobilni), admini, knihovnice
 ! pustit nekde na webu
 - ➡️ verejne zpristupnit nekolik ukazkovych aplikaci s jsonem a prihlasovacimi udaji na R prava ke vsem datasetum
+radkovani ne 2, ale 1 nebo 1.25
+- psat to postupne od zacatku a ne na preskacku
+- napsat uz ted podrobnou osnovu ke vsemu
+- vice prikladu v uvoduv uvodu napsat, co by mohli vsechno uzivatele chtit a potrebvat
+v requirements to rozepsat a az nakonec dat seznam tect bodu
+
+muzu pouzivat cizi knihovny?
+- uz ted pouzivam bootstrap
+- chci i https://developer.snapappointments.com/bootstrap-select/
+
+
 
 🔥🔥🔥
 - ❗️ refresh token (https://www.blinkingcaret.com/2018/05/30/refresh-tokens-in-asp-net-core-web-api/)
@@ -29,7 +40,7 @@ DETAILY
 - pred redirectto error dat log
 - udelat a dat app name validator nekam zvlast
 - message preparer
-- gdpr neposilat heslo na mail, ale zobrazit ho v message
+- 🔥🔥🔥gdpr neposilat heslo na mail, ale zobrazit ho v message
 - vyresit async await
 - pridat stranku, na kterou si admin muze napsat co chce - navod na pouzivani konkretni aplikace 
 - pridat do db k datasetum created_by a modified_by
@@ -40,11 +51,8 @@ DETAILY
 - user edit check box na zmenu hesla 
 - pridat prava CRUD+user password change -> bude je mit jen admin a bude je moct nastavovat jen admin -> jinak se da heslo zmenit poj v nastaveni prihlaseneho uzivatele
 - do db a app user.language
-- do db dat countries a currencies
-    - allow data.application_id NULL
 - co vsechno je potreba spustit pro inicializovani celeho projektu
     - vytvorit db
-    - naplnit currencies a countries
     - ukazkove aplikace
 - javascript popup okna pri delete, ...
 - ukladat JSON do DB pekne zformatovany
@@ -53,13 +61,15 @@ PODPORA TYPU
 - prilinkovat skripty 1.10. str 20
 - ✅ zmenit int na type number a min 0
 - ✅ klient zobrazovat vstupy podle typu
-- validace user data na klientovi
+- 🔥🔥🔥validace user data na klientovi
+- validace user data na serveru
 - validace pri vytvareni dat na serveru
 - ✅ validace pri vytvareni dat na klientovi - pomoci html
 - validace pri editu dat na serveru
 - ✅ validace pri editu dat na klientovi  - pomoci html 
 - ✅ app init vytvareni user dat admina
-- podminky hesla (helka, znaky, ...)
+- 🔥🔥🔥podminky hesla (helka, znaky, ...)
+- ✅ odkazy na user datasety
 
 KONTROLA VALIDITY vstupu
 - ❗️ validace vstupu na klientovi podle app deskriptoru
@@ -75,7 +85,7 @@ JSON VALIDACE
 - temer jakakoli hodnota atributu muze byt null!!!
 
 ZRYCHLENI
-- posilat appinit mail nekdy jindy
+- 🔥🔥🔥posilat appinit mail nekdy jindy
 
 REFAKTORING
 - AccountService.GetApplicationDescriptorByAppName dat nekam jinam

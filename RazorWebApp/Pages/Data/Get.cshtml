@@ -38,17 +38,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Data) {
+                    @foreach (var row in Model.Data) {
                     <tr>
                         @foreach (var attribute in Model.ActiveDatasetDescriptor.Attributes) {
                         <td>
-                            @item[attribute.Name]
+                            @if (row[attribute.Name].Count() >= 1) {
+                                @row[attribute.Name][0]
+                            }
+                            @for (int i = 1; i < row[attribute.Name].Count(); i++) {
+                                <text><br></text>
+                                @row[attribute.Name][i]
+                            }
                         </td>
                         }
                         @if (Model.ActiveDatasetRights >= RightsEnum.RU)
                         {
                         <td>
-                            <form method="post" asp-route-datasetName="@Model.ActiveDatasetDescriptor.Name" asp-route-dataId="@item["DBId"]" asp-page-handler="dataEdit">
+                            <form method="post" asp-route-datasetName="@Model.ActiveDatasetDescriptor.Name" asp-route-dataId="@row["DBId"][0]" asp-page-handler="dataEdit">
                                 <button class="btn btn-default">Edit</button>
                             </form>
                         </td>
@@ -56,7 +62,7 @@
                         @if (Model.ActiveDatasetRights >= RightsEnum.CRUD)
                         {
                         <td>
-                            <form method="post" asp-route-datasetName="@Model.ActiveDatasetDescriptor.Name" asp-route-dataId="@item["DBId"]" asp-page-handler="dataDelete">
+                            <form method="post" asp-route-datasetName="@Model.ActiveDatasetDescriptor.Name" asp-route-dataId="@row["DBId"][0]" asp-page-handler="dataDelete">
                                 <button class="btn btn-default">Delete</button>
                             </form>
                         </td>
