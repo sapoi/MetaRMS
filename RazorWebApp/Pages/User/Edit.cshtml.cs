@@ -18,31 +18,36 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RazorWebApp.Pages.User
 {
-    public class EditModel : PageModel
+    public class PatchModel : PageModel
     {
         private readonly IUserService _userService;
         private readonly IAccountService _accountService;
         private readonly IRightsService _rightsService;
         private IMemoryCache _cache;
+        private readonly IDataService _dataService;
 
-        public EditModel(IUserService userService, IAccountService accountService, IRightsService rightsService, IMemoryCache memoryCache)
+        public PatchModel(IUserService userService, IAccountService accountService, IRightsService rightsService, IMemoryCache memoryCache, IDataService dataService)
         {
             this._userService = userService;
             this._accountService = accountService;
             this._rightsService = rightsService;
             this._cache = memoryCache;
+            this._dataService = dataService;
         }
 
         public ApplicationDescriptor ApplicationDescriptor { get; set; }
-        public UserModel Data { get; set; }
+        public UserModel UserModelToPatch { get; set; }
         [BindProperty]
-        public List<string> ValueList { get; set; }
+        public long NewRightsId { get; set; }
+        [BindProperty]
+        public Dictionary<string, List<string>> ValueList { get; set; }
         public LoggedMenuPartialData MenuData { get; set; }
         [BindProperty]
         public long UserId { get; set; }
         public IEnumerable<SelectListItem> UserRightsList { get; set; }
-        // [BindProperty]
-        // public string RightsName { get; set; }
+        [BindProperty]
+        public Dictionary<string, List<SelectListItem>> SelectData { get; set; }
+        public string Message { get; set; }
 
         public async Task<IActionResult> OnGetAsync(long id)
         {
@@ -83,7 +88,16 @@ namespace RazorWebApp.Pages.User
                 var response = await _userService.GetById(ApplicationDescriptor.LoginAppName, id, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
-                Data = JsonConvert.DeserializeObject<UserModel>(stringResponse);
+                UserModelToPatch = JsonConvert.DeserializeObject<UserModel>(stringResponse);
+
+                // fill SelectData
+                DataLoadingHelper dlh = new DataLoadingHelper();
+                SelectData = await dlh.FillSelectData(ApplicationDescriptor, 
+                                                      ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes, 
+                                                      _userService, 
+                                                      _dataService, 
+                                                      token);
+                
             }
             return Page();
         }
@@ -99,25 +113,53 @@ namespace RazorWebApp.Pages.User
             if (ApplicationDescriptor == null)
                 return RedirectToPage("/Errors/ServerError");
 
-            // data prepare
-            long newRightsId;
-            if (ValueList.Count < 3 || !long.TryParse(ValueList[2], out newRightsId))
-                return RedirectToPage("/Errors/ServerError");
-            string newUsername = ValueList[0];
-            string newPassword = ValueList[1];
-            long newRights = long.Parse(ValueList[2]);
-            Dictionary<String, Object> inputData = new Dictionary<string, object>();
-            for (int i = 3; i < ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes.Count + 3; i++)
-            {
-                inputData.Add(ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes[i - 3].Name, ValueList[i]);
-            }
+            // // data prepare
+            // long newRightsId;
+            // if (ValueList.Count < 2 || !long.TryParse(ValueList[1][0], out newRightsId))
+            //     return RedirectToPage("/Errors/ServerError");
+            // string newUsername = ValueList[0][0];
+            // // string newPassword = ValueList[1][0];
+            // //TODO bude z enumu
+            // long newRights = newRightsId;
+            // Dictionary<String, Object> inputData = new Dictionary<string, object>();
+            // for (int i = 2; i < ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes.Count + 2; i++)
+            // {
+            //     inputData.Add(ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes[i - 2].Name, ValueList[i]);
+            // }
+
+            // foreach (var attribute in ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes)
+            // {
+            //     // if nothing was selected in a select box, the key (attributeName) was removed and 
+            //     // before sending new values to API, the key needs to be reentered with empty values
+            //     if (!ValueList.Keys.Contains(attribute.Name))
+            //         ValueList.Add(attribute.Name, new List<string>());
+            // }
+
+            //INPUT VALIDATIONS
+            var validationHelper = new ValidationHelper();
+            validationHelper.ValidateValueList(ValueList, ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes);
             
-            UserModel patchedUserModel = new UserModel() { Username = newUsername, 
-                                                           Password = newPassword,
-                                                           RightsId = newRightsId,
-                                                           Data = JsonConvert.SerializeObject(inputData) };
+            UserModel patchedUserModel = new UserModel() { //Username = newUsername, 
+                                                           RightsId = NewRightsId,
+                                                           Data = JsonConvert.SerializeObject(ValueList) };
+
+            
             var response = await _userService.PatchById(ApplicationDescriptor.LoginAppName, UserId, patchedUserModel, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                // get rights
+                var rights = await AccessHelper.GetUserRights(_cache, _accountService, token);
+                if (rights == null)
+                return RedirectToPage("/Errors/ServerError");
+                // get menu data
+                MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
+                // fill previously filled data
+                UserModelToPatch = patchedUserModel;
+                Message = message.Substring(1, message.Length - 2);
+                return Page();
+            }
 
             return RedirectToPage("/User/Get", new {message = message.Substring(1, message.Length - 2)});
         }

@@ -20,7 +20,7 @@ namespace RazorWebApp.Pages.Errors
     {
         public UnauthorizedModel() { }
 
-        public async Task<IActionResult> OnGetAsync()
+        public IActionResult OnGetAsync()
         {
             return Page();
         }

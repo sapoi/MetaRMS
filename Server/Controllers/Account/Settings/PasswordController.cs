@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Server.Repositories;
 using SharedLibrary.Helpers;
 using SharedLibrary.Models;
 using SharedLibrary.Structures;
@@ -30,7 +31,7 @@ namespace Server.Controllers.Account.Settings
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] PasswordChange passwords)
+        public IActionResult Login([FromBody] PasswordChangeStructure passwords)
         {
             // get logged user's identity from HttpContext
             var identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -43,13 +44,20 @@ namespace Server.Controllers.Account.Settings
                 return Unauthorized(); //TODO zmanit na bad request s message
             string appName = identity.FindFirst("ApplicationName").Value;
 
-            UserModel user = _context.UserDbSet.Where(u=> u.Application.LoginApplicationName == appName &&
-                                                          u.Id == userId).FirstOrDefault();
+            //INPUT VALIDATIONS
+            if (passwords.OldPassword == null || passwords.OldPassword == "" ||
+                passwords.NewPassword == null || passwords.NewPassword == "" )
+                return BadRequest("Both old and new passwords are required to be non empty.");
+
+            var userRepository = new UserRepository(_context);
+            var user = userRepository.GetById(userId);
+            // UserModel user = _context.UserDbSet.Where(u=> u.Application.LoginApplicationName == appName &&
+            //                                               u.Id == userId).FirstOrDefault();
             if (user.Password != PasswordHelper.ComputeHash(passwords.OldPassword))
                 return BadRequest("Old password is incorrect.");
-            
-            user.Password = PasswordHelper.ComputeHash(passwords.NewPassword);
-            await _context.SaveChangesAsync();
+            userRepository.SetPassword(user, passwords.NewPassword);
+            // user.Password = PasswordHelper.ComputeHash(passwords.NewPassword);
+            // await _context.SaveChangesAsync();
             return Ok("Password changed successfully.");
         }
     }

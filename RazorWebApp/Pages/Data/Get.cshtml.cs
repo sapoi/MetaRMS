@@ -10,6 +10,7 @@ using SharedLibrary.Descriptors;
 using RazorWebApp.Helpers;
 using SharedLibrary.Enums;
 using RazorWebApp.Structures;
+using SharedLibrary.Models;
 
 namespace RazorWebApp.Pages.Data
 {
@@ -29,7 +30,7 @@ namespace RazorWebApp.Pages.Data
         [BindProperty]
         public ApplicationDescriptor ApplicationDescriptor { get; set; }
         public DatasetDescriptor ActiveDatasetDescriptor { get; set; }
-        public List<Dictionary<String, List<Object>>> Data { get; set; }
+        public List<DataModel> Data { get; set; }
         public List<DatasetDescriptor> ReadAuthorizedDatasets { get; set; }
         public RightsEnum ActiveDatasetRights { get; set; }
         public LoggedMenuPartialData MenuData { get; set; }
@@ -60,7 +61,7 @@ namespace RazorWebApp.Pages.Data
                 {
                     // dummy
                     ActiveDatasetDescriptor = new DatasetDescriptor { Name = "", Id = 0, Attributes = new List<AttributeDescriptor>() };
-                    this.Data = new List<Dictionary<string, List<object>>>();
+                    this.Data = new List<DataModel>();
                     return Page();
                 }
                 var activeDatasetRights = AccessHelper.GetActiveDatasetRights(ActiveDatasetDescriptor, rights);
@@ -75,15 +76,15 @@ namespace RazorWebApp.Pages.Data
                 var response = await _dataService.GetAll(ApplicationDescriptor.LoginAppName, ActiveDatasetDescriptor.Name, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
-                Data = JsonConvert.DeserializeObject<List<Dictionary<String, List<Object>>>>(stringResponse);
+                Data = JsonConvert.DeserializeObject<List<DataModel>>(stringResponse);
             }
             return Page();
         }
-        public async Task<IActionResult> OnPostDatasetSelectAsync(string datasetName)
+        public IActionResult OnPostDatasetSelectAsync(string datasetName)
         {
-            return await OnGetAsync(datasetName);
+            return RedirectToPage("Get", "", new { datasetName = datasetName});
         }
-        public async Task<IActionResult> OnPostDataEditAsync(string datasetName, string dataId)
+        public IActionResult OnPostDataEditAsync(string datasetName, string dataId)
         {
             return RedirectToPage("Edit", "", new { datasetName = datasetName, id = dataId });
         }
@@ -105,7 +106,7 @@ namespace RazorWebApp.Pages.Data
             return await OnGetAsync(datasetName, message.Substring(1, message.Length - 2));
         }
 
-        public async Task<IActionResult> OnPostDataCreateAsync(string datasetName)
+        public IActionResult OnPostDataCreateAsync(string datasetName)
         {
             return RedirectToPage("Create", "", new { datasetName = datasetName });
         }

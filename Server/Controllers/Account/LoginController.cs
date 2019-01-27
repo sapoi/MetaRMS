@@ -11,6 +11,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using Server.Repositories;
+using SharedLibrary.Descriptors;
+using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
 using SharedLibrary.Models;
 using SharedLibrary.Structures;
@@ -27,16 +31,23 @@ namespace Server.Controllers.Account
             _context = context;
         }
         private readonly DatabaseContext _context;
-        async Task<UserModel> getUserModel(LoginCredentials loginCredentials)
-        {
-            return _context.UserDbSet.Where(u => (u.Application.LoginApplicationName == loginCredentials.ApplicationName && 
-                                                    u.Username == loginCredentials.Username)).FirstOrDefault();
-        }
+        // async Task<UserModel> getUserModel(LoginCredentials loginCredentials, ApplicationDescriptor applicationDescriptor)
+        // {
+        //     var userRepository = new UserRepository(_context);
+        //     return userRepository.GetByApplicationLoginNameAndUsername(loginCredentials.ApplicationName, 
+        //                                                                loginCredentials.Username);
+        //     // return _context.UserDbSet.Where(u => (u.Application.LoginApplicationName == loginCredentials.ApplicationName && 
+        //     //                                       u.GetUsername() == loginCredentials.Username)).FirstOrDefault();
+        // }
+        // async Task<ApplicationModel> getApplicationModelByLoginApplicationName(string loginApplicationName)
+        // {
+        //     return _context.ApplicationDbSet.Where(a => a.LoginApplicationName == loginApplicationName).FirstOrDefault();
+        // }
 
         // sem se dostane kdokoli
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginCredentials loginCredentials)
+        public IActionResult Login([FromBody] LoginCredentials loginCredentials)
         {
             if (ModelState.IsValid)
             {
@@ -46,7 +57,13 @@ namespace Server.Controllers.Account
                     return BadRequest($"Username is required.");
                 if (loginCredentials.Password == null)
                     return BadRequest($"Password is required.");
-                var user = await getUserModel(loginCredentials);
+                var applicationRepository = new ApplicationRepository(_context);
+                var applicationModel = applicationRepository.GetByLoginApplicationName(loginCredentials.ApplicationName);
+                if (applicationModel == null)
+                    return BadRequest($"Invalid application name.");
+                // var user = await getUserModel(loginCredentials, applicationModel.ApplicationDescriptor);
+                var userRepository = new UserRepository(_context);
+                var user = userRepository.GetByApplicationIdAndUsername(applicationModel.Id, loginCredentials.Username);
                 if (user == null)
                     return BadRequest($"ERROR: User {loginCredentials.Username} does not exist in application {loginCredentials.ApplicationName}."); //"kombinace jmena aplikace a username"
                 if (!PasswordHelper.CheckHash(loginCredentials.Password, user.Password))
@@ -58,6 +75,7 @@ namespace Server.Controllers.Account
                 {
                     new Claim(ClaimTypes.Name, loginCredentials.Username),
                     new Claim("UserId", user.Id.ToString()),
+                    new Claim("ApplicationId", user.ApplicationId.ToString()),
                     new Claim("ApplicationName", loginCredentials.ApplicationName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };

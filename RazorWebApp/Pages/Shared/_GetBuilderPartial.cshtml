@@ -1,0 +1,53 @@
+@using SharedLibrary.Enums 
+@using Newtonsoft.Json
+@model RazorWebApp.Structures.GetBuilderPartialData
+
+@if (@Model.CellContent.Count() >= 1) 
+{
+    bool isReference = !AttributeType.Types.Contains(@Model.Attribute.Type);
+    if (isReference)
+    {
+        var data = JsonConvert.DeserializeObject<Tuple<string, string>>(@Model.CellContent[0].ToString());
+        string path;
+        @if (@Model.Attribute.Type == @Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name)
+        {
+            path = "~/User/Edit/" + data.Item1;
+        }
+        else
+        {
+            path = "~/Data/Edit/" + @Model.Attribute.Type + "/" + data.Item1;
+        }
+        <a href="@Url.Content(path)">@data.Item2</a>
+        
+    }
+    else if (@Model.Attribute.Type == "bool")
+    {
+        if (@Model.CellContent[0].ToString() == "0")
+        {
+            <text>❌</text>
+        }
+        else
+        {
+            <text>✅</text>
+        }
+    }
+    else
+    {
+        @Model.CellContent[0]
+    }
+}
+@for (int i = 1; i < Model.CellContent.Count(); i++) 
+{
+    <text><br></text>
+    var data = JsonConvert.DeserializeObject<Tuple<string, string>>(@Model.CellContent[i].ToString());
+    string path;
+    @if (@Model.Attribute.Type == @Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name)
+    {
+        path = "~/User/Edit/" + data.Item1;
+    }
+    else
+    {
+        path = "~/Data/Edit/" + @Model.Attribute.Type + "/" + data.Item1;
+    }
+    <a href="@Url.Content(path)">@data.Item2</a>
+}

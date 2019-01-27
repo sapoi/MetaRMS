@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using SharedLibrary.Models;
 using System.Linq;
 using SharedLibrary.Helpers;
+using Server.Repositories;
 
 namespace Server.Controllers.Data
 {
@@ -26,25 +27,31 @@ namespace Server.Controllers.Data
         [HttpPost]
         [Route("{appName}/{datasetName}/{id}")]
         public IActionResult PatchById(string appName, string datasetName, long id, 
-                                      [FromBody] Dictionary<string, object> data)
+                                      [FromBody] Dictionary<string, List<object>> data)
         {
-            ApplicationModel application = (from a in _context.ApplicationDbSet
-                                   where (a.LoginApplicationName == appName)
-                                   select a).FirstOrDefault();
+            var applicationRepository = new ApplicationRepository(_context);
+            var application = applicationRepository.GetByLoginApplicationName(appName);
+            // ApplicationModel application = (from a in _context.ApplicationDbSet
+            //                        where (a.LoginApplicationName == appName)
+            //                        select a).FirstOrDefault();
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
             var datasetId = adh.GetDatasetIdByName(datasetName);
             if (datasetId == null)
                 return BadRequest("spatny nazev datasetu");
-            DataModel query = (from p in _context.DataDbSet
-                                   where (p.Application.LoginApplicationName == appName && p.DatasetId == datasetId && p.Id == id)
-                                   select p).FirstOrDefault();
-            if (query == null)
+            var dataRepository = new DataRepository(_context);
+            //TODO kontrolovat id+dataset+aplikaci
+            var dataModel = dataRepository.GetById(id);
+            // DataModel dataModel = (from p in _context.DataDbSet
+            //                        where (p.Application.LoginApplicationName == appName && p.DatasetId == datasetId && p.Id == id)
+            //                        select p).FirstOrDefault();
+            if (dataModel == null)
                 return BadRequest("neexistujici kombinace jmena aplikace, datasetu a id");
-            string JsonData = JsonConvert.SerializeObject(data);
-            query.Data = JsonData;
-            _context.SaveChanges();
+            dataRepository.SetData(dataModel, data);
+            // string JsonData = JsonConvert.SerializeObject(data);
+            // dataModel.Data = JsonData;
+            // _context.SaveChanges();
 
             return Ok($"Data in dataset {datasetName} editted successfully.");
         }

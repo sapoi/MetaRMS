@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using SharedLibrary.Models;
 using System.Linq;
 using SharedLibrary.Helpers;
+using Server.Repositories;
 
 namespace Server.Controllers.Data
 {
@@ -28,9 +29,11 @@ namespace Server.Controllers.Data
         public IActionResult Create(string appName, string datasetName, 
                                       [FromBody] Dictionary<string, object> data)
         {
-            ApplicationModel application = (from a in _context.ApplicationDbSet
-                                   where (a.LoginApplicationName == appName)
-                                   select a).FirstOrDefault();
+            var applicationRepository = new ApplicationRepository(_context);
+            var application = applicationRepository.GetByLoginApplicationName(appName);
+            // ApplicationModel application = (from a in _context.ApplicationDbSet
+            //                        where (a.LoginApplicationName == appName)
+            //                        select a).FirstOrDefault();
             if (application == null)
                 return BadRequest($"ERROR: Application name {appName} does not exist.");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
@@ -40,9 +43,11 @@ namespace Server.Controllers.Data
 
             string JsonData = JsonConvert.SerializeObject(data);
             DataModel dataModel = new DataModel{ApplicationId=application.Id, DatasetId=(long)datasetId, Data=JsonData};
-            _context.DataDbSet.Add(dataModel);
+            var dataRepository = new DataRepository(_context);
+            dataRepository.Add(dataModel);
+            // _context.DataDbSet.Add(dataModel);
 
-            _context.SaveChanges();
+            // _context.SaveChanges();
             return Ok($"New data in dataset {datasetName} created successfully.");
         }
     }

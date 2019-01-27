@@ -1,8 +1,9 @@
 @page 
 @using SharedLibrary.Enums 
+@using RazorWebApp.Structures
 @model RazorWebApp.Pages.User.CreateModel 
 @{ 
-    ViewData["Title"] = "Users"; 
+    ViewData["Title"] = @Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name; 
 }
 
 @{Html.RenderPartial("Shared/_LoggedMenuPartial", Model.MenuData); }
@@ -16,36 +17,31 @@
                 </div>
         }
         <form method="post">
+            @for (int i = 2; i < Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes.Count + 2; i++){
+                <div class="form-group">
+                     @{ var attribute = Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes[i - 2]; }
+                    <label>@attribute.Name</label>
+                    <small>@attribute.Description</small>
+                    @{Html.RenderPartial("Shared/_EditBuilderPartial", 
+                                          new EditBuilderPartialData {
+                                                                        Attribute = attribute, 
+                                                                        OutValue = "ValueList[" + attribute.Name + "]",
+                                                                        SelectData = Model.SelectData
+                                                                      }
+                                        ); 
+                    }
+                    <!--<span asp-validation-for="Model.ValueList[@i]" class="text-danger"></span>-->
+                </div>
+            }
 
             <div class="form-group">
-                <label>@Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.UsernameAttributes.Name</label>
-                <small>@Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.UsernameAttributes.Description</small>
-                <input name="ValueList[0]" class="form-control">
-            </div>
-            <div class="form-group">
-                <label>@Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.PasswordAttributes.Name</label>
-                <small>@Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.PasswordAttributes.Description</small>
-                <input name="ValueList[1]" class="form-control">
-            </div>
-            <div class="form-group">
                 <label>Rights</label>
-                <select name="ValueList[2]" 
+                <select name="NewRightsId" 
                         asp-items="Model.UserRightsList"
                         class="form-control"
                         >
                 </select>
             </div>
-
-            @for (int i = 3; i < Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes.Count + 3; i++){
-                <div class="form-group">
-                     @{ var attribute = Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes[i - 3]; }
-                    <label>@attribute.Name</label>
-                    <small>@attribute.Description</small>
-                    <input name="ValueList[@i]" 
-                           class="form-control">
-                    <!--<span asp-validation-for="Model.ValueList[@i]" class="text-danger"></span>-->
-                </div>
-            }
             
             <div class="form-group">
                 <button type="submit" class="btn btn-default">Save</button>

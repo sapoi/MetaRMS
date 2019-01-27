@@ -31,7 +31,7 @@ namespace Server.Controllers.Account
         // sem se dostane kdokoli
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Logout()
+        public IActionResult Logout()
         {
             //TODO 
             // Have DB of no longer active tokens that still have some time to live

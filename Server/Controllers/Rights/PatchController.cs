@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using SharedLibrary.Models;
 using System.Linq;
 using SharedLibrary.Helpers;
+using Server.Repositories;
 
 namespace Server.Controllers.Rights
 {
@@ -27,22 +28,30 @@ namespace Server.Controllers.Rights
         [Route("{appName}/{id}")]
         public IActionResult PatchById(string appName, long id,  [FromBody] RightsModel fromBodyRightsModel)
         {
-            ApplicationModel application = (from a in _context.ApplicationDbSet
-                                   where (a.LoginApplicationName == appName)
-                                   select a).FirstOrDefault();
+            var applicationRepository = new ApplicationRepository(_context);
+            var application = applicationRepository.GetByLoginApplicationName(appName);
+            // ApplicationModel application = (from a in _context.ApplicationDbSet
+            //                        where (a.LoginApplicationName == appName)
+            //                        select a).FirstOrDefault();
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
-            RightsModel query = (from p in _context.RightsDbSet
-                                   where (p.Application.LoginApplicationName == appName && p.Id == id)
-                                   select p).FirstOrDefault();
-            if (query == null)
+            var rightsRepository = new RightsRepository(_context);
+            //TODO kontrolovat aplikaci
+            var rightsModel = rightsRepository.GetById(id);
+            // RightsModel rightsModel = (from p in _context.RightsDbSet
+            //                        where (p.Application.LoginApplicationName == appName && p.Id == id)
+            //                        select p).FirstOrDefault();
+            if (rightsModel == null)
                 return BadRequest("neexistujici kombinace jmena aplikace a id");
 
             // string JsonData = JsonConvert.SerializeObject(rightsData);
-            query.Name = fromBodyRightsModel.Name;
-            query.Data = JsonConvert.SerializeObject(fromBodyRightsModel.DataDictionary);
-            _context.SaveChanges();
+            // rightsModel.Name = fromBodyRightsModel.Name;
+            // rightsModel.Data = JsonConvert.SerializeObject(fromBodyRightsModel.DataDictionary);
+            
+            rightsRepository.SetNameAndData(rightsModel, fromBodyRightsModel.Name, fromBodyRightsModel.DataDictionary); // TODO nevim kam to dat a jak to pojmenovat
+
+            // _context.SaveChanges();
             return Ok($"Rights {fromBodyRightsModel.Name} editted successfully.");
         }
     }

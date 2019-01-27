@@ -12,6 +12,9 @@ using System.Linq;
 using SharedLibrary.Helpers;
 using System.Security.Claims;
 using SharedLibrary.Enums;
+using SharedLibrary.Descriptors;
+using Server.Cache;
+using Server.Repositories;
 
 namespace Server.Controllers.Data
 {
@@ -39,10 +42,11 @@ namespace Server.Controllers.Data
             if (!identity.IsAuthenticated || identity.FindFirst("ApplicationName").Value != appName) //TODO muze spadnout
                 // user is not authorized to access application appName
                 return Unauthorized();
-
-            ApplicationModel application = (from a in _context.ApplicationDbSet
-                                            where (a.LoginApplicationName == appName)
-                                            select a).FirstOrDefault();
+            var applicationRepository = new ApplicationRepository(_context);
+            var application = applicationRepository.GetByLoginApplicationName(appName);
+            // ApplicationModel application = (from a in _context.ApplicationDbSet
+            //                                 where (a.LoginApplicationName == appName)
+            //                                 select a).FirstOrDefault();
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
@@ -57,59 +61,106 @@ namespace Server.Controllers.Data
             long userId;
             if (!long.TryParse(claim.Value, out userId))
                 return BadRequest("value pro userid neni ve spravnem formatu");
-            var user = (from u in _context.UserDbSet
-                        where u.Id == userId && u.ApplicationId == application.Id
-                        select u).FirstOrDefault();
+            var userRepository = new UserRepository(_context);
+            var user = userRepository.GetById(userId);
+            // var user = (from u in _context.UserDbSet
+            //             where u.Id == userId && u.ApplicationId == application.Id
+            //             select u).FirstOrDefault();
             if (user == null)
                 return BadRequest("TODO");
-            // read user's rights from DB
-            var rights = (from r in _context.RightsDbSet
-                          where r.Id == user.RightsId
-                          select r).FirstOrDefault();
-            if (rights == null)
-                return BadRequest("prava neexistuji");
-            var rightsDict = JsonConvert.DeserializeObject<Dictionary<long, RightsEnum>>(rights.Data);
+            // // read user's rights from DB
+            // var rights = (from r in _context.RightsDbSet
+            //               where r.Id == user.RightsId
+            //               select r).FirstOrDefault();
+            // if (rights == null)
+            //     return BadRequest("prava neexistuji");
+            var rightsDict = JsonConvert.DeserializeObject<Dictionary<long, RightsEnum>>(user.Rights.Data);
             var datasetRights = rightsDict.Where(r => r.Key == (long)datasetId).FirstOrDefault();
             if (datasetRights.Equals(default(KeyValuePair<long, RightsEnum>)))
                 return BadRequest("v pravech neni dataset s datasetId");
             if (datasetRights.Value <= RightsEnum.None)
                 return Forbid();
-            List<DataModel> query = (from p in _context.DataDbSet
-                                     where (p.Application.LoginApplicationName == appName && p.DatasetId == datasetId)
-                                     select p).ToList();
-            List<Dictionary<String, Object>> result = new List<Dictionary<String, Object>>();
-            foreach (var d in query)
+            var dataRepository = new DataRepository(_context);
+            var query = dataRepository.GetAllByApplicationIdAndDatasetId(application.Id, (long)datasetId);
+            // List<DataModel> query = (from p in _context.DataDbSet
+            //                          where (p.Application.LoginApplicationName == appName && p.DatasetId == datasetId)
+            //                          select p).ToList();
+            // List<Dictionary<String, List<Object>>> result = new List<Dictionary<String, List<Object>>>();
+
+            // prepare data for client - add DBId and add text representation for references
+            DataHelper dataHelper = new DataHelper(_context, application, (long)datasetId);
+            foreach (var item in query)
             {
-                var tmpDict = d.DataDictionary;
-                // serializing list containing DBId, because every data is expected to be in a list
-                tmpDict.Add("DBId", new List<object>() { d.Id } );
-                result.Add(tmpDict);
+                dataHelper.PrepareOneRowForClient(item);
             }
-            return Ok(result);
+            // var result = dataHelper.PrepareForClient(query.ToList<BaseModelWithApplicationAndData>(), long.Parse(datasetId.ToString()));
+            return Ok(query);
+
+
+
+            // var referenceIndexTypeTuple = new List<(string Name, string Type)>();
+            // if (query.Count() > 0)
+            //     foreach (var attribute in application.ApplicationDescriptor.Datasets.Where(d => d.Id == datasetId).First().Attributes)
+            //     {
+            //         bool isReference = !AttributeType.Types.Contains(attribute.Type);
+            //         if (isReference)
+            //             referenceIndexTypeTuple.Add((attribute.Name, attribute.Type));
+            //     }
+
+            // cache for reference so that if one reference is used repeatedly, the DB is queried just once
+            // ReferenceCache referenceCache = new ReferenceCache(_context, application);
+            // foreach (var row in query)
+            // {
+            //     var tmpDict = row.DataDictionary;
+            //     // add text representation for references
+            //     foreach (var attribute in referenceIndexTypeTuple)
+            //     {
+            //         var tmpIds = tmpDict[attribute.Name];
+            //         tmpDict[attribute.Name] = new List<object>();
+            //         var lastId = tmpIds.Last();
+            //         foreach (var stringId in tmpIds)
+            //         {
+            //             long id;
+            //             if (long.TryParse(stringId.ToString(), out id))
+            //             {
+            //                 string value = "";
+            //                 value += referenceCache.getTextForReference(attribute.Type, id);
+            //                 tmpDict[attribute.Name].Add( new Tuple<string, string>(id.ToString(), value) );
+            //                 if (!stringId.Equals(lastId))
+            //                     value += ", ";
+            //             }
+            //         }
+            //     }
+            //     // serializing list containing DBId, because every data is expected to be in a list
+            //     tmpDict.Add("DBId", new List<object>() { row.Id } );
+            //     result.Add(tmpDict);
+            // }
+            // return Ok(result);
         }
         [Authorize]
         [HttpGet]
         [Route("{appName}/{datasetName}/{id}")]
         public IActionResult GetById(string appName, string datasetName, long id)
         {
-            ApplicationModel application = (from a in _context.ApplicationDbSet
-                                            where (a.LoginApplicationName == appName)
-                                            select a).FirstOrDefault();
+            var applicationRepository = new ApplicationRepository(_context);
+            var application = applicationRepository.GetByLoginApplicationName(appName);
+            // ApplicationModel application = (from a in _context.ApplicationDbSet
+            //                                 where (a.LoginApplicationName == appName)
+            //                                 select a).FirstOrDefault();
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
             var datasetId = adh.GetDatasetIdByName(datasetName);
             if (datasetId == null)
                 return BadRequest("spatny nazev datasetu");
-            DataModel query = (from p in _context.DataDbSet
-                               where (p.Application.LoginApplicationName == appName && p.DatasetId == datasetId && p.Id == id)
-                               select p).FirstOrDefault();
+            var dataRepository = new DataRepository(_context);
+            //TODO kontrolovat jeste dataset+aplikaci
+            var query = dataRepository.GetById(id);
+            // DataModel query = (from p in _context.DataDbSet
+            //                    where (p.Application.LoginApplicationName == appName && p.DatasetId == datasetId && p.Id == id)
+            //                    select p).FirstOrDefault();
             if (query == null)
                 return BadRequest("neexistujici kombinace jmena aplikace, datasetu a id");
-
-
-
-
             return Ok(query.DataDictionary);
         }
     }

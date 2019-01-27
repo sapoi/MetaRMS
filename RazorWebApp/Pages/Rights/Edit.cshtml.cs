@@ -35,7 +35,7 @@ namespace RazorWebApp.Pages.Rights
         [BindProperty]
         public List<long> DatasetsIds { get; set; }
         [BindProperty]
-        public List<string> ValueList { get; set; }
+        public Dictionary<string, int> ValueList { get; set; }
         public LoggedMenuPartialData MenuData { get; set; }
         [BindProperty]
         public long DataId { get; set; }
@@ -73,6 +73,8 @@ namespace RazorWebApp.Pages.Rights
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 Data = JsonConvert.DeserializeObject<RightsModel>(stringResponse);
+                // init ValueList
+                ValueList = Data.DataDictionary;
             }
             return Page();
         }
@@ -88,16 +90,16 @@ namespace RazorWebApp.Pages.Rights
             if (ApplicationDescriptor == null)
                 return RedirectToPage("/Errors/ServerError");
 
-            // data prepare
-            Dictionary<String, Object> inputData = new Dictionary<string, object>();
-            inputData.Add(((long)SystemDatasetsEnum.Users).ToString(), ValueList[0]);
-            inputData.Add(((long)SystemDatasetsEnum.Rights).ToString(), ValueList[1]);
-            for (int i = 2; i < DatasetsIds.Count + 2; i++)
-            {
-                inputData.Add(DatasetsIds[i - 2].ToString(), ValueList[i]);
-            }
+            // // data prepare
+            // Dictionary<String, Object> inputData = new Dictionary<string, object>();
+            // inputData.Add(((long)SystemDatasetsEnum.Users).ToString(), ValueList[0]);
+            // inputData.Add(((long)SystemDatasetsEnum.Rights).ToString(), ValueList[1]);
+            // for (int i = 2; i < DatasetsIds.Count + 2; i++)
+            // {
+            //     inputData.Add(DatasetsIds[i - 2].ToString(), ValueList[i]);
+            // }
     
-            RightsModel patchedRightsModel = new RightsModel() { Name = RightsName, Data = JsonConvert.SerializeObject(inputData) };
+            RightsModel patchedRightsModel = new RightsModel() { Name = RightsName, Data = JsonConvert.SerializeObject(ValueList) };
             var response = await _rightsService.PatchById(ApplicationDescriptor.LoginAppName, DataId, patchedRightsModel, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             // delete old rights from cache

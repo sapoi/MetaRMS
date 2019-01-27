@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Net.Http;
 using Newtonsoft.Json;
 using SharedLibrary.Descriptors;
+using Server.Repositories;
 
 namespace Server.Controllers
 {
@@ -36,16 +37,18 @@ namespace Server.Controllers
             // get value for ApplicationName claim
             var appNameFromJWT = identity.FindFirst("ApplicationName").Value;
             // try to look for application descriptor in database
-            var query = (from p in _context.ApplicationDbSet
-                         where p.LoginApplicationName == appNameFromJWT
-                         select p.ApplicationDescriptorJSON).FirstOrDefault();
-            // application descriptor not found
-            if (query == null)
+            var applicationRepository = new ApplicationRepository(_context);
+            var applicationModel = applicationRepository.GetByLoginApplicationName(appNameFromJWT);
+            // var query = (from p in _context.ApplicationDbSet
+            //              where p.LoginApplicationName == appNameFromJWT
+            //              select p.ApplicationDescriptorJSON).FirstOrDefault();
+            // application not found
+            if (applicationModel == null)
                 return NotFound();
-            // application descriptor found successfully
+            // application found successfully, return descriptor
 
 
-            return Ok(JsonConvert.DeserializeObject<ApplicationDescriptor>(query));
+            return Ok(JsonConvert.DeserializeObject<ApplicationDescriptor>(applicationModel.ApplicationDescriptorJSON));
 
         }
     }

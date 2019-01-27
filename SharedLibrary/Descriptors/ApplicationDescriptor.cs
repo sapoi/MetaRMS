@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace SharedLibrary.Descriptors
 {
@@ -14,6 +15,11 @@ namespace SharedLibrary.Descriptors
         public string DefaultLanguage { get; set; }
         public SystemDatasetDescriptor SystemDatasets { get; set; }
         public List<DatasetDescriptor> Datasets { get; set; }
+
+        public AttributeDescriptor GetUsernameAttribute()
+        {
+            return this.SystemDatasets.UsersDatasetDescriptor.Attributes.Where(a => a.Type == "username").First();
+        }
         // public DatasetDescriptor GetDataset(String name){
         //     foreach (DatasetDescriptor dataset in Datasets){
         //         if (dataset.Name == name) return dataset;

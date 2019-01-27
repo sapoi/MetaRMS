@@ -13,6 +13,7 @@ using SharedLibrary.Helpers;
 using System.Security.Claims;
 using SharedLibrary.Enums;
 using JsonDotNet.CustomContractResolvers;
+using Server.Repositories;
 
 namespace Server.Controllers.Rights
 {
@@ -41,9 +42,11 @@ namespace Server.Controllers.Rights
                 // user is not authorized to access application appName
                 return Unauthorized();
 
-            ApplicationModel application = (from a in _context.ApplicationDbSet
-                                            where (a.LoginApplicationName == appName)
-                                            select a).FirstOrDefault();
+            var applicationRepository = new ApplicationRepository(_context);
+            var application = applicationRepository.GetByLoginApplicationName(appName);
+            // ApplicationModel application = (from a in _context.ApplicationDbSet
+            //                                 where (a.LoginApplicationName == appName)
+            //                                 select a).FirstOrDefault();
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
@@ -55,15 +58,19 @@ namespace Server.Controllers.Rights
             long userId;
             if (!long.TryParse(claim.Value, out userId))
                 return BadRequest("value pro userid neni ve spravnem formatu");
-            var user = (from u in _context.UserDbSet
-                        where u.Id == userId && u.ApplicationId == application.Id
-                        select u).FirstOrDefault();
+            var userRepository = new UserRepository(_context);
+            //TODO kontrolovat i aplikaci
+            var user = userRepository.GetById(userId);
+            // var user = (from u in _context.UserDbSet
+            //             where u.Id == userId && u.ApplicationId == application.Id
+            //             select u).FirstOrDefault();
             if (user == null)
                 return BadRequest("TODO");
             // read user's rights from DB
-            var rights = (from r in _context.RightsDbSet
-                          where r.Id == user.RightsId
-                          select r).FirstOrDefault();
+            // var rights = (from r in _context.RightsDbSet
+            //               where r.Id == user.RightsId
+            //               select r).FirstOrDefault();
+            var rights = user.Rights;
             if (rights == null)
                 return BadRequest("prava neexistuji");
             var rightsDict = JsonConvert.DeserializeObject<Dictionary<long, RightsEnum>>(rights.Data);
@@ -72,40 +79,47 @@ namespace Server.Controllers.Rights
                 return BadRequest("v pravech neni rights");
             if (rightsRights.Value <= RightsEnum.None)
                 return Forbid();
-            List<RightsModel> query = (from p in _context.RightsDbSet
-                                     where (p.Application.LoginApplicationName == appName)
-                                     select p).ToList();
+            var rightsRepository = new RightsRepository(_context);
+            List<RightsModel> allRightsForApplication = rightsRepository.GetAllByApplicationId(application.Id);
+            // List<RightsModel> query = (from p in _context.RightsDbSet
+            //                          where (p.Application.LoginApplicationName == appName)
+            //                          select p).ToList();
             // ignore large JSON data
-            foreach (var row in query)
+            foreach (var row in allRightsForApplication)
             {
                 row.Application = null;
                 row.Users = null;
             }
-            return Ok(query);
+            return Ok(allRightsForApplication);
         }
         [Authorize]
         [HttpGet]
         [Route("{appName}/{id}")]
         public IActionResult GetById(string appName, long id)
         {
-            ApplicationModel application = (from a in _context.ApplicationDbSet
-                                            where (a.LoginApplicationName == appName)
-                                            select a).FirstOrDefault();
+            var applicationRepository = new ApplicationRepository(_context);
+            var application = applicationRepository.GetByLoginApplicationName(appName);
+            // ApplicationModel application = (from a in _context.ApplicationDbSet
+            //                                 where (a.LoginApplicationName == appName)
+            //                                 select a).FirstOrDefault();
             if (application == null)
                 return BadRequest("spatny nazev aplikace neexistuje");
             ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
             
-            RightsModel query = (from p in _context.RightsDbSet
-                               where (p.Application.LoginApplicationName == appName && p.Id == id)
-                               select p).FirstOrDefault();
-            if (query == null)
+            var rightsRepository = new RightsRepository(_context);
+            //TODO kontrolovat i aplikaci
+            var rightsModel = rightsRepository.GetById(id);
+            // RightsModel rightsModel = (from p in _context.RightsDbSet
+            //                    where (p.Application.LoginApplicationName == appName && p.Id == id)
+            //                    select p).FirstOrDefault();
+            if (rightsModel == null)
                 return BadRequest("neexistujici kombinace jmena aplikace, datasetu a id");
 
             // ignore large JSON data
-            query.Application = null;
-            query.Users = null;
+            rightsModel.Application = null;
+            rightsModel.Users = null;
             
-            return Ok(query);
+            return Ok(rightsModel);
         }
     }
 }

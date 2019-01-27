@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RazorWebApp.Structures
 {
-    public class InputBuilderPartialData
+    public class EditBuilderPartialData
     {
         public AttributeDescriptor Attribute;
         public string OutValue;

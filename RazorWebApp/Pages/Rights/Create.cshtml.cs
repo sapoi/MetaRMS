@@ -35,7 +35,7 @@ namespace RazorWebApp.Pages.Rights
         [BindProperty]
         public List<long> DatasetsIds { get; set; }
         [BindProperty]
-        public List<string> ValueList { get; set; }
+        public Dictionary<string, int> ValueList { get; set; }
         [BindProperty]
         public string RightsName { get; set; }
         public string Message { get; set; }
@@ -60,11 +60,18 @@ namespace RazorWebApp.Pages.Rights
 
                 MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
                 
+                // init ValueList
+                ValueList = new Dictionary<string, int>();
                 DatasetsIds = new List<long>();
                 foreach (var key in ApplicationDescriptor.Datasets)
+                {
                     DatasetsIds.Add(key.Id);
+                    ValueList.Add(key.Id.ToString(), 0);
+                }
                 DatasetsIds.Add((long)SystemDatasetsEnum.Users);
                 DatasetsIds.Add((long)SystemDatasetsEnum.Rights);
+                ValueList.Add(((long)SystemDatasetsEnum.Users).ToString(), 0);
+                ValueList.Add(((long)SystemDatasetsEnum.Rights).ToString(), 0);
             }
             return Page();
         }
@@ -87,15 +94,15 @@ namespace RazorWebApp.Pages.Rights
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
             
             // data prepare
-            Dictionary<String, Object> inputData = new Dictionary<string, object>();
-            inputData.Add(((long)SystemDatasetsEnum.Users).ToString(), ValueList[0]);
-            inputData.Add(((long)SystemDatasetsEnum.Rights).ToString(), ValueList[1]);
-            for (int i = 2; i < DatasetsIds.Count + 2; i++)
-            {
-                inputData.Add(DatasetsIds[i - 2].ToString(), ValueList[i]);
-            }
+            // Dictionary<String, Object> inputData = new Dictionary<string, object>();
+            // inputData.Add(((long)SystemDatasetsEnum.Users).ToString(), ValueList[0]);
+            // inputData.Add(((long)SystemDatasetsEnum.Rights).ToString(), ValueList[1]);
+            // for (int i = 2; i < DatasetsIds.Count + 2; i++)
+            // {
+            //     inputData.Add(DatasetsIds[i - 2].ToString(), ValueList[i]);
+            // }
             
-            RightsModel newRightsModel = new RightsModel() { Name = RightsName, Data = JsonConvert.SerializeObject(inputData) };
+            RightsModel newRightsModel = new RightsModel() { Name = RightsName, Data = JsonConvert.SerializeObject(ValueList) };
             var response = await _rightsService.Create(ApplicationDescriptor.LoginAppName, newRightsModel, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 

@@ -78,6 +78,29 @@ namespace RazorWebApp.Pages.User
         {
             return RedirectToPage("Edit", "", new { id = dataId });
         }
+        public async Task<IActionResult> OnPostUserResetPasswordAsync(long dataId)
+        {
+            var token = AccessHelper.ValidateAuthentication(this);
+            // if token is not valid, return to login page
+            if (token == null)
+                return RedirectToPage("/Account/Login");
+            // get application descriptor
+            ApplicationDescriptor = await AccessHelper.GetApplicationDescriptor(_cache, _accountService, token);
+            if (ApplicationDescriptor == null)
+                return RedirectToPage("/Errors/ServerError");
+
+            // get rights
+            var rights = await AccessHelper.GetUserRights(_cache, _accountService, token);
+            if (rights == null)
+                return RedirectToPage("/Errors/ServerError");
+
+            MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
+
+            var response = await _userService.ResetPasswordById(ApplicationDescriptor.LoginAppName, dataId, token.Value);
+            string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            // remove " form beginning and end of message
+            return await OnGetAsync(message.Substring(1, message.Length - 2));
+        }
         public async Task<IActionResult> OnPostUserDeleteAsync(long dataId)
         {
             var token = AccessHelper.ValidateAuthentication(this);

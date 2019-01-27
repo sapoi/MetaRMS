@@ -8,7 +8,7 @@ using SharedLibrary.Descriptors;
 namespace SharedLibrary.Models
 {
     [Table("data")]
-    public class DataModel
+    public class DataModel : BaseModelWithApplicationAndData
     {
         [Key]
         [Column("id")]
@@ -24,14 +24,11 @@ namespace SharedLibrary.Models
         [Required]
         [Column("data")]
         public string Data { get; set; }
-
-
-
-     	public Dictionary<String,Object> DataDictionary
+     	public Dictionary<string, List<object>> DataDictionary
          {
              get
              {
-                return JsonConvert.DeserializeObject<Dictionary<String,Object>>(Data);
+                return JsonConvert.DeserializeObject<Dictionary<string, List<object>>>(Data);
              }
          }
     }

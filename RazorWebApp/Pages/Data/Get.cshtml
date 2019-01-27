@@ -1,5 +1,7 @@
 @page "{datasetName?}/{handler?}"
 @using SharedLibrary.Enums
+@using Newtonsoft.Json
+@using RazorWebApp.Structures
 @model RazorWebApp.Pages.Data.GetModel 
 @{ 
     ViewData["Title"] = @Model.ActiveDatasetDescriptor.Name; 
@@ -20,6 +22,7 @@
             </div>
         }
         <h2>@ViewData["Title"]</h2>
+        <h6>@Model.ActiveDatasetDescriptor.Description</h6>
         @if (Model.ActiveDatasetRights >= RightsEnum.CRU)
         {
             <form method="post" asp-route-datasetName="@Model.ActiveDatasetDescriptor.Name" asp-page-handler="dataCreate">
@@ -42,19 +45,20 @@
                     <tr>
                         @foreach (var attribute in Model.ActiveDatasetDescriptor.Attributes) {
                         <td>
-                            @if (row[attribute.Name].Count() >= 1) {
-                                @row[attribute.Name][0]
-                            }
-                            @for (int i = 1; i < row[attribute.Name].Count(); i++) {
-                                <text><br></text>
-                                @row[attribute.Name][i]
+                            @{Html.RenderPartial("Shared/_GetBuilderPartial", 
+                                          new GetBuilderPartialData {
+                                                                        CellContent = row.DataDictionary[attribute.Name],
+                                                                        Attribute = attribute,
+                                                                        ApplicationDescriptor = Model.ApplicationDescriptor
+                                                                    }
+                                        );
                             }
                         </td>
                         }
                         @if (Model.ActiveDatasetRights >= RightsEnum.RU)
                         {
                         <td>
-                            <form method="post" asp-route-datasetName="@Model.ActiveDatasetDescriptor.Name" asp-route-dataId="@row["DBId"][0]" asp-page-handler="dataEdit">
+                            <form method="post" asp-route-datasetName="@Model.ActiveDatasetDescriptor.Name" asp-route-dataId="@row.Id" asp-page-handler="dataEdit">
                                 <button class="btn btn-default">Edit</button>
                             </form>
                         </td>
@@ -62,7 +66,7 @@
                         @if (Model.ActiveDatasetRights >= RightsEnum.CRUD)
                         {
                         <td>
-                            <form method="post" asp-route-datasetName="@Model.ActiveDatasetDescriptor.Name" asp-route-dataId="@row["DBId"][0]" asp-page-handler="dataDelete">
+                            <form method="post" asp-route-datasetName="@Model.ActiveDatasetDescriptor.Name" asp-route-dataId="@row.Id" asp-page-handler="dataDelete">
                                 <button class="btn btn-default">Delete</button>
                             </form>
                         </td>

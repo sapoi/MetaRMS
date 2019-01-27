@@ -23,12 +23,14 @@ namespace RazorWebApp.Pages.Data
         private readonly IDataService _dataService;
         private readonly IAccountService _accountService;
         private IMemoryCache _cache;
+        private readonly IUserService _userService;
 
-        public EditModel(IDataService dataService, IAccountService accountService, IMemoryCache memoryCache)
+        public EditModel(IDataService dataService, IAccountService accountService, IMemoryCache memoryCache, IUserService userService)
         {
             this._dataService = dataService;
             this._accountService = accountService;
             this._cache = memoryCache;
+            this._userService = userService;
         }
 
         public ApplicationDescriptor ApplicationDescriptor { get; set; }
@@ -39,7 +41,7 @@ namespace RazorWebApp.Pages.Data
         [BindProperty]
         public List<string> AttributesNames { get; set; }
         [BindProperty]
-        public List<List<string>> ValueList { get; set; }
+        public Dictionary<string, List<string>> ValueList { get; set; }
         [BindProperty]
         public string DatasetName { get; set; }
         [BindProperty]
@@ -76,39 +78,21 @@ namespace RazorWebApp.Pages.Data
                 DatasetName = datasetName;
                 DataId = id;
                 AttributesNames = new List<string>();
+                // init ValueList
+                ValueList = new Dictionary<string, List<string>>();
                 foreach (var attribute in ActiveDatasetDescriptor.Attributes)
                 {
                     AttributesNames.Add(attribute.Name);
+                    ValueList.Add(attribute.Name, new List<string>());
                 }
 
                 // fill SelectData
-                SelectData = new Dictionary<string, List<SelectListItem>>();
-                foreach (var attribute in ActiveDatasetDescriptor.Attributes)
-                {
-                    if (attribute.Type != "color" && attribute.Type != "date" && attribute.Type != "datetime" && 
-                        attribute.Type != "email" && attribute.Type != "month" && attribute.Type != "int" && 
-                        attribute.Type != "float" && attribute.Type != "year" && attribute.Type != "tel" && 
-                        attribute.Type != "string" && attribute.Type != "time" && attribute.Type != "url" &&
-                        attribute.Type != "bool" && attribute.Type != "text")
-                        if (!SelectData.ContainsKey(attribute.Type))
-                        {
-                            // getting real data
-                            var selectResponse = await _dataService.GetAll(ApplicationDescriptor.LoginAppName, attribute.Type, token.Value);
-                            //TODO kontrolovat chyby v response
-                            string selectStringResponse = await selectResponse.Content.ReadAsStringAsync();
-                            var data = JsonConvert.DeserializeObject<List<Dictionary<String, Object>>>(selectStringResponse);
-                            SelectData[attribute.Type] = data.Select(x => new SelectListItem { Value = JsonConvert.DeserializeObject<List<string>>
-                                                                                                            (x["DBId"].ToString()).First(), 
-                                                                                               Text =  JsonConvert.DeserializeObject<List<string>>
-                                                                                                            (x[ApplicationDescriptor.Datasets.Where(d => d.Name == attribute.Type)
-                                                                                                                                      .First()
-                                                                                                                             .Attributes[0].Name
-                                                                                                                ].ToString()).First() 
-                                                                                             } 
-                                                                    )
-                                                             .ToList();
-                        }
-                }
+                DataLoadingHelper dlh = new DataLoadingHelper();
+                SelectData = await dlh.FillSelectData(ApplicationDescriptor, 
+                                                      ActiveDatasetDescriptor.Attributes, 
+                                                      _userService, 
+                                                      _dataService, 
+                                                      token);
 
                 // getting real data
                 var response = await _dataService.GetById(ApplicationDescriptor.LoginAppName, datasetName, id, token.Value);
@@ -137,17 +121,27 @@ namespace RazorWebApp.Pages.Data
             if (ActiveDatasetDescriptor == null)
                 return RedirectToPage("/Errors/ServerError");
 
-            // data prepare
-            Dictionary<String, Object> inputData = new Dictionary<string, object>();
-            for (int i = 0; i < AttributesNames.Count; i++)
-                inputData.Add(AttributesNames[i], ValueList[i]);
+            // foreach (var attributeName in AttributesNames)
+            // {
+            //     // if nothing was selected in a select box, the key (attributeName) was removed and 
+            //     // before sending new values to API, the key needs to be reentered with empty values
+            //     if (!ValueList.Keys.Contains(attributeName))
+            //         ValueList.Add(attributeName, new List<string>());
+            // }
+            var validationHelper = new ValidationHelper();
+            validationHelper.ValidateValueList(ValueList, ActiveDatasetDescriptor.Attributes);
 
-            var response = await _dataService.PatchById(ApplicationDescriptor.LoginAppName, DatasetName, DataId, inputData, token.Value);
+            // // data prepare
+            // Dictionary<String, Object> inputData = new Dictionary<string, object>();
+            // for (int i = 0; i < AttributesNames.Count; i++)
+            //     inputData.Add(AttributesNames[i], ValueList[i]);
+
+            var response = await _dataService.PatchById(ApplicationDescriptor.LoginAppName, DatasetName, DataId, ValueList, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             return RedirectToPage("/Data/Get",  new {message = message.Substring(1, message.Length - 2)});
         }
 
-        public async Task<IActionResult> OnPostDatasetSelectAsync(string datasetName)
+        public IActionResult OnPostDatasetSelectAsync(string datasetName)
         {
             return RedirectToPage("Get", "", new { datasetName = datasetName });
         }

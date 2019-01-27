@@ -4827,6 +4827,7 @@
       "type": "package",
       "path": "bootstrap/3.0.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "Content/Content/bootstrap-theme.css",
         "Content/Content/bootstrap-theme.min.css",
@@ -4847,6 +4848,7 @@
       "type": "package",
       "path": "bootstrap-select/1.13.3",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "bootstrap-select.1.13.3.nupkg.sha512",
         "bootstrap-select.nuspec",
@@ -4935,6 +4937,7 @@
       "type": "package",
       "path": "jquery/1.9.1",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "Content/Scripts/jquery-1.9.1-vsdoc.js",
         "Content/Scripts/jquery-1.9.1.js",
@@ -7069,6 +7072,7 @@
       "type": "package",
       "path": "microsoft.identitymodel.jsonwebtokens/5.2.4",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/net45/Microsoft.IdentityModel.JsonWebTokens.dll",
         "lib/net45/Microsoft.IdentityModel.JsonWebTokens.pdb",
@@ -7088,6 +7092,7 @@
       "type": "package",
       "path": "microsoft.identitymodel.logging/5.2.4",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/net45/Microsoft.IdentityModel.Logging.dll",
         "lib/net45/Microsoft.IdentityModel.Logging.pdb",
@@ -7137,6 +7142,7 @@
       "type": "package",
       "path": "microsoft.identitymodel.tokens/5.2.4",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/net45/Microsoft.IdentityModel.Tokens.dll",
         "lib/net45/Microsoft.IdentityModel.Tokens.pdb",
@@ -9420,6 +9426,7 @@
       "type": "package",
       "path": "system.identitymodel.tokens.jwt/5.2.4",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/net45/System.IdentityModel.Tokens.Jwt.dll",
         "lib/net45/System.IdentityModel.Tokens.Jwt.pdb",

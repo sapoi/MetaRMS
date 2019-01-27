@@ -55,7 +55,7 @@ namespace SharedLibrary.Services
             return response;
         }
 
-        public async Task<HttpResponseMessage> PatchById(string appName, string dataset, long id, Dictionary<string, object> dataDict, string token)
+        public async Task<HttpResponseMessage> PatchById(string appName, string dataset, long id, Dictionary<string, List<string>> dataDict, string token)
         {
             // adding JWT token value to authorization header
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -69,7 +69,7 @@ namespace SharedLibrary.Services
             return response;
         }
 
-        public async Task<HttpResponseMessage> Create(string appName, string dataset, Dictionary<string, object> dataDict, string token)
+        public async Task<HttpResponseMessage> Create(string appName, string dataset, Dictionary<string, List<string>> dataDict, string token)
         {
             // adding JWT token value to authorization header
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

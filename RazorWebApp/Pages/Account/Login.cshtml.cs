@@ -37,7 +37,7 @@ namespace RazorWebApp.Pages.Account
         public LoginCredentials Input { get; set; }
         public string Message { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public IActionResult OnGetAsync()
         {
             return Page();
         }

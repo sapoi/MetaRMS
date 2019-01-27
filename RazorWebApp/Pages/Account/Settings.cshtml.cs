@@ -33,7 +33,7 @@ namespace RazorWebApp.Pages.Account
         public ApplicationDescriptor ApplicationDescriptor { get; set; }
         public LoggedMenuPartialData MenuData { get; set; }
         [BindProperty]
-        public List<string> ValueList { get; set; }
+        public PasswordChangeStructure PasswordChangeStructure { get; set; }
         public string Message { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string message = null)
@@ -77,15 +77,22 @@ namespace RazorWebApp.Pages.Account
 
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
 
-            if (ValueList.Count < 3)
-                return RedirectToPage("/Errors/ServerError");
-            if (ValueList[0] != ValueList[1])
+
+            //INPUT VALIDATIONS
+            if (PasswordChangeStructure.OldPassword == null || PasswordChangeStructure.OldPassword == "" ||
+                PasswordChangeStructure.NewPassword == null || PasswordChangeStructure.NewPassword == "" ||
+                PasswordChangeStructure.NewPasswordCopy == null || PasswordChangeStructure.NewPasswordCopy == "")
             {
-                Message = "Old passwords do not match.";
+                Message = "Old, new and a copy of new password are all required fields.";
+                return Page();
+            }    
+            if (PasswordChangeStructure.NewPassword != PasswordChangeStructure.NewPasswordCopy)
+            {
+                Message = "New passwords do not match.";
                 return Page();
             }
             var response = await _accountService.ChangePassword(ApplicationDescriptor.LoginAppName, 
-                                                                new PasswordChange { OldPassword = ValueList[0], NewPassword = ValueList [2] }, 
+                                                                PasswordChangeStructure, 
                                                                 token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 

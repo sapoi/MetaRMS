@@ -80,5 +80,16 @@ namespace SharedLibrary.Services
 
             return response;
         }
+
+        public async Task<HttpResponseMessage> ResetPasswordById(string appName, long id, string token)
+        {
+            // adding JWT token value to authorization header
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            // GET request to server with authorization header containing JWT token value
+            var address = new Uri(_client.BaseAddress.OriginalString + "/resetPassword/" + appName + '/' + id);
+            var response = await _client.GetAsync(address);
+
+            return response;
+        }
     }
 }

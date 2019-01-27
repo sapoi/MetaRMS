@@ -1,5 +1,5 @@
 @using SharedLibrary.Enums 
-@model RazorWebApp.Structures.InputBuilderPartialData
+@model RazorWebApp.Structures.EditBuilderPartialData
 
 <!-- For types that use input tag -->
 @if (@Model.Attribute.Type == "color" || 
@@ -8,9 +8,10 @@
 	 @Model.Attribute.Type == "int" || @Model.Attribute.Type == "float" || 
 	 @Model.Attribute.Type == "year" || @Model.Attribute.Type == "tel" || 
 	 @Model.Attribute.Type == "string" || @Model.Attribute.Type == "time" || 
-	 @Model.Attribute.Type == "url") {
+	 @Model.Attribute.Type == "url" || @Model.Attribute.Type == "username" ||
+	 @Model.Attribute.Type == "password") {
 	<input 	name="@Model.OutValue"
-			value="@(Model.InValue != null ? Model.InValue[0] : "")"
+			value="@(Model.InValue != null && Model.InValue.Count() >= 1 ? Model.InValue[0] : "")"
 	       	class="form-control"
 	       	@switch (@Model.Attribute.Type) {
 	       		case "color":
@@ -49,6 +50,12 @@
 	       		case "url":
 	       			<text>type="url"</text>
 	       			break;
+				case "username":
+	       			<text>type="text"</text>
+	       			break;
+				case "password":
+	       			<text>type="password"</text>
+	       			break;
 	       		default:
 	       			break;
 	       	}
@@ -61,10 +68,22 @@
 	       			<text>max="@Model.Attribute.Max"</text>
 	       		}
 	       	}
+			@if (Model.Attribute.Type == "text" || Model.Attribute.Type == "string" ||
+				 Model.Attribute.Type == "username" || Model.Attribute.Type == "password") {
+				if (Model.Attribute.Max != null) {
+					<text>maxlength="@Model.Attribute.Max"</text>
+				}
+				if (Model.Attribute.Min != null) {
+					<text>minlength="@Model.Attribute.Min"</text>
+				}
+				if (Model.Attribute.Type == "password" && Model.Attribute.Safer == true) {
+					<text>pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"</text>
+				}
+			}
 
-	       	@if (Model.Attribute.Nullable == false) {
+	       	@if (Model.Attribute.Required == true) {
 	          	<text>required</text>
-	       	}
+			}
 
 	    >
 } else if (@Model.Attribute.Type == "bool"){
@@ -75,7 +94,7 @@
 				value="0"
 				required
 	</text>
-   	@if (Model.InValue != null && Model.InValue[0] == "0")
+   	@if (Model.InValue != null && Model.InValue.Count() >= 1 && Model.InValue[0].ToString() == "0")
    	{
    		<text>checked</text>
    	}
@@ -86,21 +105,21 @@
 				name="@Model.OutValue"
 				value="1"
 	</text>
-	@if (Model.InValue != null && Model.InValue[0] == "1")
+	@if (Model.InValue != null && Model.InValue.Count() >= 1 && Model.InValue[0].ToString() == "1")
    	{
    		<text>checked</text>
    	}
 	<text>
 		> ✅<br>
 	</text>
-	@if (Model.Attribute.Nullable == true) {
+	@if (Model.Attribute.Required == false) {
 		<text>
 			<input 	type="radio"
 					class="form-control"
 					name="@Model.OutValue"
 					value="null"
 		</text>
-				@if (Model.InValue != null && Model.InValue[0] == "null")
+				@if (Model.InValue != null && Model.InValue.Count() >= 1 && Model.InValue[0].ToString() == "null")
 			   	{
 			   		<text>checked</text>
 			   	}
@@ -114,15 +133,15 @@
 <!-- For types using textarea tag -->
 	<textarea 	name="@Model.OutValue"
 	       	  	class="form-control"
-	       	  	rows="8"
-	       	  	@if (Model.Attribute.Nullable == false) {
+	       	  	rows="10"
+	       	  	@if (Model.Attribute.Required == true) {
 	          		<text>required</text>
 	       		}
 	>
-		@(Model.InValue != null ? Model.InValue[0] : "")
+		@(Model.InValue != null && Model.InValue.Count() >= 1 ? Model.InValue[0] : "")
 	</textarea>
 } else {
-<!-- For types using select tag -->
+<!-- For types using select tag = reference types -->
 	<select name="@Model.OutValue"
 			class="selectpicker form-control"
 			data-live-search="true"
@@ -133,7 +152,7 @@
           		</text>
        		}
 
-       	  	@if (Model.Attribute.Nullable == false) {
+       	  	@if (Model.Attribute.Required == true) {
           		<text>required</text>
        		}
     >
@@ -141,7 +160,7 @@
 	    {
 			
 	        <option value="@item.Value" 
-	        		data-subtext="Heinz"
+	        		data-subtext=""
 					selected="@(Model.InValue != null ? Model.InValue.Contains(item.Value) : false)"
 	        >
 	        	@item.Text

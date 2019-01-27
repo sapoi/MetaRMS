@@ -24,7 +24,7 @@
             <div class="form-group">
                 @{ var dataset = Model.ApplicationDescriptor.Datasets[i-2]; }
                 <label>@dataset.Name</label>
-                <select name="ValueList[@i]" 
+                <select name="ValueList[@dataset.Id]" 
                         asp-items="Html.GetEnumSelectList<RightsEnum>()" 
                         class="form-control"
                         asp-for="@Model.Data.DataDictionary[dataset.Id.ToString()]"
@@ -35,7 +35,7 @@
             <hr>
             <div class="form-group">
                 <label>Users</label>
-                <select name="ValueList[0]" 
+                <select name="ValueList[@((long)SystemDatasetsEnum.Users)]" 
                         asp-items="Html.GetEnumSelectList<RightsEnum>()"
                         class="form-control"
                         asp-for="@Model.Data.DataDictionary[((long)SystemDatasetsEnum.Users).ToString()]"
@@ -45,7 +45,7 @@
             </div>
             <div class="form-group">
                 <label>Rights</label>
-                <select name="ValueList[1]" 
+                <select name="ValueList[@((long)SystemDatasetsEnum.Rights)]" 
                         asp-items="Html.GetEnumSelectList<RightsEnum>()"
                         class="form-control"
                         asp-for="@Model.Data.DataDictionary[((long)SystemDatasetsEnum.Rights).ToString()]"

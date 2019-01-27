@@ -9,6 +9,15 @@ namespace SharedLibrary.Helpers
     // class describing datasets for one application
     public class ApplicationDescriptorHelper
     {
+        // public getter for descriptor
+        public ApplicationDescriptor Descriptor 
+        { 
+            get 
+            { 
+                return descriptor; 
+            }
+        }
+        // private decsriptor
         ApplicationDescriptor descriptor;
         public ApplicationDescriptorHelper(ApplicationDescriptor descriptor)
         {

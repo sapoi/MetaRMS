@@ -29,7 +29,7 @@ namespace RazorWebApp.Pages.Appinit
         public string Email { get; set; }
         public string Message { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public IActionResult OnGetAsync()
         {
             return Page();
         }

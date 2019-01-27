@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using SharedLibrary.Descriptors;
 using System.Collections.Generic;
 using SharedLibrary.Enums;
+using Server.Repositories;
 
 namespace Server.Controllers.Account
 {
@@ -43,14 +44,17 @@ namespace Server.Controllers.Account
             if (!long.TryParse(userIdString, out userId))
                 return BadRequest("UserId claim could not be parsed");
             // try to look for user in DB
-            var user = (from u in _context.UserDbSet
-                        where u.Id == userId
-                        select u).FirstOrDefault();
+            var userRepository = new UserRepository(_context);
+            var user = userRepository.GetById(userId);
+            // var user = (from u in _context.UserDbSet
+            //             where u.Id == userId
+            //             select u).FirstOrDefault();
             if (user == null)
                 return BadRequest("No such user with user id " + userId);
-            var rights = (from r in _context.RightsDbSet
-                          where r.Id == user.RightsId
-                          select r).FirstOrDefault();
+            var rights = user.Rights;
+            // var rights = (from r in _context.RightsDbSet
+            //               where r.Id == user.RightsId
+            //               select r).FirstOrDefault();
             if (rights == null)
                 return BadRequest("No such rights with id" + user.RightsId);
             if (rights.Data == null || rights.Data == "")

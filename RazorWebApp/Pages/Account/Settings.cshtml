@@ -1,5 +1,6 @@
 @page "{handler?}"
 @using SharedLibrary.Enums
+@using RazorWebApp.Structures
 @model RazorWebApp.Pages.Account.SettingsModel
 @{ 
     ViewData["Title"] = "Settings"; 
@@ -19,17 +20,39 @@
         <form method="post">
             <h2>Password</h2>
             <div class="form-group">
+                @{ var passwordAttribute = Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.PasswordAttribute; }
                 <label>Old password</label>
-                <input name="ValueList[0]" class="form-control" type="password">
-            </div>
-            <div class="form-group">
-                <label>Old password once again</label>
-                <input name="ValueList[1]" class="form-control" type="password">
+                @{Html.RenderPartial("Shared/_EditBuilderPartial", 
+                                        new EditBuilderPartialData {
+                                                                    Attribute = passwordAttribute, 
+                                                                    OutValue = "PasswordChangeStructure.OldPassword",
+                                                                    SelectData = null
+                                                                    }
+                                    ); 
+                }
             </div>
             <div class="form-group">
                 <label>New password</label>
-                <small>@Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.PasswordAttributes.Description</small>
-                <input name="ValueList[2]" class="form-control" type="password">
+                <small>@passwordAttribute.Description</small>
+                @{Html.RenderPartial("Shared/_EditBuilderPartial", 
+                                        new EditBuilderPartialData {
+                                                                    Attribute = passwordAttribute, 
+                                                                    OutValue = "PasswordChangeStructure.NewPassword",
+                                                                    SelectData = null
+                                                                    }
+                                    ); 
+                }
+            </div>
+            <div class="form-group">
+                <label>New password once again</label>
+                @{Html.RenderPartial("Shared/_EditBuilderPartial", 
+                                        new EditBuilderPartialData {
+                                                                    Attribute = passwordAttribute, 
+                                                                    OutValue = "PasswordChangeStructure.NewPasswordCopy",
+                                                                    SelectData = null
+                                                                    }
+                                    ); 
+                }
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-default">Change</button>

@@ -21,13 +21,12 @@
                 <input type="hidden" asp-for="AttributesNames[i]"/>
                 <div class="form-group">
                     @{ var attribute = Model.ActiveDatasetDescriptor.Attributes[i]; }
-                    @{ Model.ValueList = Enumerable.Repeat(new List<string>(), Model.ActiveDatasetDescriptor.Attributes.Count).ToList(); }
                     <label>@attribute.Name</label>
                     <small>@attribute.Description</small>
-                    @{Html.RenderPartial("Shared/_InputBuilderCreatePartial", 
-                                          new InputBuilderPartialData {
+                    @{Html.RenderPartial("Shared/_EditBuilderPartial", 
+                                          new EditBuilderPartialData {
                                                                         Attribute = attribute, 
-                                                                        OutValue = "ValueList[" + i + "]", 
+                                                                        OutValue = "ValueList[" + attribute.Name + "]", 
                                                                         InValue = Model.Data[attribute.Name],
                                                                         SelectData = Model.SelectData
                                                                        }

@@ -27,7 +27,7 @@ namespace RazorWebApp.Pages
         [BindProperty]
         public LoginCredentials Input { get; set; }
         public string Message { get; set; }
-        public async Task<IActionResult> OnGet(string message = null)
+        public IActionResult OnGet(string message = null)
         {
             // get AccessToken from PageModel
             var token = AuthorizationHelper.GetTokenFromPageModel(this);

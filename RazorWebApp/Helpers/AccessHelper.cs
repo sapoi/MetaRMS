@@ -92,6 +92,7 @@ namespace RazorWebApp.Helpers
             var menuData = new LoggedMenuPartialData();
             menuData.NavbarRights = AccessHelper.GetNavbarRightsDict(rights);
             menuData.AppName = applicationDescriptor.AppName;
+            menuData.UsersDatasetName = applicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name;
             return menuData;
         }
         public static DatasetDescriptor GetActiveDatasetDescriptor(ApplicationDescriptor applicationDescriptor, Dictionary<long, RightsEnum> rights, string datasetName)

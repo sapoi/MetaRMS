@@ -17,6 +17,7 @@ using SharedLibrary.Helpers;
 using SharedLibrary.Enums;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
+using Server.Repositories;
 
 namespace Server.Controllers
 {
@@ -49,7 +50,9 @@ namespace Server.Controllers
                 return BadRequest("JSON file is in incorrect format, please read again about page.");
             }
             // check if LoginAppName is unique
-            if (_context.ApplicationDbSet.Where(app => app.LoginApplicationName == applicationDescriptor.LoginAppName).Count() != 0)
+            var applicationRepository = new ApplicationRepository(_context);
+            var applicationModel = applicationRepository.GetByLoginApplicationName(applicationDescriptor.LoginAppName);
+            if (applicationModel != null)
             {
                 //TODO error
                 //ModelState.AddModelError("ErrorCode", "001");
@@ -75,20 +78,24 @@ namespace Server.Controllers
                         LoginApplicationName = applicationDescriptor.LoginAppName, 
                         ApplicationDescriptorJSON = serializedApplicationDescriptor
                         };
-                    _context.ApplicationDbSet.Add(newApplication);
+                    applicationRepository.Add(newApplication);
+                    // _context.ApplicationDbSet.Add(newApplication);
                     // create new admin account for new application and add it to DB
                     string newPassword = PasswordHelper.GenerateRandomPassword(8);
                     RightsModel newRights = getAdminRights(newApplication, applicationDescriptor);
-                    _context.RightsDbSet.Add(newRights);
+                    var rightsRepository = new RightsRepository(_context);
+                    rightsRepository.Add(newRights);
+                    // _context.RightsDbSet.Add(newRights);
                     UserModel newUser = new UserModel
                     {
                         Application = newApplication,
-                        Username = "admin",
                         Password = PasswordHelper.ComputeHash(newPassword),
-                        Data = getEmptyUserDataDictionary(applicationDescriptor.SystemDatasets.UsersDatasetDescriptor),
+                        Data = getDefaultAdminDataDictionary(applicationDescriptor.SystemDatasets.UsersDatasetDescriptor),
                         Rights = newRights
                     };
-                    _context.UserDbSet.Add(newUser);
+                    var userRepository = new UserRepository(_context);
+                    userRepository.Add(newUser);
+                    // _context.UserDbSet.Add(newUser);
                     // try to send login details to admin account to email from parametres
                     sendEmailWithCredentials(email, newApplication.LoginApplicationName, newPassword);
                     transaction.Commit();
@@ -103,16 +110,20 @@ namespace Server.Controllers
             return Ok($"Application {applicationDescriptor.AppName} was created successfully and login credentials were sent to email {email}.");
         }
         // creates empty user data based on application descriptor
-        string getEmptyUserDataDictionary(UsersDatasetDescriptor usersDatasetDescriptor)
+        string getDefaultAdminDataDictionary(UsersDatasetDescriptor usersDatasetDescriptor)
         {
             StringBuilder sb = new StringBuilder("{");
             foreach (var attribute in usersDatasetDescriptor.Attributes)
             {
-                sb.Append($"\"{attribute.Name}\":");
-                //TODO podpora typu
-                sb.Append("\"\",");
+                // [] bacause it is an empty list
+                // if attribute type is usermane, set value to "admin"
+                if (attribute.Type == "username")
+                    sb.Append($"\"{attribute.Name}\":[\"admin\"],");
+                // othewise keep the value list empty
+                else
+                    sb.Append($"\"{attribute.Name}\":[],");
             }
-            // last domma is not a problem for parsing
+            // last comma is not a problem for parsing
             sb.Append("}");
             return sb.ToString();
         }

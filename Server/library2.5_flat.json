@@ -1,0 +1,197 @@
+{ 
+  "LoginAppName":"library_manager_2.5_flat",
+  "AppName":"Library manager 5.2",
+  "DefaultLanguage":"en",
+  "SystemDatasets":
+  {
+    "UsersDatasetDescriptor":
+    {
+      "Name":"Users",
+      "Decription":"Dataset containing system users.",
+      "Attributes":
+      [
+        {
+          "Name":"Username",
+          "Description":"Username containing at least 8 and at most 20 characters.",
+          "Type":"username",
+          "Min":8,
+          "Max":20
+        },
+        {
+          "Name":"Password",
+          "Description":"Password containing at least 8 and at most 20 characters, at least 1 number, 1 lower and 1 upper-case letter.",
+          "Type":"password",
+          "Min":8,
+          "Max":20,
+          "Safer":true
+        },
+        {
+          "Name":"Name",
+          "Description":"User's name.",
+          "Type":"string",
+          "Required":true
+        },
+        {
+          "Name":"Position",
+          "Description":"User's position.",
+          "Type":"string"
+        },
+        {
+          "Name":"Email",
+          "Description":"User's email.",
+          "Type":"string",
+          "Required":true,
+          "Unique":true
+        }
+      ]
+    }
+  },
+  "Datasets": 
+  [
+    {
+      "Name":"Books",
+      "Description":"All books in our library.",
+      "Attributes": 
+      [
+        {
+          "Name":"Title",
+          "Description":"Book title.",
+          "Type":"string",
+          "Required":true
+        },
+        {
+          "Name":"Authors",
+          "Description":"List of book authors (if author is not in the list, please add him first in Authors dataset).",
+          "Type":"Author",
+          "Min":1
+        },
+        {
+          "Name":"Book ID",
+          "Description":"Book ID.",
+          "Type":"string",
+          "Required":true,
+          "Unique":true
+        },
+        {
+          "Name":"Genre",
+          "Description":"The genre of the book (multiple can be chosen, if genre is not in the list, add it first in the Genre dataset).",
+          "Type":"Genre",
+          "Min":1,
+          "Max":5
+        },
+        {
+          "Name":"Published year",
+          "Description":"Year when the book was published.",
+          "Type":"year",
+          "Required":true
+        },
+        {
+          "Name":"Original price",
+          "Description":"Original price of the book.",
+          "Type":"float",
+          "Required":true
+        }
+      ]
+    },
+    {
+      "Name":"Authors",
+      "Description":"All the authors.",
+      "Attributes": 
+      [
+        {
+          "Name":"Name",
+          "Description":"Author's name.",
+          "Type":"string",
+          "Required":true
+        },
+        {
+          "Name":"Birth year",
+          "Description":"Year when the author was born.",
+          "Type":"year",
+          "Required":true
+        }
+      ]
+    },
+    {
+      "Name":"Genres",
+      "Description":"Enum of genres.",
+      "Attributes": 
+      [
+        {
+          "Name":"Name",
+          "Type":"string",
+          "Required":true,
+          "Unique":true
+        }
+      ]
+    },
+    {
+      "Name":"Readers",
+      "Description":"All the readers of our library.",
+      "Attributes": 
+      [
+        {
+          "Name":"Reader's card ID",
+          "Description":"Reader's card ID.",
+          "Type":"string",
+          "Required":true,
+          "Unique":true
+        },
+        {
+          "Name":"Name",
+          "Description":"Reader's name.",
+          "Type":"string",
+          "Required":true
+        },
+        {
+          "Name":"Birth date",
+          "Description":"Reader's birth date.",
+          "Type":"date",
+          "Required":true
+        }
+      ]
+    },
+    {
+      "Name":"Borrowings",
+      "Description":"Readers linked with borrowed books.",
+      "Attributes": 
+      [
+        {
+          "Name":"Book",
+          "Description":"Name of the borrowed book.",
+          "Type":"Book",
+          "Min":1,
+          "Max":1,
+          "Required":true,
+          "Unique":true
+        },
+        {
+          "Name":"Reader",
+          "Description":"Reader's card ID.",
+          "Type":"Reader",
+          "Min":1,
+          "Max":1,
+          "Required":true
+        },
+        {
+          "Name":"Borrovind date",
+          "Description":"Date and time of the borrowing.",
+          "Type":"datetime",
+          "Required":true
+        },
+        {
+          "Name":"Return date",
+          "Description":"End date of the borrowing.",
+          "Type":"date",
+          "Required":true
+        },
+        {
+          "Name":"Returned",
+          "Description":"Yes, if book was successfully returned.",
+          "Type":"bool",
+          "Required":true
+        }
+      ]
+    }
+  ]
+}

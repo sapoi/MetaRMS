@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="DatabaseAccessLibrary" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Data" t="Include">
+          <e p="data1.csv" t="Include" />
+          <e p="data2.csv" t="Include" />
+          <e p="data3.csv" t="Include" />
+        </e>
+        <e p="Data.cs" t="Include" />
+        <e p="DatabaseAccessLibrary.csproj" t="IncludeRecursive" />
+        <e p="DbContexts" t="Include">
+          <e p="FullDbContext.cs" t="Include" />
+          <e p="VectorDbContext.cs" t="Include" />
+        </e>
+        <e p="DescriptorCache.cs" t="Include" />
+        <e p="Models" t="Include">
+          <e p="DataColumnModel.cs" t="Include" />
+          <e p="FullModel.cs" t="Include" />
+          <e p="VectorModel.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="DatabaseAccessLibrary.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Operations" t="Include">
+          <e p="FullOperations.cs" t="Include" />
+          <e p="IOperations.cs" t="Include" />
+          <e p="JSONColumnOperations.cs" t="Include" />
+          <e p="VectorOperations.cs" t="Include" />
+        </e>
+      </e>
+      <e p="MetaRMS.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="RazorWebApp" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="bundleconfig.json" t="Include" />
+        <e p="Files" t="Include">
+          <e p="specifikace.pdf" t="Include" />
+        </e>
+        <e p="Helpers" t="Include">
+          <e p="AccessHelper.cs" t="Include" />
+          <e p="AuthorizationHelper.cs" t="Include" />
+          <e p="CacheAccessHelper.cs" t="Include" />
+          <e p="DataLoadingHelper.cs" t="Include" />
+          <e p="Logger.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.0" t="Include">
+              <e p="RazorWebApp.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Pages" t="Include">
+          <e p="_Layout.cshtml" t="Include" />
+          <e p="_ValidationScriptsPartial.cshtml" t="Include" />
+          <e p="_ViewImports.cshtml" t="Include" />
+          <e p="_ViewStart.cshtml" t="Include" />
+          <e p="About.cshtml" t="Include" />
+          <e p="About.cshtml.cs" t="Include" />
+          <e p="Account" t="Include">
+            <e p="DefaultPasswordChange.cshtml" t="Include" />
+            <e p="DefaultPasswordChange.cshtml.cs" t="Include" />
+            <e p="Login.cshtml" t="Include" />
+            <e p="Login.cshtml.cs" t="Include" />
+            <e p="Logout.cshtml" t="Include" />
+            <e p="Logout.cshtml.cs" t="Include" />
+            <e p="Settings.cshtml" t="Include" />
+            <e p="Settings.cshtml.cs" t="Include" />
+          </e>
+          <e p="AppInit" t="Include">
+            <e p="Index.cshtml" t="Include" />
+            <e p="Index.cshtml.cs" t="Include" />
+          </e>
+          <e p="Contact.cshtml" t="Include" />
+          <e p="Contact.cshtml.cs" t="Include" />
+          <e p="Data" t="Include">
+            <e p="Create.cshtml" t="Include" />
+            <e p="Create.cshtml.cs" t="Include" />
+            <e p="Edit.cshtml" t="Include" />
+            <e p="Edit.cshtml.cs" t="Include" />
+            <e p="Get.cshtml" t="Include" />
+            <e p="Get.cshtml.cs" t="Include" />
+          </e>
+          <e p="Error.cshtml" t="Include" />
+          <e p="Error.cshtml.cs" t="Include" />
+          <e p="Errors" t="Include">
+            <e p="ServerError.cshtml" t="Include" />
+            <e p="ServerError.cshtml.cs" t="Include" />
+            <e p="Unauthorized.cshtml" t="Include" />
+            <e p="Unauthorized.cshtml.cs" t="Include" />
+          </e>
+          <e p="Index.cshtml" t="Include" />
+          <e p="Index.cshtml.cs" t="Include" />
+          <e p="Rights" t="Include">
+            <e p="Create.cshtml" t="Include" />
+            <e p="Create.cshtml.cs" t="Include" />
+            <e p="Edit.cshtml" t="Include" />
+            <e p="Edit.cshtml.cs" t="Include" />
+            <e p="Get.cshtml" t="Include" />
+            <e p="Get.cshtml.cs" t="Include" />
+          </e>
+          <e p="Shared" t="Include">
+            <e p="_EditBuilderPartial.cshtml" t="Include" />
+            <e p="_GetBuilderPartial.cshtml" t="Include" />
+            <e p="_LoggedMenuPartial.cshtml" t="Include" />
+            <e p="_LogoutMenuPartial.cshtml" t="Include" />
+            <e p="_ReadAuthorizedDatasetsMenuPartial.cshtml" t="Include" />
+          </e>
+          <e p="User" t="Include">
+            <e p="Create.cshtml" t="Include" />
+            <e p="Create.cshtml.cs" t="Include" />
+            <e p="Edit.cshtml" t="Include" />
+            <e p="Edit.cshtml.cs" t="Include" />
+            <e p="Get.cshtml" t="Include" />
+            <e p="Get.cshtml.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="RazorWebApp.csproj" t="IncludeRecursive" />
+        <e p="Startup.cs" t="Include" />
+        <e p="Structures" t="Include">
+          <e p="EditBuilderPartialData.cs" t="Include" />
+          <e p="GetBuilderPartialData.cs" t="Include" />
+          <e p="LoggedMenuPartial.cs" t="Include" />
+        </e>
+        <e p="wwwroot" t="Include">
+          <e p="css" t="Include">
+            <e p="site.css" t="Include" />
+            <e p="site.min.css" t="Include" />
+          </e>
+          <e p="favicon.ico" t="Include" />
+          <e p="images" t="Include">
+            <e p="banner1.svg" t="Include" />
+            <e p="banner2.svg" t="Include" />
+            <e p="banner3.svg" t="Include" />
+            <e p="banner4.svg" t="Include" />
+          </e>
+          <e p="js" t="Include">
+            <e p="site.js" t="Include" />
+            <e p="site.min.js" t="Include" />
+          </e>
+          <e p="lib" t="Include">
+            <e p="bootstrap" t="Include">
+              <e p=".bower.json" t="Include" />
+              <e p="dist" t="Include">
+                <e p="css" t="Include">
+                  <e p="bootstrap-theme.css" t="Include" />
+                  <e p="bootstrap-theme.css.map" t="Include" />
+                  <e p="bootstrap-theme.min.css.map" t="Include" />
+                  <e p="bootstrap.css" t="Include" />
+                  <e p="bootstrap.css.map" t="Include" />
+                  <e p="bootstrap.min.css.map" t="Include" />
+                </e>
+                <e p="fonts" t="Include">
+                  <e p="glyphicons-halflings-regular.eot" t="Include" />
+                  <e p="glyphicons-halflings-regular.svg" t="Include" />
+                  <e p="glyphicons-halflings-regular.ttf" t="Include" />
+                  <e p="glyphicons-halflings-regular.woff" t="Include" />
+                  <e p="glyphicons-halflings-regular.woff2" t="Include" />
+                </e>
+                <e p="js" t="Include">
+                  <e p="bootstrap.js" t="Include" />
+                  <e p="npm.js" t="Include" />
+                </e>
+              </e>
+              <e p="LICENSE" t="Include" />
+            </e>
+            <e p="jquery" t="Include">
+              <e p=".bower.json" t="Include" />
+              <e p="dist" t="Include">
+                <e p="jquery.js" t="Include" />
+                <e p="jquery.min.map" t="Include" />
+              </e>
+              <e p="LICENSE.txt" t="Include" />
+            </e>
+            <e p="jquery-validation" t="Include">
+              <e p=".bower.json" t="Include" />
+              <e p="dist" t="Include">
+                <e p="additional-methods.js" t="Include" />
+                <e p="jquery.validate.js" t="Include" />
+              </e>
+              <e p="LICENSE.md" t="Include" />
+            </e>
+            <e p="jquery-validation-unobtrusive" t="Include">
+              <e p=".bower.json" t="Include" />
+              <e p="jquery.validate.unobtrusive.js" t="Include" />
+              <e p="jquery.validate.unobtrusive.min.js" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Server" t="IncludeRecursive">
+        <e p="all_test.json" t="Include" />
+        <e p="ApplicationNotFoundException.cs" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Cache" t="Include">
+          <e p="ReferenceCache.cs" t="Include" />
+        </e>
+        <e p="Controllers" t="Include">
+          <e p="Account" t="Include">
+            <e p="LoginController.cs" t="Include" />
+            <e p="LogoutController.cs" t="Include" />
+            <e p="RightsController.cs" t="Include" />
+            <e p="Settings" t="Include">
+              <e p="PasswordController.cs" t="Include" />
+            </e>
+          </e>
+          <e p="AppInitController.cs" t="Include" />
+          <e p="ApplicationDescriptorController.cs" t="Include" />
+          <e p="Data" t="Include">
+            <e p="CreateController.cs" t="Include" />
+            <e p="DeleteController.cs" t="Include" />
+            <e p="GetController.cs" t="Include" />
+            <e p="PatchController.cs" t="Include" />
+          </e>
+          <e p="Rights" t="Include">
+            <e p="CreateController.cs" t="Include" />
+            <e p="DeleteController.cs" t="Include" />
+            <e p="GetController.cs" t="Include" />
+            <e p="PatchController.cs" t="Include" />
+          </e>
+          <e p="User" t="Include">
+            <e p="CreateController.cs" t="Include" />
+            <e p="DeleteController.cs" t="Include" />
+            <e p="GetController.cs" t="Include" />
+            <e p="PatchController.cs" t="Include" />
+            <e p="ResetPasswordController.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Data" t="Include" />
+        <e p="data.xml" t="Include" />
+        <e p="database.db" t="Include" />
+        <e p="database01.db" t="Include" />
+        <e p="database02.db" t="Include" />
+        <e p="database03.db" t="Include" />
+        <e p="database04.db" t="Include" />
+        <e p="email_templates.json" t="Include" />
+        <e p="Helpers" t="Include">
+          <e p="AccessHelper.cs" t="Include" />
+          <e p="DataHelper.cs" t="Include" />
+          <e p="PasswordHelper.cs" t="Include" />
+        </e>
+        <e p="library.json" t="Include" />
+        <e p="library2.0.json" t="Include" />
+        <e p="library2.1.json" t="Include" />
+        <e p="library2.2.json" t="Include" />
+        <e p="library2.3.json" t="Include" />
+        <e p="library2.4.json" t="Include" />
+        <e p="library2.5_flat.json" t="Include" />
+        <e p="Migrations" t="Include">
+          <e p="20181025135031_InitialUpdate.cs" t="Include" />
+          <e p="20181025135031_InitialUpdate.Designer.cs" t="Include" />
+          <e p="DatabaseContextModelSnapshot.cs" t="Include" />
+        </e>
+        <e p="Model.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.0" t="Include">
+              <e p="Server.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Repositories" t="Include">
+          <e p="DataRepository.cs" t="Include" />
+          <e p="UserRepository.cs" t="Include" />
+        </e>
+        <e p="Server.csproj" t="IncludeRecursive" />
+        <e p="Server.userprefs" t="Include" />
+        <e p="Startup.cs" t="Include" />
+        <e p="wwwroot" t="Include" />
+      </e>
+      <e p="SharedLibrary" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Descriptors" t="Include">
+          <e p="ApplicationDescriptor.cs" t="Include" />
+          <e p="AttributeDescriptor.cs" t="Include" />
+          <e p="DatasetDescriptor.cs" t="Include" />
+          <e p="SystemDatasetDescriptor.cs" t="Include" />
+          <e p="UsersDatasetDescriptor.cs" t="Include" />
+        </e>
+        <e p="Enums" t="Include">
+          <e p="AttributeTypeEnum.cs" t="Include" />
+          <e p="ClaimsEnum.cs" t="Include" />
+          <e p="RightsEnum.cs" t="Include" />
+          <e p="SystemDatasetsEnum.cs" t="Include" />
+        </e>
+        <e p="ErrorCodes" t="Include" />
+        <e p="Exceptions.cs" t="Include" />
+        <e p="Helpers" t="Include">
+          <e p="ApplicationDescriptorHelper.cs" t="Include" />
+          <e p="TokenHelper.cs" t="Include" />
+        </e>
+        <e p="Models" t="Include">
+          <e p="ApplicationModel.cs" t="Include" />
+          <e p="BaseModel.cs" t="Include" />
+          <e p="DataModel.cs" t="Include" />
+          <e p="RightsModel.cs" t="Include" />
+          <e p="UserModel.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="SharedLibrary.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Services" t="Include">
+          <e p="AccountService.cs" t="Include" />
+          <e p="AppInitService.cs" t="Include" />
+          <e p="DataService.cs" t="Include" />
+          <e p="IAccountService.cs" t="Include" />
+          <e p="IAppInitService.cs" t="Include" />
+          <e p="IDataService.cs" t="Include" />
+          <e p="IRightsService.cs" t="Include" />
+          <e p="ISecretService.cs" t="Include" />
+          <e p="IService.cs" t="Include" />
+          <e p="IUserService.cs" t="Include" />
+          <e p="RightsService.cs" t="Include" />
+          <e p="SecretService.cs" t="Include" />
+          <e p="UserService.cs" t="Include" />
+        </e>
+        <e p="SharedLibrary.csproj" t="IncludeRecursive" />
+        <e p="Structures" t="Include">
+          <e p="JWTToken.cs" t="Include" />
+          <e p="LoginCredentials.cs" t="Include" />
+          <e p="PasswordChange.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Tests" t="Include">
+        <e p="DatabaseTests" t="IncludeRecursive">
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="DatabaseTests.csproj" t="IncludeRecursive" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netcoreapp2.0" t="Include">
+                <e p="DatabaseTests.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Program.cs" t="Include" />
+        </e>
+      </e>
+    </e>
+    <e p="$USER_HOME$/Library/Caches/Rider2018.3/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2018.3/resharper-host/local/Transient/ReSharperHost/v183/SolutionCaches/_MetaRMS.-1714158818.00" t="ExcludeRecursive" />
+  </component>
+</project>

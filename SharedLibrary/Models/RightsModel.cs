@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace SharedLibrary.Models
 {
     [Table("rights")]
-    public class RightsModel
+    public class RightsModel: BaseModel
     {
         [Key]
         [Column("id")]
@@ -28,11 +28,11 @@ namespace SharedLibrary.Models
         public List<UserModel> Users { get; set; }
 
         [JsonIgnore]
-        public Dictionary<String,Object> DataDictionary
+        public Dictionary<string,int> DataDictionary
          {
              get
              {
-                return JsonConvert.DeserializeObject<Dictionary<String,Object>>(Data);
+                return JsonConvert.DeserializeObject<Dictionary<string,int>>(Data);
              }
          }
     }

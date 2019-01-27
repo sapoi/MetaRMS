@@ -47,7 +47,7 @@ namespace SharedLibrary.Services
             var address = new Uri(_client.BaseAddress.OriginalString + "/rights");
             return await _client.GetAsync(address);
         }
-        public async Task<HttpResponseMessage> ChangePassword(string appName, PasswordChange passwords, string token)
+        public async Task<HttpResponseMessage> ChangePassword(string appName, PasswordChangeStructure passwords, string token)
         {
             string jsonPasswordsData = JsonConvert.SerializeObject(passwords);
             var jsonDataContent = new StringContent(jsonPasswordsData, Encoding.UTF8, "application/json");

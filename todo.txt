@@ -1,140 +1,200 @@
+🙈 NOT SUPPORTED
+    - min u referenci (bootstrap-select nema implementovano -> pro min=1 je pot5eba nastavit required=true)
+    - unique
+    - search
+    - moznost seradit zobrazena data
+-----------------------
+TODO
+    - ✴️ zmena hesla - nekontrolovat delku/spec znaky stareho hesla
+    - ✴️ validovat prava - musi mit min R na vsechny navazane datasety datasetu, na ktery ma nim R
+    - ✴️ pridat detail dat - po kliknuti na referenci
+    - 🔥🔥🔥🔥🔥🔥validace user data na serveru
+    - 🔥🔥🔥🔥🔥🔥validace dat dat na serveru
+    - 🔥🔥🔥🔥🔥🔥pri mazani uzivatelu/dat kontrolovat, jestli na ne nekde nevede reference
+    - ValueList jako dict <string, ...>
+                C  U          x    odesilat model
+        data    ✅ ✅                   ✴️
+        users   ✅ ✅                   ✅
+        rights  ✅ ✅                   ✅
+        settings              ✅        ✅
+        defaultpasswordchange 🅾️        🅾️
+    - 🔥🔥🔥
+        - ❗️ refresh token (https://www.blinkingcaret.com/2018/05/30/refresh-tokens-in-asp-net-core-web-api/)
+        - ❗️ odhlaseni na serveru
+    KONTROLA VALIDITY vstupu
+        - ❗️ validace vstupu na klientovi podle app deskriptoru
+        - 🔸 app init kontrola ze je vzdy soubor v service a controlleru
+    DETAILY
+        - if user deleted, log him out first
+        🅾️- ➡️ zobrazovat nekde jmeno prihlaseneho uzivatele
+        - u dat vracet unauthorized pokud rights = none
+        🅾️- ruzne druhy message - info, warneni, error
+        - ➡️ pocitani referenci pro mazani
+        🅾️- pred redirectto error dat log
+        - udelat a dat app name validator nekam zvlast
+        🅾️- message preparer
+        - ✅ vyresit async await
+        🅾️- lazy loadig
+        - ✅ value list indexovat stringama nazven atributu a ne cisly
+        🅾️- kdyz je default heslo, vyzadovat zmenu na safe
+
+        🅾️- presunout getTextForReference
+        - pridat typ backgroundcolor - bude jako color, pro kadzy dataset max jedna -> pokud bude tento dataset referencovany nekde, tak se ta reference podbarvi tou barvou, jakou ma ten radek datasetu nastavenou jako background color
+        - _editbuilderpartial -> data-subtext=" "
+    JAVASCRIPT
+        🅾️- javascript popup okna pri delete, ...
+        🅾️- users alert jestli doopravdy vyresetovat heslo
+        ️- 🔥🔥🔥🔥🔥🔥new password equal validation
+        - prilinkovat skripty 1.10. str 20
+    ZRYCHLENI
+        - 🔥🔥🔥posilat appinit mail nekdy jindy - neposilat mail, ale zobrazit heslo? je to bezpecnostni riziko?
+        - 🔥🔥🔥gdpr neposilat heslo na mail, ale zobrazit ho v message
+        - pocitat reference pro mazani
+
+-----------------------
+JSON VALIDACE
+    - validace deskriptoru ye obsahuje app name a vsechno ostatni co je povinne ... pokud to nebude obsahovta (napr max delka hesla, ...), nastavit default a nekde rict, co je defalut
+    - validace DefaultLang - vytvorit enum a kontrolovat proti nemu
+    - validace/ pripadne doplnit u username a password type string - ne - username je typu username a password typu password a kazde muze byt v user datasetu prave 1x
+    - kazdy atribut datasetu se mui jmenovat jinak
+    - pro typ bool je nullable vzdy true
+    - 🔥🔥🔥🔥🔥🔥users create password reguired -> u password nastavovat nullable=false
+    - username automaticky nastavit unique
+    - username a passvord vzdy nastavit na required
+    - kdyz neni nastaveno required/unique, nastavi se pri initu na false
+    - v kazdem datasetu musi byt alespon jedna required polozka
+    - pro typ user dataset se da required nahradit min
+    - kazdy atribut v ramci datasetu musi mit unikatni jmeno
+    - reference nevede sama na sebe
+    - reference nejsou v USER datasetu
+    - nazvyatributu nesmi byt BDId a RIGHTSId
+    - kontrolovat, za reference existuji
+    - kdyz je v min > 0, nastavit required na true
+    - co neni true je null = false
+    - datasety se nesmi jmenovat jako basic typy
+    - nastavit username a password na required pri initu do deskriptoru
+
+    - temer jakakoli hodnota atributu muze byt null!!!
+-----------------------
+REFAKTORING
+    - AccountService.GetApplicationDescriptorByAppName dat nekam jinam
+    - metoda na kontrolu tokenu a appname do Validations
+    - odstranit login stranku - misto ni je index
+    - rozdelit accesshepler 
+    - pomocne app init metody z kontrolleru nekam jinam
+    - spojit rights, user a data servicy do jedne -> pridat basemodel
+    - na serveru validace u controlleru dat zvlast
+    - misto edit dat patch, jen popisek buttonu bude edit
+    - nepouzivat v controllerech appName, ale brat id z claimu
+-----------------------
 TEXT
-- ➡️ zkusit napsat uvod k bp v anglictine
-- 🔥 ➡️ bodova osnova
-    - ta 1. kapitola v budoucim case (plan toho, co se bude delat)
-- 🔥 ➡️ konkurence?
-- dokumentacni komentare
-- konkurence
-- uziv dok jako tutorial
-- 2 ukazkove aplikace
-- 3 uzivatele - programatori co chcou pripojit aplikaci (mobilni), admini, knihovnice
-! pustit nekde na webu
-- ➡️ verejne zpristupnit nekolik ukazkovych aplikaci s jsonem a prihlasovacimi udaji na R prava ke vsem datasetum
-radkovani ne 2, ale 1 nebo 1.25
-- psat to postupne od zacatku a ne na preskacku
-- napsat uz ted podrobnou osnovu ke vsemu
-- vice prikladu v uvoduv uvodu napsat, co by mohli vsechno uzivatele chtit a potrebvat
-v requirements to rozepsat a az nakonec dat seznam tect bodu
+    - ➡️ zkusit napsat uvod k bp v anglictine
+    - 🔥 ➡️ bodova osnova
+        - ta 1. kapitola v budoucim case (plan toho, co se bude delat)
+    - 🔥 ➡️ konkurence?
+    - dokumentacni komentare
+    - konkurence
+    - uziv dok jako tutorial
+    - 2 ukazkove aplikace
+    - 3 uzivatele - programatori co chcou pripojit aplikaci (mobilni), admini, knihovnice
+    ! pustit nekde na webu
+    - ➡️ verejne zpristupnit nekolik ukazkovych aplikaci s jsonem a prihlasovacimi udaji na R prava ke vsem datasetum
+    radkovani ne 2, ale 1 nebo 1.25
+    - psat to postupne od zacatku a ne na preskacku
+    - napsat uz ted podrobnou osnovu ke vsemu
+    - vice prikladu v uvoduv uvodu napsat, co by mohli vsechno uzivatele chtit a potrebvat
+    - v requirements to rozepsat a az nakonec dat seznam tect bodu
 
-muzu pouzivat cizi knihovny?
-- uz ted pouzivam bootstrap
-- chci i https://developer.snapappointments.com/bootstrap-select/
-
-
-
-🔥🔥🔥
-- ❗️ refresh token (https://www.blinkingcaret.com/2018/05/30/refresh-tokens-in-asp-net-core-web-api/)
-- ❗️ odhlaseni na serveru
-- ✅ user additional data 
-
-DETAILY
-- preklady se budou moct delat v app 
-    - bude tam form na odeslani zadosti o pridani noveho jayzka
-- 🅾️ pridat defalut enumy a dat je mezi podporovane typy - countries, currency, 
-- if user deleted, log him out first
-- ➡️ zobrazovat nekde jmeno prihlaseneho uzivatele
-- u dat vracet unauthorized pokud rights = none
-- ruzne druhy message - info, warneni, error
-- mazani rights z cache jen pro konkretni id
-- ➡️ pocitani referenci pro mazani
-- pred redirectto error dat log
-- udelat a dat app name validator nekam zvlast
-- message preparer
-- 🔥🔥🔥gdpr neposilat heslo na mail, ale zobrazit ho v message
-- vyresit async await
-- pridat stranku, na kterou si admin muze napsat co chce - navod na pouzivani konkretni aplikace 
-- pridat do db k datasetum created_by a modified_by
-- ❓ co vsechno muze prihlaseny uzivatel menit na svych user data?
-- odhlasovat pri erroru jako napr nenalayen deskriptor aplikace uyivatele?
-- v Users dat rights tak, aby si ho mohl kazdy pojmenovat podle sebe
-- settings zmena hesla - zmenit aby tam bylo puvodni heslo 1x a nove heslo 2x
-- user edit check box na zmenu hesla 
-- pridat prava CRUD+user password change -> bude je mit jen admin a bude je moct nastavovat jen admin -> jinak se da heslo zmenit poj v nastaveni prihlaseneho uzivatele
-- do db a app user.language
-- co vsechno je potreba spustit pro inicializovani celeho projektu
+-----------------------
+INIT - co vsechno je potreba spustit pro inicializovani celeho projektu
     - vytvorit db
     - ukazkove aplikace
-- javascript popup okna pri delete, ...
-- ukladat JSON do DB pekne zformatovany
 
-PODPORA TYPU
-- prilinkovat skripty 1.10. str 20
-- ✅ zmenit int na type number a min 0
-- ✅ klient zobrazovat vstupy podle typu
-- 🔥🔥🔥validace user data na klientovi
-- validace user data na serveru
-- validace pri vytvareni dat na serveru
-- ✅ validace pri vytvareni dat na klientovi - pomoci html
-- validace pri editu dat na serveru
-- ✅ validace pri editu dat na klientovi  - pomoci html 
-- ✅ app init vytvareni user dat admina
-- 🔥🔥🔥podminky hesla (helka, znaky, ...)
-- ✅ odkazy na user datasety
-
-KONTROLA VALIDITY vstupu
-- ❗️ validace vstupu na klientovi podle app deskriptoru
-- 🔸 app init kontrola ze je vzdy soubor v service a controlleru
-
-JSON VALIDACE
-- validace deskriptoru ye obsahuje app name a vsechno ostatni co je povinne ... pokud to nebude obsahovta (napr max delka hesla, ...), nastavit default a nekde rict, co je defalut
-- validace DefaultLang - vytvorit enum a kontrolovat proti nemu
-- validace/ pripadne doplnit u username a password type string
-- kazdy atribut datasetu se mui jmenovat jinak
-- pro typ bool je nullable vzdy true
-
-- temer jakakoli hodnota atributu muze byt null!!!
-
-ZRYCHLENI
-- 🔥🔥🔥posilat appinit mail nekdy jindy
-
-REFAKTORING
-- AccountService.GetApplicationDescriptorByAppName dat nekam jinam
-- metoda na kontrolu tokenu a appname do Validations
-- odstranit login stranku - misto ni je index
-- rozdelit accesshepler 
-- pomocne app init metody z kontrolleru nekam jinam
-- spojit rights, user a data servicy do jedne -> pridat basemodel
-- na serveru validace u controlleru dat zvlast
-- 🔥 ➡️ repozitare
-- ✅ pouzivat description z jsonu
-- pridani jayzka do descriptoru
-- lokalizovat zobrazeni data nebo to dat do nastaveni
-
+-----------------------
 HOTOVO
-- ✅ prava nemi jit samzat, pokud je nekdo pouziva 
-- ✅ zobrazit mesage ze prava nebyla smazana 
-- ✅ crud uzivatele 
-- ✅ partial na menu logged 
-- ✅ partial menu unlogged
-- ✅ db ondelete restrict 
-- ✅ odkomentovat posilani mailu
-- ✅ partial na read auth datasets 
-- ✅ data controllers do slozky
-- ✅ vyzkouset data delete 
-- ✅ dodelat [Authorize] nad controllery
-- ✅ prodlouzit token
-- ✅ message pro data
-- ✅ rights patch messages
-- ✅ servererror.cshtml.cs - error stranky 2x
-- ✅ misto return to login page by melo byt nejprve odhlaseni a pak return
-- ✅ napsat varovani k init page
-- ✅ app name validator pred app init
-- ✅ posledni user nesmazatelny
-- ✅ chyba pri spatne zadanem hesle login
-- ✅ rights unique name
-- ✅ username unique
-- ✅ message o vytvoreni app z appinit do index
-- ✅ proc je get u login controlleru
-- ✅ user settings zmena hesla
-- ✅ misto hesla zobrazovat * index a login -> type="password"
-- ✅ edit user nezobrazovat hash u edit
-- ✅ app init kontrola validity mailu
-- ✅ napsat popis do about page
-- ✅ 
+    - ✅ prava nemi jit samzat, pokud je nekdo pouziva 
+    - ✅ zobrazit mesage ze prava nebyla smazana 
+    - ✅ crud uzivatele 
+    - ✅ partial na menu logged 
+    - ✅ partial menu unlogged
+    - ✅ db ondelete restrict 
+    - ✅ odkomentovat posilani mailu
+    - ✅ partial na read auth datasets 
+    - ✅ data controllers do slozky
+    - ✅ vyzkouset data delete 
+    - ✅ dodelat [Authorize] nad controllery
+    - ✅ prodlouzit token
+    - ✅ message pro data
+    - ✅ rights patch messages
+    - ✅ servererror.cshtml.cs - error stranky 2x
+    - ✅ misto return to login page by melo byt nejprve odhlaseni a pak return
+    - ✅ napsat varovani k init page
+    - ✅ app name validator pred app init
+    - ✅ posledni user nesmazatelny
+    - ✅ chyba pri spatne zadanem hesle login
+    - ✅ rights unique name
+    - ✅ username unique
+    - ✅ message o vytvoreni app z appinit do index
+    - ✅ proc je get u login controlleru
+    - ✅ user settings zmena hesla
+    - ✅ misto hesla zobrazovat * index a login -> type="password"
+    - ✅ edit user nezobrazovat hash u edit
+    - ✅ app init kontrola validity mailu
+    - ✅ napsat popis do about page
+    - ✅ settings zmena hesla - zmenit aby tam bylo puvodni heslo 1x a nove heslo 2x
+    - ✅ user edit check box na zmenu hesla -> ne, udelat tam tlacitko na reset hesla na nejakou defaultni hodnotu a tu si pak muze uzivatel zmenit ve svem nastaveni po prihlaseni -> default hodnota bude username
+    - ✅ user additional data 
+    - ✅ pouzivat description z jsonu
+    - ✅ v Users dat rights tak, aby si ho mohl kazdy pojmenovat podle sebe - asi ok - rights muzou mitt jmeno
+    - ✅ typy (username, float, string, ...) dat do enumu - NE musel by se zavest type "reference" a novy attribute characteristic rikajici typ reference
+    - ✅ create user default heslo
+    - ✅ repozitare
+    - ✅ form resubmission
+    - ✅ nejde create datasetu s referencema
+    - ✅ odstranit z users reference
+    - ✅ nejdou users
+    - ✅ test repozitaru
+    - ✅ pouzivat description datasetu
+    - ✅ reference       R  C/U
+        - users v data  ✅  ✅ 
+        - data v users  ✅  ✅ 
+        - data v data   ✅  ✅ 
+    PODPORA TYPU
+        - ✅ zmenit int na type number a min 0
+        - ✅ klient zobrazovat vstupy podle typu
+        - ✅ validace user data na klientovi 
+        - ✅ validace pri vytvareni dat na klientovi - pomoci html
+        - ✅ validace pri editu dat na klientovi  - pomoci html 
+        - ✅ app init vytvareni user dat admina
+        - ✅ podminky hesla (helka, znaky, ...)
+        - ✅ odkazy na user datasety
+        - ✅ nezobrazovat ID, ale nejake hodonty
+            - ✅ reference na reference na reference otestovat
+        - ✅ odstranit autoincrement
+        - ✅ user patch unique name
+    - ✅ Users textik brat z deskriptoru
 
+-----------------------
+ZRUŠENO
+    - 🅾️ pridat defalut enumy a dat je mezi podporovane typy - countries, currency, 
+    - 🅾️ pridat prava CRUD+user password change -> bude je mit jen admin a bude je moct nastavovat jen admin -> jinak se da heslo zmenit poj v nastaveni prihlaseneho uzivatele
+    - 🅾️ preklady se budou moct delat v app 
+        - 🅾️ bude tam form na odeslani zadosti o pridani noveho jayzka
+    - 🅾️ mazani rights z cache jen pro konkretni id
+    - 🅾️ moznost menit barvu pozadi radku
+    - 🅾️ odhlasovat pri erroru jako napr nenalayen deskriptor aplikace uyivatele?
+    - 🅾️ do db a app user.language
+    - 🅾️ ukladat JSON do DB pekne zformatovany
+    - 🅾️ moznost smazani aplikace
+    - 🅾️ moznost exportu dat
+    - 🅾️ cache, ktera se postupne uci, ktera data jsou nejpouzivanejsi a ty si bude pamatovat
+    - 🅾️ pridat stranku, na kterou si admin muze napsat co chce - navod na pouzivani konkretni aplikace 
+    ️- 🅾️ pridat do db k datasetum created_by a modified_by
+    - 🅾️ ❓ co vsechno muze prihlaseny uzivatel menit na svych user data?
+    - 🅾️ pridani jayzka do descriptoru
+    - 🅾️ lokalizovat zobrazeni data nebo to dat do nastaveni
 
-password reguired
-
+-----------------------
 
 
 ---------
@@ -144,16 +204,16 @@ JSON requirements
     - AppName (one)
     - DefaultLanguage (one) - z nejakeho oficialniho enumu, pokusim se na nej napasovat preklad, pokud preklad pro ten jazyk nebude existovat, bere se en
     - Users (one)
+        - PasswordAttribute
         - Attributes
             - Username
-            - Password
     - Datasets (one)
         - 
 - pokud nebude v atributu nullable, bere se jako true
 - pokud nebude v atributu unique, bere se jako false
 - pokud nebude uvedena u atributu max hodnota, bere se jako null, tedy nekonecno
 - v podstate se nemusi uvadet zadna false hodnota, protoze ta se nastavi default
-- atribut Name nesmi byt nazev podporovaneho typu (jako treba bool, int, currency (ale muze byt Currency)) - kvuli if v _InputBuilderCreatePartial
+- atribut Name nesmi byt nazev podporovaneho typu (jako treba bool, int, currency (ale muze byt Currency)) - kvuli if v _EditBuilderPartial
 
 
 
@@ -162,17 +222,29 @@ JSON requirements
     - string🆗, int🆗, float🆗
     - date🆗, time🆗, datetime🆗 (kalendare a timepickery)
     - year🆗 
-    - systémový dataset Users
-    - uživatelské datasety (=dají se pomocí nich vyjádřit enumy) - v roletce bude zobrazeno 1. - 2. sloupec
+    - systémový dataset Users 🆗 
+    - uživatelské datasety (=dají se pomocí nich vyjádřit enumy) - v roletce bude zobrazeno 1. - 3. sloupec 🆗 
     - text🆗 - multiline
     - url🆗
     - color🆗 - na zmenu barvy prostredi?
     - email🆗
+    - username 🆗 - pouze v User datasetu a pouze 1x
+    - password 🆗 - pouze v User datasetu v password attribute
+    - bool 🆗 
 
     - required pro libovolny typ
 
     - min/max pro int, float ... TODO pro date, time, datetime
 
+- atributy
+    🆗 "Name": vsechno, povinne, unikatni
+    🆗 "Description": vsechno, nepovinny
+    🆗 "Type": vsechno, povinne, na vyber z podporovanych typu
+    🆗 "Required": vsechno, true x false, nepovinny
+    🅾️ "Unique": TODO
+    🆗 "Safer": true x false, jen password TODO test
+    "Min": cislo, jen pro int, float, 🅾️ reference TODO pro reference, a nove i jen pro string, text, username, password
+    🆗 "Max": cislo, jen pro int, float, reference, a nove i jen pro string, text, username, password
 
 
 - podminky

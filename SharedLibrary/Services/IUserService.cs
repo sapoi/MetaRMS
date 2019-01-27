@@ -13,5 +13,7 @@ namespace SharedLibrary.Services
         Task<HttpResponseMessage> DeleteById(string appName, long id, string token);
         Task<HttpResponseMessage> PatchById(string appName, long id, UserModel patchedUserModel, string token);
         Task<HttpResponseMessage> Create(string appName, UserModel newUserModel, string token);
+        Task<HttpResponseMessage> ResetPasswordById(string appName, long id, string token);
+
     }
 }
