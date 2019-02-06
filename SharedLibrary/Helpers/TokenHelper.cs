@@ -9,11 +9,11 @@ public class TokenHelper
     {
         _accessToken = token;
     }
-    public string GetAppName()
+    public string GetLoginApplicationName()
     {
         var handler = new JwtSecurityTokenHandler();
         var token = handler.ReadToken(_accessToken.Value) as JwtSecurityToken;
-        var claim =  token.Claims.First(c => c.Type == "ApplicationName");
+        var claim =  token.Claims.First(c => c.Type == "LoginApplicationName");
         if (claim == null)
             return null;
         return claim.Value;

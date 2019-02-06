@@ -12,6 +12,11 @@ namespace Server.Repositories
         {
             return _model.FirstOrDefault(d => d.Id == id);
         }
+        public RightsModel GetById(long applicationId, long id)
+        {
+            return _model.FirstOrDefault(d => d.ApplicationId == applicationId &&
+                                              d.Id == id);
+        }
         public List<RightsModel> GetByApplicationIdAndName(long applicationId, string name)
         {
             return _model.Where(r => r.ApplicationId == applicationId && 

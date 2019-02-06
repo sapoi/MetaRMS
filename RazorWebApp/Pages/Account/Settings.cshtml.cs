@@ -91,7 +91,7 @@ namespace RazorWebApp.Pages.Account
                 Message = "New passwords do not match.";
                 return Page();
             }
-            var response = await _accountService.ChangePassword(ApplicationDescriptor.LoginAppName, 
+            var response = await _accountService.ChangePassword(ApplicationDescriptor.LoginApplicationName, 
                                                                 PasswordChangeStructure, 
                                                                 token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();

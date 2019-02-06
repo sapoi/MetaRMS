@@ -16,6 +16,11 @@ namespace Server.Repositories
                          .Include(u => u.Application)
                          .FirstOrDefault(d => d.Id == id);
         }
+        public UserModel GetById(long applicationId, long id)
+        {
+            return _model.FirstOrDefault(d => d.ApplicationId == applicationId &&
+                                              d.Id == id);
+        }
         public UserModel GetByApplicationIdAndUsername(long applicationId, string username)
         {
             var allApplicationUsers = this.GetAllByApplicationId(applicationId);

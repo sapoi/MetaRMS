@@ -37,7 +37,7 @@ namespace RazorWebApp.Pages.Data
         public DatasetDescriptor ActiveDatasetDescriptor { get; set; }
         public List<DatasetDescriptor> ReadAuthorizedDatasets { get; set; }
         public LoggedMenuPartialData MenuData { get; set; }
-        public Dictionary<String, List<Object>> Data { get; set; }
+        public DataModel Data { get; set; }
         [BindProperty]
         public List<string> AttributesNames { get; set; }
         [BindProperty]
@@ -95,10 +95,10 @@ namespace RazorWebApp.Pages.Data
                                                       token);
 
                 // getting real data
-                var response = await _dataService.GetById(ApplicationDescriptor.LoginAppName, datasetName, id, token.Value);
+                var response = await _dataService.GetById(ApplicationDescriptor.LoginApplicationName, datasetName, id, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
-                Data = JsonConvert.DeserializeObject<Dictionary<String, List<Object>>>(stringResponse);
+                Data = JsonConvert.DeserializeObject<DataModel>(stringResponse);
             }
             return Page();
         }
@@ -136,7 +136,7 @@ namespace RazorWebApp.Pages.Data
             // for (int i = 0; i < AttributesNames.Count; i++)
             //     inputData.Add(AttributesNames[i], ValueList[i]);
 
-            var response = await _dataService.PatchById(ApplicationDescriptor.LoginAppName, DatasetName, DataId, ValueList, token.Value);
+            var response = await _dataService.PatchById(ApplicationDescriptor.LoginApplicationName, DatasetName, DataId, ValueList, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             return RedirectToPage("/Data/Get",  new {message = message.Substring(1, message.Length - 2)});
         }

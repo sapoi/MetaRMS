@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
+using RazorWebApp.Helpers;
 using RazorWebApp.Structures;
 using SharedLibrary.Descriptors;
 using SharedLibrary.Enums;
+using SharedLibrary.Helpers;
 using SharedLibrary.Services;
 using static SharedLibrary.Structures.JWTToken;
 
@@ -23,17 +25,17 @@ namespace RazorWebApp.Helpers
             // if there is no token, log info and redirect user to login page
             if (token == null)
             {
-                Logger.Log(DateTime.Now, "neni token");
+                Logger.LogToConsole("neni token");
                 return null;
             }
 
             TokenHelper tokenHelper = new TokenHelper(token);
             // get application name from token
-            var appName = tokenHelper.GetAppName();
+            var appName = tokenHelper.GetLoginApplicationName();
             // if no application name was found in token, log info and redirect user to login page
             if (appName == null)
             {
-                Logger.Log(DateTime.Now, "v tokenu nebyl claim co se jmenuje ApplicationName");
+                Logger.LogToConsole("v tokenu nebyl claim co se jmenuje LoginApplicationName");
                 return null;
             }
             // get user if from token
@@ -41,7 +43,7 @@ namespace RazorWebApp.Helpers
             // if no user id was found in token, log info and redirect user to login page
             if (userId == null)
             {
-                Logger.Log(DateTime.Now, "v tokenu nebyl claim co se jmenuje UserId");
+                Logger.LogToConsole("v tokenu nebyl claim co se jmenuje UserId");
                 return null;
             }
             // token is valid
@@ -54,7 +56,7 @@ namespace RazorWebApp.Helpers
             // if no application descriptor was found in token, log info and redirect user to login page
             if (applicationDescriptor == null)
             {
-                Logger.Log(DateTime.Now, "nenalezen odpovidajici deskriptor aplikace");
+                Logger.LogToConsole("nenalezen odpovidajici deskriptor aplikace");
                 return null;
             }
             return applicationDescriptor;
@@ -65,7 +67,7 @@ namespace RazorWebApp.Helpers
             var rights = await CacheAccessHelper.GetRightsFromCacheAsync(_cache, _accountService, token);
             if (rights == null)
             {
-                Logger.Log(DateTime.Now, "nenalezena prava uzivatele");
+                Logger.LogToConsole("nenalezena prava uzivatele");
                 return null;
             }
             return rights;
@@ -91,7 +93,7 @@ namespace RazorWebApp.Helpers
         {
             var menuData = new LoggedMenuPartialData();
             menuData.NavbarRights = AccessHelper.GetNavbarRightsDict(rights);
-            menuData.AppName = applicationDescriptor.AppName;
+            menuData.ApplicationName = applicationDescriptor.ApplicationName;
             menuData.UsersDatasetName = applicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name;
             return menuData;
         }
@@ -101,7 +103,7 @@ namespace RazorWebApp.Helpers
             var readAuthorizedDatasets = AccessHelper.GetReadAuthorizedDatasets(applicationDescriptor, rights);                                      
             if (readAuthorizedDatasets.Count() == 0)
             {
-                Logger.Log(DateTime.Now, "uzivatel nema zadne read authorized descriptory");
+                Logger.LogToConsole("uzivatel nema zadne read authorized descriptory");
                 return null;
             }
             // if no dataset was specified in parameter, select first dataset with at least read right (>= 1)
@@ -117,7 +119,7 @@ namespace RazorWebApp.Helpers
             var rightsKeyValuePair = rights.Where(r => r.Key == datasetDescriptor.Id).FirstOrDefault();
             if (rightsKeyValuePair.Equals(default(KeyValuePair<long, RightsEnum>)))
             {
-                Logger.Log(DateTime.Now, "nenalezena prava na dataset");
+                Logger.LogToConsole("nenalezena prava na dataset");
                 return null;
             }
             return rightsKeyValuePair.Value;
@@ -127,7 +129,7 @@ namespace RazorWebApp.Helpers
             var systemRights = rights.Where(r => r.Key == ((long)dataset)).FirstOrDefault();
             if (systemRights.Equals(default(KeyValuePair<long, RightsEnum>)))
             {
-                Logger.Log(DateTime.Now, "nenalezena prava na prava");
+                Logger.LogToConsole("nenalezena prava na prava");
                 return null;
             }
             return systemRights.Value;

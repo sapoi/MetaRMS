@@ -73,7 +73,7 @@ namespace RazorWebApp.Pages.Data
                     Message = message;
 
                 // getting real data
-                var response = await _dataService.GetAll(ApplicationDescriptor.LoginAppName, ActiveDatasetDescriptor.Name, token.Value);
+                var response = await _dataService.GetAll(ApplicationDescriptor.LoginApplicationName, ActiveDatasetDescriptor.Name, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 Data = JsonConvert.DeserializeObject<List<DataModel>>(stringResponse);
@@ -100,7 +100,7 @@ namespace RazorWebApp.Pages.Data
             if (ApplicationDescriptor == null)
                 return RedirectToPage("/Errors/ServerError");
 
-            var response = await _dataService.DeleteById(ApplicationDescriptor.LoginAppName, datasetName, dataId, token.Value);
+            var response = await _dataService.DeleteById(ApplicationDescriptor.LoginApplicationName, datasetName, dataId, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             // remove " form beginning and end of message
             return await OnGetAsync(datasetName, message.Substring(1, message.Length - 2));

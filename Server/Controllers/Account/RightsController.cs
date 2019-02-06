@@ -9,6 +9,7 @@ using SharedLibrary.Descriptors;
 using System.Collections.Generic;
 using SharedLibrary.Enums;
 using Server.Repositories;
+using Server.Helpers;
 
 namespace Server.Controllers.Account
 {
@@ -30,43 +31,57 @@ namespace Server.Controllers.Account
         // get application descriptor
         public IActionResult GetByIdFromToken()
         {
-            // get logged user's identity
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-            // if user is authenticated and JWT contains claim named ApplicationName
-            if (identity == null || !identity.IsAuthenticated 
-                                 || identity.FindFirst("ApplicationName") == null
-                                 || identity.FindFirst("UserId") == null)
-                // user is not authorized to access application descriptor for application appName
+            var controllerHelper = new ControllerHelper(_context);
+            // Authentication
+            var authUserModel = controllerHelper.Authenticate(HttpContext.User.Identity as ClaimsIdentity);
+            if (authUserModel == null)
                 return Unauthorized();
-            // get user id for UserId claim
-            var userIdString = identity.FindFirst("UserId").Value;
-            long userId;
-            if (!long.TryParse(userIdString, out userId))
-                return BadRequest("UserId claim could not be parsed");
-            // try to look for user in DB
-            var userRepository = new UserRepository(_context);
-            var user = userRepository.GetById(userId);
-            // var user = (from u in _context.UserDbSet
-            //             where u.Id == userId
-            //             select u).FirstOrDefault();
-            if (user == null)
-                return BadRequest("No such user with user id " + userId);
-            var rights = user.Rights;
-            // var rights = (from r in _context.RightsDbSet
-            //               where r.Id == user.RightsId
-            //               select r).FirstOrDefault();
-            if (rights == null)
-                return BadRequest("No such rights with id" + user.RightsId);
-            if (rights.Data == null || rights.Data == "")
-                return BadRequest("Rights with unfilled data.");
-            try
-            {
-                return Ok(JsonConvert.DeserializeObject<Dictionary<long, RightsEnum>>(rights.Data));
-            }
-            catch
-            {
-                return BadRequest("Malformed rights data.");
-            }
+            // Authorization - none - every logged user is authorized to read own rights
+            return Ok(JsonConvert.DeserializeObject<Dictionary<long, RightsEnum>>(authUserModel.Rights.Data));
+
+
+
+
+
+
+
+            // // get logged user's identity
+            // var identity = HttpContext.User.Identity as ClaimsIdentity;
+            // // if user is authenticated and JWT contains claim named LoginApplicationName
+            // if (identity == null || !identity.IsAuthenticated 
+            //                      || identity.FindFirst("LoginApplicationName") == null
+            //                      || identity.FindFirst("UserId") == null)
+            //     // user is not authorized to access application descriptor for application appName
+            //     return Unauthorized();
+            // // get user id for UserId claim
+            // var userIdString = identity.FindFirst("UserId").Value;
+            // long userId;
+            // if (!long.TryParse(userIdString, out userId))
+            //     return BadRequest("UserId claim could not be parsed");
+            // // try to look for user in DB
+            // var userRepository = new UserRepository(_context);
+            // var user = userRepository.GetById(userId);
+            // // var user = (from u in _context.UserDbSet
+            // //             where u.Id == userId
+            // //             select u).FirstOrDefault();
+            // if (user == null)
+            //     return BadRequest("No such user with user id " + userId);
+            // var rights = user.Rights;
+            // // var rights = (from r in _context.RightsDbSet
+            // //               where r.Id == user.RightsId
+            // //               select r).FirstOrDefault();
+            // if (rights == null)
+            //     return BadRequest("No such rights with id" + user.RightsId);
+            // if (rights.Data == null || rights.Data == "")
+            //     return BadRequest("Rights with unfilled data.");
+            // try
+            // {
+            //     return Ok(JsonConvert.DeserializeObject<Dictionary<long, RightsEnum>>(rights.Data));
+            // }
+            // catch
+            // {
+            //     return BadRequest("Malformed rights data.");
+            // }
         }
 
     }

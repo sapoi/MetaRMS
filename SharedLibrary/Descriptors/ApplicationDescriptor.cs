@@ -1,43 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace SharedLibrary.Descriptors
 {
-    // class describing datasets for one application
+    /// <summary>
+    /// ApplicationDescriptor class describes single one application.
+    /// This descriptor is used whenever accessing application within the project.
+    /// </summary>
     public class ApplicationDescriptor
     {
-        // does not have to be unique
-        public string AppName { get; set; }
-        // have to be unique
-        public string LoginAppName { get; set; }
+        /// <summary>
+        /// ApplicationName is a non-unique string displayed for a logged user.
+        /// </summary>
+        public string ApplicationName { get; set; }
+        /// <summary>
+        /// LoginApplicationName is a unique string used to log into the application.
+        /// </summary>
+        public string LoginApplicationName { get; set; }
+        //TODO remove?
         public string DefaultLanguage { get; set; }
+        /// <summary>
+        /// SystemDatasets contains system datasets with mandatory elements and some user defined parts.
+        /// In current version UserDatasetDescriptor is obligatory.
+        /// </summary>
         public SystemDatasetDescriptor SystemDatasets { get; set; }
+        /// <summary>
+        /// Datasets list contains user defined datasets.
+        /// </summary>
         public List<DatasetDescriptor> Datasets { get; set; }
-
+        /// <summary>
+        /// Function used to get an AttributeDescriptor for username.
+        /// This descriptor can be found as one of the SystemDatasets.UsersDatasetDescriptor.Attributes
+        /// and  it is the only one with a .Type == "username".
+        /// </summary>
+        /// <returns>The return value is an AttributeDescriptor describing username.</returns>
         public AttributeDescriptor GetUsernameAttribute()
         {
-            return this.SystemDatasets.UsersDatasetDescriptor.Attributes.Where(a => a.Type == "username").First();
+            return this.SystemDatasets.UsersDatasetDescriptor.Attributes.First(a => a.Type == "username");
         }
-        // public DatasetDescriptor GetDataset(String name){
-        //     foreach (DatasetDescriptor dataset in Datasets){
-        //         if (dataset.Name == name) return dataset;
-        //     }
-        //     return null;
-        // }
-        // public ApplicationDescriptor CreateMockup()
-        // {
-        //     ApplicationDescriptor a = new ApplicationDescriptor();
-        //     a.AppName = "Person-Cup App";
-        //     DatasetDescriptor d = new DatasetDescriptor();
-        //     d.Name = "User";
-        //     AttributeDescriptor a1 = new AttributeDescriptor();
-        //     a1.Name="rights";
-        //     a1.Type="string";
-        //     d.Attributes = new List<AttributeDescriptor> { {a1}};
-        //     a.Datasets = new List<DatasetDescriptor>{{d}};
-        //     return a;
-        // }
     }
 }

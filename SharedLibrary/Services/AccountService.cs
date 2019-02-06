@@ -35,7 +35,7 @@ namespace SharedLibrary.Services
             var address = new Uri(_client.BaseAddress.OriginalString + "/logout");
             return await _client.PostAsync(address, new StringContent(""));
         }
-        public async Task<HttpResponseMessage> GetApplicationDescriptorByAppName(string token)
+        public async Task<HttpResponseMessage> GetApplicationDescriptorByApplicationName(string token)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var address = new Uri("http://localhost:5000/api/applicationdescriptor");

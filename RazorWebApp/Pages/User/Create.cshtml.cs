@@ -77,7 +77,7 @@ namespace RazorWebApp.Pages.User
                     ValueList.Add(attribute.Name, new List<string>());
                 }
 
-                var response = await _rightsService.GetAll(ApplicationDescriptor.LoginAppName, token.Value);
+                var response = await _rightsService.GetAll(ApplicationDescriptor.LoginApplicationName, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 List<RightsModel> data = JsonConvert.DeserializeObject<List<RightsModel>>(stringResponse);
@@ -145,7 +145,7 @@ namespace RazorWebApp.Pages.User
                                                         //  Password = newPassword,
                                                          RightsId = NewRightsId,
                                                          Data = JsonConvert.SerializeObject(ValueList) };
-            var response = await _userService.Create(ApplicationDescriptor.LoginAppName, newUserModel, token.Value);
+            var response = await _userService.Create(ApplicationDescriptor.LoginApplicationName, newUserModel, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             if (!response.IsSuccessStatusCode)

@@ -92,7 +92,6 @@
 				class="form-control"
 				name="@Model.OutValue"
 				value="0"
-				required
 	</text>
    	@if (Model.InValue != null && Model.InValue.Count() >= 1 && Model.InValue[0].ToString() == "0")
    	{
@@ -112,21 +111,6 @@
 	<text>
 		> ✅<br>
 	</text>
-	@if (Model.Attribute.Required == false) {
-		<text>
-			<input 	type="radio"
-					class="form-control"
-					name="@Model.OutValue"
-					value="null"
-		</text>
-				@if (Model.InValue != null && Model.InValue.Count() >= 1 && Model.InValue[0].ToString() == "null")
-			   	{
-			   		<text>checked</text>
-			   	}
-		<text>
-			> ?<br>	
-		</text>
-	}
 	
 
 } else if (@Model.Attribute.Type == "text"){

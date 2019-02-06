@@ -134,7 +134,7 @@ namespace RazorWebApp.Pages.Data
             var validationHelper = new ValidationHelper();
             validationHelper.ValidateValueList(ValueList, ActiveDatasetDescriptor.Attributes);
             
-            var response = await _dataService.Create(ApplicationDescriptor.LoginAppName, DatasetName, ValueList, token.Value);
+            var response = await _dataService.Create(ApplicationDescriptor.LoginApplicationName, DatasetName, ValueList, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             return RedirectToPage("/Data/Get", new {message = message.Substring(1, message.Length - 2)});

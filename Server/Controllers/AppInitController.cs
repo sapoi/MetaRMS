@@ -49,15 +49,15 @@ namespace Server.Controllers
                 //TODO detekovat, kde je chyba
                 return BadRequest("JSON file is in incorrect format, please read again about page.");
             }
-            // check if LoginAppName is unique
+            // check if LoginApplicationName is unique
             var applicationRepository = new ApplicationRepository(_context);
-            var applicationModel = applicationRepository.GetByLoginApplicationName(applicationDescriptor.LoginAppName);
+            var applicationModel = applicationRepository.GetByLoginApplicationName(applicationDescriptor.LoginApplicationName);
             if (applicationModel != null)
             {
                 //TODO error
                 //ModelState.AddModelError("ErrorCode", "001");
                 //return BadRequest(ModelState);
-                return BadRequest($"Application name {applicationDescriptor.LoginAppName} already exists, please choose another.");
+                return BadRequest($"Application name {applicationDescriptor.LoginApplicationName} already exists, please choose another.");
             }
             // check if no dataset atribute has name BDId
             if (applicationDescriptor.Datasets.Any(d => d.Attributes.Any(a => a.Name == "DBId")))
@@ -75,7 +75,7 @@ namespace Server.Controllers
                     // create new application and add it to DB
                     string serializedApplicationDescriptor = JsonConvert.SerializeObject(applicationDescriptor);
                     ApplicationModel newApplication = new ApplicationModel { 
-                        LoginApplicationName = applicationDescriptor.LoginAppName, 
+                        LoginApplicationName = applicationDescriptor.LoginApplicationName, 
                         ApplicationDescriptorJSON = serializedApplicationDescriptor
                         };
                     applicationRepository.Add(newApplication);
@@ -107,7 +107,7 @@ namespace Server.Controllers
             }
             // if everythong was ok, save changes to DB and return Ok
             _context.SaveChangesAsync();
-            return Ok($"Application {applicationDescriptor.AppName} was created successfully and login credentials were sent to email {email}.");
+            return Ok($"Application {applicationDescriptor.ApplicationName} was created successfully and login credentials were sent to email {email}.");
         }
         // creates empty user data based on application descriptor
         string getDefaultAdminDataDictionary(UsersDatasetDescriptor usersDatasetDescriptor)

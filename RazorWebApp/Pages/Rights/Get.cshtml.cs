@@ -65,7 +65,7 @@ namespace RazorWebApp.Pages.Rights
                 if (message != null)
                     Message = message;
 
-                var response = await _rightsService.GetAll(ApplicationDescriptor.LoginAppName, token.Value);
+                var response = await _rightsService.GetAll(ApplicationDescriptor.LoginApplicationName, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 List<RightsModel> data = JsonConvert.DeserializeObject<List<RightsModel>>(stringResponse);
@@ -88,7 +88,7 @@ namespace RazorWebApp.Pages.Rights
             if (ApplicationDescriptor == null)
                 return RedirectToPage("/Errors/ServerError");
 
-            var response = await _rightsService.DeleteById(ApplicationDescriptor.LoginAppName, dataId, token.Value);
+            var response = await _rightsService.DeleteById(ApplicationDescriptor.LoginApplicationName, dataId, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             // remove " form beginning and end of message
             return await OnGetAsync(message.Substring(1, message.Length - 2));

@@ -51,24 +51,24 @@ namespace Server.Controllers.Account
         {
             if (ModelState.IsValid)
             {
-                if (loginCredentials.ApplicationName == null)
-                    return BadRequest($"Application name is required.");
+                if (loginCredentials.LoginApplicationName == null)
+                    return BadRequest($"ERROR: Application name is required.");
                 if (loginCredentials.Username == null)
-                    return BadRequest($"Username is required.");
+                    return BadRequest($"ERROR: Username is required.");
                 if (loginCredentials.Password == null)
-                    return BadRequest($"Password is required.");
+                    return BadRequest($"ERROR: Password is required.");
                 var applicationRepository = new ApplicationRepository(_context);
-                var applicationModel = applicationRepository.GetByLoginApplicationName(loginCredentials.ApplicationName);
+                var applicationModel = applicationRepository.GetByLoginApplicationName(loginCredentials.LoginApplicationName);
                 if (applicationModel == null)
-                    return BadRequest($"Invalid application name.");
+                    return BadRequest($"ERROR: Invalid application name.");
                 // var user = await getUserModel(loginCredentials, applicationModel.ApplicationDescriptor);
                 var userRepository = new UserRepository(_context);
                 var user = userRepository.GetByApplicationIdAndUsername(applicationModel.Id, loginCredentials.Username);
                 if (user == null)
-                    return BadRequest($"ERROR: User {loginCredentials.Username} does not exist in application {loginCredentials.ApplicationName}."); //"kombinace jmena aplikace a username"
+                    return BadRequest($"ERROR: User {loginCredentials.Username} does not exist in application {loginCredentials.LoginApplicationName}."); //"kombinace jmena aplikace a username"
                 if (!PasswordHelper.CheckHash(loginCredentials.Password, user.Password))
                 {
-                    return BadRequest($"ERROR: Could not log in: combination of application name {loginCredentials.ApplicationName}, username {loginCredentials.Username} and password does not exist.");
+                    return BadRequest($"ERROR: Could not log in: combination of application name {loginCredentials.LoginApplicationName}, username {loginCredentials.Username} and password does not exist.");
                 }
                 // a když jsou platné přihlašovací údaje, vytvoří se token
                 var claims = new[]
@@ -76,7 +76,7 @@ namespace Server.Controllers.Account
                     new Claim(ClaimTypes.Name, loginCredentials.Username),
                     new Claim("UserId", user.Id.ToString()),
                     new Claim("ApplicationId", user.ApplicationId.ToString()),
-                    new Claim("ApplicationName", loginCredentials.ApplicationName),
+                    new Claim("LoginApplicationName", loginCredentials.LoginApplicationName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
 
@@ -97,7 +97,7 @@ namespace Server.Controllers.Account
             }
 
             //return null;
-            return BadRequest("Could not create token - model state not valid");
+            return BadRequest("ERROR: Could not create token - model state not valid");
         }
     }
 }

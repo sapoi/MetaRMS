@@ -21,12 +21,7 @@ namespace RazorWebApp.Helpers
             var selectData = new Dictionary<string, List<SelectListItem>>();
             foreach (var attribute in attributes)
             {
-                if (attribute.Type != "color" && attribute.Type != "date" && attribute.Type != "datetime" && 
-                    attribute.Type != "email" && attribute.Type != "month" && attribute.Type != "int" && 
-                    attribute.Type != "float" && attribute.Type != "year" && attribute.Type != "tel" && 
-                    attribute.Type != "string" && attribute.Type != "time" && attribute.Type != "url" &&
-                    attribute.Type != "bool" && attribute.Type != "text" &&
-                    attribute.Type != "username" /* && attribute.Type != "password" */)
+                if (!AttributeType.Types.Contains(attribute.Type))
                     if (!selectData.ContainsKey(attribute.Type))
                     {
                         // getting real data
@@ -36,7 +31,7 @@ namespace RazorWebApp.Helpers
                         
                         if (attribute.Type == applicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name)
                         {
-                            response = await userService.GetAll(applicationDescriptor.LoginAppName, token.Value);
+                            response = await userService.GetAll(applicationDescriptor.LoginApplicationName, token.Value);
                             string stringResponse = await response.Content.ReadAsStringAsync();
                             List<UserModel> data = JsonConvert.DeserializeObject<List<UserModel>>(stringResponse);
                             shownAttributes.Add(applicationDescriptor.GetUsernameAttribute());
@@ -50,7 +45,7 @@ namespace RazorWebApp.Helpers
                         // if type is any otherreference data
                         else
                         {
-                            response = await dataService.GetAll(applicationDescriptor.LoginAppName, attribute.Type, token.Value);
+                            response = await dataService.GetAll(applicationDescriptor.LoginApplicationName, attribute.Type, token.Value);
                             string stringResponse = await response.Content.ReadAsStringAsync();
                             List<DataModel> data = JsonConvert.DeserializeObject<List<DataModel>>(stringResponse);
                             var st = applicationDescriptor.Datasets.Where(d => d.Name == attribute.Type).First();

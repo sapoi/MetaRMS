@@ -70,7 +70,7 @@ namespace RazorWebApp.Pages.User
                 MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
                 UserId = id;
 
-                var rightsResponse = await _rightsService.GetAll(ApplicationDescriptor.LoginAppName, token.Value);
+                var rightsResponse = await _rightsService.GetAll(ApplicationDescriptor.LoginApplicationName, token.Value);
                 //TODO kontrolovat chyby v response
                 string rightsStringResponse = await rightsResponse.Content.ReadAsStringAsync();
                 List<RightsModel> data = JsonConvert.DeserializeObject<List<RightsModel>>(rightsStringResponse);
@@ -85,7 +85,7 @@ namespace RazorWebApp.Pages.User
                 // foreach (var key in ApplicationDescriptor.Datasets)
                 //     DatasetsIds.Add(key.Id);
 
-                var response = await _userService.GetById(ApplicationDescriptor.LoginAppName, id, token.Value);
+                var response = await _userService.GetById(ApplicationDescriptor.LoginApplicationName, id, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 UserModelToPatch = JsonConvert.DeserializeObject<UserModel>(stringResponse);
@@ -144,7 +144,7 @@ namespace RazorWebApp.Pages.User
                                                            Data = JsonConvert.SerializeObject(ValueList) };
 
             
-            var response = await _userService.PatchById(ApplicationDescriptor.LoginAppName, UserId, patchedUserModel, token.Value);
+            var response = await _userService.PatchById(ApplicationDescriptor.LoginApplicationName, UserId, patchedUserModel, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             if (!response.IsSuccessStatusCode)

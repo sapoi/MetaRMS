@@ -69,7 +69,7 @@ namespace RazorWebApp.Pages.Rights
                 DatasetsIds.Add((long)SystemDatasetsEnum.Users);
                 DatasetsIds.Add((long)SystemDatasetsEnum.Rights);
 
-                var response = await _rightsService.GetById(ApplicationDescriptor.LoginAppName, id, token.Value);
+                var response = await _rightsService.GetById(ApplicationDescriptor.LoginApplicationName, id, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 Data = JsonConvert.DeserializeObject<RightsModel>(stringResponse);
@@ -100,10 +100,10 @@ namespace RazorWebApp.Pages.Rights
             // }
     
             RightsModel patchedRightsModel = new RightsModel() { Name = RightsName, Data = JsonConvert.SerializeObject(ValueList) };
-            var response = await _rightsService.PatchById(ApplicationDescriptor.LoginAppName, DataId, patchedRightsModel, token.Value);
+            var response = await _rightsService.PatchById(ApplicationDescriptor.LoginApplicationName, DataId, patchedRightsModel, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             // delete old rights from cache
-            CacheAccessHelper.RemoveRightsFromCache(_cache, ApplicationDescriptor.LoginAppName, DataId);
+            CacheAccessHelper.RemoveRightsFromCache(_cache, ApplicationDescriptor.LoginApplicationName, DataId);
             return RedirectToPage("/Rights/Get",  new {message = message.Substring(1, message.Length - 2)});
         }
     }

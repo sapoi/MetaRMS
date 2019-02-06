@@ -18,12 +18,12 @@ namespace RazorWebApp.Helpers
         {
             TokenHelper tokenHelper = new TokenHelper(token);
             // get application name from token
-            var appName = tokenHelper.GetAppName();
+            var appName = tokenHelper.GetLoginApplicationName();
 
             return await cache.GetOrCreateAsync("Descriptor_" + appName, async entry =>
               {
                   entry.SlidingExpiration = TimeSpan.FromMinutes(2);
-                  var response = await _accountService.GetApplicationDescriptorByAppName(token.Value);
+                  var response = await _accountService.GetApplicationDescriptorByApplicationName(token.Value);
                   var stringResponse = await response.Content.ReadAsStringAsync();
                   cacheKeys.Add("Descriptor_" + appName);
               return JsonConvert.DeserializeObject<ApplicationDescriptor>(stringResponse);
@@ -33,7 +33,7 @@ namespace RazorWebApp.Helpers
         {
             TokenHelper tokenHelper = new TokenHelper(token);
             // get application name and user id from token
-            var appName = tokenHelper.GetAppName();
+            var appName = tokenHelper.GetLoginApplicationName();
             var userId = tokenHelper.GetUserId();
             
             return await
