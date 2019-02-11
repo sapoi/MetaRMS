@@ -16,72 +16,35 @@ namespace Server.Controllers.Account
     [Route("api/account/[controller]")]
     public class RightsController : Controller
     {
-        private readonly DatabaseContext _context;
-
+        /// <summary>
+        /// Database context for repository.
+        /// </summary>
+        private readonly DatabaseContext context;
         public RightsController(DatabaseContext context)
         {
-            _context = context;
+            this.context = context;
         }
-
+        /// <summary>
+        /// API endpoint for getting rights for authenticated user.
+        /// </summary>
+        /// <returns>User RightsModel</returns>
+        /// <response code="200">Returns user rights</response>
+        /// <response code="401">If user is not authenticated</response>
         [Authorize]
         [HttpGet]
-        //[ProducesResponseType(200)] // returns 200 if descriptor found
-        //[ProducesResponseType(401)] // returns 401 if user is not authorized to get descriptor for chosen appName
-        //[ProducesResponseType(404)] // returns 404 if descriptor not found
-        // get application descriptor
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
         public IActionResult GetByIdFromToken()
         {
-            var controllerHelper = new ControllerHelper(_context);
             // Authentication
+            var controllerHelper = new ControllerHelper(context);
             var authUserModel = controllerHelper.Authenticate(HttpContext.User.Identity as ClaimsIdentity);
             if (authUserModel == null)
                 return Unauthorized();
-            // Authorization - none - every logged user is authorized to read own rights
-            return Ok(JsonConvert.DeserializeObject<Dictionary<long, RightsEnum>>(authUserModel.Rights.Data));
 
-
-
-
-
-
-
-            // // get logged user's identity
-            // var identity = HttpContext.User.Identity as ClaimsIdentity;
-            // // if user is authenticated and JWT contains claim named LoginApplicationName
-            // if (identity == null || !identity.IsAuthenticated 
-            //                      || identity.FindFirst("LoginApplicationName") == null
-            //                      || identity.FindFirst("UserId") == null)
-            //     // user is not authorized to access application descriptor for application appName
-            //     return Unauthorized();
-            // // get user id for UserId claim
-            // var userIdString = identity.FindFirst("UserId").Value;
-            // long userId;
-            // if (!long.TryParse(userIdString, out userId))
-            //     return BadRequest("UserId claim could not be parsed");
-            // // try to look for user in DB
-            // var userRepository = new UserRepository(_context);
-            // var user = userRepository.GetById(userId);
-            // // var user = (from u in _context.UserDbSet
-            // //             where u.Id == userId
-            // //             select u).FirstOrDefault();
-            // if (user == null)
-            //     return BadRequest("No such user with user id " + userId);
-            // var rights = user.Rights;
-            // // var rights = (from r in _context.RightsDbSet
-            // //               where r.Id == user.RightsId
-            // //               select r).FirstOrDefault();
-            // if (rights == null)
-            //     return BadRequest("No such rights with id" + user.RightsId);
-            // if (rights.Data == null || rights.Data == "")
-            //     return BadRequest("Rights with unfilled data.");
-            // try
-            // {
-            //     return Ok(JsonConvert.DeserializeObject<Dictionary<long, RightsEnum>>(rights.Data));
-            // }
-            // catch
-            // {
-            //     return BadRequest("Malformed rights data.");
-            // }
+            // Authorization - none, because every logged user is authorized to read own rights.
+            
+            return Ok(authUserModel.Rights);
         }
 
     }

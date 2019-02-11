@@ -23,7 +23,7 @@ namespace RazorWebApp.Helpers
             return await cache.GetOrCreateAsync("Descriptor_" + appName, async entry =>
               {
                   entry.SlidingExpiration = TimeSpan.FromMinutes(2);
-                  var response = await _accountService.GetApplicationDescriptorByApplicationName(token.Value);
+                  var response = await _accountService.GetApplicationDescriptor(token.Value);
                   var stringResponse = await response.Content.ReadAsStringAsync();
                   cacheKeys.Add("Descriptor_" + appName);
               return JsonConvert.DeserializeObject<ApplicationDescriptor>(stringResponse);
@@ -40,7 +40,7 @@ namespace RazorWebApp.Helpers
                 cache.GetOrCreateAsync("Rights_" + appName + '_' + userId, async entry =>
               {
                   entry.SlidingExpiration = TimeSpan.FromMinutes(2);
-                  var response = await _accountService.GetRightsByUserId(token.Value);
+                  var response = await _accountService.GetRights(token.Value);
                   var stringResponse = await response.Content.ReadAsStringAsync();
                   cacheKeys.Add("Rights_" + appName + '_' + userId);
                   return JsonConvert.DeserializeObject<Dictionary<long, RightsEnum>>(stringResponse);

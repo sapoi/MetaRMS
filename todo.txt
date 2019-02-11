@@ -1,23 +1,29 @@
 🙈 NOT SUPPORTED
-    - min u referenci (bootstrap-select nema implementovano -> pro min=1 je pot5eba nastavit required=true)
+    - validace min u referenci na klientovi (bootstrap-select nema implementovano -> pro min=1 je pot5eba nastavit required=true)
     - unique
     - search
     - moznost seradit zobrazena data
     - lazy loadig zobrazenych dat
+    - pridat typ backgroundcolor - bude jako color, pro kadzy dataset max jedna -> pokud bude tento dataset referencovany nekde, tak se ta reference podbarvi tou barvou, jakou ma ten radek datasetu nastavenou jako background color
+    - _editbuilderpartial -> data-subtext=" "
 -----------------------
 TODO
-    - pattern na type="tel" + popis do enumu
-    - popis validni type="url"
+    - uzivatelum pridat jazyk a pri vztvreni uzivatale nastavit jako default jazyk aplikace + do settings dat zmenu jazyka
+    - Message.GetMessage() pouzivat language
+    - pouzivat [HttpPost]?
+    - nastavovat user datasetu id - AppInitController
+    - ✅ pattern na type="tel" + popis do enumu
+    - ✅ popis validni type="url"
     - ✅ reference user-user
     - mazani dat - gkeep
         - 🔥 pri mazani uzivatelu/dat kontrolovat, jestli na ne nekde nevede reference
     - kdyz je default heslo, vyzadovat zmenu na safe
         - ✴️ zmena hesla - nekontrolovat delku/spec znaky stareho hesla - vyresi se zavedenim vynuceni zmeny default hesla
     - zobrazovat nekde jmeno prihlaseneho uzivatele
-    - ✴️ validovat prava - musi mit min R na vsechny navazane datasety datasetu, na ktery ma nim R
+    - *️⃣ validovat prava - musi mit min R na vsechny navazane datasety datasetu, na ktery ma nim R
     - ✴️ pridat detail dat - po kliknuti na referenci
-- 🔥🔥🔥🔥🔥🔥validace user data na serveru
-- 🔥🔥🔥🔥🔥🔥validace dat dat na serveru
+    - *️⃣ validace user data na serveru
+    - *️⃣ validace dat dat na serveru
     - ValueList jako dict <string, ...>
                 C  U          x    odesilat model
         data    ✅ ✅                   ✴️
@@ -28,16 +34,15 @@ TODO
     - 🔥🔥🔥
         - ❗️ refresh token (https://www.blinkingcaret.com/2018/05/30/refresh-tokens-in-asp-net-core-web-api/)
     KONTROLA VALIDITY vstupu
-        - ❗️ validace vstupu na klientovi podle app deskriptoru - co nezvaliduje html5?
+        - 🅾️ validace vstupu na klientovi podle app deskriptoru - co nezvaliduje html5?
         - 🔸 app init kontrola ze je vzdy soubor v service a controlleru
     DETAILY
         - if user deleted, log him out first
 - ✅ u dat vracet unauthorized pokud rights = none
-        🅾️- ruzne druhy message - info, warneni, error
-        🅾️- pred redirectto error dat log
-        🅾️- message preparer
-        - pridat typ backgroundcolor - bude jako color, pro kadzy dataset max jedna -> pokud bude tento dataset referencovany nekde, tak se ta reference podbarvi tou barvou, jakou ma ten radek datasetu nastavenou jako background color
-        - _editbuilderpartial -> data-subtext=" "
+    - ruzne druhy message - info, warneni, error
+    🅾️- pred redirectto error dat log
+    - message preparer
+        
     JAVASCRIPT
         🅾️- javascript popup okna pri delete, ...
         🅾️- users alert jestli doopravdy vyresetovat heslo
@@ -66,17 +71,20 @@ JSON VALIDACE
     - co neni true je null = false
     - datasety se nesmi jmenovat jako basic typy
     - nastavit username a password na required pri initu do deskriptoru
+    - nazvy datasetu nesmi obsahovat {cislo} (kvuli replaci messagi)
+    - typ password jen u desla user datasetu
+    - min mensi nez max
 
     - temer jakakoli hodnota atributu muze byt null!!!
 -----------------------
 REFAKTORING
-    - AccountService.GetApplicationDescriptorByAppName dat nekam jinam
-- metoda na kontrolu tokenu a appname do Validations
+    - *️⃣ AccountService.GetApplicationDescriptorByAppName dat nekam jinam
+- *️⃣ metoda na kontrolu tokenu a appname do Validations
     - odstranit login stranku - misto ni je index
     - rozdelit accesshepler 
     - pomocne app init metody z kontrolleru nekam jinam
     - spojit rights, user a data servicy do jedne -> pridat basemodel
-- na serveru validace u controlleru dat zvlast
+- *️⃣ na serveru validace u controlleru dat zvlast
     - misto edit dat patch, jen popisek buttonu bude edit
 - nepouzivat v controllerech appName, ale brat id z claimu
     - ✅ prejmenovat ApplicationDescriptor.LoginAppName a .AppName na (Login)ApplicationName

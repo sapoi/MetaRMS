@@ -8,66 +8,47 @@ using Newtonsoft.Json;
 using SharedLibrary.Descriptors;
 using Server.Repositories;
 using Server.Helpers;
+using System.Collections.Generic;
+using SharedLibrary.Structures;
 
 namespace Server.Controllers
 {
     [Route("api/[controller]")]
     public class ApplicationDescriptorController : Controller
     {
-        private readonly DatabaseContext _context;
-
+        /// <summary>
+        /// Database context for repository.
+        /// </summary>
+        private readonly DatabaseContext context;
         public ApplicationDescriptorController(DatabaseContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
+        /// <summary>
+        /// API endpoint for getting application descriptor for authenticated user.
+        /// </summary>
+        /// <returns>ApplicationDescriptor</returns>
+        /// <response code="200">Returns application descriptor</response>
+        /// <response code="401">If user is not authenticated</response>
         [Authorize]
         [HttpGet]
-        [ProducesResponseType(200)] // returns 200 if descriptor found
-        [ProducesResponseType(401)] // returns 401 if user is not authorized to get descriptor for chosen appName
-        [ProducesResponseType(404)] // returns 404 if descriptor not found
-        // get application descriptor
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
         public IActionResult Get()
         {
-            var controllerHelper = new ControllerHelper(_context);
+            // List of messages to return to the client
+            var messages = new List<Message>();
+
             // Authentication
+            var controllerHelper = new ControllerHelper(context);
             var authUserModel = controllerHelper.Authenticate(HttpContext.User.Identity as ClaimsIdentity);
             if (authUserModel == null)
                 return Unauthorized();
-            // Authorization - none - every logged user is authorized to read application descriptor
-            // Get data from database
-            var applicationRepository = new ApplicationRepository(_context);
-            var applicationModel = applicationRepository.GetById(authUserModel.ApplicationId);
-            if (applicationModel == null)
-                return NotFound();
-            return Ok(JsonConvert.DeserializeObject<ApplicationDescriptor>(applicationModel.ApplicationDescriptorJSON));
 
+            // Authorization - none, because every logged user is authorized to read an own application descriptor.
 
-
-
-
-            // // get logged user's identity
-            // var identity = HttpContext.User.Identity as ClaimsIdentity;
-            // // if user is authenticated and JWT contains claim named LoginApplicationName
-            // if (!identity.IsAuthenticated || identity.FindFirst("LoginApplicationName") == null)
-            //     // user is not authorized to access application descriptor for application appName
-            //     return Unauthorized();
-            // // get value for LoginApplicationName claim
-            // var appNameFromJWT = identity.FindFirst("LoginApplicationName").Value;
-            // // try to look for application descriptor in database
-            // var applicationRepository = new ApplicationRepository(_context);
-            // var applicationModel = applicationRepository.GetByLoginApplicationName(appNameFromJWT);
-            // // var query = (from p in _context.ApplicationDbSet
-            // //              where p.LoginApplicationName == appNameFromJWT
-            // //              select p.ApplicationDescriptorJSON).FirstOrDefault();
-            // // application not found
-            // if (applicationModel == null)
-            //     return NotFound();
-            // // application found successfully, return descriptor
-
-
-            // return Ok(JsonConvert.DeserializeObject<ApplicationDescriptor>(applicationModel.ApplicationDescriptorJSON));
-
+            return Ok(authUserModel.Application.ApplicationDescriptor);
         }
     }
 }

@@ -12,13 +12,13 @@ namespace SharedLibrary.Services
 {
     public class AccountService : IAccountService
     {
-        private HttpClient _client;
+        private HttpClient client;
         public AccountService()
         {
-            _client = new HttpClient();
-            _client.BaseAddress = new Uri("http://localhost:5000/api/account");
-            _client.DefaultRequestHeaders.Clear();
-            _client.DefaultRequestHeaders.Add("Accept", "application/json");
+            client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:5000/api/account");
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
         }
 
         public async Task<HttpResponseMessage> Login(LoginCredentials loginCredentials)
@@ -26,34 +26,34 @@ namespace SharedLibrary.Services
             // odesílání přihlašovacích údalů na server
             string jsonLoginData = JsonConvert.SerializeObject(loginCredentials);
             var jsonLoginDataContent = new StringContent(jsonLoginData, Encoding.UTF8, "application/json");
-            var address = new Uri(_client.BaseAddress.OriginalString + "/login");
-            return await _client.PostAsync(address, jsonLoginDataContent);
+            var address = new Uri(client.BaseAddress.OriginalString + "/login");
+            return await client.PostAsync(address, jsonLoginDataContent);
         }
         public async Task<HttpResponseMessage> Logout(string token)
         {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var address = new Uri(_client.BaseAddress.OriginalString + "/logout");
-            return await _client.PostAsync(address, new StringContent(""));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var address = new Uri(client.BaseAddress.OriginalString + "/logout");
+            return await client.PostAsync(address, new StringContent(""));
         }
-        public async Task<HttpResponseMessage> GetApplicationDescriptorByApplicationName(string token)
+        public async Task<HttpResponseMessage> GetApplicationDescriptor(string token)
         {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var address = new Uri("http://localhost:5000/api/applicationdescriptor");
-            return await _client.GetAsync(address);
+            return await client.GetAsync(address);
         }
-        public async Task<HttpResponseMessage> GetRightsByUserId(string token)
+        public async Task<HttpResponseMessage> GetRights(string token)
         {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var address = new Uri(_client.BaseAddress.OriginalString + "/rights");
-            return await _client.GetAsync(address);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var address = new Uri(client.BaseAddress.OriginalString + "/rights");
+            return await client.GetAsync(address);
         }
-        public async Task<HttpResponseMessage> ChangePassword(string appName, PasswordChangeStructure passwords, string token)
+        public async Task<HttpResponseMessage> ChangePassword(PasswordChangeStructure passwords, string token)
         {
             string jsonPasswordsData = JsonConvert.SerializeObject(passwords);
             var jsonDataContent = new StringContent(jsonPasswordsData, Encoding.UTF8, "application/json");
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var address = new Uri(_client.BaseAddress.OriginalString + "/settings/password");
-            return await _client.PostAsync(address, jsonDataContent);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var address = new Uri(client.BaseAddress.OriginalString + "/settings/password");
+            return await client.PostAsync(address, jsonDataContent);
         }
     }
 }

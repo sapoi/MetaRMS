@@ -1,18 +1,20 @@
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.Models;
 
 namespace SharedLibrary.Services
 {
+    /// <summary>
+    /// IDataServece is a interface for services regarding to DataModel.
+    /// Additional comments of each method can be found with the implementation.
+    /// </summary>
     public interface IDataService  
-    {           
-        Task<HttpResponseMessage> GetAll(string appName, string dataset, string token);
-        Task<HttpResponseMessage> GetById(string appName, string dataset, long id, string token);
-        Task<HttpResponseMessage> DeleteById(string appName, string dataset, long id, string token);
-        Task<HttpResponseMessage> PatchById(string appName, string dataset, long id, Dictionary<string, List<string>> dataDict, string token);
-        Task<HttpResponseMessage> Create(string appName, string dataset, Dictionary<string, List<string>> dataDict, string token);
+    {
+        Task<HttpResponseMessage> GetAll(long datasetId, string token);
+        Task<HttpResponseMessage> GetById(long id, string token);
+        Task<HttpResponseMessage> DeleteById(long id, string token);
+        Task<HttpResponseMessage> Patch(DataModel dataModel, string token);
+        Task<HttpResponseMessage> Create(DataModel dataModel, string token);
         
 
     }

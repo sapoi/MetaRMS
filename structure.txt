@@ -1,0 +1,157 @@
+.
+├── RazorWebApp *️⃣
+│   ├── Helpers 
+│   │   ├── AccessHelper.cs *️⃣
+│   │   ├── AuthorizationHelper.cs *️⃣
+│   │   ├── CacheAccessHelper.cs *️⃣
+│   │   ├── DataLoadingHelper.cs *️⃣
+│   │   └── ValidationHelper.cs *️⃣
+│   ├── Pages 
+│   │   ├── About.cshtml *️⃣
+│   │   ├── About.cshtml.cs *️⃣
+│   │   ├── Account 
+│   │   │   ├── DefaultPasswordChange.cshtml *️⃣
+│   │   │   ├── DefaultPasswordChange.cshtml.cs *️⃣
+│   │   │   ├── Login.cshtml *️⃣
+│   │   │   ├── Login.cshtml.cs *️⃣
+│   │   │   ├── Logout.cshtml *️⃣
+│   │   │   ├── Logout.cshtml.cs *️⃣
+│   │   │   ├── Settings.cshtml *️⃣
+│   │   │   └── Settings.cshtml.cs *️⃣
+│   │   ├── AppInit 
+│   │   │   ├── Index.cshtml *️⃣
+│   │   │   └── Index.cshtml.cs *️⃣
+│   │   ├── Contact.cshtml *️⃣
+│   │   ├── Contact.cshtml.cs *️⃣
+│   │   ├── Data 
+│   │   │   ├── Create.cshtml *️⃣
+│   │   │   ├── Create.cshtml.cs *️⃣
+│   │   │   ├── Edit.cshtml *️⃣
+│   │   │   ├── Edit.cshtml.cs *️⃣
+│   │   │   ├── Get.cshtml *️⃣
+│   │   │   └── Get.cshtml.cs *️⃣
+│   │   ├── Error.cshtml *️⃣
+│   │   ├── Error.cshtml.cs *️⃣
+│   │   ├── Errors 
+│   │   │   ├── ServerError.cshtml *️⃣
+│   │   │   ├── ServerError.cshtml.cs *️⃣
+│   │   │   ├── Unauthorized.cshtml *️⃣
+│   │   │   └── Unauthorized.cshtml.cs *️⃣
+│   │   ├── Index.cshtml *️⃣
+│   │   ├── Index.cshtml.cs *️⃣
+│   │   ├── Rights 
+│   │   │   ├── Create.cshtml *️⃣
+│   │   │   ├── Create.cshtml.cs *️⃣
+│   │   │   ├── Edit.cshtml *️⃣
+│   │   │   ├── Edit.cshtml.cs *️⃣
+│   │   │   ├── Get.cshtml *️⃣
+│   │   │   └── Get.cshtml.cs *️⃣
+│   │   ├── Shared 
+│   │   │   ├── _EditBuilderPartial.cshtml *️⃣
+│   │   │   ├── _GetBuilderPartial.cshtml *️⃣
+│   │   │   ├── _LoggedMenuPartial.cshtml *️⃣
+│   │   │   ├── _LogoutMenuPartial.cshtml *️⃣
+│   │   │   └── _ReadAuthorizedDatasetsMenuPartial.cshtml *️⃣
+│   │   ├── User 
+│   │   │   ├── Create.cshtml *️⃣
+│   │   │   ├── Create.cshtml.cs *️⃣
+│   │   │   ├── Edit.cshtml *️⃣
+│   │   │   ├── Edit.cshtml.cs *️⃣
+│   │   │   ├── Get.cshtml *️⃣
+│   │   │   └── Get.cshtml.cs *️⃣
+│   │   ├── _Layout.cshtml *️⃣
+│   │   ├── _ValidationScriptsPartial.cshtml *️⃣
+│   │   ├── _ViewImports.cshtml *️⃣
+│   │   └── _ViewStart.cshtml *️⃣
+│   ├── Program.cs *️⃣
+│   ├── Startup.cs *️⃣
+│   └── Structures 
+│       ├── EditBuilderPartialData.cs *️⃣
+│       ├── GetBuilderPartialData.cs *️⃣
+│       └── LoggedMenuPartial.cs *️⃣
+├── Server 
+│   ├── Cache 
+│   │   └── ReferenceCache.cs *️⃣
+│   ├── Controllers 
+│   │   ├── Account 
+│   │   │   ├── LoginController.cs *️⃣
+│   │   │   ├── LogoutController.cs *️⃣
+│   │   │   ├── RightsController.cs ✴️
+│   │   │   └── Settings 
+│   │   │       └── PasswordController.cs ✴️
+│   │   ├── AppInitController.cs *️⃣
+│   │   ├── ApplicationDescriptorController.cs ✴️
+│   │   ├── Data 
+│   │   │   ├── CreateController.cs ✴️
+│   │   │   ├── DeleteController.cs *️⃣
+│   │   │   ├── GetController.cs ✴️
+│   │   │   └── PatchController.cs ✴️
+│   │   ├── Rights 
+│   │   │   ├── CreateController.cs ✴️
+│   │   │   ├── DeleteController.cs *️⃣
+│   │   │   ├── GetController.cs ✴️
+│   │   │   └── PatchController.cs ✴️
+│   │   └── User 
+│   │       ├── CreateController.cs ✴️
+│   │       ├── DeleteController.cs *️⃣
+│   │       ├── GetController.cs ✴️
+│   │       ├── PatchController.cs ✴️
+│   │       └── ResetPasswordController.cs ✴️
+│   ├── Helpers 
+│   │   ├── AccessHelper.cs *️⃣
+│   │   ├── ControllerHelper.cs *️⃣
+│   │   ├── DataHelper.cs *️⃣
+│   │   └── PasswordHelper.cs *️⃣
+│   ├── Model.cs *️⃣
+│   ├── Program.cs *️⃣
+│   ├── Repositories 
+│   │   ├── ApplicationRepository.cs ✅
+│   │   ├── BaseRepository.cs ✅
+│   │   ├── DataRepository.cs ✅
+│   │   ├── RightsRepository.cs ✅
+│   │   └── UserRepository.cs ✅
+│   └── Startup.cs *️⃣
+├── SharedLibrary 
+│   ├── Descriptors - 👉 used when describing application
+│   │   ├── ApplicationDescriptor.cs ✅
+│   │   ├── AttributeDescriptor.cs ⛔️ TODO - Unique not supported
+│   │   ├── DatasetDescriptor.cs ✅
+│   │   ├── SystemDatasetDescriptor.cs ✅
+│   │   └── UsersDatasetDescriptor.cs ✅
+│   ├── Enums 
+│   │   ├── AttributeTypeEnum.cs ✅
+│   │   ├── LanguagesEnum.cs ✅
+│   │   ├── MessageTypeEnum.cs ✅
+│   │   ├── RightsEnum.cs ✅
+│   │   └── SystemDatasetsEnum.cs ✅
+│   ├── Helpers 
+│   │   ├── ApplicationDescriptorHelper.cs *️⃣
+│   │   ├── Logger.cs *️⃣
+│   │   ├── TokenHelper.cs *️⃣
+│   │   └── ValidationsHelper.cs *️⃣
+│   ├── Models - 👉 database models
+│   │   ├── ApplicationModel.cs ✅
+│   │   ├── DataModel.cs ✅
+│   │   ├── IBaseModel.cs ✅
+│   │   ├── IBaseModelWithApplicationAndData.cs ✅
+│   │   ├── RightsModel.cs ✅
+│   │   └── UserModel.cs ✅
+│   ├── Services 
+│   │   ├── AccountService.cs *️⃣
+│   │   ├── AppInitService.cs *️⃣
+│   │   ├── DataService.cs *️⃣
+│   │   ├── IAccountService.cs ✅
+│   │   ├── IAppInitService.cs ✅
+│   │   ├── IDataService.cs ✅
+│   │   ├── IRightsService.cs ✅
+│   │   ├── IUserService.cs ✅
+│   │   ├── RightsService.cs *️⃣
+│   │   └── UserService.cs *️⃣
+│   ├── Structures 
+│   │   ├── JWTToken.cs *️⃣
+│   │   ├── LoginCredentials.cs ✅
+│   │   ├── Message.cs ⛔️ TODO - language
+│   │   └── PasswordChangeStructure.cs ✅
+├── errorcodes.txt 
+├── structure.txt 
+└── todo.txt 

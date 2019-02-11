@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Server.Repositories;
@@ -9,10 +11,10 @@ namespace Server.Helpers
 {
     public class ControllerHelper
     {
-        DatabaseContext _context;
+        DatabaseContext context;
         public ControllerHelper(DatabaseContext context)
         {
-            _context = context;
+            this.context = context;
         }
         public UserModel Authenticate(ClaimsIdentity identity)
         {
@@ -33,7 +35,7 @@ namespace Server.Helpers
                 return null;
             }
             // try to look for user in DB
-            var userRepository = new UserRepository(_context);
+            var userRepository = new UserRepository(context);
             var userModel = userRepository.GetById(userId);
             if (userModel == null)
             {
@@ -46,6 +48,22 @@ namespace Server.Helpers
         public bool Authorize(UserModel userModel, long datasetId, RightsEnum minimalRights)
         {
             return (RightsEnum)userModel.Rights.DataDictionary[datasetId.ToString()] >= minimalRights;
+        }
+        public Dictionary<string, List<long>> GetAllReferencesIdsDictionary(ApplicationModel applicationModel)
+        {
+            var stringKeyDictionary = new Dictionary<string, List<long>>();
+            var dataRepository = new DataRepository(context);
+            var longKeyDictionary = dataRepository.GetAllReferencesIdsDictionary(applicationModel.Id);
+            foreach (var item in longKeyDictionary)
+            {
+                string key = applicationModel.ApplicationDescriptor.Datasets.First(d => d.Id == item.Key).Name;
+                stringKeyDictionary.Add(key, item.Value);
+            }
+            var userRepository = new UserRepository(context);
+            var longKeyUserReferences = userRepository.GetAllReferencesIdsDictionary(applicationModel.Id);
+            stringKeyDictionary.Add(applicationModel.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name,
+                                    longKeyUserReferences.Value);
+            return stringKeyDictionary;
         }
     }
 }

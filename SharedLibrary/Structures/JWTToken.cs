@@ -4,7 +4,6 @@ namespace SharedLibrary.Structures
     {
         public class AccessToken
         {
-            //public string Key;
             public string Value;
         }
     }

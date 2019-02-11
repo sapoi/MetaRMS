@@ -9,22 +9,34 @@ namespace SharedLibrary.Descriptors
     public class DatasetDescriptor
     {
         /// <summary>
-        /// Dataset name is unique within the application datasets.
+        /// Name property.
         /// </summary>
+        /// <value>
+        /// Dataset name is unique within the application datasets.
+        /// </value>
         public string Name { get; set; }
         /// <summary>
+        /// Description property.
+        /// </summary>
+        /// <value>
         /// Dataset description is an arbitrary string describing the dataset.
         /// It is displayed next to a dataset name when the list of dataset data is displayed.
         /// This string is for applications users to help them understand what the dataset contains.
-        /// </summary>
+        /// </value>
         public string Description { get; set; }
         /// <summary>
-        /// Id is a unique dataset identifier within application and is assigned to the dataset automatically.
+        /// Id property.
         /// </summary>
+        /// <value>
+        /// Id is a unique dataset identifier within application and is assigned to the dataset automatically.
+        /// </value>
         public long Id { get; set; }
         /// <summary>
-        /// List of Dataset attributes.
+        /// Attributes property.
         /// </summary>
+        /// <value>
+        /// List of Dataset attributes.
+        /// </value>
         public List<AttributeDescriptor> Attributes { get; set; }
     }
 }

@@ -14,98 +14,98 @@ using Server.Repositories;
 using Server.Helpers;
 using System.Security.Claims;
 using SharedLibrary.Enums;
+using SharedLibrary.Structures;
 
 namespace Server.Controllers.User
 {
     [Route("api/user/[controller]")]
     public class CreateController : Controller
     {
-        private readonly DatabaseContext _context;
+        /// <summary>
+        /// Database context for repository.
+        /// </summary>
+        private readonly DatabaseContext context;
 
         public CreateController(DatabaseContext context)
         {
-            _context = context;
+            this.context = context;
         }
+        /// <summary>
+        /// API endpoint for creating user.
+        /// </summary>
+        /// <returns>Messages about action result</returns>
+        /// <response code="200">If user successfully created</response>
+        /// <response code="401">If user is not authenticated</response>
+        /// <response code="403">If user is not autorized to create users</response>
+        /// <response code="404">If input is not valid</response>
         [Authorize]
         [HttpPost]
-        [Route("{appName}")]
-        public IActionResult Create(string appName, [FromBody] UserModel fromBodyUserModel)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(403)]
+        [ProducesResponseType(404)]
+        public IActionResult Create([FromBody] UserModel fromBodyUserModel)
         {
-            var controllerHelper = new ControllerHelper(_context);
+            // List of messages to return to the client
+            var messages = new List<Message>();
+
             // Authentication
+            var controllerHelper = new ControllerHelper(context);
             var authUserModel = controllerHelper.Authenticate(HttpContext.User.Identity as ClaimsIdentity);
             if (authUserModel == null)
                 return Unauthorized();
+
             // Authorization
             if (!controllerHelper.Authorize(authUserModel, (long)SystemDatasetsEnum.Users, RightsEnum.CRU))
                 return Forbid();
-            // input prepare - set application - the same as auth user
-            fromBodyUserModel.ApplicationId = authUserModel.ApplicationId;
+
+            #region VALIDATIONS
+
+            // New user ApplicationId must be the same as of authorized user
+            var validationsHelper = new ValidationsHelper();
+            messages = validationsHelper.ValidateApplicationId(fromBodyUserModel.ApplicationId, authUserModel.ApplicationId);
+            if (messages.Count != 0)
+                return BadRequest(messages);
             fromBodyUserModel.Application = authUserModel.Application;
-            //TODO Input data validations
-            var userRepository = new UserRepository(_context);
-            //INPUT VALIDATIONS
-            // check if username is nonempty
-            if (fromBodyUserModel.GetUsername() == "")
-                return BadRequest("ERROR: Username can not be an empty string.");
-            // check if username is unique
+            
+            // New username must be nonempty
+            if (fromBodyUserModel.GetUsername() == null || fromBodyUserModel.GetUsername() == "")
+            {
+                messages.Add(new Message(MessageTypeEnum.Error, 
+                                                  3001, 
+                                                  new List<string>()));
+                return BadRequest(messages);
+            }
+
+            // New username must be unique
+            var userRepository = new UserRepository(context);
             var sameNameUser = userRepository.GetByApplicationIdAndUsername(authUserModel.ApplicationId, fromBodyUserModel.GetUsername());
             if (sameNameUser != null)
-                return BadRequest($"ERROR: User named \"{fromBodyUserModel.GetUsername()}\" already exists, please choose another username.");
-            // reset passwword to default
+            {
+                messages.Add(new Message(MessageTypeEnum.Error, 
+                                                  3002, 
+                                                  new List<string>(){ fromBodyUserModel.GetUsername() }));
+                return BadRequest(messages);
+            }
+
+            // Input data validations
+            var validReferencesIdsDictionary = controllerHelper.GetAllReferencesIdsDictionary(authUserModel.Application);
+            messages = validationsHelper.ValidateDataByApplicationDescriptor(authUserModel.Application.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor, 
+                                                                               fromBodyUserModel.DataDictionary, 
+                                                                               validReferencesIdsDictionary);
+            if (messages.Count != 0)
+                return BadRequest(messages);
+
+            #endregion
+
+            // Reset password to default
             userRepository.ResetPassword(fromBodyUserModel);
 
             userRepository.Add(fromBodyUserModel);
-            return Ok($"INFO: New user \"{fromBodyUserModel.GetUsername()}\" created successfully.");
-
-
-
-
-
-            // var applicationRepository = new ApplicationRepository(_context);
-            // var application = applicationRepository.GetByLoginApplicationName(appName);
-            // // ApplicationModel application = (from a in _context.ApplicationDbSet
-            // //                        where (a.LoginApplicationName == appName)
-            // //                        select a).FirstOrDefault();
-            // if (application == null)
-            //     return BadRequest("spatny nazev aplikace neexistuje");
-
-            // string JsonData = JsonConvert.SerializeObject(fromBodyUserModel.DataDictionary);
-            // // string hashedPassword = PasswordHelper.ComputeHash(fromBodyUserModel.GetUsername());
-            // UserModel userModel = new UserModel{ ApplicationId = application.Id, 
-            //                                      Application = application,
-            //                                      //Username = fromBodyUserModel.Username, 
-            //                                     //  Password = hashedPassword,
-            //                                      Data = JsonData,
-            //                                      RightsId = fromBodyUserModel.RightsId
-            //                                     };
-            // //INPUT VALIDATIONS
-            // // check if username is nonempty
-            // if (userModel.GetUsername() == "")
-            //     return BadRequest("Username can not be an empty string.");
-
-            
-            // var userRepository = new UserRepository(_context);
-
-            // // check if user name is unique
-            // var sameNameUser = userRepository.GetByApplicationIdAndUsername(application.Id, userModel.GetUsername());
-            // // var sameNameUser = _context.UserDbSet.Where(u => u.ApplicationId == application.Id && 
-            // //                                                   u.GetUsername() == dataModel.GetUsername()).ToList();
-            // if (sameNameUser != null)
-            //     return BadRequest($"User named {userModel.GetUsername()} already exists, please chhose another username.");
-
-            // // reset passwword to default
-            // userRepository.ResetPassword(userModel);
-
-            // userRepository.Add(userModel);
-
-            // // // reset passwword to default
-            // // userRepository.ResetPassword(userModel);
-
-
-            // // _context.UserDbSet.Add(userModel);
-            // // _context.SaveChanges();
-            // return Ok($"New user {userModel.GetUsername()} created successfully.");
+            messages.Add(new Message(MessageTypeEnum.Info, 
+                                              3003, 
+                                              new List<string>(){ fromBodyUserModel.GetUsername() }));
+            return Ok(messages);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SharedLibrary.Enums;
 
 namespace SharedLibrary.Descriptors
 {
@@ -10,23 +11,32 @@ namespace SharedLibrary.Descriptors
     public class ApplicationDescriptor
     {
         /// <summary>
-        /// ApplicationName is a non-unique string displayed for a logged user.
+        /// ApplicationName property.
         /// </summary>
+        /// <value>ApplicationName is a non-unique string displayed for a logged user.</value>
         public string ApplicationName { get; set; }
         /// <summary>
-        /// LoginApplicationName is a unique string used to log into the application.
+        /// LoginApplicationName property.
         /// </summary>
+        /// <value>LoginApplicationName is a unique string used to log into the application.</value>
         public string LoginApplicationName { get; set; }
-        //TODO remove?
-        public string DefaultLanguage { get; set; }
         /// <summary>
+        /// DefaultLanguage property.
+        /// </summary>
+        /// <value>DefaultLanguage is a value from LanguageEnum, used when creating a new user as the users language.</value>
+        public LanguageEnum DefaultLanguage { get; set; }
+        /// <summary>
+        /// SystemDatasets property.
+        /// </summary>
+        /// <value>
         /// SystemDatasets contains system datasets with mandatory elements and some user defined parts.
         /// In current version UserDatasetDescriptor is obligatory.
-        /// </summary>
+        /// </value>
         public SystemDatasetDescriptor SystemDatasets { get; set; }
         /// <summary>
-        /// Datasets list contains user defined datasets.
+        /// Datasets property.
         /// </summary>
+        /// <value>Datasets list contains user defined datasets.</value>
         public List<DatasetDescriptor> Datasets { get; set; }
         /// <summary>
         /// Function used to get an AttributeDescriptor for username.

@@ -25,7 +25,7 @@ namespace SharedLibrary.Helpers
             // find attributes with references
             setReferencesIndices(datasetId);
         }
-        public void PrepareOneRowForClient(BaseModelWithApplicationAndData model)
+        public void PrepareOneRowForClient(IBaseModelWithApplicationAndData model)
         {
             var preparedDictionary = model.DataDictionary;
             translateIDToText(preparedDictionary);

@@ -14,12 +14,12 @@ namespace SharedLibrary.Enums
             /// </summary>
             "color",
             /// <summary>
-            /// "date" represents date in YYYY-MM-DD format stored as list containing one string 
+            /// "date" represents date in yyyy-MM-dd format stored as list containing one string 
             /// Example: ["2019-02-21"]
             /// </summary>
             "date",
             /// <summary>
-            /// "datetime" represents date and time in YYYY-MM-DDTHH:MM format stored as list containing one string 
+            /// "datetime" represents date and time in yyyy-MM-ddThh:mm format stored as list containing one string 
             /// Example: ["2019-02-11T20:57"]
             /// </summary>
             "datetime",
@@ -29,18 +29,20 @@ namespace SharedLibrary.Enums
             /// </summary>
             "email",
             /// <summary>
-            /// "month" represents month in YYYY-MM format stored as list containing one string 
+            /// "month" represents month in yyyy-MM format stored as list containing one string 
             /// Example: ["2019-02"]
             /// </summary>
             "month",
             /// <summary>
-            /// "int" represents any signed or unsigned integer stored as list containing one string 
-            /// Example: ["-1234"] or ["-2.34567890876543212e+113"] or even ["-2345678908765432125678909876543213456789087654321345678908765432123456789098765432123456789876543214567872123456787654321234567890876543212345678900987654321234567890"]
+            /// "int" represents signed or unsigned integer between –2,147,483,648 and 2,147,483,647 
+            /// corresponding to C# int stored as list containing one string 
+            /// Example: ["-1234"]
             /// </summary>
             "int",
             /// <summary>
-            /// "float" represents any signed or unsigned floating point number stored as list containing one string 
-            /// Example: ["-12.34"] or ["-1.23456789098765432e+173"] or even ["-123456789098765432134567812345678909876543213456781234567890987654321345678123456321345678.12345678909876543213456781234567890987654321345678123456789087654321345678"]
+            /// "float" represents signed or unsigned floating point number between
+            /// corresponding to C# float stored as list containing one string 
+            /// Example: ["-12.34"]
             /// </summary>
             "float",
             /// <summary>
@@ -48,7 +50,11 @@ namespace SharedLibrary.Enums
             /// Example: ["-42"] 
             /// </summary>
             "year",
-            //TODO popis
+            /// <summary>
+            /// "tel" represents any phone number vit legal characters (numbers, "+", "(", ")", ".", "-" and ",") 
+            /// stored as list containing the string as first element
+            /// Example: ["+123 (456)-789"]
+            /// </summary>
             "tel",
             /// <summary>
             /// "string" represents any preferably short string stored as list containing the string as first element
@@ -56,11 +62,14 @@ namespace SharedLibrary.Enums
             /// </summary>
             "string",
             /// <summary>
-            /// "time" represents time in HH:MM format stored as list containing one string 
-            /// Example: ["14:19"],
+            /// "time" represents time in hh:mm format stored as list containing one string 
+            /// Example: ["14:19"]
             /// </summary>
             "time",
-            //TODO popis
+            /// <summary>
+            /// "url" represents absloute or relative url stored as list containing one string 
+            /// Example: ["www.example.com"]
+            /// </summary>
             "url",
             /// <summary>
             /// "username" represents a unique username in UsersDatasetDescriptor stored as list containing one string

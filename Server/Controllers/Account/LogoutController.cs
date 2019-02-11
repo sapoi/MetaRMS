@@ -1,36 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using SharedLibrary.Helpers;
-using SharedLibrary.Models;
-using SharedLibrary.Structures;
 
 namespace Server.Controllers.Account
 {
     [Route("api/account/[controller]")]
     public class LogoutController : Controller
     {
-        private readonly IConfiguration _configuration;
-        public LogoutController(IConfiguration configuration, DatabaseContext context)
+        /// <summary>
+        /// Database context for repository.
+        /// </summary>
+        private readonly DatabaseContext context;
+        public LogoutController(DatabaseContext context)
         {
-            _configuration = configuration;
-            _context = context;
+            this.context = context;
         }
-        private readonly DatabaseContext _context;
-
-        // sem se dostane kdokoli
+        /// <summary>
+        /// API endpoint for user logout.
+        /// </summary>
+        /// <returns>Error of info message about action result</returns>
+        /// <response code="200">If user was successfully logged out</response>
         [Authorize]
         [HttpPost]
+        [ProducesResponseType(200)]
         public IActionResult Logout()
         {
             //TODO 

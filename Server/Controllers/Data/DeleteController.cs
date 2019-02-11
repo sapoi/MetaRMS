@@ -50,35 +50,6 @@ namespace Server.Controllers.Data
                 return BadRequest($"ERROR: Combination of application name \"{authUserModel.Application.LoginApplicationName}\", dataset \"{datasetName}\" and id \"{id}\" does not exist.");
             dataRepository.Remove(dataModel);
             return Ok($"INFO: Data from dataset \"{datasetName}\" deleted successfully.");
-
-
-            // var applicationRepository = new ApplicationRepository(_context);
-            // var application = applicationRepository.GetByLoginApplicationName(appName);
-            // // ApplicationModel application = (from a in _context.ApplicationDbSet
-            // //                        where (a.LoginApplicationName == appName)
-            // //                        select a).FirstOrDefault();
-            // if (application == null)
-            //     return BadRequest($"ERROR: Application name {appName} does not exist.");
-            // // ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON);
-            // // var datasetId = adh.GetDatasetIdByName(datasetName);
-            // // if (datasetId == null)
-            // //     return BadRequest($"ERROR: Dataset name {datasetName} does not exist.");
-            // ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptor);
-            // var datasetDescriptor = adh.GetDatasetDescriptorByName(datasetName);
-            // if (datasetDescriptor == null)
-            //     return BadRequest($"ERROR: Dataset name {datasetName} does not exist.");
-            // var dataRepository = new DataRepository(_context);
-            // //TODO kontrolovat id+dataset+aplikaci
-            // var dataModel = dataRepository.GetById(id);
-            // // DataModel dataModel = (from p in _context.DataDbSet
-            // //                        where (p.Application.LoginApplicationName == appName && p.DatasetId == datasetId && p.Id == id)
-            // //                        select p).FirstOrDefault();
-            // if (dataModel == null)
-            //     return BadRequest($"ERROR: Combination of application name {appName}, dataset {datasetName} and id {id} does not exist.");
-            // dataRepository.Remove(dataModel);
-            // // _context.DataDbSet.Remove(query);
-            // // _context.SaveChanges();
-            // return Ok($"Data  from dataset {datasetName} deleted successfully.");
         }
     }
 }

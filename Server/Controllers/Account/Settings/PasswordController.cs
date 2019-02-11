@@ -1,20 +1,11 @@
-using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using Server.Helpers;
 using Server.Repositories;
+using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
-using SharedLibrary.Models;
 using SharedLibrary.Structures;
 
 namespace Server.Controllers.Account.Settings
@@ -22,64 +13,92 @@ namespace Server.Controllers.Account.Settings
     [Route("api/account/settings/[controller]")]
     public class PasswordController : Controller
     {
-        private readonly IConfiguration _configuration;
-        public PasswordController(IConfiguration configuration, DatabaseContext context)
+        /// <summary>
+        /// Database context for repository.
+        /// </summary>
+        private readonly DatabaseContext context;
+        public PasswordController(DatabaseContext context)
         {
-            _configuration = configuration;
-            _context = context;
+            this.context = context;
         }
-        private readonly DatabaseContext _context;
-
+        /// <summary>
+        /// API endpoint for password change.
+        /// </summary>
+        /// <returns>Error of info message about action result</returns>
+        /// <response code="200">If password successfully changed</response>
+        /// <response code="401">If user is not authenticated</response>
+        /// <response code="404">If input passwords are not valid</response>
         [Authorize]
         [HttpPost]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(404)]
         public IActionResult PasswordChange([FromBody] PasswordChangeStructure passwords)
         {
-            var controllerHelper = new ControllerHelper(_context);
+            // List of messages to return to the client
+            var messages = new List<Message>();
+
             // Authentication
+            var controllerHelper = new ControllerHelper(context);
             var authUserModel = controllerHelper.Authenticate(HttpContext.User.Identity as ClaimsIdentity);
             if (authUserModel == null)
                 return Unauthorized();
-            // Authorization - none - every logged user is authorized to change an own password
 
-            //INPUT VALIDATIONS
+            // Authorization - none, because every logged user is authorized to change an own password.
+
+            #region VALIDATIONS
+
+            // All passwords must not be null or empty strings
             if (passwords.OldPassword == null || passwords.OldPassword == "" ||
-                passwords.NewPassword == null || passwords.NewPassword == "" )
-                return BadRequest("ERROR: Both old and new passwords are required to be non empty.");
+                passwords.NewPassword == null || passwords.NewPassword == "" ||
+                passwords.NewPasswordCopy == null || passwords.NewPasswordCopy == "")
+            {
+                messages.Add(new Message(MessageTypeEnum.Error, 
+                                                  5001, 
+                                                  new List<string>()));
+                return BadRequest(messages);
+            }
+
+            // Both new passwords must be equal
+            if (passwords.NewPassword != passwords.NewPasswordCopy)
+            {
+                messages.Add(new Message(MessageTypeEnum.Error, 
+                                                  5002, 
+                                                  new List<string>()));
+                return BadRequest(messages);
+            }
+
+            // Old password must be correct
             if (authUserModel.Password != PasswordHelper.ComputeHash(passwords.OldPassword))
-                return BadRequest("ERROR: Old password is incorrect.");
+            {
+                messages.Add(new Message(MessageTypeEnum.Error, 
+                                                  5003, 
+                                                  new List<string>()));
+                return BadRequest(messages);
+            }
 
-            var userRepository = new UserRepository(_context);
+            // If passwords are required to be safer by application descriptor
+            if (authUserModel.Application.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.PasswordAttribute.Safer == true)
+            {
+                var validationsHelper = new ValidationsHelper();
+                if (!validationsHelper.IsPasswordSafer(passwords.NewPassword))
+                {
+                    messages.Add(new Message(MessageTypeEnum.Error, 
+                                                      5004, 
+                                                      new List<string>()));
+                    return BadRequest(messages);
+                }
+            }
+
+            #endregion
+
+            // Setting new password
+            var userRepository = new UserRepository(context);
             userRepository.SetPassword(authUserModel, passwords.NewPassword);
-            return Ok("Password changed successfully.");
-
-
-
-            // // get logged user's identity from HttpContext
-            // var identity = HttpContext.User.Identity as ClaimsIdentity;
-            // // if user is authenticated and JWT contains claim named LoginApplicationName
-            // long userId = -1;
-            // if (!identity.IsAuthenticated || !identity.HasClaim(c => c.Type == "LoginApplicationName"
-            //                               || !identity.HasClaim(d => d.Type == "UserId"
-            //                               || !long.TryParse(identity.FindFirst("UserId").Value, out userId))))
-            //     // user is not authorized to access application appName
-            //     return Unauthorized(); //TODO zmanit na bad request s message
-            // string appName = identity.FindFirst("LoginApplicationName").Value;
-
-            // //INPUT VALIDATIONS
-            // if (passwords.OldPassword == null || passwords.OldPassword == "" ||
-            //     passwords.NewPassword == null || passwords.NewPassword == "" )
-            //     return BadRequest("Both old and new passwords are required to be non empty.");
-
-            // var userRepository = new UserRepository(_context);
-            // var user = userRepository.GetById(userId);
-            // // UserModel user = _context.UserDbSet.Where(u=> u.Application.LoginApplicationName == appName &&
-            // //                                               u.Id == userId).FirstOrDefault();
-            // if (user.Password != PasswordHelper.ComputeHash(passwords.OldPassword))
-            //     return BadRequest("Old password is incorrect.");
-            // userRepository.SetPassword(user, passwords.NewPassword);
-            // // user.Password = PasswordHelper.ComputeHash(passwords.NewPassword);
-            // // await _context.SaveChangesAsync();
-            // return Ok("Password changed successfully.");
+            messages.Add(new Message(MessageTypeEnum.Info, 
+                                              5005, 
+                                              new List<string>()));
+            return Ok(messages);
         }
     }
 }

@@ -1,22 +1,13 @@
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using Server.Repositories;
-using SharedLibrary.Descriptors;
-using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
-using SharedLibrary.Models;
 using SharedLibrary.Structures;
 
 namespace Server.Controllers.Account
@@ -31,18 +22,6 @@ namespace Server.Controllers.Account
             _context = context;
         }
         private readonly DatabaseContext _context;
-        // async Task<UserModel> getUserModel(LoginCredentials loginCredentials, ApplicationDescriptor applicationDescriptor)
-        // {
-        //     var userRepository = new UserRepository(_context);
-        //     return userRepository.GetByApplicationLoginNameAndUsername(loginCredentials.ApplicationName, 
-        //                                                                loginCredentials.Username);
-        //     // return _context.UserDbSet.Where(u => (u.Application.LoginApplicationName == loginCredentials.ApplicationName && 
-        //     //                                       u.GetUsername() == loginCredentials.Username)).FirstOrDefault();
-        // }
-        // async Task<ApplicationModel> getApplicationModelByLoginApplicationName(string loginApplicationName)
-        // {
-        //     return _context.ApplicationDbSet.Where(a => a.LoginApplicationName == loginApplicationName).FirstOrDefault();
-        // }
 
         // sem se dostane kdokoli
         [AllowAnonymous]

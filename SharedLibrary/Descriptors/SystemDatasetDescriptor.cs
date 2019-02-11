@@ -7,8 +7,11 @@ namespace SharedLibrary.Descriptors
     public class SystemDatasetDescriptor
     {
         /// <summary>
-        /// UserDatasetDescriptor contains information about application users.
+        /// UsersDatasetDescriptor property.
         /// </summary>
+        /// <value>
+        /// UserDatasetDescriptor contains information about application users.
+        /// </value>
         public UsersDatasetDescriptor UsersDatasetDescriptor { get; set; }
     }
 }

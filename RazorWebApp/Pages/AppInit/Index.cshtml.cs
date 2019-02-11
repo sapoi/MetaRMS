@@ -44,7 +44,7 @@ namespace RazorWebApp.Pages.Appinit
                     return Page();
                 }
                 // 
-                var response = await _appInitService.InitApp(Email, FileUpload);
+                var response = await _appInitService.InitializeApplication(Email, FileUpload);
                 string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                 // remove " form beginning and end of message
                 Message = message.Substring(1, message.Length - 2);

@@ -1,0 +1,73 @@
+    code    type    text with placeholders
+0001 APPLICATION INITIALIZATION
+            ERROR   JSON file is in incorrect format, please read again about page.
+            ERROR   Application name {applicationDescriptor.LoginApplicationName} already exists, please choose another.
+            ERROR   Application descriptor contains invalid attribute name \"DBId\"
+            ... dalsi errory app deskriptoru ...
+            ERROR   Email {mail} address is not valid, please choose another.
+            INFO    Application {applicationDescriptor.ApplicationName} was created successfully and login credentials were sent to email {email}.
+
+
+1000 GENERAL APPLICATION
+    1001    ERROR   Application name is required.
+    1002    ERROR   Username is required.
+    1003    ERROR   Password is required.
+    1004    ERROR   Invalid application name.
+    1005    ERROR   User {loginCredentials.Username} does not exist in application {loginCredentials.LoginApplicationName}.
+    1006    ERROR   Could not log in: combination of application name {loginCredentials.LoginApplicationName}, username {loginCredentials.Username} and password does not exist.
+
+
+
+2000 DATA DATASETS
+    2001    ERROR   Dataset with id {0} not found.
+    2002    INFO    New data in dataset {0} created successfully.
+    2003    ERROR   Combination of application name {0}, dataset {1} and id {2} does not exist.
+            INFO    Data from dataset \"{datasetName}\" deleted successfully.
+    2005    INFO    Data in dataset \"{datasetName}\" editted successfully.
+    2006    ERROR   No element data with id {0} found in dataset {1}.
+
+
+3000 USERS DATASET
+    3001    ERROR   Username can not be an empty string.
+    3002    ERROR   User named {0} already exists, please choose another username.
+    3003    INFO    New user {0} created successfully with password set to {0}.
+    3004    ERROR   Combination of application name {0} and user id {1} does not exist.
+            ERROR   Cannot delete last user in application. There has to be always at least one.
+            INFO    User \"{userModel.GetUsername()}\" deleted successfully.
+    3006    ERROR   No user with id {0} found.
+    3007    INFO    User {0} editted successfully.
+    3008    INFO    User \"{userModel.GetUsername()}\" password reset successfully to \"{userModel.GetUsername()}\".
+
+
+
+4000 RIGHTS DATASET
+    4001    ERROR   Rights named {0} already exists, please choose another name.
+    4002    INFO    New rights {0} created successfully.
+    4003    ERROR   Combination of application name {0} and rights id {1} does not exist.
+            ERROR   Can't delete - rights {rightsModel.Name} are used by one or more users: {usernames}.
+            INFO    Rights \"{rightsModel.Name}\" deleted successfully.
+    4006    ERROR   No rights with id {0} found.
+    4007    INFO    Rights \"{fromBodyRightsModel.Name}\" editted successfully.
+
+5000 SETTINGS
+    5001    ERROR   Each of old, new and the copy of new passwords are required to be non empty.
+    5002    ERROR   New and the copy of new passwords must be equal.
+    5003    ERROR   Old password is incorrect.
+    5004    ERROR   New password does not fulfill the security requirements - it must be at least 8 characters long and contain at least 1 upper and 1 lower-case letter and one number or special character.
+    5005    INFO    Password changed successfully.
+
+6000 VALIDATIONS
+    6001    ERROR   Attribute {0} does not exist in dataset {1}.
+    6002    ERROR   Attribute {0} value is required.
+    6003    ERROR   Attribute {0} is not a reference type - only 1 value can be submitted, but {1} were received.
+    6004    ERROR   Attribute {0} value not in a correct format - {1} expected, but {2} received.
+    6005    ERROR   Attribute {0} value can not be less than {1}, but {2} received.
+    6006    ERROR   Attribute {0} value can not be greater than {1}, but {2} received.
+    6007    ERROR   Attribute {0} value can not be shorter than {1}, but value {2} has only {3} characters.
+    6008    ERROR   Attribute {0} value can not be longer than {1}, but value {2} has {3} characters.
+    6009    ERROR   Attribute {0} value can not contain less than {1} reference(s), but {2} received.
+    6010    ERROR   Attribute {0} value can not contain more than {1} reference(s), but {2} received.
+    6011    ERROR   Rights value for dataset {0} is missing.
+    6012    ERROR   Rights value for dataset {0} is in a incorrect format, number between 0 and 4 expected, but {1} received.
+    6013    ERROR   If dataset {0} has read rights, dataset {1} also must have read rights.
+    6014    ERROR   Recieved application id {0} does not correspond to application id {1} of the authorized user.
