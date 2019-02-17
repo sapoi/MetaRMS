@@ -24,9 +24,21 @@ namespace Server.Controllers.Rights
         {
             this.context = context;
         }
+        /// <summary>
+        /// API endpoint for deleting rights.
+        /// </summary>
+        /// <returns>Messages about action result</returns>
+        /// <response code="200">If rights successfully deleted</response>
+        /// <response code="401">If user is not authenticated</response>
+        /// <response code="403">If user is not autorized to delete rights</response>
+        /// <response code="404">If input is not valid</response>
         [Authorize]
-        [HttpGet]
+        [HttpPost]
         [Route("{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(403)]
+        [ProducesResponseType(404)]
         public IActionResult DeleteById(long id)
         {
             // List of messages to return to the client

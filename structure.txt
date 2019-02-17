@@ -40,17 +40,18 @@
 │   │   ├── Index.cshtml *️⃣
 │   │   ├── Index.cshtml.cs *️⃣
 │   │   ├── Rights 
-│   │   │   ├── Create.cshtml *️⃣
-│   │   │   ├── Create.cshtml.cs *️⃣
-│   │   │   ├── Edit.cshtml *️⃣
-│   │   │   ├── Edit.cshtml.cs *️⃣
-│   │   │   ├── Get.cshtml *️⃣
-│   │   │   └── Get.cshtml.cs *️⃣
+│   │   │   ├── Create.cshtml ✅
+│   │   │   ├── Create.cshtml.cs ✅
+│   │   │   ├── Edit.cshtml ✅
+│   │   │   ├── Edit.cshtml.cs ✅
+│   │   │   ├── Get.cshtml ✅
+│   │   │   └── Get.cshtml.cs ✅
 │   │   ├── Shared 
 │   │   │   ├── _EditBuilderPartial.cshtml *️⃣
 │   │   │   ├── _GetBuilderPartial.cshtml *️⃣
 │   │   │   ├── _LoggedMenuPartial.cshtml *️⃣
 │   │   │   ├── _LogoutMenuPartial.cshtml *️⃣
+│   │   │   ├── _MessagesPartial.cshtml *️⃣
 │   │   │   └── _ReadAuthorizedDatasetsMenuPartial.cshtml *️⃣
 │   │   ├── User 
 │   │   │   ├── Create.cshtml *️⃣
@@ -87,10 +88,10 @@
 │   │   │   ├── GetController.cs ✴️
 │   │   │   └── PatchController.cs ✴️
 │   │   ├── Rights 
-│   │   │   ├── CreateController.cs ✴️
-│   │   │   ├── DeleteController.cs *️⃣
-│   │   │   ├── GetController.cs ✴️
-│   │   │   └── PatchController.cs ✴️
+│   │   │   ├── CreateController.cs ✅
+│   │   │   ├── DeleteController.cs ✅
+│   │   │   ├── GetController.cs ✅
+│   │   │   └── PatchController.cs ✅
 │   │   └── User 
 │   │       ├── CreateController.cs ✴️
 │   │       ├── DeleteController.cs *️⃣

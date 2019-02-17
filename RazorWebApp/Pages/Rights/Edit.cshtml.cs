@@ -46,17 +46,43 @@ namespace RazorWebApp.Pages.Rights
             this.accountService = accountService;
             this.cache = memoryCache;
         }
-
+        /// <summary>
+        /// Id of the rights to edit.
+        /// </summary>
+        /// <value>long</value>
         [BindProperty]
         public long RightsId { get; set; }
+        /// <summary>
+        /// New name of the rights.
+        /// </summary>
+        /// <value>string</value>
         [BindProperty]
         public string RightsName { get; set; }
+        /// <summary>
+        /// Dictionary containing rights value for each dataset.
+        /// </summary>
+        /// <value>Dictionary of long and RightsEnum</value>
         [BindProperty]
         public Dictionary<long, RightsEnum> RightsDictionary { get; set; }
+        /// <summary>
+        /// ApplicationDescriptor property contains descriptor of the signed user.
+        /// </summary>
+        /// <value>ApplicationDescriptor class</value>
         public ApplicationDescriptor ApplicationDescriptor { get; set; }
+        /// <summary>
+        /// MenuData property contains data necessary for _LoggedMenuPartial.
+        /// </summary>
+        /// <value>LoggedMenuPartialData structure</value>
         public LoggedMenuPartialData MenuData { get; set; }
+        /// <summary>
+        /// Messages property contains list of messages for user.
+        /// </summary>
+        /// <value>List of Message structure</value>
         public List<Message> Messages { get; set; }
-
+        /// <summary>
+        /// This method is used when there is a GET request to Rights/Edit.cshtml page
+        /// </summary>
+        /// <returns>The page.</returns>
         public async Task<IActionResult> OnGetAsync(long id)
         {
             // Authentication
@@ -129,6 +155,10 @@ namespace RazorWebApp.Pages.Rights
 
             return Page();
         }
+        /// <summary>
+        /// OnPostAsync method is invoked after clicking on Submit button.
+        /// </summary>
+        /// <returns>Redirect to Get page or the same page with validation messages</returns>
         public async Task<IActionResult> OnPostAsync()
         {
             // Authentication

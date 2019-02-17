@@ -76,7 +76,6 @@ namespace RazorWebApp.Pages.Rights
         /// <summary>
         /// This method is used when there is a GET request to Rights/Get.cshtml page
         /// </summary>
-        /// <param name="messages">List of messages to be displayed on the page.</param>
         /// <returns>The page.</returns>
         public async Task<IActionResult> OnGetAsync()
         {

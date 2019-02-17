@@ -38,8 +38,6 @@ namespace Server.Controllers.Rights
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [ProducesResponseType(404)]
-        [Authorize]
-        [HttpPost]
         public IActionResult Patch([FromBody] RightsModel fromBodyRightsModel)
         {
             // List of messages to return to the client
