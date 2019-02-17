@@ -18,42 +18,42 @@ namespace RazorWebApp.Helpers
         {
             TokenHelper tokenHelper = new TokenHelper(token);
             // get application name from token
-            var appName = tokenHelper.GetLoginApplicationName();
-
-            return await cache.GetOrCreateAsync("Descriptor_" + appName, async entry =>
+            var applicationId = tokenHelper.GetApplicationId();
+            // todo kontrolovat, ze neni null
+            return await cache.GetOrCreateAsync("Descriptor_" + applicationId, async entry =>
               {
                   entry.SlidingExpiration = TimeSpan.FromMinutes(2);
                   var response = await _accountService.GetApplicationDescriptor(token.Value);
                   var stringResponse = await response.Content.ReadAsStringAsync();
-                  cacheKeys.Add("Descriptor_" + appName);
+                  cacheKeys.Add("Descriptor_" + applicationId);
               return JsonConvert.DeserializeObject<ApplicationDescriptor>(stringResponse);
               });
         }
-        public static async Task<Dictionary<long, RightsEnum>> GetRightsFromCacheAsync(IMemoryCache cache, IAccountService _accountService, AccessToken token)
+        public static async Task<RightsModel> GetRightsFromCacheAsync(IMemoryCache cache, IAccountService _accountService, AccessToken token)
         {
             TokenHelper tokenHelper = new TokenHelper(token);
             // get application name and user id from token
-            var appName = tokenHelper.GetLoginApplicationName();
+            var applicationId = tokenHelper.GetApplicationId();
+            // todo kontrolovat, ze neni null
             var userId = tokenHelper.GetUserId();
             
             return await
-                cache.GetOrCreateAsync("Rights_" + appName + '_' + userId, async entry =>
+                cache.GetOrCreateAsync("Rights_" + applicationId + '_' + userId, async entry =>
               {
                   entry.SlidingExpiration = TimeSpan.FromMinutes(2);
                   var response = await _accountService.GetRights(token.Value);
                   var stringResponse = await response.Content.ReadAsStringAsync();
-                  cacheKeys.Add("Rights_" + appName + '_' + userId);
-                  return JsonConvert.DeserializeObject<Dictionary<long, RightsEnum>>(stringResponse);
+                  cacheKeys.Add("Rights_" + applicationId + '_' + userId);
+                  return JsonConvert.DeserializeObject<RightsModel>(stringResponse);
               });
         }
-        public static void RemoveRightsFromCache(IMemoryCache cache, string appName, long rightsId)
+        public static void RemoveRightsFromCache(IMemoryCache cache)
         {
             foreach (var key in cacheKeys)
             {
                 if(key.StartsWith("Rights_"))
                     cache.Remove(key);
             }
-            //cache.Remove("Rights_" + appName + '_' + rightsId);
         }
     }
 }

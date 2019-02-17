@@ -5,8 +5,8 @@ namespace RazorWebApp.Structures
 {
     public class LoggedMenuPartialData
     {
-        public string ApplicationName;
-        public string UsersDatasetName;
-        public Dictionary<long, RightsEnum> NavbarRights;
+        public string ApplicationName { get; set; }
+        public string UsersDatasetName { get; set; }
+        public Dictionary<long, RightsEnum> NavbarRights { get; set; }
     }
 }

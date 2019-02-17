@@ -43,7 +43,7 @@ namespace SharedLibrary.Helpers
             }
             return messages;
         }
-        public List<Message> ValidateRights(ApplicationDescriptor applicationDescriptor, Dictionary<string, int> rightsData)
+        public List<Message> ValidateRights(ApplicationDescriptor applicationDescriptor, Dictionary<long, RightsEnum> rightsData)
         {
             // Check that all oligatory rights are filled and are in a correct format
             var messages = validateRightsData(applicationDescriptor, rightsData);
@@ -52,11 +52,12 @@ namespace SharedLibrary.Helpers
                 messages.AddRange(validateRightsLogic(applicationDescriptor, rightsData));
             return messages;
         }
-        List<Message> validateRightsData(ApplicationDescriptor applicationDescriptor, Dictionary<string, int> rightsData)
+        List<Message> validateRightsData(ApplicationDescriptor applicationDescriptor, Dictionary<long, RightsEnum> rightsData)
         {
             var messages = new List<Message>();
             // Check user defined datasets
-            var datasetsToCheck = applicationDescriptor.Datasets;
+            var datasetsToCheck = new List<DatasetDescriptor>();
+            datasetsToCheck.AddRange(applicationDescriptor.Datasets);
             // And users dataset
             datasetsToCheck.Add(applicationDescriptor.SystemDatasets.UsersDatasetDescriptor);
             // And also rights for rights need to be checked by creating mock dataset
@@ -66,7 +67,7 @@ namespace SharedLibrary.Helpers
                                                         });
             foreach (var datasetDescriptor in datasetsToCheck)
             {
-                var rightsForDataset = rightsData.FirstOrDefault(r => r.Key == datasetDescriptor.Id.ToString());
+                var rightsForDataset = rightsData.FirstOrDefault(r => r.Key == datasetDescriptor.Id);
                 // If no rights for dataset found
                 if (rightsForDataset.Equals(new KeyValuePair<string, List<long>>()))
                     messages.Add(new Message(MessageTypeEnum.Error, 
@@ -83,11 +84,12 @@ namespace SharedLibrary.Helpers
             }
             return messages;
         }
-        List<Message> validateRightsLogic(ApplicationDescriptor applicationDescriptor, Dictionary<string, int> rightsData)
+        List<Message> validateRightsLogic(ApplicationDescriptor applicationDescriptor, Dictionary<long, RightsEnum> rightsData)
         {
             var messages = new List<Message>();
             // Check user defined datasets
-            var datasetsToCheck = applicationDescriptor.Datasets;
+            var datasetsToCheck = new List<DatasetDescriptor>();
+            datasetsToCheck.AddRange(applicationDescriptor.Datasets);
             // And users dataset
             datasetsToCheck.Add(applicationDescriptor.SystemDatasets.UsersDatasetDescriptor);
             // Dictionary containing <dataset id, dataset name>
@@ -95,21 +97,24 @@ namespace SharedLibrary.Helpers
             // Check that for each dataset with at least read right, all datasets referenced in it have at least read rights
             foreach (var datasetDescriptor in datasetsToCheck)
             {
-                foreach (var attribute in datasetDescriptor.Attributes)
+                if (rightsData[datasetDescriptor.Id] >= RightsEnum.R)
                 {
-                    // If attribute type is reference
-                    if (!AttributeType.Types.Contains(attribute.Type))
+                    foreach (var attribute in datasetDescriptor.Attributes)
                     {
-                        // And rights for the reference are less than read rights
-                        if (rightsData[idNameDictionary[attribute.Type].ToString()] < (int)RightsEnum.R)
+                        // If attribute type is reference
+                        if (!AttributeType.Types.Contains(attribute.Type))
                         {
-                            messages.Add(new Message(MessageTypeEnum.Error, 
-                                                              6013, 
-                                                              new List<string>(){ 
-                                                                                  datasetDescriptor.Name,
-                                                                                  attribute.Type
-                                                                                })
-                                        );
+                            // And rights for the reference are less than read rights
+                            if (rightsData[idNameDictionary[attribute.Type]] < RightsEnum.R)
+                            {
+                                messages.Add(new Message(MessageTypeEnum.Error, 
+                                                                6013, 
+                                                                new List<string>(){ 
+                                                                                    datasetDescriptor.Name,
+                                                                                    attribute.Type
+                                                                                    })
+                                            );
+                            }
                         }
                     }
                 }

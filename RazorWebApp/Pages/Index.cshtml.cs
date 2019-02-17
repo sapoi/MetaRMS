@@ -30,7 +30,7 @@ namespace RazorWebApp.Pages
         public IActionResult OnGet(string message = null)
         {
             // get AccessToken from PageModel
-            var token = AuthorizationHelper.GetTokenFromPageModel(this);
+            var token = AccessHelper.GetTokenFromPageModel(this);
             // if there is no token, log info and redirect user to login page
             if (token == null)
             {
@@ -56,7 +56,7 @@ namespace RazorWebApp.Pages
                 var jsonToken = response.Content.ReadAsStringAsync().Result;
                 // ulozeni tokenu do session storage
                 HttpContext.Session.SetString("sessionJWT", jsonToken);
-                var token = AuthorizationHelper.GetTokenFromPageModel(this);
+                var token = AccessHelper.GetTokenFromPageModel(this);
                 // pokud jiz neni v cahe, nacist appliction descriptor a ulozit ho do ni
                 await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, token);
 

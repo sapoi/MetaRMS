@@ -53,7 +53,7 @@ namespace RazorWebApp.Pages.Data
             if (ModelState.IsValid)
             {
                 // get token if valid
-                var token = AccessHelper.ValidateAuthentication(this);
+                var token = AccessHelper.GetTokenFromPageModel(this);
                 // if token is not valid, return to login page
                 if (token == null)
                     return RedirectToPage("/Account/Login");
@@ -95,7 +95,7 @@ namespace RazorWebApp.Pages.Data
                                                       token);
 
                 // getting real data
-                var response = await _dataService.GetById(ApplicationDescriptor.LoginApplicationName, datasetName, id, token.Value);
+                var response = await _dataService.GetById(id, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 Data = JsonConvert.DeserializeObject<DataModel>(stringResponse);
@@ -105,7 +105,7 @@ namespace RazorWebApp.Pages.Data
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             // validation
-            var token = AccessHelper.ValidateAuthentication(this);
+            var token = AccessHelper.GetTokenFromPageModel(this);
             // if token is not valid, return to login page
             if (token == null)
                 return RedirectToPage("/Account/Login");
@@ -136,7 +136,13 @@ namespace RazorWebApp.Pages.Data
             // for (int i = 0; i < AttributesNames.Count; i++)
             //     inputData.Add(AttributesNames[i], ValueList[i]);
 
-            var response = await _dataService.PatchById(ApplicationDescriptor.LoginApplicationName, DatasetName, DataId, ValueList, token.Value);
+            var patchedDataModel = new DataModel(){
+                Id = DataId,
+                DatasetId = ActiveDatasetDescriptor.Id,
+                Data = JsonConvert.SerializeObject(ValueList)
+            };
+
+            var response = await _dataService.Patch(patchedDataModel, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             return RedirectToPage("/Data/Get",  new {message = message.Substring(1, message.Length - 2)});
         }

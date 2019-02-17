@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
+using SharedLibrary.Enums;
 
 namespace SharedLibrary.Models
 {
@@ -57,11 +58,11 @@ namespace SharedLibrary.Models
         /// </summary>
         /// <value>Represents deserialized Data.</value>
         [JsonIgnore]
-        public Dictionary<string,int> DataDictionary
+        public Dictionary<long, RightsEnum> DataDictionary
         {
             get
             {
-            return JsonConvert.DeserializeObject<Dictionary<string,int>>(Data);
+            return JsonConvert.DeserializeObject<Dictionary<long, RightsEnum>>(Data);
             }
         }
     }

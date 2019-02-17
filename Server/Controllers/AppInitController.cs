@@ -68,6 +68,8 @@ namespace Server.Controllers
             {
                 applicationDescriptor.Datasets[i].Id = i + 1;
             }
+            // add id -1 to users dataset
+            applicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Id = (long)SystemDatasetsEnum.Users;
             using (var transaction = _context.Database.BeginTransaction())
             {
                 try

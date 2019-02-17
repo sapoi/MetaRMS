@@ -10,6 +10,7 @@ using SharedLibrary.Structures;
 using System.Linq;
 using SharedLibrary.Models;
 using SharedLibrary.Enums;
+using SharedLibrary.Helpers;
 
 namespace RazorWebApp.Helpers
 {
@@ -31,7 +32,8 @@ namespace RazorWebApp.Helpers
                         
                         if (attribute.Type == applicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name)
                         {
-                            response = await userService.GetAll(applicationDescriptor.LoginApplicationName, token.Value);
+                            response = await userService.GetAll(token.Value);
+                            // kontrolovat response
                             string stringResponse = await response.Content.ReadAsStringAsync();
                             List<UserModel> data = JsonConvert.DeserializeObject<List<UserModel>>(stringResponse);
                             shownAttributes.Add(applicationDescriptor.GetUsernameAttribute());
@@ -45,7 +47,15 @@ namespace RazorWebApp.Helpers
                         // if type is any otherreference data
                         else
                         {
-                            response = await dataService.GetAll(applicationDescriptor.LoginApplicationName, attribute.Type, token.Value);
+                            var sourceDataset = applicationDescriptor.Datasets.FirstOrDefault(d => d.Name == attribute.Type);
+                            if (sourceDataset == null)
+                            {
+                                //TODO server error
+                                Logger.LogToConsole("DataLoadingHepler source name not found in user defined descriptors.");
+                                break;
+                            }
+                            response = await dataService.GetAll(sourceDataset.Id, token.Value);
+                            // kontrolovat response
                             string stringResponse = await response.Content.ReadAsStringAsync();
                             List<DataModel> data = JsonConvert.DeserializeObject<List<DataModel>>(stringResponse);
                             var st = applicationDescriptor.Datasets.Where(d => d.Name == attribute.Type).First();
@@ -63,28 +73,6 @@ namespace RazorWebApp.Helpers
                                 selectData[attribute.Type].Add(new SelectListItem { Value = item.Id.ToString(), Text = text });
                             }
                         }
-                        //TODO kontrolovat chyby v response
-                        // string stringResponse = await response.Content.ReadAsStringAsync();
-                        // var data = JsonConvert.DeserializeObject<List<Dictionary<String, Object>>>(stringResponse);
-                        // selectData.Add(attribute.Type, new List<SelectListItem>());
-                        // foreach (var item in data)
-                        // {
-                        //     string value = JsonConvert.DeserializeObject<List<string>>(item["DBId"].ToString()).First();
-                        //     string text = getTextForSelectItem(shownAttributes, item);
-                        //     selectData[attribute.Type].Add(new SelectListItem { Value = value, Text = text });
-                        // }
-                        // selectData[attribute.Type] = data.Select(x => new SelectListItem { Value =  JsonConvert.DeserializeObject<List<string>>
-                        //                                                                                 (x["DBId"].ToString()).First(), 
-                        //                                                                     Text =  JsonConvert.DeserializeObject<List<string>>
-                        //                                                                                 (x[shownAttributes[0].Name
-                        //                                                                                     ].ToString()).First() 
-                        //                                                                                     +
-                        //                                                                             JsonConvert.DeserializeObject<List<string>>
-                        //                                                                                 (x[shownAttributes[1].Name
-                        //                                                                                     ].ToString()).First()
-                        //                                                                     } 
-                        //                                         )
-                        //                                     .ToList();
                     }
             }
             return selectData;
@@ -122,8 +110,6 @@ namespace RazorWebApp.Helpers
                 if (attribute != shownAttributes.Last())
                     text += " | ";
             }
-            // if (text.Length >= 3)
-            //     text = text.Substring(0, text.Length - 3);
             return text;
         }
     }

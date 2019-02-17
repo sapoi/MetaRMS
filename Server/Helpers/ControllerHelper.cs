@@ -47,7 +47,7 @@ namespace Server.Helpers
         }
         public bool Authorize(UserModel userModel, long datasetId, RightsEnum minimalRights)
         {
-            return (RightsEnum)userModel.Rights.DataDictionary[datasetId.ToString()] >= minimalRights;
+            return (RightsEnum)userModel.Rights.DataDictionary[datasetId] >= minimalRights;
         }
         public Dictionary<string, List<long>> GetAllReferencesIdsDictionary(ApplicationModel applicationModel)
         {

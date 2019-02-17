@@ -41,7 +41,7 @@ namespace RazorWebApp.Pages.Data
             // only if ActiveDatasetDescriptor is valid, check for model validity
             if (ModelState.IsValid)
             {
-                var token = AccessHelper.ValidateAuthentication(this);
+                var token = AccessHelper.GetTokenFromPageModel(this);
                 // if token is not valid, return to login page
                 if (token == null)
                     return RedirectToPage("/Account/Login");
@@ -73,7 +73,7 @@ namespace RazorWebApp.Pages.Data
                     Message = message;
 
                 // getting real data
-                var response = await _dataService.GetAll(ApplicationDescriptor.LoginApplicationName, ActiveDatasetDescriptor.Name, token.Value);
+                var response = await _dataService.GetAll(ActiveDatasetDescriptor.Id, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 Data = JsonConvert.DeserializeObject<List<DataModel>>(stringResponse);
@@ -91,7 +91,7 @@ namespace RazorWebApp.Pages.Data
         public async Task<IActionResult> OnPostDataDeleteAsync(string datasetName, long dataId)
         {
             // validation
-            var token = AccessHelper.ValidateAuthentication(this);
+            var token = AccessHelper.GetTokenFromPageModel(this);
             // if token is not valid, return to login page
             if (token == null)
                 return RedirectToPage("/Account/Login");
@@ -100,7 +100,7 @@ namespace RazorWebApp.Pages.Data
             if (ApplicationDescriptor == null)
                 return RedirectToPage("/Errors/ServerError");
 
-            var response = await _dataService.DeleteById(ApplicationDescriptor.LoginApplicationName, datasetName, dataId, token.Value);
+            var response = await _dataService.DeleteById(dataId, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             // remove " form beginning and end of message
             return await OnGetAsync(datasetName, message.Substring(1, message.Length - 2));

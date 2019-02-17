@@ -2,96 +2,47 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="46c7c9e6-bed5-4482-9176-71709e68e581" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MetaRMS/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MetaRMS/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MetaRMS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MetaRMS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/Data.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/Data/data1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/Data/data2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/Data/data3.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/DatabaseAccessLibrary.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/DbContexts/FullDbContext.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/DbContexts/VectorDbContext.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/DescriptorCache.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/Models/DataColumnModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/Models/FullModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/Models/VectorModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/Operations/FullOperations.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/Operations/IOperations.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/Operations/JSONColumnOperations.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/Operations/VectorOperations.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/bin/Debug/netstandard2.0/DatabaseAccessLibrary.deps.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/bin/Debug/netstandard2.0/DatabaseAccessLibrary.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/bin/Debug/netstandard2.0/DatabaseAccessLibrary.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/bin/Debug/netstandard2.0/SharedLibrary.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/bin/Debug/netstandard2.0/SharedLibrary.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/obj/DatabaseAccessLibrary.csproj.nuget.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/obj/DatabaseAccessLibrary.csproj.nuget.g.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/obj/DatabaseAccessLibrary.csproj.nuget.g.targets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/obj/Debug/netstandard2.0/DatabaseAccessLibrary.AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/obj/Debug/netstandard2.0/DatabaseAccessLibrary.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/obj/Debug/netstandard2.0/DatabaseAccessLibrary.csproj.CopyComplete" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/obj/Debug/netstandard2.0/DatabaseAccessLibrary.csproj.CoreCompileInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/obj/Debug/netstandard2.0/DatabaseAccessLibrary.csproj.FileListAbsolute.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/obj/Debug/netstandard2.0/DatabaseAccessLibrary.csprojAssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/obj/Debug/netstandard2.0/DatabaseAccessLibrary.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/obj/Debug/netstandard2.0/DatabaseAccessLibrary.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/obj/Debug/netstandard2.0/project.razor.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/obj/project.assets.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAccessLibrary/obj/project.packagespec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MetaRMS.sln" beforeDir="false" afterPath="$PROJECT_DIR$/MetaRMS.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MetaRMS.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/MetaRMS.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/AccessHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Helpers/AccessHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/AuthorizationHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Helpers/AuthorizationHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/CacheAccessHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Helpers/CacheAccessHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/DataLoadingHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Helpers/DataLoadingHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Account/Settings.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/Account/Settings.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Create.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Create.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Edit.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Edit.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Get.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Get.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Create.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Create.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Edit.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Edit.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Get.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Get.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/User/Create.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/User/Create.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/User/Edit.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/User/Edit.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/User/Get.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/User/Get.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Startup.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/SharedLibrary.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/SharedLibrary.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/SharedLibrary.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/SharedLibrary.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Controllers/Account/LoginController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Controllers/Account/LoginController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/Server.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/Server.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/Server.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/Server.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/SharedLibrary.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/SharedLibrary.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/SharedLibrary.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/SharedLibrary.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/Server/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/obj/Debug/netcoreapp2.0/Server.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Server/obj/Debug/netcoreapp2.0/Server.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/obj/Debug/netcoreapp2.0/Server.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Server/obj/Debug/netcoreapp2.0/Server.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/Descriptors/ApplicationDescriptor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/Descriptors/ApplicationDescriptor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/Descriptors/AttributeDescriptor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/Descriptors/AttributeDescriptor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/Descriptors/DatasetDescriptor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/Descriptors/DatasetDescriptor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/Descriptors/SystemDatasetDescriptor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/Descriptors/SystemDatasetDescriptor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/Descriptors/UsersDatasetDescriptor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/Descriptors/UsersDatasetDescriptor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/Enums/AttributeTypeEnum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/Enums/AttributeTypeEnum.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/Enums/ClaimsEnum.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/Enums/RightsEnum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/Enums/RightsEnum.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/Enums/SystemDatasetsEnum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/Enums/SystemDatasetsEnum.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/SharedLibrary.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/SharedLibrary.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/Structures/LoginCredentials.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/Structures/LoginCredentials.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/obj/Debug/netcoreapp2.0/Server.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Server/obj/Debug/netcoreapp2.0/Server.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedLibrary/Helpers/Logger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/Helpers/Logger.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedLibrary/Helpers/TokenHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/Helpers/TokenHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedLibrary/Structures/JWTToken.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/Structures/JWTToken.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SharedLibrary/bin/Debug/netstandard2.0/SharedLibrary.dll" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/bin/Debug/netstandard2.0/SharedLibrary.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SharedLibrary/bin/Debug/netstandard2.0/SharedLibrary.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/bin/Debug/netstandard2.0/SharedLibrary.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SharedLibrary/obj/Debug/netstandard2.0/SharedLibrary.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/obj/Debug/netstandard2.0/SharedLibrary.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SharedLibrary/obj/Debug/netstandard2.0/SharedLibrary.dll" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/obj/Debug/netstandard2.0/SharedLibrary.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SharedLibrary/obj/Debug/netstandard2.0/SharedLibrary.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/obj/Debug/netstandard2.0/SharedLibrary.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/DatabaseTests.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/bin/Debug/netcoreapp2.0/DatabaseAccessLibrary.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/bin/Debug/netcoreapp2.0/DatabaseAccessLibrary.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/bin/Debug/netcoreapp2.0/DatabaseTests.deps.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/bin/Debug/netcoreapp2.0/DatabaseTests.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/bin/Debug/netcoreapp2.0/DatabaseTests.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/bin/Debug/netcoreapp2.0/DatabaseTests.runtimeconfig.dev.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/bin/Debug/netcoreapp2.0/DatabaseTests.runtimeconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/bin/Debug/netcoreapp2.0/SharedLibrary.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/bin/Debug/netcoreapp2.0/SharedLibrary.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/obj/DatabaseTests.csproj.nuget.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/obj/DatabaseTests.csproj.nuget.g.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/obj/DatabaseTests.csproj.nuget.g.targets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/obj/Debug/netcoreapp2.0/DatabaseTests.AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/obj/Debug/netcoreapp2.0/DatabaseTests.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/obj/Debug/netcoreapp2.0/DatabaseTests.csproj.CopyComplete" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/obj/Debug/netcoreapp2.0/DatabaseTests.csproj.CoreCompileInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/obj/Debug/netcoreapp2.0/DatabaseTests.csproj.FileListAbsolute.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/obj/Debug/netcoreapp2.0/DatabaseTests.csprojAssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/obj/Debug/netcoreapp2.0/DatabaseTests.csprojResolveAssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/obj/Debug/netcoreapp2.0/DatabaseTests.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/obj/Debug/netcoreapp2.0/DatabaseTests.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/obj/Debug/netcoreapp2.0/project.razor.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/obj/project.assets.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/DatabaseTests/obj/project.packagespec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/errorcodes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/errorcodes.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structure.txt" beforeDir="false" afterPath="$PROJECT_DIR$/structure.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/todo.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -101,57 +52,16 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SharedLibrary/Descriptors/ApplicationDescriptor.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="38" />
-              <folding>
-                <marker date="1548656077500" expanded="false" signature="6:52" ph="..." />
-                <marker date="1548656077500" expanded="true" signature="89:1756" ph="{...}" />
-                <marker date="1548656077500" expanded="true" signature="96:281" ph="/// ApplicationDescriptor class describes single one application. ... " />
-                <marker date="1548656077500" expanded="true" signature="320:1754" ph="{...}" />
-                <marker date="1548656077500" expanded="true" signature="335:443" ph="/// AppName is a non-unique string displayed for a logged user. ... " />
-                <marker date="1548656077500" expanded="true" signature="496:610" ph="/// LoginAppName is a unique string used to log into the application. ... " />
-                <marker date="1548656077500" expanded="true" signature="743:952" ph="/// SystemDatasets contains system datasets with mandatory elements and some user defined parts. ... " />
-                <marker date="1548656077500" expanded="true" signature="1029:1123" ph="/// Datasets list contains user defined datasets. ... " />
-                <marker date="1548656077500" expanded="true" signature="1194:1563" ph="/// Function used to get an AttributeDescriptor for username. ... " />
-                <marker date="1548656077500" expanded="true" signature="1621:1748" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/SharedLibrary/Structures/LoginCredentials.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="34" />
-              <folding>
-                <marker date="1548656168189" expanded="true" signature="34:846" ph="{...}" />
-                <marker date="1548656168189" expanded="true" signature="41:178" ph="/// LoginCredentials structure is used on both client and server side as a container for login data. ... " />
-                <marker date="1548656168189" expanded="true" signature="213:844" ph="{...}" />
-                <marker date="1548656168189" expanded="true" signature="228:368" ph="/// LoginApplicationName must correspond with LoginApplicationName from application descriptor. ... " />
-                <marker date="1548656168189" expanded="true" signature="429:587" ph="/// Username must be a value of attribute with Type == &quot;username&quot; from the application with LoginApplicationName. ... " />
-                <marker date="1548656168189" expanded="true" signature="641:793" ph="/// Password must correspond with password for user with Username in application with LoginApplicationName. ... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/SharedLibrary/Models/ApplicationModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/SharedLibrary/Exceptions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Server/Controllers/Data/GetController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Server/Controllers/Data/CreateController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Server/Controllers/User/GetController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/SharedLibrary/Structures/PasswordChange.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedLibrary/Structures/LoginCredentials.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedLibrary/Structures/JWTToken.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedLibrary/Descriptors/DatasetDescriptor.cs" root0="FORCE_HIGHLIGHTING" />
@@ -189,49 +99,20 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="FileSystemExplorer" />
+      <pane id="AssemblyExplorer" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
             <path>
               <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="MetaRMS" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="MetaRMS" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="SharedLibrary" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="MetaRMS" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="SharedLibrary" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Descriptors" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="MetaRMS" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="SharedLibrary" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Enums" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="MetaRMS" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="SharedLibrary" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Models" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="MetaRMS" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="SharedLibrary" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Structures" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Loading solution..." type="24d0babc:SolutionExplorerModelNode" />
             </path>
           </expand>
           <select />
         </subPane>
         <option name="show-all-files" value="false" />
       </pane>
-      <pane id="AssemblyExplorer" />
-      <pane id="FileSystemExplorer" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -284,11 +165,15 @@
       <updated>1547895982253</updated>
       <workItem from="1547895985391" duration="1970000" />
       <workItem from="1548651840478" duration="4389000" />
+      <workItem from="1550309362067" duration="387000" />
+      <workItem from="1550309760099" duration="184000" />
+      <workItem from="1550309986054" duration="36000" />
+      <workItem from="1550310102187" duration="675000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6359000" />
+    <option name="totallyTimeSpent" value="7641000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -301,9 +186,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23263328" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24717286" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -317,13 +201,13 @@
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49919224" weight="0.329927" />
       <window_info anchor="bottom" id="NuGet" order="7" sideWeight="0.3562197" weight="0.270073" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49919224" visible="true" weight="0.329927" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49596122" visible="true" weight="0.329927" />
       <window_info anchor="bottom" id="Inspection Results" order="10" weight="0.32868218" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Unit Tests" order="12" />
       <window_info anchor="bottom" id="REST Client" order="13" />
       <window_info anchor="bottom" id="Terminal" order="14" />
-      <window_info anchor="bottom" id="Event Log" order="15" sideWeight="0.50080776" side_tool="true" visible="true" weight="0.329927" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="15" sideWeight="0.50403875" side_tool="true" visible="true" weight="0.329927" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -348,9 +232,7 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Server/data.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/data.xml" />
     <entry file="file://$PROJECT_DIR$/Server/Controllers/Data/CreateController.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
@@ -497,9 +379,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SharedLibrary/Enums/ClaimsEnum.cs">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/SharedLibrary/Enums/ClaimsEnum.cs" />
     <entry file="file://$PROJECT_DIR$/SharedLibrary/Enums/AttributeTypeEnum.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -537,17 +417,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SharedLibrary/Structures/PasswordChange.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding>
-            <marker date="1548522725470" expanded="true" signature="34:259" ph="{...}" />
-            <marker date="1548522725470" expanded="true" signature="77:257" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/SharedLibrary/Structures/PasswordChange.cs" />
     <entry file="file://$PROJECT_DIR$/SharedLibrary/Structures/JWTToken.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -560,23 +430,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SharedLibrary/ErrorCodes">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SharedLibrary/Exceptions.cs">
+    <entry file="file://$PROJECT_DIR$/SharedLibrary/ErrorCodes" />
+    <entry file="file://$PROJECT_DIR$/SharedLibrary/Exceptions.cs" />
+    <entry file="file://$PROJECT_DIR$/SharedLibrary/Structures/LoginCredentials.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="57" selection-start-line="4" selection-start-column="57" selection-end-line="4" selection-end-column="57" />
+        <state relative-caret-position="74">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
           <folding>
-            <marker date="1523009203000" expanded="true" signature="38:770" ph="{...}" />
-            <marker date="1523009203000" expanded="true" signature="98:412" ph="{...}" />
-            <marker date="1523009203000" expanded="true" signature="150:170" ph="{...}" />
-            <marker date="1523009203000" expanded="true" signature="247:267" ph="{...}" />
-            <marker date="1523009203000" expanded="true" signature="386:406" ph="{...}" />
-            <marker date="1523009203000" expanded="true" signature="466:768" ph="{...}" />
-            <marker date="1523009203000" expanded="true" signature="514:534" ph="{...}" />
-            <marker date="1523009203000" expanded="true" signature="607:627" ph="{...}" />
-            <marker date="1523009203000" expanded="true" signature="742:762" ph="{...}" />
+            <marker date="1549813602104" expanded="true" signature="41:80" ph="/// LoginCredentials structure is used on both client and server side as a container for login data. ... " />
+            <marker date="1549813602104" expanded="true" signature="938:939" ph="/// Password must correspond with password for user with Username in application with LoginApplicationName. ... " />
+            <marker date="1549813602104" expanded="true" signature="938:990" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -584,33 +447,13 @@
     <entry file="file://$PROJECT_DIR$/SharedLibrary/Descriptors/ApplicationDescriptor.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="38" />
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
           <folding>
-            <marker date="1548656077500" expanded="false" signature="6:52" ph="..." />
-            <marker date="1548656077500" expanded="true" signature="89:1756" ph="{...}" />
-            <marker date="1548656077500" expanded="true" signature="96:281" ph="/// ApplicationDescriptor class describes single one application. ... " />
-            <marker date="1548656077500" expanded="true" signature="320:1754" ph="{...}" />
-            <marker date="1548656077500" expanded="true" signature="335:443" ph="/// AppName is a non-unique string displayed for a logged user. ... " />
-            <marker date="1548656077500" expanded="true" signature="496:610" ph="/// LoginAppName is a unique string used to log into the application. ... " />
-            <marker date="1548656077500" expanded="true" signature="743:952" ph="/// SystemDatasets contains system datasets with mandatory elements and some user defined parts. ... " />
-            <marker date="1548656077500" expanded="true" signature="1029:1123" ph="/// Datasets list contains user defined datasets. ... " />
-            <marker date="1548656077500" expanded="true" signature="1194:1563" ph="/// Function used to get an AttributeDescriptor for username. ... " />
-            <marker date="1548656077500" expanded="true" signature="1621:1748" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SharedLibrary/Structures/LoginCredentials.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="34" />
-          <folding>
-            <marker date="1548656168189" expanded="true" signature="34:846" ph="{...}" />
-            <marker date="1548656168189" expanded="true" signature="41:178" ph="/// LoginCredentials structure is used on both client and server side as a container for login data. ... " />
-            <marker date="1548656168189" expanded="true" signature="213:844" ph="{...}" />
-            <marker date="1548656168189" expanded="true" signature="228:368" ph="/// LoginApplicationName must correspond with LoginApplicationName from application descriptor. ... " />
-            <marker date="1548656168189" expanded="true" signature="429:587" ph="/// Username must be a value of attribute with Type == &quot;username&quot; from the application with LoginApplicationName. ... " />
-            <marker date="1548656168189" expanded="true" signature="641:793" ph="/// Password must correspond with password for user with Username in application with LoginApplicationName. ... " />
+            <marker date="1549815000847" expanded="true" signature="1608:1609" ph="/// Datasets list contains user defined datasets. ... " />
+            <marker date="1549815000847" expanded="true" signature="1608:2240" ph="{...}" />
+            <marker date="1549815000847" expanded="true" signature="1608:2242" ph="{...}" />
+            <marker date="1549815000847" expanded="true" signature="1680:2049" ph="/// Function used to get an AttributeDescriptor for username. ... " />
+            <marker date="1549815000847" expanded="true" signature="2107:2234" ph="{...}" />
           </folding>
         </state>
       </provider>

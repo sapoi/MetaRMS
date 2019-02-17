@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using SharedLibrary.Enums;
 using SharedLibrary.Models;
 
 namespace Server.Repositories
@@ -56,7 +57,7 @@ namespace Server.Repositories
         /// <param name="name">Name of the rights.</param>
         /// <param name="data">Dictionary of rights data.</param>
         /// <returns>Number of rows affected.</returns>
-        public int SetNameAndData(RightsModel model, string name, Dictionary<string, int> data)
+        public int SetNameAndData(RightsModel model, string name, Dictionary<long, RightsEnum> data)
         {
             model.Name = name;
             model.Data = JsonConvert.SerializeObject(data);

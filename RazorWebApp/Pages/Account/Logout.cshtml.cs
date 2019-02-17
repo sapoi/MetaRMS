@@ -23,7 +23,7 @@ namespace RazorWebApp.Pages.Account
         public async Task<IActionResult> OnGetAsync()
         {
             // validation
-            var token = AccessHelper.ValidateAuthentication(this);
+            var token = AccessHelper.GetTokenFromPageModel(this);
             // if token is not valid, return to login page
             if (token == null)
                 return RedirectToPage("/Account/Login");

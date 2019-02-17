@@ -53,7 +53,7 @@ namespace RazorWebApp.Pages.User
             if (ModelState.IsValid)
             {
                 // get token if valid
-                var token = AccessHelper.ValidateAuthentication(this);
+                var token = AccessHelper.GetTokenFromPageModel(this);
                 // if token is not valid, return to login page
                 if (token == null)
                     return RedirectToPage("/Account/Login");
@@ -77,7 +77,7 @@ namespace RazorWebApp.Pages.User
                     ValueList.Add(attribute.Name, new List<string>());
                 }
 
-                var response = await _rightsService.GetAll(ApplicationDescriptor.LoginApplicationName, token.Value);
+                var response = await _rightsService.GetAll(token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 List<RightsModel> data = JsonConvert.DeserializeObject<List<RightsModel>>(stringResponse);
@@ -106,7 +106,7 @@ namespace RazorWebApp.Pages.User
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             // validation
-            var token = AccessHelper.ValidateAuthentication(this);
+            var token = AccessHelper.GetTokenFromPageModel(this);
             // if token is not valid, return to login page
             if (token == null)
                 return RedirectToPage("/Account/Login");
@@ -145,7 +145,7 @@ namespace RazorWebApp.Pages.User
                                                         //  Password = newPassword,
                                                          RightsId = NewRightsId,
                                                          Data = JsonConvert.SerializeObject(ValueList) };
-            var response = await _userService.Create(ApplicationDescriptor.LoginApplicationName, newUserModel, token.Value);
+            var response = await _userService.Create(newUserModel, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             if (!response.IsSuccessStatusCode)

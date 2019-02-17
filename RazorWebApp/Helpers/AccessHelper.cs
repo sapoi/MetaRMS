@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
 using RazorWebApp.Helpers;
 using RazorWebApp.Structures;
 using SharedLibrary.Descriptors;
@@ -18,36 +20,60 @@ namespace RazorWebApp.Helpers
     class AccessHelper
     {
         // validate if token from PageModel model is valid
-        public static AccessToken ValidateAuthentication(PageModel model)
+        /// <summary>
+        /// This method validates if the page model contains correct token.
+        /// </summary>
+        /// <param name="model">Page model to get the token from</param>
+        /// <returns>Valid token or null</returns>
+        public static AccessToken GetTokenFromPageModel(PageModel model)
         {
-            // get AccessToken from PageModel
-            AccessToken token = AuthorizationHelper.GetTokenFromPageModel(model);
-            // if there is no token, log info and redirect user to login page
-            if (token == null)
+            // Get session data from page model
+            var sessionData = model.HttpContext.Session.GetString("sessionJWT");
+            if (sessionData == null)
             {
-                Logger.LogToConsole("neni token");
+                Logger.LogToConsole($"New request from address {model.Request.Host.Host} without token.");
                 return null;
             }
-
+            // Parse token from session data
+            AccessToken token;
+            try
+            {
+                token = JsonConvert.DeserializeObject<AccessToken>(sessionData);
+            }
+            catch
+            {
+                Logger.LogToConsole($"New request from address {model.Request.Host.Host} with cookie data {sessionData} without token.");
+                return null;
+            }
+            // Get application id and user id from token
             TokenHelper tokenHelper = new TokenHelper(token);
-            // get application name from token
-            var appName = tokenHelper.GetLoginApplicationName();
-            // if no application name was found in token, log info and redirect user to login page
-            if (appName == null)
+            // Application id
+            var applicationId = tokenHelper.GetApplicationId();
+            // If token did not contain application id
+            if (!applicationId.HasValue)
             {
-                Logger.LogToConsole("v tokenu nebyl claim co se jmenuje LoginApplicationName");
+                Logger.LogToConsole($"There was no application id in token {token.Value}.");
                 return null;
             }
-            // get user if from token
+            token.ApplicationId = (long)applicationId;
+            // User id
             var userId = tokenHelper.GetUserId();
-            // if no user id was found in token, log info and redirect user to login page
-            if (userId == null)
+            // If token did not contain user id
+            if (!userId.HasValue)
             {
-                Logger.LogToConsole("v tokenu nebyl claim co se jmenuje UserId");
+                Logger.LogToConsole($"There was no user id in token {token.Value}.");
                 return null;
             }
-            // token is valid
+            token.UserId = (long)userId;
+
+            // Return valid token
             return token;
+        }
+        public static RightsEnum? GetRights(Dictionary<long, RightsEnum> rights, long datasetId)
+        {
+            if (rights.Keys.Contains(datasetId))
+                return rights[datasetId];
+            return null;
         }
         public static async Task<ApplicationDescriptor> GetApplicationDescriptor(IMemoryCache _cache, IAccountService _accountService, AccessToken token)
         {
@@ -70,7 +96,7 @@ namespace RazorWebApp.Helpers
                 Logger.LogToConsole("nenalezena prava uzivatele");
                 return null;
             }
-            return rights;
+            return rights.DataDictionary;
         }
         public static List<DatasetDescriptor> GetReadAuthorizedDatasets(ApplicationDescriptor applicationDescriptor, Dictionary<long, RightsEnum> rights)
         {

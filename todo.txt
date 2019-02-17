@@ -8,6 +8,10 @@
     - _editbuilderpartial -> data-subtext=" "
 -----------------------
 TODO
+    - mazani delat pres httpdelete
+    - preklady: nazvy tlacitek, rights dataset, rights.get nazvy sloupcu tabluky, settings
+    - salt to passwords
+    - Server.Helpers.AuthHelper - Authorize prejmenovat na IsAuthorized a presunout do SharedLibrary
     - uzivatelum pridat jazyk a pri vztvreni uzivatale nastavit jako default jazyk aplikace + do settings dat zmenu jazyka
     - Message.GetMessage() pouzivat language
     - pouzivat [HttpPost]?
@@ -108,7 +112,13 @@ TEXT
     - psat to postupne od zacatku a ne na preskacku
     - napsat uz ted podrobnou osnovu ke vsemu
     - vice prikladu v uvoduv uvodu napsat, co by mohli vsechno uzivatele chtit a potrebvat
-    - v requirements to rozepsat a az nakonec dat seznam tect bodu
+    - v requirements to rozepsat a az nakonec dat seznam tect 
+    
+    - jak jsem resila validace pomoci messagi, ale vlastne by to slo pomoci modelstate, ale neslo
+        - mohla jsem pouzit na validaci a prenaseni dat a erorru modelstate, ale vzhledem k tomu, ze pro jednotlive typy uzivatelem def 
+          dat ve slovnicich nemuzu uvadet validation atributy, ma pro me vetsi smzsl si validace a errory posilat sama, navic ne vzdy 
+          se errory poji k nejakemu poli (viz errory bez atributu) -  https://exceptionnotfound.net/asp-net-mvc-demystified-modelstate/
+    - client side authentication - token validation https://auth0.com/docs/api-auth/tutorials/verify-access-token
 
 -----------------------
 INIT - co vsechno je potreba spustit pro inicializovani celeho projektu

@@ -15,7 +15,8 @@
     1004    ERROR   Invalid application name.
     1005    ERROR   User {loginCredentials.Username} does not exist in application {loginCredentials.LoginApplicationName}.
     1006    ERROR   Could not log in: combination of application name {loginCredentials.LoginApplicationName}, username {loginCredentials.Username} and password does not exist.
-
+    1007    ERROR   You are not authorized to read this data.
+    1008    ERROR   Server error - data from server could not be parsed.
 
 
 2000 DATA DATASETS
@@ -23,7 +24,7 @@
     2002    INFO    New data in dataset {0} created successfully.
     2003    ERROR   Combination of application name {0}, dataset {1} and id {2} does not exist.
             INFO    Data from dataset \"{datasetName}\" deleted successfully.
-    2005    INFO    Data in dataset \"{datasetName}\" editted successfully.
+    2005    INFO    Data in dataset \"{datasetName}\" edited successfully.
     2006    ERROR   No element data with id {0} found in dataset {1}.
 
 
@@ -35,7 +36,7 @@
             ERROR   Cannot delete last user in application. There has to be always at least one.
             INFO    User \"{userModel.GetUsername()}\" deleted successfully.
     3006    ERROR   No user with id {0} found.
-    3007    INFO    User {0} editted successfully.
+    3007    INFO    User {0} edited successfully.
     3008    INFO    User \"{userModel.GetUsername()}\" password reset successfully to \"{userModel.GetUsername()}\".
 
 
@@ -44,10 +45,14 @@
     4001    ERROR   Rights named {0} already exists, please choose another name.
     4002    INFO    New rights {0} created successfully.
     4003    ERROR   Combination of application name {0} and rights id {1} does not exist.
-            ERROR   Can't delete - rights {rightsModel.Name} are used by one or more users: {usernames}.
-            INFO    Rights \"{rightsModel.Name}\" deleted successfully.
+    4004    ERROR   Can't delete - rights {0} are used by one or more users: {1}.
+    4005    INFO    Rights {0} deleted successfully.
     4006    ERROR   No rights with id {0} found.
-    4007    INFO    Rights \"{fromBodyRightsModel.Name}\" editted successfully.
+    4007    INFO    Rights {0} edited successfully.
+    4008    ERROR   You are not allowed to read rights.
+    4009    ERROR   You are not allowed to delete rights.
+    4010    ERROR   You are not allowed to create rights.
+    4011    ERROR   You are not allowed to edit rights.
 
 5000 SETTINGS
     5001    ERROR   Each of old, new and the copy of new passwords are required to be non empty.

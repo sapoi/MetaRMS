@@ -77,7 +77,7 @@ namespace SharedLibrary.Models
         /// </summary>
         /// <value>Language represents user's language of the application.</value>
         [Required]
-        [Column("language")]
+        [Column("language_id")]
         public LanguageEnum Language { get; set; }
         /// <summary>
         /// GetUsername method.

@@ -41,7 +41,7 @@ namespace RazorWebApp.Pages.User
         {
             if (ModelState.IsValid)
             {
-                var token = AccessHelper.ValidateAuthentication(this);
+                var token = AccessHelper.GetTokenFromPageModel(this);
                 // if token is not valid, return to login page
                 if (token == null)
                     return RedirectToPage("/Account/Login");
@@ -66,7 +66,7 @@ namespace RazorWebApp.Pages.User
                 if (message != null)
                     Message = message;
 
-                var response = await _userService.GetAll(ApplicationDescriptor.LoginApplicationName, token.Value);
+                var response = await _userService.GetAll(token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 List<UserModel> data = JsonConvert.DeserializeObject<List<UserModel>>(stringResponse);
@@ -80,7 +80,7 @@ namespace RazorWebApp.Pages.User
         }
         public async Task<IActionResult> OnPostUserResetPasswordAsync(long dataId)
         {
-            var token = AccessHelper.ValidateAuthentication(this);
+            var token = AccessHelper.GetTokenFromPageModel(this);
             // if token is not valid, return to login page
             if (token == null)
                 return RedirectToPage("/Account/Login");
@@ -96,14 +96,14 @@ namespace RazorWebApp.Pages.User
 
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
 
-            var response = await _userService.ResetPasswordById(ApplicationDescriptor.LoginApplicationName, dataId, token.Value);
+            var response = await _userService.ResetPasswordById(dataId, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             // remove " form beginning and end of message
             return await OnGetAsync(message.Substring(1, message.Length - 2));
         }
         public async Task<IActionResult> OnPostUserDeleteAsync(long dataId)
         {
-            var token = AccessHelper.ValidateAuthentication(this);
+            var token = AccessHelper.GetTokenFromPageModel(this);
             // if token is not valid, return to login page
             if (token == null)
                 return RedirectToPage("/Account/Login");
@@ -119,7 +119,7 @@ namespace RazorWebApp.Pages.User
 
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
 
-            var response = await _userService.DeleteById(ApplicationDescriptor.LoginApplicationName, dataId, token.Value);
+            var response = await _userService.DeleteById(dataId, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             // remove " form beginning and end of message
             return await OnGetAsync(message.Substring(1, message.Length - 2));

@@ -21,5 +21,9 @@ namespace SharedLibrary.Helpers
                 LogMessageToConsole(message, language);
             }
         }
+        public static void LogExceptionToConsole(Exception exception)
+        {
+            Console.WriteLine($"{DateTime.Now}:\t{exception.Message}\n\t{exception.StackTrace}");
+        }
     }
 }

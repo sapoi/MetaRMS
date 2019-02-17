@@ -1,0 +1,6 @@
+@using SharedLibrary.Structures;
+@model List<Message>
+
+@foreach (var message in Model) {
+    <span>@message.GetMessage()</span>
+}

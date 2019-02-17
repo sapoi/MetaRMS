@@ -52,10 +52,10 @@ namespace Server.Controllers.Account
                 // a když jsou platné přihlašovací údaje, vytvoří se token
                 var claims = new[]
                 {
-                    new Claim(ClaimTypes.Name, loginCredentials.Username),
+                    // new Claim(ClaimTypes.Name, loginCredentials.Username),
                     new Claim("UserId", user.Id.ToString()),
                     new Claim("ApplicationId", user.ApplicationId.ToString()),
-                    new Claim("LoginApplicationName", loginCredentials.LoginApplicationName),
+                    // new Claim("LoginApplicationName", loginCredentials.LoginApplicationName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
 

@@ -52,7 +52,7 @@ namespace RazorWebApp.Pages.Data
             if (ModelState.IsValid)
             {
                 // get token if valid
-                var token = AccessHelper.ValidateAuthentication(this);
+                var token = AccessHelper.GetTokenFromPageModel(this);
                 // if token is not valid, return to login page
                 if (token == null)
                     return RedirectToPage("/Account/Login");
@@ -99,7 +99,7 @@ namespace RazorWebApp.Pages.Data
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             // validation
-            var token = AccessHelper.ValidateAuthentication(this);
+            var token = AccessHelper.GetTokenFromPageModel(this);
             // if token is not valid, return to login page
             if (token == null)
                 return RedirectToPage("/Account/Login");
@@ -133,8 +133,13 @@ namespace RazorWebApp.Pages.Data
             //     inputData.Add(AttributesNames[i], ValueList[AttributesNames[i]]);
             var validationHelper = new ValidationHelper();
             validationHelper.ValidateValueList(ValueList, ActiveDatasetDescriptor.Attributes);
+
+            var newDataModel = new DataModel(){
+                DatasetId = ActiveDatasetDescriptor.Id,
+                Data = JsonConvert.SerializeObject(ValueList)
+            };
             
-            var response = await _dataService.Create(ApplicationDescriptor.LoginApplicationName, DatasetName, ValueList, token.Value);
+            var response = await _dataService.Create(newDataModel, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             return RedirectToPage("/Data/Get", new {message = message.Substring(1, message.Length - 2)});

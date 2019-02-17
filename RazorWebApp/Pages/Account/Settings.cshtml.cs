@@ -41,7 +41,7 @@ namespace RazorWebApp.Pages.Account
             if (ModelState.IsValid)
             {
                 // get token if valid
-                var token = AccessHelper.ValidateAuthentication(this);
+                var token = AccessHelper.GetTokenFromPageModel(this);
                 // if token is not valid, return to login page
                 if (token == null)
                     return RedirectToPage("/Account/Login");
@@ -62,7 +62,7 @@ namespace RazorWebApp.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             // validation
-            var token = AccessHelper.ValidateAuthentication(this);
+            var token = AccessHelper.GetTokenFromPageModel(this);
             // if token is not valid, return to login page
             if (token == null)
                 return RedirectToPage("/Account/Login");
@@ -91,8 +91,7 @@ namespace RazorWebApp.Pages.Account
                 Message = "New passwords do not match.";
                 return Page();
             }
-            var response = await _accountService.ChangePassword(ApplicationDescriptor.LoginApplicationName, 
-                                                                PasswordChangeStructure, 
+            var response = await _accountService.ChangePassword(PasswordChangeStructure, 
                                                                 token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 

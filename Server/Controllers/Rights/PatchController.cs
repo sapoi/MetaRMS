@@ -64,7 +64,7 @@ namespace Server.Controllers.Rights
                 return BadRequest(messages);
             fromBodyRightsModel.Application = authUserModel.Application;
 
-            // Data must already exist in the database
+            // Rights must already exist in the database
             var rightsRepository = new RightsRepository(context);
             var rightsModel = rightsRepository.GetById(authUserModel.ApplicationId, fromBodyRightsModel.Id);
             if (rightsModel == null)

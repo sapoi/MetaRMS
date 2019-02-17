@@ -54,7 +54,7 @@ namespace RazorWebApp.Pages.User
             if (ModelState.IsValid)
             {
                 // get token if valid
-                var token = AccessHelper.ValidateAuthentication(this);
+                var token = AccessHelper.GetTokenFromPageModel(this);
                 // if token is not valid, return to login page
                 if (token == null)
                     return RedirectToPage("/Account/Login");
@@ -70,7 +70,7 @@ namespace RazorWebApp.Pages.User
                 MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
                 UserId = id;
 
-                var rightsResponse = await _rightsService.GetAll(ApplicationDescriptor.LoginApplicationName, token.Value);
+                var rightsResponse = await _rightsService.GetAll(token.Value);
                 //TODO kontrolovat chyby v response
                 string rightsStringResponse = await rightsResponse.Content.ReadAsStringAsync();
                 List<RightsModel> data = JsonConvert.DeserializeObject<List<RightsModel>>(rightsStringResponse);
@@ -85,7 +85,7 @@ namespace RazorWebApp.Pages.User
                 // foreach (var key in ApplicationDescriptor.Datasets)
                 //     DatasetsIds.Add(key.Id);
 
-                var response = await _userService.GetById(ApplicationDescriptor.LoginApplicationName, id, token.Value);
+                var response = await _userService.GetById(id, token.Value);
                 //TODO kontrolovat chyby v response
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 UserModelToPatch = JsonConvert.DeserializeObject<UserModel>(stringResponse);
@@ -104,7 +104,7 @@ namespace RazorWebApp.Pages.User
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             // validation
-            var token = AccessHelper.ValidateAuthentication(this);
+            var token = AccessHelper.GetTokenFromPageModel(this);
             // if token is not valid, return to login page
             if (token == null)
                 return RedirectToPage("/Account/Login");
@@ -139,12 +139,12 @@ namespace RazorWebApp.Pages.User
             var validationHelper = new ValidationHelper();
             validationHelper.ValidateValueList(ValueList, ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes);
             
-            UserModel patchedUserModel = new UserModel() { //Username = newUsername, 
+            UserModel patchedUserModel = new UserModel() { Id = UserId,
                                                            RightsId = NewRightsId,
                                                            Data = JsonConvert.SerializeObject(ValueList) };
 
             
-            var response = await _userService.PatchById(ApplicationDescriptor.LoginApplicationName, UserId, patchedUserModel, token.Value);
+            var response = await _userService.Patch(patchedUserModel, token.Value);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             if (!response.IsSuccessStatusCode)

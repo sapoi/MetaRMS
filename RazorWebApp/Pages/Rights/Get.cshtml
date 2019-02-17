@@ -1,40 +1,48 @@
-@page "{handler?}"
+@page
 @using SharedLibrary.Enums
 @model RazorWebApp.Pages.Rights.GetModel 
 @{ 
     ViewData["Title"] = "Rights"; 
 }
 
+<!-- Application menu -->
 @{Html.RenderPartial("Shared/_LoggedMenuPartial", Model.MenuData); }
 
+<!-- Application body -->
 <div class="row">
     <div class="col-sm-12">
-        @if (Model.Message != null || Model.Message != ""){
-                <div class="modal-body col-sm-12 center-block text-center">
-                    <span><b>@Model.Message</b></span>
-                </div>
+        <!-- Messages -->
+        @if (Model.Messages != null || Model.Messages.Count != 0){
+            Html.RenderPartial("Shared/_MessagesPartial", Model.Messages);
         }
+
         <h2>@ViewData["Title"]</h2>
+
+        <!-- New rights creation button, if user has rights to create new rights -->
         @if (Model.RightsRights >= RightsEnum.CRU)
         {
             <form method="post" asp-page-handler="rightsCreate">
-                <button class="btn btn-default">Create</button>
+                <button class="btn btn-success">Create</button>
             </form>
         }
+        <!-- Table with application rights -->
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
+                        <!-- Name of the rights column -->
                         <th>
                             Name
                         </th>
+                        <!-- Columns with rights for user defined datasets -->
                         @foreach (var dataset in Model.ApplicationDescriptor.Datasets) {
-                        <th>
-                            @dataset.Name
-                        </th>
+                            <th>
+                                @dataset.Name
+                            </th>
                         }
+                        <!-- Columns for rights for system datasets Users and Rights -->
                         <th>
-                            Users
+                            @Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name
                         </th>
                         <th>
                             Rights
@@ -42,39 +50,39 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Data) {
-                    <tr>
-                        <td>
-                            @item.Name
-                        </td>
-                        @foreach (var dataset in Model.ApplicationDescriptor.Datasets) {
-                        <td>
-                            @((RightsEnum)int.Parse(item.DataDictionary[dataset.Id.ToString()].ToString()))
-                        </td>
-                        }
-                        <td>
-                            @((RightsEnum)int.Parse(item.DataDictionary[((long)SystemDatasetsEnum.Users).ToString()].ToString()))
-                        </td>
-                        <td>
-                            @((RightsEnum)int.Parse(item.DataDictionary[((long)SystemDatasetsEnum.Rights).ToString()].ToString()))
-                        </td>
-                        @if (Model.RightsRights >= RightsEnum.RU)
-                        {
-                        <td>
-                            <form method="post" asp-route-dataId="@item.Id" asp-page-handler="rightsEdit">
-                                <button class="btn btn-default">Edit</button>
-                            </form>
-                        </td>
-                        }
-                        @if (Model.RightsRights >= RightsEnum.CRUD)
-                        {
-                        <td>
-                            <form method="post" asp-route-dataId="@item.Id" asp-page-handler="rightsDelete">
-                                <button class="btn btn-default">Delete</button>
-                            </form>
-                        </td>
-                        }
-                    </tr>
+                    @foreach (var rights in Model.Data) {
+                        <tr>
+                            <td>
+                                @rights.Name
+                            </td>
+                            @foreach (var dataset in Model.ApplicationDescriptor.Datasets) {
+                                <td>
+                                    @rights.DataDictionary[dataset.Id]
+                                </td>
+                            }
+                            <td>
+                                @rights.DataDictionary[((long)SystemDatasetsEnum.Users)]
+                            </td>
+                            <td>
+                                @rights.DataDictionary[((long)SystemDatasetsEnum.Rights)]
+                            </td>
+                            <!-- Rights edit button, if user has rights to edit rights -->
+                            @if (Model.RightsRights >= RightsEnum.RU) {
+                                <td>
+                                    <form method="post" asp-route-dataId="@rights.Id" asp-page-handler="rightsEdit">
+                                        <button class="btn btn-info">Edit</button>
+                                    </form>
+                                </td>
+                            }
+                            <!-- Rights delete button, if user has rights to delete rights -->
+                            @if (Model.RightsRights >= RightsEnum.CRUD) {
+                                <td>
+                                    <form method="post" asp-route-dataId="@rights.Id" asp-page-handler="rightsDelete">
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            }
+                        </tr>
                     }
                 </tbody>
             </table>
