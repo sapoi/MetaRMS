@@ -1,38 +1,46 @@
 @page "{datasetName?}"
 @using RazorWebApp.Structures
+@using System.Linq
 @model RazorWebApp.Pages.Data.CreateModel 
 @{ 
     ViewData["Title"] = @Model.ActiveDatasetDescriptor.Name; 
 }
 
+<!-- Application menu -->
 @{Html.RenderPartial("Shared/_LoggedMenuPartial", Model.MenuData); }
 
+<!-- Application body -->
 <div class="row">
-    
+    <!-- Side menu with read authorized datasets -->
     @{Html.RenderPartial("Shared/_ReadAuthorizedDatasetsMenuPartial", Model.ReadAuthorizedDatasets); }
 
     <div class="col-sm-9">
+        <!-- Messages -->
+        @if (Model.Messages != null || Model.Messages.Count != 0){
+            Html.RenderPartial("Shared/_MessagesPartial", Model.Messages);
+        }
+
         <h2>@ViewData["Title"]</h2>
+
+        <!-- New dataset data creation form -->
         <form method="post">
             <input type="hidden" asp-for="DatasetName"/>
 
-
+            <!-- Input for each dataset attribute -->
             @for (int i = 0; i < Model.ActiveDatasetDescriptor.Attributes.Count; i++){
-                <input type="hidden" asp-for="AttributesNames[i]"/>
                 <div class="form-group">
-                     @{ var attribute = Model.ActiveDatasetDescriptor.Attributes[i]; }
-                    <label>@attribute.Name</label>
-                    <small>@attribute.Description</small>
-                    @{Html.RenderPartial("Shared/_EditBuilderPartial", 
-                                          new EditBuilderPartialData {
-                                                                        Attribute = attribute, 
-                                                                        OutValue = "ValueList[" + attribute.Name + "]",
-                                                                        SelectData = Model.SelectData
-                                                                      }
-                                        ); 
-                    }
-                    
-                    <!--<span asp-validation-for="Model.ValueList[@i]" class="text-danger"></span>-->
+                    @{ var attribute = Model.ActiveDatasetDescriptor.Attributes[i]; }
+                        <label>@attribute.Name</label>
+                        <small>@attribute.Description</small>
+                        @{Html.RenderPartial("Shared/_EditBuilderPartial", 
+                                            new EditBuilderPartialData {
+                                                                            Attribute = attribute, 
+                                                                            OutValue = "NewDataDictionary[" + attribute.Name + "]",
+                                                                            InValue = Model.NewDataDictionary[attribute.Name].ToList<object>(),
+                                                                            SelectData = Model.SelectData
+                                                                        }
+                                            ); 
+                        }
                 </div>
             }
             <div class="form-group">

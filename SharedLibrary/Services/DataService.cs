@@ -26,7 +26,7 @@ namespace SharedLibrary.Services
             // adding JWT token value to authorization header
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             // GET request to server with authorization header containing JWT token value
-            var address = new Uri(client.BaseAddress.OriginalString + "/get/");
+            var address = new Uri(client.BaseAddress.OriginalString + "/get/" + datasetId);
             var response = await client.GetAsync(address);
 
 

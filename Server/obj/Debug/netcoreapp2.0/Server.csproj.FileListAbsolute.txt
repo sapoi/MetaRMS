@@ -22,4 +22,3 @@
 /Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Server/obj/Debug/netcoreapp2.0/Server.AssemblyInfo.cs
 /Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Server/obj/Debug/netcoreapp2.0/Server.dll
 /Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Server/obj/Debug/netcoreapp2.0/Server.pdb
-/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Server/obj/Debug/netcoreapp2.0/Server.csprojResolveAssemblyReference.cache

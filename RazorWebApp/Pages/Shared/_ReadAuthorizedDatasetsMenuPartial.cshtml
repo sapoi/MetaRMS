@@ -5,7 +5,7 @@
 	<h2>Datasets</h2>
 	@foreach (var dataset in Model) {
 		<form method="post" asp-route-datasetName="@dataset.Name" asp-page-handler="datasetSelect">
-			<button class="btn btn-default">@dataset.Name</button>
+			<button class="btn btn-primary">@dataset.Name</button>
 		</form>
 		<br> 
 	}

@@ -17,7 +17,6 @@
 /Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.pdb
 /Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/bin/Debug/netcoreapp2.0/SharedLibrary.dll
 /Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/bin/Debug/netcoreapp2.0/SharedLibrary.pdb
-/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.csprojResolveAssemblyReference.cache
 /Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.csproj.CoreCompileInputs.cache
 /Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.AssemblyInfoInputs.cache
 /Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.AssemblyInfo.cs

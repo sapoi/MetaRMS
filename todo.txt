@@ -78,6 +78,7 @@ JSON VALIDACE
     - nazvy datasetu nesmi obsahovat {cislo} (kvuli replaci messagi)
     - typ password jen u desla user datasetu
     - min mensi nez max
+    - kdyz je min a neni required, nastavit i requierd
 
     - temer jakakoli hodnota atributu muze byt null!!!
 -----------------------

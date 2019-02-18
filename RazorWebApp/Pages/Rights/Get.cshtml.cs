@@ -58,8 +58,8 @@ namespace RazorWebApp.Pages.Rights
         /// <value>List of RightsModel</value>
         public List<RightsModel> Data { get; set; }
         /// <summary>
-        /// RightsRights property conatins user's rights to the rights dataset.async This
-        /// values are used for displaying Create, Edit and Delete buttons.
+        /// RightsRights property conatins user's rights to the rights dataset.async 
+        /// This value is used for displaying Create, Edit and Delete buttons.
         /// </summary>
         /// <value>RightsEnum value.</value>
         public RightsEnum? RightsRights { get; set; }
@@ -74,7 +74,7 @@ namespace RazorWebApp.Pages.Rights
         /// <value>List of Message structure</value>
         public List<Message> Messages { get; set; }
         /// <summary>
-        /// This method is used when there is a GET request to Rights/Get.cshtml page
+        /// This method is used when there is a GET request to Rights/Get.cshtml page.
         /// </summary>
         /// <returns>The page.</returns>
         public async Task<IActionResult> OnGetAsync()

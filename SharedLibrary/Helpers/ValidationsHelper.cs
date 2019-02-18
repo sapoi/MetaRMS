@@ -269,7 +269,7 @@ namespace SharedLibrary.Helpers
                 default:
                     isReference = true;
                     // References must contain only valid ids to the referenced dataset
-                    var validIds = validReferencesIdsDictionary.FirstOrDefault(k => k.Key == attributeDescriptor.Name);
+                    var validIds = validReferencesIdsDictionary.FirstOrDefault(k => k.Key == attributeDescriptor.Type);
                     if (validIds.Equals(new KeyValuePair<string, List<long>>()))
                     {
                         // Key error

@@ -109,7 +109,7 @@ namespace RazorWebApp.Pages.Rights
             }
             // Menu data
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
-            // NewDataDictionary - prepare keys
+            // NewRightsDictionary - prepare keys
             NewRightsDictionary = new Dictionary<long, RightsEnum>();
             foreach (var key in ApplicationDescriptor.Datasets)
                 NewRightsDictionary.Add(key.Id, 0);
@@ -135,7 +135,7 @@ namespace RazorWebApp.Pages.Rights
             // Authorization
             var rights = await AccessHelper.GetUserRights(cache, accountService, token);
             // If user is not authorized to create, add message and redirect to get page
-            if (AccessHelper.GetRights(rights, (long)SystemDatasetsEnum.Rights) < RightsEnum.CRUD)
+            if (AccessHelper.GetRights(rights, (long)SystemDatasetsEnum.Rights) < RightsEnum.CRU)
             {
                 return RedirectToPage("/Rights/Get", new { messages = new List<Message>() {
                     new Message(MessageTypeEnum.Error, 

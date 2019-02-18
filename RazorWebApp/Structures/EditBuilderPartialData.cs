@@ -8,9 +8,9 @@ namespace RazorWebApp.Structures
 {
     public class EditBuilderPartialData
     {
-        public AttributeDescriptor Attribute;
-        public string OutValue;
-        public List<object> InValue;
-        public Dictionary<string, List<SelectListItem>> SelectData;
+        public AttributeDescriptor Attribute { get; set; }
+        public string OutValue { get; set; }
+        public List<object> InValue { get; set; }
+        public Dictionary<string, List<SelectListItem>> SelectData { get; set; }
     }
 }
