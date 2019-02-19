@@ -140,9 +140,13 @@ namespace RazorWebApp.Pages.Rights
                     Messages.Add(new Message(MessageTypeEnum.Error, 
                                                 4011, 
                                                 new List<string>()));
-                // Otherwise try parse error messages
+                // Otherwise try parse error messages and display them at the get page
                 else
-                    Messages.AddRange(JsonConvert.DeserializeObject<List<Message>>(await response.Content.ReadAsStringAsync()));
+                {
+                    // Set messages to cookie
+                    TempData["Messages"] = await response.Content.ReadAsStringAsync();
+                    return RedirectToPage("/Rights/Get");
+                }
             }
             catch (JsonSerializationException e)
             {
@@ -205,7 +209,7 @@ namespace RazorWebApp.Pages.Rights
                     messages.Add(new Message(MessageTypeEnum.Error, 
                                              4011, 
                                              new List<string>()));
-                // Otherwise try parse error messages and display them at the create page
+                // Otherwise try parse error messages and display them at the get page
                 else
                 {
                     messages = JsonConvert.DeserializeObject<List<Message>>(await response.Content.ReadAsStringAsync());

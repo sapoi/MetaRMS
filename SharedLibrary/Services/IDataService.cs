@@ -11,7 +11,7 @@ namespace SharedLibrary.Services
     public interface IDataService  
     {
         Task<HttpResponseMessage> GetAll(long datasetId, string token);
-        Task<HttpResponseMessage> GetById(long id, string token);
+        Task<HttpResponseMessage> GetById(long datasetId, long id, string token);
         Task<HttpResponseMessage> DeleteById(long id, string token);
         Task<HttpResponseMessage> Patch(DataModel dataModel, string token);
         Task<HttpResponseMessage> Create(DataModel dataModel, string token);

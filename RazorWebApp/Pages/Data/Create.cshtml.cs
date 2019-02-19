@@ -60,7 +60,7 @@ namespace RazorWebApp.Pages.Data
         [BindProperty]
         public string DatasetName { get; set; }
         /// <summary>
-        /// Dictionary containing string attribute name as key and list of strings ac the values.
+        /// Dictionary containing string attribute name as key and list of strings as the values.
         /// </summary>
         /// <value>Dictionary of string and list of strings</value>
         [BindProperty]
@@ -195,7 +195,7 @@ namespace RazorWebApp.Pages.Data
             {
                 return RedirectToPage("/Data/Get", new { messages = new List<Message>() {
                     new Message(MessageTypeEnum.Error, 
-                                209, 
+                                2009, 
                                 new List<string>(){DatasetName})}});
             }
 

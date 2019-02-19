@@ -10,7 +10,7 @@ namespace RazorWebApp.Structures
     {
         public AttributeDescriptor Attribute { get; set; }
         public string OutValue { get; set; }
-        public List<object> InValue { get; set; }
+        public List<string> InValue { get; set; }
         public Dictionary<string, List<SelectListItem>> SelectData { get; set; }
     }
 }

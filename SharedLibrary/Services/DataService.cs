@@ -33,12 +33,12 @@ namespace SharedLibrary.Services
             return response;
         }
 
-        public async Task<HttpResponseMessage> GetById(long id, string token)
+        public async Task<HttpResponseMessage> GetById(long datasetId, long id, string token)
         {
             // adding JWT token value to authorization header
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             // GET request to server with authorization header containing JWT token value
-            var address = new Uri(client.BaseAddress.OriginalString + "/get/" + id);
+            var address = new Uri(client.BaseAddress.OriginalString + "/get/" + datasetId + "/" + id);
             var response = await client.GetAsync(address);
 
             return response;

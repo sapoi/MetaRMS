@@ -1,3 +1,5 @@
+-----------------------
+
 🙈 NOT SUPPORTED
     - validace min u referenci na klientovi (bootstrap-select nema implementovano -> pro min=1 je pot5eba nastavit required=true)
     - unique
@@ -6,6 +8,11 @@
     - lazy loadig zobrazenych dat
     - pridat typ backgroundcolor - bude jako color, pro kadzy dataset max jedna -> pokud bude tento dataset referencovany nekde, tak se ta reference podbarvi tou barvou, jakou ma ten radek datasetu nastavenou jako background color
     - _editbuilderpartial -> data-subtext=" "
+
+🕓 FURTHER WORK
+    - join and parametrize create and update methods due to code duplicity for data, users and rights on both server and client
+    - 
+
 -----------------------
 TODO
     - mazani delat pres httpdelete
