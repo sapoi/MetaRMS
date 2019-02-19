@@ -30,7 +30,7 @@
     2008    ERROR   You are not allowed to delete data of dataset {0}.
     2009    ERROR   You are not allowed to create data of dataset {0}.
     2010    ERROR   You are not allowed to edit data of dataset {0}.
-    2011    INFO    You are not allower to read any application datasets.
+    2011    INFO    You are not allowed to read any application datasets.
 
 
 

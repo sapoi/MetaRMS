@@ -125,19 +125,13 @@ namespace RazorWebApp.Helpers
         }
         public static DatasetDescriptor GetActiveDatasetDescriptor(ApplicationDescriptor applicationDescriptor, Dictionary<long, RightsEnum> rights, string datasetName)
         {
-            DatasetDescriptor activeDatasetDescriptor;
-            var readAuthorizedDatasets = AccessHelper.GetReadAuthorizedDatasets(applicationDescriptor, rights);                                      
-            if (readAuthorizedDatasets.Count() == 0)
+            // if datasetName was specified
+            if (datasetName != null)
             {
-                return null;
+                return applicationDescriptor.Datasets.Where(d => d.Name == datasetName).FirstOrDefault();
             }
-            // if no dataset was specified in parameter, select first dataset with at least read right (>= 1)
-            if (datasetName == null)
-                return readAuthorizedDatasets[0];
-            activeDatasetDescriptor = readAuthorizedDatasets.Where(d => d.Name == datasetName).FirstOrDefault();
-            if (activeDatasetDescriptor == null)
-                return readAuthorizedDatasets[0];
-            return activeDatasetDescriptor;
+            // if dataset name was not specified, select first dataset with at least read right (>= 1)
+            return AccessHelper.GetReadAuthorizedDatasets(applicationDescriptor, rights).FirstOrDefault();                                      
         }
         public static RightsEnum? GetActiveDatasetRights(DatasetDescriptor datasetDescriptor, Dictionary<long, RightsEnum> rights)
         {

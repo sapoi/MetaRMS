@@ -26,8 +26,8 @@
 │   │   ├── Data 
 │   │   │   ├── Create.cshtml ✅
 │   │   │   ├── Create.cshtml.cs ✅
-│   │   │   ├── Edit.cshtml *️⃣
-│   │   │   ├── Edit.cshtml.cs *️⃣
+│   │   │   ├── Edit.cshtml ✅
+│   │   │   ├── Edit.cshtml.cs ✅
 │   │   │   ├── Get.cshtml ✅
 │   │   │   └── Get.cshtml.cs ✅
 │   │   ├── Error.cshtml *️⃣
@@ -35,8 +35,8 @@
 │   │   ├── Errors 
 │   │   │   ├── ServerError.cshtml *️⃣
 │   │   │   ├── ServerError.cshtml.cs *️⃣
-│   │   │   ├── Unauthorized.cshtml *️⃣
-│   │   │   └── Unauthorized.cshtml.cs *️⃣
+│   │   │   ├── Unauthorized.cshtml ❌
+│   │   │   └── Unauthorized.cshtml.cs ❌
 │   │   ├── Index.cshtml *️⃣
 │   │   ├── Index.cshtml.cs *️⃣
 │   │   ├── Rights 
