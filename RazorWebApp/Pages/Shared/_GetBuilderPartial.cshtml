@@ -5,16 +5,19 @@
 @if (@Model.CellContent.Count() >= 1) 
 {
     bool isReference = !AttributeType.Types.Contains(@Model.Attribute.Type);
-    if (isReference)
+    if (isReference) 
     {
+        <!-- If attribute is reference types, display value with link -->
         var data = JsonConvert.DeserializeObject<Tuple<string, string>>(@Model.CellContent[0].ToString());
         string path;
         @if (@Model.Attribute.Type == @Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name)
         {
+            <!-- System users dataset -->
             path = "~/User/Edit/" + data.Item1;
         }
         else
         {
+            <!-- User defined datasets -->
             path = "~/Data/Edit/" + @Model.Attribute.Type + "/" + data.Item1;
         }
         <a href="@Url.Content(path)">@data.Item2</a>
@@ -22,6 +25,7 @@
     }
     else if (@Model.Attribute.Type == "bool")
     {
+        <!-- Display icon for boolean type attributes -->
         if (@Model.CellContent[0].ToString() == "0")
         {
             <text>❌</text>
@@ -33,9 +37,11 @@
     }
     else
     {
+        <!-- For other types display the text representation -->
         @Model.CellContent[0]
     }
 }
+<!-- For references with multiple elements selected display each of them with link -->
 @for (int i = 1; i < Model.CellContent.Count(); i++) 
 {
     <text><br></text>
@@ -43,10 +49,12 @@
     string path;
     @if (@Model.Attribute.Type == @Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name)
     {
+        <!-- System users dataset -->
         path = "~/User/Edit/" + data.Item1;
     }
     else
     {
+        <!-- User defined datasets -->
         path = "~/Data/Edit/" + @Model.Attribute.Type + "/" + data.Item1;
     }
     <a href="@Url.Content(path)">@data.Item2</a>

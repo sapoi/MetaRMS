@@ -22,8 +22,8 @@
             <div class="form-group">
                 @{ var passwordAttribute = Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.PasswordAttribute; }
                 <label>Old password</label>
-                @{Html.RenderPartial("Shared/_EditBuilderPartial", 
-                                        new EditBuilderPartialData {
+                @{Html.RenderPartial("Shared/_InputBuilderPartial", 
+                                        new InputBuilderPartialData {
                                                                     Attribute = passwordAttribute, 
                                                                     OutValue = "PasswordChangeStructure.OldPassword",
                                                                     SelectData = null
@@ -34,8 +34,8 @@
             <div class="form-group">
                 <label>New password</label>
                 <small>@passwordAttribute.Description</small>
-                @{Html.RenderPartial("Shared/_EditBuilderPartial", 
-                                        new EditBuilderPartialData {
+                @{Html.RenderPartial("Shared/_InputBuilderPartial", 
+                                        new InputBuilderPartialData {
                                                                     Attribute = passwordAttribute, 
                                                                     OutValue = "PasswordChangeStructure.NewPassword",
                                                                     SelectData = null
@@ -45,8 +45,8 @@
             </div>
             <div class="form-group">
                 <label>New password once again</label>
-                @{Html.RenderPartial("Shared/_EditBuilderPartial", 
-                                        new EditBuilderPartialData {
+                @{Html.RenderPartial("Shared/_InputBuilderPartial", 
+                                        new InputBuilderPartialData {
                                                                     Attribute = passwordAttribute, 
                                                                     OutValue = "PasswordChangeStructure.NewPasswordCopy",
                                                                     SelectData = null

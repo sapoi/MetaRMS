@@ -114,7 +114,7 @@ namespace RazorWebApp.Pages.Data
             // Authentication
             var token = AccessHelper.GetTokenFromPageModel(this);
             if (token == null)
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("/Index");
 
             // Application descriptor
             ApplicationDescriptor = await AccessHelper.GetApplicationDescriptor(cache, accountService, token);
@@ -176,7 +176,7 @@ namespace RazorWebApp.Pages.Data
                 }
                 // If user is not authenticated, redirect to login page
                 else if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    return RedirectToPage("/Account/Login");
+                    return RedirectToPage("/Index");
                 // If user is not authorized, add message
                 else if (response.StatusCode == HttpStatusCode.Forbidden)
                     Messages.Add(new Message(MessageTypeEnum.Error, 
@@ -205,12 +205,12 @@ namespace RazorWebApp.Pages.Data
         /// OnPostAsync method is invoked after clicking on Submit button.
         /// </summary>
         /// <returns>Redirect to Get page or the same page with validation messages</returns>
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync()
         {
             // Authentication
             var token = AccessHelper.GetTokenFromPageModel(this);
             if (token == null)
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("/Index");
 
             // Application descriptor
             ApplicationDescriptor = await AccessHelper.GetApplicationDescriptor(cache, accountService, token);
@@ -266,7 +266,7 @@ namespace RazorWebApp.Pages.Data
                 }
                 // If user is not authenticated, redirect to login page
                 else if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    return RedirectToPage("/Account/Login");
+                    return RedirectToPage("/Index");
                 // If user is not authorized, add message
                 else if (response.StatusCode == HttpStatusCode.Forbidden)
                     messages.Add(new Message(MessageTypeEnum.Error, 

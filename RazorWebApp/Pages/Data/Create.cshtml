@@ -30,8 +30,8 @@
                 <div class="form-group">
                     <label>@attribute.Name</label>
                     <small>@attribute.Description</small>
-                    @{Html.RenderPartial("Shared/_EditBuilderPartial", 
-                                        new EditBuilderPartialData {
+                    @{Html.RenderPartial("Shared/_InputBuilderPartial", 
+                                        new InputBuilderPartialData {
                                                                         Attribute = attribute, 
                                                                         OutValue = "NewDataDictionary[" + attribute.Name + "]",
                                                                         InValue = Model.NewDataDictionary[attribute.Name],

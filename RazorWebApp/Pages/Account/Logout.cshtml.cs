@@ -26,7 +26,7 @@ namespace RazorWebApp.Pages.Account
             var token = AccessHelper.GetTokenFromPageModel(this);
             // if token is not valid, return to login page
             if (token == null)
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("/Index");
 
             // logout on server
             await _accountService.Logout(token.Value);

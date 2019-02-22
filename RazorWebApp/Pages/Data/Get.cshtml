@@ -21,7 +21,7 @@
             Html.RenderPartial("Shared/_MessagesPartial", Model.Messages);
         }
         
-        <!-- Display rights table if user is allowed to read data for dataset -->
+        <!-- Display data table if user is allowed to read data for dataset -->
         @if (Model.ActiveDatasetRights >= RightsEnum.R)
         {
             <h2>@ViewData["Title"]</h2>

@@ -82,7 +82,7 @@ namespace RazorWebApp.Pages.Rights
             // Authentication
             var token = AccessHelper.GetTokenFromPageModel(this);
             if (token == null)
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("/Index");
 
             // Authorization
             var rights = await AccessHelper.GetUserRights(cache, accountService, token);
@@ -130,7 +130,7 @@ namespace RazorWebApp.Pages.Rights
             // Authentication
             var token = AccessHelper.GetTokenFromPageModel(this);
             if (token == null)
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("/Index");
 
             // Authorization
             var rights = await AccessHelper.GetUserRights(cache, accountService, token);
@@ -162,7 +162,7 @@ namespace RazorWebApp.Pages.Rights
                 }
                 // If user is not authenticated, redirect to login page
                 else if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    return RedirectToPage("/Account/Login");
+                    return RedirectToPage("/Index");
                 // If user is not authorized, add message
                 else if (response.StatusCode == HttpStatusCode.Forbidden)
                     messages.Add(new Message(MessageTypeEnum.Error, 

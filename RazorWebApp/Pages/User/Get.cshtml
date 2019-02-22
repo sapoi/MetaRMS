@@ -1,4 +1,4 @@
-@page "{handler?}"
+@page
 @using SharedLibrary.Enums
 @using RazorWebApp.Structures
 @model RazorWebApp.Pages.User.GetModel 
@@ -6,101 +6,93 @@
     ViewData["Title"] = @Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name; 
 }
 
+<!-- Application menu -->
 @{Html.RenderPartial("Shared/_LoggedMenuPartial", Model.MenuData); }
 
+<!-- Application body -->
 <div class="row">
     <div class="col-sm-12">
-        @if (Model.Message != null || Model.Message != ""){
-        <div class="row">
-            <div class="modal-body col-sm-12 center-block text-center">
-                <span><b>@Model.Message</b></span>
-            </div>
-        </div>
+        <!-- Messages -->
+        @if (Model.Messages != null || Model.Messages.Count != 0){
+            Html.RenderPartial("Shared/_MessagesPartial", Model.Messages);
         }
-        <h2>@ViewData["Title"]</h2>
-        <h6>@Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Description</h6>
-        @if (Model.UsersRights >= RightsEnum.CRU) {
-        <form method="post" asp-page-handler="userCreate">
-            <button class="btn btn-default">Create</button>
-        </form>
-        }
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        @*
-                        <th>
-                            @Model.ApplicationDescriptor.GetUsernameAttribute().Name
-                        </th>
-                        
-                        <th>
-                            @Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.PasswordAttribute.Name
-                        </th>
-                        *@
-                        
 
-                        @foreach (var attribute in Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes) {
-                        <th>
-                            @attribute.Name
-                        </th>
-                        }
-                        <th>
-                            Rights
-                        </th>
+        <!-- Display users table if user is allowed to read users -->
+        @if (Model.UsersRights >= RightsEnum.R)
+        {
+            <h2>@ViewData["Title"]</h2>
+            <h6>@Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Description</h6>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var user in Model.Data) {
-                    <tr>
-                        @*
-                        <td>
-                            @user.DataDictionary[Model.ApplicationDescriptor.GetUsernameAttribute().Name][0].ToString();
-                        </td>
-                        
-                        <td>
-                            @user.Password
-                        </td>
-                        *@
-                        
-
-                        @foreach (var attribute in Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes) {
-                        <td>
-                            @{Html.RenderPartial("Shared/_GetBuilderPartial", 
-                                          new GetBuilderPartialData {
-                                                                        CellContent = user.DataDictionary[attribute.Name],
-                                                                        Attribute = attribute,
-                                                                        ApplicationDescriptor = Model.ApplicationDescriptor
-                                                                    }
-                                        );
+            <!-- New user creation button, if user has rights to create new user -->
+            @if (Model.UsersRights >= RightsEnum.CRU) 
+            {
+                <form method="post" asp-page-handler="userCreate">
+                    <button class="btn btn-success">Create</button>
+                </form>
+            }
+            <!-- Table with application users -->
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <!-- Columns with user data -->
+                            @foreach (var attribute in Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes) {
+                                <th>
+                                    @attribute.Name
+                                </th>
                             }
-                        </td>
-                        } 
-                        <td>
-                            @user.Rights.Name
-                        </td>
-                        @if (Model.UsersRights >= RightsEnum.RU) {
-                        <td>
-                            <form method="post" asp-route-dataId="@user.Id" asp-page-handler="userEdit">
-                                <button class="btn btn-default">Edit</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form method="post" asp-route-dataId="@user.Id" asp-page-handler="userResetPassword">
-                                <button class="btn btn-default">Reset password</button>
-                            </form>
-                        </td>
-                        } @if (Model.UsersRights >= RightsEnum.CRUD) {
-                        <td>
-                            <form method="post" asp-route-dataId="@user.Id" asp-page-handler="userDelete">
-                                <button class="btn btn-default">Delete</button>
-                            </form>
-                        </td>
+                            <!-- Columns with user rights -->
+                            <th>
+                                Rights
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model.Data) {
+                            <tr>
+                                @foreach (var attribute in Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes) {
+                                    <td>
+                                        @{Html.RenderPartial("Shared/_GetBuilderPartial", 
+                                                    new GetBuilderPartialData {
+                                                                                    CellContent = user.DataDictionary[attribute.Name],
+                                                                                    Attribute = attribute,
+                                                                                    ApplicationDescriptor = Model.ApplicationDescriptor
+                                                                                }
+                                                    );
+                                        }
+                                    </td>
+                                } 
+                                <td>
+                                    @user.Rights.Name
+                                </td>
+                                <!-- User edit and password reset button, if user has rights to edit users -->
+                                @if (Model.UsersRights >= RightsEnum.RU) 
+                                {
+                                    <td>
+                                        <form method="post" asp-route-dataId="@user.Id" asp-page-handler="userEdit">
+                                            <button class="btn btn-info">Edit</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method="post" asp-route-dataId="@user.Id" asp-page-handler="userResetPassword">
+                                            <button class="btn btn-warning">Reset password</button>
+                                        </form>
+                                    </td>
+                                } 
+                                <!-- User delete button, if user has rights to delete users -->
+                                @if (Model.UsersRights >= RightsEnum.CRUD) 
+                                {
+                                    <td>
+                                        <form method="post" asp-route-dataId="@user.Id" asp-page-handler="userDelete">
+                                            <button class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                }
+                            </tr>
                         }
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                    </tbody>
+                </table>
+            </div>
+        }
     </div>
 </div>

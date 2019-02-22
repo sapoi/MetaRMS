@@ -16,6 +16,20 @@ namespace RazorWebApp.Helpers
 {
     public class DataLoadingHelper
     {
+        public async Task<IEnumerable<SelectListItem>> FillUserRightsData(IRightsService rightsService, JWTToken.AccessToken token)
+        {
+            var response = await rightsService.GetAll(token.Value);
+            //TODO kontrolovat chyby v response
+            string stringResponse = await response.Content.ReadAsStringAsync();
+            List<RightsModel> data = JsonConvert.DeserializeObject<List<RightsModel>>(stringResponse);
+
+            return data.Select(x => 
+                                            new SelectListItem
+                                            {
+                                                Value = x.Id.ToString(),
+                                                Text = x.Name
+                                            });
+        }
         public async Task<Dictionary<string, List<SelectListItem>>> FillSelectData(ApplicationDescriptor applicationDescriptor, List<AttributeDescriptor> attributes, 
             IUserService userService, IDataService dataService, JWTToken.AccessToken token)
         {

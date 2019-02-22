@@ -1,46 +1,51 @@
 @page "{id?}" 
 @using SharedLibrary.Enums 
 @using RazorWebApp.Structures
-@model RazorWebApp.Pages.User.PatchModel 
+@model RazorWebApp.Pages.User.EditModel 
 @{ 
     ViewData["Title"] = @Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name; 
 }
 
+<!-- Application menu -->
 @{Html.RenderPartial("Shared/_LoggedMenuPartial", Model.MenuData); }
 
+<!-- Application body -->
 <div class="row">
     <div class="col-sm-12">
-        <h2>@ViewData["Title"]</h2>
-        @if (Model.Message != null || Model.Message != ""){
-                <div class="modal-body col-sm-12 center-block text-center">
-                    <span><b>@Model.Message</b></span>
-                </div>
+        <!-- Messages -->
+        @if (Model.Messages != null || Model.Messages.Count != 0){
+            Html.RenderPartial("Shared/_MessagesPartial", Model.Messages);
         }
+
+        <h2>@ViewData["Title"]</h2>
+        
+        <!-- User edit form -->
         <form method="post">
             <input type="hidden" asp-for="UserId" /> 
 
-            @for (int i = 0; i < Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes.Count; i++){
+            <!-- Input for each attribute in users dataset -->
+            @foreach (var attribute in Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes){
                 <div class="form-group">
-                    @{ var attribute = Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes[i]; }
                     <label>@attribute.Name</label>
                     <small>@attribute.Description</small>
-                    @{Html.RenderPartial("Shared/_EditBuilderPartial", 
-                                          new EditBuilderPartialData {
+                    @{Html.RenderPartial("Shared/_InputBuilderPartial", 
+                                          new InputBuilderPartialData {
                                                                         Attribute = attribute, 
-                                                                        OutValue = "ValueList[" + attribute.Name + "]", 
-                                                                        InValue = Model.UserModelToPatch.DataDictionary[attribute.Name],
+                                                                        OutValue = "UserDataDictionary[" + attribute.Name + "]",
+                                                                        InValue = Model.UserDataDictionary[attribute.Name],
                                                                         SelectData = Model.SelectData
                                                                        }
                                         );
                     }
                 </div>
             }
+            <!-- Input for user rights -->
             <div class="form-group">
                 <label>Rights</label>
-                <select name="NewRightsId" 
-                        asp-items="Model.UserRightsList"
+                <select name="UserRightsId" 
+                        asp-items="Model.UserRightsData"
                         class="form-control"
-                        asp-for="@Model.UserModelToPatch.RightsId"
+                        asp-for="@Model.UserRightsId"
                         >
                 </select>
             </div>

@@ -44,7 +44,7 @@
 //                 var token = AccessHelper.ValidateAuthentication(this);
 //                 // if token is not valid, return to login page
 //                 if (token == null)
-//                     return RedirectToPage("/Account/Login");
+//                     return RedirectToPage("/Index");
 //                 // get application descriptor
 //                 ApplicationDescriptor = await AccessHelper.GetApplicationDescriptor(_cache, _accountService, token);
 //                 if (ApplicationDescriptor == null)
@@ -65,7 +65,7 @@
 //             var token = AccessHelper.ValidateAuthentication(this);
 //             // if token is not valid, return to login page
 //             if (token == null)
-//                 return RedirectToPage("/Account/Login");
+//                 return RedirectToPage("/Index");
 //             // get application descriptor
 //             ApplicationDescriptor = await AccessHelper.GetApplicationDescriptor(_cache, _accountService, token);
 //             if (ApplicationDescriptor == null)

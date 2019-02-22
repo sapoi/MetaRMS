@@ -44,6 +44,10 @@
     3006    ERROR   No user with id {0} found.
     3007    INFO    User {0} edited successfully.
     3008    INFO    User {0} password reset successfully to {1}.
+    3009    ERROR   You are not allowed to read users.
+    3010    ERROR   You are not allowed to delete users.
+    3011    ERROR   You are not allowed to create users.
+    3012    ERROR   You are not allowed to edit users.
     
 
 

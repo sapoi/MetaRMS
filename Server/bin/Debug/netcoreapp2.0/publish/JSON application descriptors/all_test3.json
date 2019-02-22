@@ -1,0 +1,96 @@
+{ 
+  "LoginAppName":"all_test3",
+  "AppName":"All test",
+  "DefaultLanguage":"en",
+  "SystemDatasets":
+  {
+    "UsersDatasetDescriptor":
+    {
+      "Name":"Uživatelé",
+      "Description":"Dataset s uživateli aplikace.",
+      "PasswordAttribute":
+      {
+        "Name":"Password",
+        "Type":"password",
+        "Safer":false
+      },
+      "Attributes":
+      [
+        {
+          "Name":"Uživatelské jméno",
+          "Type":"username"
+        }
+      ]
+    }
+  },
+  "Datasets": 
+  [
+    {
+      "Name":"Main dataset",
+      "Description":"Dataset containing all possible input types.",
+      "Attributes": 
+      [
+        {
+          "Name":"Color",
+          "Type":"color"
+        },
+        {
+          "Name":"Date",
+          "Type":"date"
+        },
+        {
+          "Name":"Date and time",
+          "Type":"datetime"
+        },
+        {
+          "Name":"Email",
+          "Type":"email"
+        },
+        {
+          "Name":"Month",
+          "Type":"month"
+        },
+        {
+          "Name":"Any integer",
+          "Type":"int"
+        },
+        {
+          "Name":"Float",
+          "Type":"float"
+        },
+        {
+          "Name":"Year",
+          "Type":"year"
+        },
+        {
+          "Name":"Telephone",
+          "Type":"tel"
+        },
+        {
+          "Name":"String",
+          "Type":"string"
+        },
+        {
+          "Name":"Time",
+          "Type":"time"
+        },
+        {
+          "Name":"URL",
+          "Type":"url"
+        },
+        {
+          "Name":"password",
+          "Type":"password"
+        },
+        {
+          "Name":"Bool",
+          "Type":"bool"
+        },
+        {
+          "Name":"Multiline text",
+          "Type":"text"
+        }
+      ]
+    }
+  ]
+}

@@ -12,8 +12,8 @@
 │   │   ├── Account 
 │   │   │   ├── DefaultPasswordChange.cshtml *️⃣
 │   │   │   ├── DefaultPasswordChange.cshtml.cs *️⃣
-│   │   │   ├── Login.cshtml *️⃣
-│   │   │   ├── Login.cshtml.cs *️⃣
+│   │   │   ├── Login.cshtml ❌
+│   │   │   ├── Login.cshtml.cs ❌
 │   │   │   ├── Logout.cshtml *️⃣
 │   │   │   ├── Logout.cshtml.cs *️⃣
 │   │   │   ├── Settings.cshtml *️⃣
@@ -34,9 +34,7 @@
 │   │   ├── Error.cshtml.cs *️⃣
 │   │   ├── Errors 
 │   │   │   ├── ServerError.cshtml *️⃣
-│   │   │   ├── ServerError.cshtml.cs *️⃣
-│   │   │   ├── Unauthorized.cshtml ❌
-│   │   │   └── Unauthorized.cshtml.cs ❌
+│   │   │   └── ServerError.cshtml.cs *️⃣
 │   │   ├── Index.cshtml *️⃣
 │   │   ├── Index.cshtml.cs *️⃣
 │   │   ├── Rights 
@@ -47,29 +45,29 @@
 │   │   │   ├── Get.cshtml ✅
 │   │   │   └── Get.cshtml.cs ✅
 │   │   ├── Shared 
-│   │   │   ├── _EditBuilderPartial.cshtml *️⃣
-│   │   │   ├── _GetBuilderPartial.cshtml *️⃣
-│   │   │   ├── _LoggedMenuPartial.cshtml *️⃣
-│   │   │   ├── _LogoutMenuPartial.cshtml *️⃣
+│   │   │   ├── _GetBuilderPartial.cshtml ✅
+│   │   │   ├── _InputBuilderPartial.cshtml *️⃣
+│   │   │   ├── _LoggedMenuPartial.cshtml ✅ - hardcoded strings
+│   │   │   ├── _LogoutMenuPartial.cshtml ✅ - hardcoded strings
 │   │   │   ├── _MessagesPartial.cshtml *️⃣
-│   │   │   └── _ReadAuthorizedDatasetsMenuPartial.cshtml *️⃣
+│   │   │   └── _ReadAuthorizedDatasetsMenuPartial.cshtml ✅ - "Datasets" hardcoded string - transtation missing
 │   │   ├── User 
-│   │   │   ├── Create.cshtml *️⃣
-│   │   │   ├── Create.cshtml.cs *️⃣
-│   │   │   ├── Edit.cshtml *️⃣
-│   │   │   ├── Edit.cshtml.cs *️⃣
-│   │   │   ├── Get.cshtml *️⃣
-│   │   │   └── Get.cshtml.cs *️⃣
-│   │   ├── _Layout.cshtml *️⃣
-│   │   ├── _ValidationScriptsPartial.cshtml *️⃣
-│   │   ├── _ViewImports.cshtml *️⃣
-│   │   └── _ViewStart.cshtml *️⃣
+│   │   │   ├── Create.cshtml ✅
+│   │   │   ├── Create.cshtml.cs ✅
+│   │   │   ├── Edit.cshtml ✅
+│   │   │   ├── Edit.cshtml.cs ✅
+│   │   │   ├── Get.cshtml ✅
+│   │   │   └── Get.cshtml.cs ✅
+│   │   ├── _Layout.cshtml ✅ - title and footer hardcoded strings
+│   │   ├── _ValidationScriptsPartial.cshtml ❌ - was referenced in login.schtml a index.cshtml
+│   │   ├── _ViewImports.cshtml ✅ - dont know why, but really important
+│   │   └── _ViewStart.cshtml ❌
 │   ├── Program.cs *️⃣
 │   ├── Startup.cs *️⃣
 │   └── Structures 
-│       ├── EditBuilderPartialData.cs *️⃣
-│       ├── GetBuilderPartialData.cs *️⃣
-│       └── LoggedMenuPartial.cs *️⃣
+│       ├── GetBuilderPartialData.cs ✅
+│       ├── InputBuilderPartialData.cs ✅
+│       └── LoggedMenuPartial.cs ✅
 ├── Server 
 │   ├── Cache 
 │   │   └── ReferenceCache.cs *️⃣
@@ -86,18 +84,18 @@
 │   │   │   ├── CreateController.cs ✅
 │   │   │   ├── DeleteController.cs *️⃣
 │   │   │   ├── GetController.cs ✅
-│   │   │   └── PatchController.cs ✴️
+│   │   │   └── PatchController.cs ✅
 │   │   ├── Rights 
 │   │   │   ├── CreateController.cs ✅
 │   │   │   ├── DeleteController.cs ✅
 │   │   │   ├── GetController.cs ✅
 │   │   │   └── PatchController.cs ✅
 │   │   └── User 
-│   │       ├── CreateController.cs ✴️
+│   │       ├── CreateController.cs ✅
 │   │       ├── DeleteController.cs *️⃣
-│   │       ├── GetController.cs ✴️
-│   │       ├── PatchController.cs ✴️
-│   │       └── ResetPasswordController.cs ✴️
+│   │       ├── GetController.cs ✅
+│   │       ├── PatchController.cs ✅
+│   │       └── ResetPasswordController.cs ✅
 │   ├── Helpers 
 │   │   ├── AccessHelper.cs *️⃣
 │   │   ├── ControllerHelper.cs *️⃣

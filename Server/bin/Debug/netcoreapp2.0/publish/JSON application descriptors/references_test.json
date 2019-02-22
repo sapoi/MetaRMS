@@ -1,0 +1,173 @@
+{ 
+  "LoginAppName":"references_test_adresy",
+  "AppName":"references test",
+  "DefaultLanguage":"en",
+  "SystemDatasets":
+  {
+    "UsersDatasetDescriptor":
+    {
+      "Name":"users",
+      "Description":"Dataset containing system users.",
+      "PasswordAttribute":
+      {
+        "Name":"Password",
+        "Type":"password",
+        "Safer":false
+      },
+      "Attributes":
+      [
+        {
+          "Name":"uživatelské jméno",
+          "Type":"username"
+        },
+        {
+          "Name":"sada adres",
+          "Type":"sady adres"
+        }
+      ]
+    }
+  },
+  "Datasets": 
+  [
+    {
+      "Name":"sady adres",
+      "Attributes": 
+      [
+        {
+          "Name":"název sady",
+          "Type":"string"
+        },
+        {
+          "Name":"adresy",
+          "Type":"adresy"
+        }
+      ]
+    },
+    {
+      "Name":"adresy",
+      "Attributes": 
+      [
+        {
+          "Name":"stát",
+          "Type":"stát + zbytek"
+        },
+        {
+          "Name":"string1",
+          "Type":"string"
+        },
+        {
+          "Name":"string2",
+          "Type":"string"
+        },
+        {
+          "Name":"string3",
+          "Type":"string"
+        },
+        {
+          "Name":"string4",
+          "Type":"string"
+        }
+      ]
+    },
+    {
+      "Name":"stát + zbytek",
+      "Attributes": 
+      [
+        {
+          "Name":"město",
+          "Type":"město + zbytek"
+        },
+        {
+          "Name":"string1",
+          "Type":"string"
+        },
+        {
+          "Name":"string2",
+          "Type":"string"
+        },
+        {
+          "Name":"string3",
+          "Type":"string"
+        },
+        {
+          "Name":"string4",
+          "Type":"string"
+        }
+      ]
+    },
+    {
+      "Name":"město + zbytek",
+      "Attributes": 
+      [
+        {
+          "Name":"ulice",
+          "Type":"string"
+        },
+        {
+          "Name":"číslo popisné",
+          "Type":"int"
+        },
+        {
+          "Name":"string2",
+          "Type":"string"
+        },
+        {
+          "Name":"string3",
+          "Type":"string"
+        },
+        {
+          "Name":"string4",
+          "Type":"string"
+        }
+      ]
+    },
+    {
+      "Name":"uživatelé přiřazení ke státům",
+      "Attributes": 
+      [
+        {
+          "Name":"uživatelé",
+          "Type":"uživatelé"
+        },
+        {
+          "Name":"stát",
+          "Type":"string"
+        },
+        {
+          "Name":"string2",
+          "Type":"string"
+        },
+        {
+          "Name":"string3",
+          "Type":"string"
+        },
+        {
+          "Name":"string4",
+          "Type":"string"
+        }
+      ]
+    },
+    {
+      "Name":"mixed reference",
+      "Attributes": 
+      [
+        {
+          "Name":"uživatelé přiřazení ke státům",
+          "Type":"uživatelé přiřazení ke státům"
+        },
+        {
+          "Name":"adresy",
+          "Type":"adresy"
+        },
+        {
+          "Name":"stát + zbytek",
+          "Type":"stát + zbytek"
+        },
+        {
+          "Name":"string1",
+          "Type":"string"
+        }
+      ]
+    }
+  ]
+}

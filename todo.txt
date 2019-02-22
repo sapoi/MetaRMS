@@ -1,3 +1,4 @@
+
 -----------------------
 
 🙈 NOT SUPPORTED
@@ -10,8 +11,8 @@
     - _editbuilderpartial -> data-subtext=" "
 
 🕓 FURTHER WORK
-    - join and parametrize create and update methods due to code duplicity for data, users and rights on both server and client
-    - 
+    - join and parametrize create, update and delete methods due to code duplicity for data, users and rights on both server and client
+    - povolit uzivatelum zpetne editovat nektere casti application descriptoru (napr popisy datasetu)
 
 -----------------------
 TODO
@@ -23,21 +24,15 @@ TODO
     - Message.GetMessage() pouzivat language
     - pouzivat [HttpPost]?
     - nastavovat user datasetu id - AppInitController
-    - ✅ pattern na type="tel" + popis do enumu
-    - ✅ popis validni type="url"
-    - ✅ reference user-user
     - mazani dat - gkeep
         - 🔥 pri mazani uzivatelu/dat kontrolovat, jestli na ne nekde nevede reference
     - kdyz je default heslo, vyzadovat zmenu na safe
         - ✴️ zmena hesla - nekontrolovat delku/spec znaky stareho hesla - vyresi se zavedenim vynuceni zmeny default hesla
     - zobrazovat nekde jmeno prihlaseneho uzivatele
-    - *️⃣ validovat prava - musi mit min R na vsechny navazane datasety datasetu, na ktery ma nim R
-    - ✴️ pridat detail dat - po kliknuti na referenci
-    - *️⃣ validace user data na serveru
-    - *️⃣ validace dat dat na serveru
+    - ✴️🔥🔥🔥 pridat detail dat - po kliknuti na referenci - nutne - kdyz ma uzivatel pouze R prava, nezobrazil by se mu detail pomoci edit
     - ValueList jako dict <string, ...>
                 C  U          x    odesilat model
-        data    ✅ ✅                   ✴️
+        data    ✅ ✅                   ✅
         users   ✅ ✅                   ✅
         rights  ✅ ✅                   ✅
         settings              ✅        ✅
@@ -45,19 +40,13 @@ TODO
     - 🔥🔥🔥
         - ❗️ refresh token (https://www.blinkingcaret.com/2018/05/30/refresh-tokens-in-asp-net-core-web-api/)
     KONTROLA VALIDITY vstupu
-        - 🅾️ validace vstupu na klientovi podle app deskriptoru - co nezvaliduje html5?
         - 🔸 app init kontrola ze je vzdy soubor v service a controlleru
-    DETAILY
-        - if user deleted, log him out first
-- ✅ u dat vracet unauthorized pokud rights = none
-    - ruzne druhy message - info, warneni, error
-    🅾️- pred redirectto error dat log
     - message preparer
         
     JAVASCRIPT
-        🅾️- javascript popup okna pri delete, ...
-        🅾️- users alert jestli doopravdy vyresetovat heslo
-        ️- 🔥🔥🔥🔥🔥🔥new password equal validation
+        - 🔥 javascript popup okna pri delete, ...
+        - 🔥 users alert jestli doopravdy vyresetovat heslo
+        ️- 🔥 new password equal validation
         - prilinkovat skripty 1.10. str 20
 
 -----------------------
@@ -90,19 +79,10 @@ JSON VALIDACE
     - temer jakakoli hodnota atributu muze byt null!!!
 -----------------------
 REFAKTORING
-    - *️⃣ AccountService.GetApplicationDescriptorByAppName dat nekam jinam
-- *️⃣ metoda na kontrolu tokenu a appname do Validations
-    - odstranit login stranku - misto ni je index
     - rozdelit accesshepler 
     - pomocne app init metody z kontrolleru nekam jinam
     - spojit rights, user a data servicy do jedne -> pridat basemodel
-- *️⃣ na serveru validace u controlleru dat zvlast
-    - misto edit dat patch, jen popisek buttonu bude edit
-- nepouzivat v controllerech appName, ale brat id z claimu
-    - ✅ prejmenovat ApplicationDescriptor.LoginAppName a .AppName na (Login)ApplicationName
-    - ✅ prejmenovat LoginCredentials.ApplicationName na .LoginApplicationName
     - presunout getTextForReference
-    - udelat a dat app name validator nekam zvlast
 -----------------------
 TEXT
     - ➡️ zkusit napsat uvod k bp v anglictine
@@ -132,6 +112,7 @@ TEXT
 INIT - co vsechno je potreba spustit pro inicializovani celeho projektu
     - vytvorit db
     - ukazkove aplikace
+    - jak aplikaci umistit online
 
 -----------------------
 HOTOVO
@@ -198,6 +179,21 @@ HOTOVO
     - ✅ Users textik brat z deskriptoru
     - ✅ vyresit async await
     - ✅ value list indexovat stringama nazven atributu a ne cisly
+    - ✅ na serveru validace u controlleru dat zvlast
+    - ✅ misto edit dat patch, jen popisek buttonu bude edit
+    - ✅ nepouzivat v controllerech appName, ale brat id z claimu
+    - ✅ prejmenovat ApplicationDescriptor.LoginAppName a .AppName na (Login)ApplicationName
+    - ✅ prejmenovat LoginCredentials.ApplicationName na .LoginApplicationName
+    - ✅ u dat vracet unauthorized pokud rights = none
+    - ✅ ruzne druhy message - info, warneni, error
+    - ✅ validace vstupu na klientovi podle app deskriptoru - co nezvaliduje html5?
+    - ✅ pattern na type="tel" + popis do enumu
+    - ✅ popis validni type="url"
+    - ✅ reference user-user
+    - ✅ validovat prava - musi mit min R na vsechny navazane datasety datasetu, na ktery ma nim R
+    - ✅ validace user data na serveru
+    - ✅ validace dat dat na serveru
+    - ✅ odstranit login stranku - misto ni je index
 
 -----------------------
 ZRUŠENO
@@ -219,11 +215,18 @@ ZRUŠENO
     - 🅾️ pridani jayzka do descriptoru
     - 🅾️ lokalizovat zobrazeni data nebo to dat do nastaveni
     - 🅾️ odhlaseni na serveru - to vlastne nedava smysl - kdyz se odhlasim z webove aplikace, tak nechci odhlasit i z mobilni aplikace
+    - 🅾️ AccountService.GetApplicationDescriptorByAppName dat nekam jinam
+    - 🅾️ metoda na kontrolu tokenu a appname do Validations
+    - ️️️️️🅾️ udelat a dat app name validator nekam zvlast
+    - 🅾️ if user deleted, log him out first
     
 
 -----------------------
 HOSTING
+    - porovnani: https://www.hledej-hosting.cz/hledat/webhosting-net/?
     - https://www.aspone.cz/cz/Webhosting/Freehosting/
+    - https://www.asp2.cz/
+    - https://www.aspify.com/cz/webhosting/aspnet-freehosting/
 
 ---------
 
@@ -241,7 +244,7 @@ JSON requirements
 - pokud nebude v atributu unique, bere se jako false
 - pokud nebude uvedena u atributu max hodnota, bere se jako null, tedy nekonecno
 - v podstate se nemusi uvadet zadna false hodnota, protoze ta se nastavi default
-- atribut Name nesmi byt nazev podporovaneho typu (jako treba bool, int, currency (ale muze byt Currency)) - kvuli if v _EditBuilderPartial
+- atribut Name nesmi byt nazev podporovaneho typu (jako treba bool, int, currency (ale muze byt Currency)) - kvuli if v _InputBuilderPartial
 
 
 
