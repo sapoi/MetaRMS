@@ -3,7 +3,6 @@
 --application-name=RazorWebApp
 --content-root=/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp
 --file=/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/Pages/About.cshtml
---file=/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/Pages/Account/DefaultPasswordChange.cshtml
 --file=/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/Pages/Account/Logout.cshtml
 --file=/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/Pages/Account/Settings.cshtml
 --file=/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/RazorWebApp/Pages/AppInit/Index.cshtml
