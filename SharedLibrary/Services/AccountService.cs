@@ -16,7 +16,7 @@ namespace SharedLibrary.Services
         public AccountService()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:5000/api/account");
+            client.BaseAddress = new Uri("http://sapoi.aspifyhost.com/api/account");
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("Accept", "application/json");
         }
@@ -38,7 +38,7 @@ namespace SharedLibrary.Services
         public async Task<HttpResponseMessage> GetApplicationDescriptor(string token)
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var address = new Uri("http://localhost:5000/api/applicationdescriptor");
+            var address = new Uri(client.BaseAddress.OriginalString + "/applicationdescriptor");
             return await client.GetAsync(address);
         }
         public async Task<HttpResponseMessage> GetRights(string token)

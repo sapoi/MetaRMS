@@ -228,6 +228,16 @@ HOSTING
     - https://www.asp2.cz/
     - https://www.aspify.com/cz/webhosting/aspnet-freehosting/
 
+- deploy dat
+    - cd RazorWebApp
+    - dotnet build
+    - dotnet publish
+    - ...RazorWebApp/bin/Debug/netcoreapp2.0/publish/
+    - https://stackoverflow.com/questions/39238850/how-to-set-aspnetcore-environment-in-publish-file
+- databaze
+    - zkopirovat
+
+
 ---------
 
 JSON requirements

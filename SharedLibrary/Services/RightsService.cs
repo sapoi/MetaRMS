@@ -16,7 +16,7 @@ namespace SharedLibrary.Services
         public RightsService()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:5000/api/rights");
+            client.BaseAddress = new Uri("http://sapoi.aspifyhost.com/api/rights");
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("Accept", "application/json");
         }

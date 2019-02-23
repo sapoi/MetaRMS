@@ -17,7 +17,7 @@ namespace SharedLibrary.Services
         public AppInitService()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:5000/api/appinit");
+            client.BaseAddress = new Uri("http://sapoi.aspifyhost.com/api/appinit");
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("Accept", "application/json");
         }

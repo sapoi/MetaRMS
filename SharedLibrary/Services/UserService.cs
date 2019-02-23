@@ -16,7 +16,7 @@ namespace SharedLibrary.Services
         public UserService()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:5000/api/user");
+            client.BaseAddress = new Uri("http://sapoi.aspifyhost.com/api/user");
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("Accept", "application/json");
         }
