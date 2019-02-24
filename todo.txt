@@ -16,21 +16,13 @@
 
 -----------------------
 TODO
-    - footer
-    - nejdou videt polozky menu na mobilu
-    - mazani delat pres httpdelete
-    - preklady: nazvy tlacitek, rights dataset, rights.get nazvy sloupcu tabluky, settings
+    - delsi doba prihlaseni - delsi platnost tokenu
     - salt to passwords
-    - Server.Helpers.AuthHelper - Authorize prejmenovat na IsAuthorized a presunout do SharedLibrary
-    - uzivatelum pridat jazyk a pri vztvreni uzivatale nastavit jako default jazyk aplikace + do settings dat zmenu jazyka
-    - Message.GetMessage() pouzivat language
-    - pouzivat [HttpPost]?
     - nastavovat user datasetu id - AppInitController
-    - mazani dat - gkeep
-        - 🔥 pri mazani uzivatelu/dat kontrolovat, jestli na ne nekde nevede reference
     - kdyz je default heslo, vyzadovat zmenu na safe
         - ✴️ zmena hesla - nekontrolovat delku/spec znaky stareho hesla - vyresi se zavedenim vynuceni zmeny default hesla
     - zobrazovat nekde jmeno prihlaseneho uzivatele
+    - message preparer
     - ✴️🔥🔥🔥 pridat detail dat - po kliknuti na referenci - nutne - kdyz ma uzivatel pouze R prava, nezobrazil by se mu detail pomoci edit
     - ValueList jako dict <string, ...>
                 C  U          x    odesilat model
@@ -39,11 +31,20 @@ TODO
         rights  ✅ ✅                   ✅
         settings              ✅        ✅
         defaultpasswordchange ✴️        ✴️
-    - 🔥🔥🔥
-        - ❗️ refresh token (https://www.blinkingcaret.com/2018/05/30/refresh-tokens-in-asp-net-core-web-api/)
-    KONTROLA VALIDITY vstupu
+    - ❗️ refresh token (https://www.blinkingcaret.com/2018/05/30/refresh-tokens-in-asp-net-core-web-api/)
+    
+    APPLICATION INITILIZATION
         - 🔸 app init kontrola ze je vzdy soubor v service a controlleru
-    - message preparer
+    
+
+    REFAKTORING
+        - pouzivat [HttpPost]?
+        - mazani delat pres httpdelete
+        - Server.Helpers.AuthHelper - Authorize prejmenovat na IsAuthorized a presunout do SharedLibrary
+        - rozdelit accesshepler 
+        - pomocne app init metody z kontrolleru nekam jinam
+        - spojit rights, user a data servicy do jedne -> pridat basemodel
+        - presunout getTextForReference
         
     JAVASCRIPT
         - 🔥 javascript popup okna pri delete, ...
@@ -51,7 +52,24 @@ TODO
         ️- 🔥 new password equal validation
         - prilinkovat skripty 1.10. str 20
 
-    - delete
+    MULTILINGUAL SUPPORT
+        - preklady: nazvy tlacitek, rights dataset, rights.get nazvy sloupcu tabluky, settings
+        - uzivatelum pridat jazyk a pri vztvreni uzivatale nastavit jako default jazyk aplikace + do settings dat zmenu jazyka
+        - Message.GetMessage() pouzivat language
+
+    DESIGN
+        - footer
+        - MOBILE VERSION
+            - hamburger button in iphone
+            - smaller page margin
+            - no table border
+            - menu without bullets
+            - menu larger spaces between lines
+
+
+    DELETE
+        - mazani dat - gkeep
+            - 🔥 pri mazani uzivatelu/dat kontrolovat, jestli na ne nekde nevede reference
         - on delete actions (cca https://dev.mysql.com/doc/refman/8.0/en/create-table-foreign-keys.html):
             - I want to delete rowA from table1 and rowA is referenced in table2, if attribute in table@ containing rowA as reference has onDelete set to:
                 - cascade - rowA will be deleted, all rows referencing rowA in table2 will be deleted
@@ -94,12 +112,7 @@ JSON VALIDACE
     - kdyz je min a neni required, nastavit i requierd
 
     - temer jakakoli hodnota atributu muze byt null!!!
------------------------
-REFAKTORING
-    - rozdelit accesshepler 
-    - pomocne app init metody z kontrolleru nekam jinam
-    - spojit rights, user a data servicy do jedne -> pridat basemodel
-    - presunout getTextForReference
+
 -----------------------
 TEXT
     - ➡️ zkusit napsat uvod k bp v anglictine
@@ -124,12 +137,6 @@ TEXT
           dat ve slovnicich nemuzu uvadet validation atributy, ma pro me vetsi smzsl si validace a errory posilat sama, navic ne vzdy 
           se errory poji k nejakemu poli (viz errory bez atributu) -  https://exceptionnotfound.net/asp-net-mvc-demystified-modelstate/
     - client side authentication - token validation https://auth0.com/docs/api-auth/tutorials/verify-access-token
-
------------------------
-INIT - co vsechno je potreba spustit pro inicializovani celeho projektu
-    - vytvorit db
-    - ukazkove aplikace
-    - jak aplikaci umistit online
 
 -----------------------
 HOTOVO
@@ -211,6 +218,7 @@ HOTOVO
     - ✅ validace user data na serveru
     - ✅ validace dat dat na serveru
     - ✅ odstranit login stranku - misto ni je index
+    - ✅ nejdou videt polozky menu na mobilu
 
 -----------------------
 ZRUŠENO
@@ -239,21 +247,22 @@ ZRUŠENO
     
 
 -----------------------
-HOSTING
+🍑 HOSTING
     - porovnani: https://www.hledej-hosting.cz/hledat/webhosting-net/?
     - https://www.aspone.cz/cz/Webhosting/Freehosting/
     - https://www.asp2.cz/
-    - https://www.aspify.com/cz/webhosting/aspnet-freehosting/
+    - https://www.aspify.com/cz/webhosting/aspnet-freehosting/ - nejvice mista
 
-- deploy dat
-    - cd RazorWebApp
-    - dotnet build
-    - dotnet publish
-    - ...RazorWebApp/bin/Debug/netcoreapp2.0/publish/
-    - https://stackoverflow.com/questions/39238850/how-to-set-aspnetcore-environment-in-publish-file
-- databaze
-    - zkopirovat
-
+    - deploy dat
+        - cd RazorWebApp
+        - dotnet build
+        - dotnet publish
+        - ...RazorWebApp/bin/Debug/netcoreapp2.0/publish/
+        - https://stackoverflow.com/questions/39238850/how-to-set-aspnetcore-environment-in-publish-file
+    - databaze
+        - zkopirovat
+        - 🍑 jak vygenerovat novou?
+    - 🍑 ukazkove aplikace?
 
 ---------
 

@@ -1,0 +1,160 @@
+.
+├── MetaRMS.sln
+├── MetaRMS.sln.DotSettings.user
+├── RazorWebApp
+│   ├── Cache
+│   │   └── ReferenceCache.cs
+│   ├── Controllers
+│   │   ├── Account
+│   │   │   ├── ApplicationDescriptorController.cs
+│   │   │   ├── LoginController.cs
+│   │   │   ├── LogoutController.cs
+│   │   │   ├── RightsController.cs
+│   │   │   └── Settings
+│   │   │       └── PasswordController.cs
+│   │   ├── AppInitController.cs
+│   │   ├── Data
+│   │   │   ├── CreateController.cs
+│   │   │   ├── DeleteController.cs
+│   │   │   ├── GetController.cs
+│   │   │   └── PatchController.cs
+│   │   ├── Rights
+│   │   │   ├── CreateController.cs
+│   │   │   ├── DeleteController.cs
+│   │   │   ├── GetController.cs
+│   │   │   └── PatchController.cs
+│   │   └── User
+│   │       ├── CreateController.cs
+│   │       ├── DeleteController.cs
+│   │       ├── GetController.cs
+│   │       ├── PatchController.cs
+│   │       └── ResetPasswordController.cs
+│   ├── Helpers
+│   │   ├── AccessHelper.cs
+│   │   ├── AccessHelper_server_version.cs
+│   │   ├── AuthorizationHelper.cs
+│   │   ├── CacheAccessHelper.cs
+│   │   ├── ControllerHelper.cs
+│   │   ├── DataHelper.cs
+│   │   ├── DataLoadingHelper.cs
+│   │   ├── PasswordHelper.cs
+│   │   └── ValidationHelper.cs
+│   ├── Model.cs
+│   ├── Pages
+│   │   ├── About.cshtml
+│   │   ├── About.cshtml.cs
+│   │   ├── Account
+│   │   │   ├── Logout.cshtml
+│   │   │   ├── Logout.cshtml.cs
+│   │   │   ├── Settings.cshtml
+│   │   │   └── Settings.cshtml.cs
+│   │   ├── AppInit
+│   │   │   ├── Index.cshtml
+│   │   │   └── Index.cshtml.cs
+│   │   ├── Contact.cshtml
+│   │   ├── Contact.cshtml.cs
+│   │   ├── Data
+│   │   │   ├── Create.cshtml
+│   │   │   ├── Create.cshtml.cs
+│   │   │   ├── Edit.cshtml
+│   │   │   ├── Edit.cshtml.cs
+│   │   │   ├── Get.cshtml
+│   │   │   └── Get.cshtml.cs
+│   │   ├── Error.cshtml
+│   │   ├── Error.cshtml.cs
+│   │   ├── Errors
+│   │   │   ├── ServerError.cshtml
+│   │   │   └── ServerError.cshtml.cs
+│   │   ├── Index.cshtml
+│   │   ├── Index.cshtml.cs
+│   │   ├── Rights
+│   │   │   ├── Create.cshtml
+│   │   │   ├── Create.cshtml.cs
+│   │   │   ├── Edit.cshtml
+│   │   │   ├── Edit.cshtml.cs
+│   │   │   ├── Get.cshtml
+│   │   │   └── Get.cshtml.cs
+│   │   ├── Shared
+│   │   │   ├── _GetBuilderPartial.cshtml
+│   │   │   ├── _InputBuilderPartial.cshtml
+│   │   │   ├── _LoggedMenuPartial.cshtml
+│   │   │   ├── _LogoutMenuPartial.cshtml
+│   │   │   ├── _MessagesPartial.cshtml
+│   │   │   └── _ReadAuthorizedDatasetsMenuPartial.cshtml
+│   │   ├── User
+│   │   │   ├── Create.cshtml
+│   │   │   ├── Create.cshtml.cs
+│   │   │   ├── Edit.cshtml
+│   │   │   ├── Edit.cshtml.cs
+│   │   │   ├── Get.cshtml
+│   │   │   └── Get.cshtml.cs
+│   │   ├── _Layout.cshtml
+│   │   └── _ViewImports.cshtml ✅ - dont know why, but really important
+│   ├── Program.cs
+│   ├── RazorWebApp.csproj
+│   ├── Repositories - 👉 tridy pro praci s databazi
+│   │   ├── ApplicationRepository.cs
+│   │   ├── BaseRepository.cs
+│   │   ├── DataRepository.cs
+│   │   ├── RightsRepository.cs
+│   │   └── UserRepository.cs
+│   ├── Startup.cs
+│   ├── Structures
+│   │   ├── GetBuilderPartialData.cs
+│   │   ├── InputBuilderPartialData.cs
+│   │   └── LoggedMenuPartial.cs
+│   ├── appsettings.Development.json
+│   ├── appsettings.json
+│   ├── bundleconfig.json
+│   ├── database.db
+│   └── wwwroot
+│       └── css
+│           ├── site.css
+│           └── site.min.css
+├── SharedLibrary - 👉 knihovna trid sdilenych pro server a klienty
+│   ├── Descriptors - 👉 used when describing application
+│   │   ├── ApplicationDescriptor.cs
+│   │   ├── AttributeDescriptor.cs ⛔️ TODO - Unique not supported
+│   │   ├── DatasetDescriptor.cs
+│   │   ├── SystemDatasetDescriptor.cs
+│   │   └── UsersDatasetDescriptor.cs
+│   ├── Enums
+│   │   ├── AttributeTypeEnum.cs
+│   │   ├── LanguageEnum.cs
+│   │   ├── MessageTypeEnum.cs
+│   │   ├── RightsEnum.cs
+│   │   └── SystemDatasetsEnum.cs
+│   ├── Helpers
+│   │   ├── ApplicationDescriptorHelper.cs
+│   │   ├── AuthorizetionHelper.cs
+│   │   ├── Logger.cs
+│   │   ├── MessageHelper.cs
+│   │   ├── TokenHelper.cs
+│   │   └── ValidationsHelper.cs
+│   ├── Models - 👉 database models
+│   │   ├── ApplicationModel.cs
+│   │   ├── DataModel.cs
+│   │   ├── IBaseModel.cs
+│   │   ├── IBaseModelWithApplicationAndData.cs
+│   │   ├── RightsModel.cs
+│   │   └── UserModel.cs
+│   ├── Services - 👉 servicy pro odeslani pozadavku klienta na server a prijeti odpovedi
+│   │   ├── AccountService.cs
+│   │   ├── AppInitService.cs
+│   │   ├── DataService.cs
+│   │   ├── IAccountService.cs
+│   │   ├── IAppInitService.cs
+│   │   ├── IDataService.cs
+│   │   ├── IRightsService.cs
+│   │   ├── IUserService.cs
+│   │   ├── RightsService.cs
+│   │   └── UserService.cs
+│   ├── SharedLibrary.csproj
+│   └── Structures
+│       ├── JWTToken.cs
+│       ├── LoginCredentials.cs
+│       ├── Message.cs ⛔️ TODO - language
+│       └── PasswordChangeStructure.cs
+├── errorcodes.txt
+├── structure2.txt
+└── todo.txt
