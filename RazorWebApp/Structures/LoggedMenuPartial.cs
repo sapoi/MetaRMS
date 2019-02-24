@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SharedLibrary.Descriptors;
 using SharedLibrary.Enums;
 
 namespace RazorWebApp.Structures
@@ -24,5 +25,9 @@ namespace RazorWebApp.Structures
         /// </summary>
         /// <value>Dictionary of long and RightsEnum</value>
         public Dictionary<long, RightsEnum> NavbarRights { get; set; }
+
+
+
+        public List<DatasetDescriptor> ReadAuthorizedDatasets { get; set; }
     }
 }

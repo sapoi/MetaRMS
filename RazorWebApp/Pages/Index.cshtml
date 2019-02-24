@@ -7,38 +7,38 @@
 @{Html.RenderPartial("Shared/_LogoutMenuPartial"); }
 
 <div class="container-fluid">
-<div class="row">
-    <div class="col-md-4 mx-auto mh-10"  style="float: none; margin: 0 auto;">
-        <h2>Log in</h2>
-        
-        @if (Model.Message != null || Model.Message != ""){
-            <div class="modal-body col-sm-12 center-block text-center">
-                <span><b>@Model.Message</b></span>
-            </div>
-        }
-        
-        <form method="post">
+    <div class="row">
+        <div class="col-md-4 mx-auto mh-10"  style="float: none; margin: 0 auto;">
+            <h2>Log in</h2>
             
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.LoginApplicationName"></label>
-                <input asp-for="Input.LoginApplicationName" class="form-control">
-                <span asp-validation-for="Input.LoginApplicationName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Username"></label>
-                <input asp-for="Input.Username" class="form-control">
-                <span asp-validation-for="Input.Username" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" type="password">
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-default">Log in</button>
-            </div>
-        </form>
+            @if (Model.Message != null || Model.Message != ""){
+                <div class="modal-body col-sm-12 center-block text-center">
+                    <span><b>@Model.Message</b></span>
+                </div>
+            }
+            
+            <form method="post">
+                
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.LoginApplicationName"></label>
+                    <input asp-for="Input.LoginApplicationName" class="form-control">
+                    <span asp-validation-for="Input.LoginApplicationName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Username"></label>
+                    <input asp-for="Input.Username" class="form-control">
+                    <span asp-validation-for="Input.Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control" type="password">
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">Log in</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 </div>

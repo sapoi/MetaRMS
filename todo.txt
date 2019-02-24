@@ -16,6 +16,8 @@
 
 -----------------------
 TODO
+    - footer
+    - nejdou videt polozky menu na mobilu
     - mazani delat pres httpdelete
     - preklady: nazvy tlacitek, rights dataset, rights.get nazvy sloupcu tabluky, settings
     - salt to passwords
@@ -48,6 +50,21 @@ TODO
         - 🔥 users alert jestli doopravdy vyresetovat heslo
         ️- 🔥 new password equal validation
         - prilinkovat skripty 1.10. str 20
+
+    - delete
+        - on delete actions (cca https://dev.mysql.com/doc/refman/8.0/en/create-table-foreign-keys.html):
+            - I want to delete rowA from table1 and rowA is referenced in table2, if attribute in table@ containing rowA as reference has onDelete set to:
+                - cascade - rowA will be deleted, all rows referencing rowA in table2 will be deleted
+                - setEmpty - rowA will be deleted, all values of attributess referencing rowA in table2 will be set to empty
+                - protect - no rows will be deleted
+            - what if rowA is referenced anywhere else?
+                - first check whereever rowA can be referenced and the onDelete settings -> do not start delete before this
+                - check if it really is referenced
+                - then 
+                    - if anything is protect return message and do not delete anything
+                    - if anything is cascade, check if cascade can be deleted the same way as checking if rowA can be deleted
+                    - if everything is setEmpty, delete and set empty
+
 
 -----------------------
 JSON VALIDACE

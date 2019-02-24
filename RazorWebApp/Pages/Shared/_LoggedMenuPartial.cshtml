@@ -3,36 +3,78 @@
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
-        <!-- Name of application the user is logged into -->
-        <div class="navbar-header">
-            <a asp-page="/Index" class="navbar-brand">@Model.ApplicationName</a>
+        <div class="navbar-header pull-left">
+            <button class="navbar-brand visible-xs btn-transparent" data-toggle="collapse" data-target="#sidebarCollapse">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a asp-page="/Index" class="navbar-brand">
+                @Model.ApplicationName
+            </a>
         </div>
-        <div class="navbar-collapse collapse">
-            <!-- Logout button -->
-            <ul class="nav navbar-nav navbar-right">
-                <li><a asp-page="../Account/Logout" class="navbar-brand">Logout</a></li>
-            </ul>
-            <!-- System datasets button displayed if user has at least read rights to each of them and user setings -->
-            <ul class="nav navbar-nav navbar-right">
-                <!-- Users -->
-                @if (Model.NavbarRights[(long)SystemDatasetsEnum.Users] >= RightsEnum.R) 
-                {
-                    <li>
-                        <a asp-page="../User/Get">@Model.UsersDatasetName</a>
-                    </li>
-                } 
-                <!-- Rights -->
-                @if (Model.NavbarRights[(long)SystemDatasetsEnum.Rights] >= RightsEnum.R) 
-                {
-                    <li>
-                        <a asp-page="../Rights/Get">Rights</a>
-                    </li>
-                }
-                <!-- Settings -->
-                <li>
-                    <a asp-page="/Account/Settings">Settings</a>
-                </li>
-            </ul>
-        </div>
+        <span class="navbar-text pull-right">
+            <!-- <a asp-page="../Account/Logout" class=""> -->
+                <i class="fas fa-user"></i>
+                Username
+            <!-- </a> -->
+        </span>
     </div>
 </nav>
+
+<!-- Sidebar menu -->
+<div class="navbar fixed-left collapse navbar-collapse navbar-inverse" id="sidebarCollapse">
+	<ul class="navbar-nav">
+		@foreach (var dataset in Model.ReadAuthorizedDatasets) 
+        {
+            string link = "~/Data/Get/" + dataset.Name;
+			<li class="nav-item">
+                <a class="nav-link" href="@Url.Content(link)">@dataset.Name</a>
+			</li>
+		}
+	</ul>
+    <ul class="navbar-nav">
+        <!-- <li role="separator" class="divider nav-item"></li> -->
+
+        <!-- System datasets button displayed if user has at least read rights to each of them and user setings -->
+            
+        <!-- Users -->
+        @if (Model.NavbarRights[(long)SystemDatasetsEnum.Users] >= RightsEnum.R) 
+        {
+            <li class="nav-item">
+                <a class="nav-link" asp-page="../User/Get">
+                    <i class="fas fa-users"></i>
+                    @Model.UsersDatasetName
+                </a>
+            </li>
+        } 
+        <!-- Rights -->
+        @if (Model.NavbarRights[(long)SystemDatasetsEnum.Rights] >= RightsEnum.R) 
+        {
+            <li class="nav-item">
+                <a class="nav-link" asp-page="../Rights/Get">
+                    <i class="fas fa-key"></i>
+                    Rights
+                </a>
+            </li>
+        }
+    </ul>
+    <ul class="navbar-nav">
+        <!-- Settings -->
+        <li class="nav-item">
+            <a class="nav-link" asp-page="/Account/Settings">
+                <i class="fas fa-cog"></i>
+                Settings
+            </a>
+        </li> 
+	</ul>
+
+
+    <ul class="navbar-nav">
+        <!-- Logout -->
+        <li class="nav-item">
+            <a asp-page="../Account/Logout" class="">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </li> 
+	</ul>
+</div>

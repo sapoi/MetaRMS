@@ -63,11 +63,11 @@ namespace RazorWebApp.Pages.Data
         /// </summary>
         /// <value>List of DataModel</value>
         public List<DataModel> Data { get; set; }
-        /// <summary>
-        /// List of DatasetDescriptor with at least read rights.
-        /// </summary>
-        /// <value>List of DatasetDescriptor</value>
-        public List<DatasetDescriptor> ReadAuthorizedDatasets { get; set; }
+        // /// <summary>
+        // /// List of DatasetDescriptor with at least read rights.
+        // /// </summary>
+        // /// <value>List of DatasetDescriptor</value>
+        // public List<DatasetDescriptor> ReadAuthorizedDatasets { get; set; }
         /// <summary>
         /// ActiveDatasetRights property conatins user's rights to the active dataset. 
         /// This value is used for displaying Create, Edit and Delete buttons.
@@ -127,9 +127,9 @@ namespace RazorWebApp.Pages.Data
             // Menu data
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
             // Read authorized datasets
-            ReadAuthorizedDatasets = AccessHelper.GetReadAuthorizedDatasets(ApplicationDescriptor, rights);
+            // ReadAuthorizedDatasets = AccessHelper.GetReadAuthorizedDatasets(ApplicationDescriptor, rights);
             // If user has no read authorized datasets, create dummy dataset and info message.
-            if (ReadAuthorizedDatasets.Count == 0)
+            if (MenuData.ReadAuthorizedDatasets.Count == 0)
             {
                 ActiveDatasetDescriptor = new DatasetDescriptor { Name = "", Id = 0, Attributes = new List<AttributeDescriptor>() };
                 Data = new List<DataModel>();
@@ -143,8 +143,7 @@ namespace RazorWebApp.Pages.Data
             ActiveDatasetDescriptor = AccessHelper.GetActiveDatasetDescriptor(ApplicationDescriptor, rights, datasetName);
             // And its rights
             ActiveDatasetRights = AccessHelper.GetRights(rights, ActiveDatasetDescriptor.Id);
-            if (ReadAuthorizedDatasets == null || ActiveDatasetDescriptor == null || 
-                ActiveDatasetRights == null || MenuData == null)
+            if (ActiveDatasetDescriptor == null || ActiveDatasetRights == null || MenuData == null)
             {
                 Logger.LogToConsole($"ReadAuthorizedDatasets, ActiveDatasetDescriptor, ActiveDatasetRights or MenuData failed loading for user with token {token.Value}.");
                 return RedirectToPage("/Errors/ServerError");
@@ -190,16 +189,6 @@ namespace RazorWebApp.Pages.Data
                                          new List<string>(){ActiveDatasetDescriptor.Name}));
 
             return Page();
-        }
-        /// <summary>
-        /// OnPostDatasetSelectAsync method is invoked after clicking on any user defined 
-        /// dataset button and redirects user to page with data from that dataset.
-        /// </summary>
-        /// <param name="datasetName">Name of source data dataset</param>
-        /// <returns>Redirect to dataset get page.</returns>
-        public IActionResult OnPostDatasetSelectAsync(string datasetName)
-        {
-            return RedirectToPage("Get", "", new { datasetName = datasetName});
         }
         /// <summary>
         /// OnPostDataEditAsync method is invoked after clicking on Edit button

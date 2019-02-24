@@ -90,11 +90,11 @@ namespace RazorWebApp.Pages.Data
         /// </summary>
         /// <value>DatasetDescriptor class</value>
         public DatasetDescriptor ActiveDatasetDescriptor { get; set; }
-        /// <summary>
-        /// List of DatasetDescriptor with at least read rights.
-        /// </summary>
-        /// <value>List of DatasetDescriptor</value>
-        public List<DatasetDescriptor> ReadAuthorizedDatasets { get; set; }
+        // /// <summary>
+        // /// List of DatasetDescriptor with at least read rights.
+        // /// </summary>
+        // /// <value>List of DatasetDescriptor</value>
+        // public List<DatasetDescriptor> ReadAuthorizedDatasets { get; set; }
         /// <summary>
         /// MenuData property contains data necessary for _LoggedMenuPartial.
         /// </summary>
@@ -148,7 +148,7 @@ namespace RazorWebApp.Pages.Data
 
             Messages = new List<Message>();
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
-            ReadAuthorizedDatasets = AccessHelper.GetReadAuthorizedDatasets(ApplicationDescriptor, rights);
+            // ReadAuthorizedDatasets = AccessHelper.GetReadAuthorizedDatasets(ApplicationDescriptor, rights);
             DatasetName = "";
             DataId = 0;
             DataDictionary = new Dictionary<string, List<string>>();
@@ -288,7 +288,7 @@ namespace RazorWebApp.Pages.Data
             // Menu data
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
             // Read authorized datasets
-            ReadAuthorizedDatasets = AccessHelper.GetReadAuthorizedDatasets(ApplicationDescriptor, rights);
+            // ReadAuthorizedDatasets = AccessHelper.GetReadAuthorizedDatasets(ApplicationDescriptor, rights);
             // SelectData
             DataLoadingHelper dlh = new DataLoadingHelper();
             SelectData = await dlh.FillSelectData(ApplicationDescriptor, 
@@ -300,16 +300,6 @@ namespace RazorWebApp.Pages.Data
             Messages = messages;
 
             return Page();
-        }
-        /// <summary>
-        /// OnPostDatasetSelectAsync method is invoked after clicking on any user defined 
-        /// dataset button and redirects user to page with data from that dataset.
-        /// </summary>
-        /// <param name="datasetName">Name of source data dataset</param>
-        /// <returns>Redirect to dataset get page.</returns>
-        public IActionResult OnPostDatasetSelectAsync(string datasetName)
-        {
-            return RedirectToPage("Get", "", new { datasetName = datasetName });
         }
     }
 }

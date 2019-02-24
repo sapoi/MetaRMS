@@ -9,7 +9,7 @@
 @{Html.RenderPartial("Shared/_LoggedMenuPartial", Model.MenuData); }
 
 
-<div class="row">
+<div class="container-fluid logged-page-content">
     <div class="col-sm-12">
         <h2>@ViewData["Title"]</h2>
         @if (Model.Message != null || Model.Message != ""){
@@ -18,7 +18,7 @@
                 </div>
         }
         <form method="post">
-            <h2>Password</h2>
+            <h3>Password</h3>
             <div class="form-group">
                 @{ var passwordAttribute = Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.PasswordAttribute; }
                 <label>Old password</label>
