@@ -10,8 +10,6 @@ using RazorWebApp.Repositories;
 using RazorWebApp.Helpers;
 using System.Collections.Generic;
 using SharedLibrary.Structures;
-using Server;
-
 namespace RazorWebApp.Controllers.Account
 {
     [Route("api/account/[controller]")]

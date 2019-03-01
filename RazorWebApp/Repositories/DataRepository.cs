@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using Server;
 using SharedLibrary.Models;
+using System.Linq.Dynamic.Core;
 
 namespace RazorWebApp.Repositories
 {
@@ -62,6 +63,16 @@ namespace RazorWebApp.Repositories
             return model.Where(d => d.ApplicationId == applicationId)
                         .GroupBy(d => d.DatasetId)
                         .ToDictionary(key => key.Key, value => value.Select(d => d.Id).ToList());
+        }
+
+
+
+
+        public List<DataModel> GetAllByApplicationIdAndDatasetIdAndDataContentLike(long applicationId, long datasetId, string dataDictionaryLike)
+        {
+            return model.Where(d => d.ApplicationId == applicationId && d.DatasetId == datasetId && 
+                               d.Data.Contains(dataDictionaryLike))
+                        .ToList();
         }
     }
 }

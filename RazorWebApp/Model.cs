@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SharedLibrary.Models;
 
-namespace Server
+namespace RazorWebApp
 {
     public class DatabaseContext : DbContext
     {

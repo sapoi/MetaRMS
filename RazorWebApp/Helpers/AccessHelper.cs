@@ -17,6 +17,7 @@ using static SharedLibrary.Structures.JWTToken;
 
 namespace RazorWebApp.Helpers
 {
+    // frontend
     class AccessHelper
     {
         // validate if token from PageModel model is valid
@@ -154,9 +155,9 @@ namespace RazorWebApp.Helpers
             }
             return systemRights.Value;
         }
-        public static void Logout(PageModel model)
-        {
+        // public static void Logout(PageModel model)
+        // {
             
-        }
+        // }
     }
 }

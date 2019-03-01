@@ -9,7 +9,6 @@ using SharedLibrary.Enums;
 using RazorWebApp.Repositories;
 using RazorWebApp.Helpers;
 using SharedLibrary.Structures;
-using Server;
 
 namespace RazorWebApp.Controllers.User
 {
@@ -49,7 +48,7 @@ namespace RazorWebApp.Controllers.User
                 return Unauthorized();
 
             // Authorization
-            if (!controllerHelper.Authorize(authUserModel, (long)SystemDatasetsEnum.Users, RightsEnum.R))
+            if (!AuthorizationHelper.IsAuthorized(authUserModel, (long)SystemDatasetsEnum.Users, RightsEnum.R))
                 return Forbid();
 
             // Get data from database
@@ -91,7 +90,7 @@ namespace RazorWebApp.Controllers.User
                 return Unauthorized();
 
             // Authorization
-            if (!controllerHelper.Authorize(requestUserModel,(long)SystemDatasetsEnum.Users, RightsEnum.R))
+            if (!AuthorizationHelper.IsAuthorized(requestUserModel,(long)SystemDatasetsEnum.Users, RightsEnum.R))
                 return Forbid();
 
             // Get data from database

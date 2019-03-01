@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using SharedLibrary.Enums;
 using RazorWebApp.Repositories;
 using RazorWebApp.Helpers;
-using Server;
 
 namespace RazorWebApp.Controllers.Account
 {

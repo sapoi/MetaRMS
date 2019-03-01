@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using RazorWebApp.Repositories;
-using Server;
 using SharedLibrary.Helpers;
 using SharedLibrary.Structures;
 

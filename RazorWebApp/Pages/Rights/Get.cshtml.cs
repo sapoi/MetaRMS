@@ -126,7 +126,7 @@ namespace RazorWebApp.Pages.Rights
             #endregion
 
             // Authorization
-            if (RightsRights >= RightsEnum.R)
+            if (AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Rights, RightsEnum.R))
             {
                 // Data request to the server via rightsService
                 var response = await rightsService.GetAll(token.Value);
@@ -177,7 +177,7 @@ namespace RazorWebApp.Pages.Rights
             // Authorization
             var rights = await AccessHelper.GetUserRights(cache, accountService, token);
             // If user is not authorized to delete, add message and display page again
-            if (AccessHelper.GetRights(rights, (long)SystemDatasetsEnum.Rights) < RightsEnum.CRUD)
+            if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Rights, RightsEnum.CRUD))
             {
                 // Set messages to cookie
                 TempData["Messages"] = JsonConvert.SerializeObject(

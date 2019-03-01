@@ -16,6 +16,7 @@ namespace RazorWebApp.Helpers
 {
     public class DataLoadingHelper
     {
+        // frontend
         public async Task<IEnumerable<SelectListItem>> FillUserRightsData(IRightsService rightsService, JWTToken.AccessToken token)
         {
             var response = await rightsService.GetAll(token.Value);

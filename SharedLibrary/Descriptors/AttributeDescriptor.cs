@@ -1,3 +1,5 @@
+using SharedLibrary.Enums;
+
 namespace SharedLibrary.Descriptors
 {
     /// <summary>
@@ -71,5 +73,9 @@ namespace SharedLibrary.Descriptors
         /// For reference types it means maximum of references that the attribute can contain.
         /// </value>
         public int? Max { get; set; }
+
+
+
+        public OnDeleteActionEnum OnDeleteAction { get; set; }
     }
 }

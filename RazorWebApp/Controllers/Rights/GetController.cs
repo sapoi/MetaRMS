@@ -8,7 +8,7 @@ using SharedLibrary.Enums;
 using RazorWebApp.Repositories;
 using RazorWebApp.Helpers;
 using SharedLibrary.Structures;
-using Server;
+using SharedLibrary.Helpers;
 
 namespace RazorWebApp.Controllers.Rights
 {
@@ -48,7 +48,7 @@ namespace RazorWebApp.Controllers.Rights
                 return Unauthorized();
 
             // Authorization
-            if (!controllerHelper.Authorize(userModel, (long)SystemDatasetsEnum.Rights, RightsEnum.R))
+            if (!AuthorizationHelper.IsAuthorized(userModel, (long)SystemDatasetsEnum.Rights, RightsEnum.R))
                 return Forbid();
 
             // Get data from database
@@ -85,7 +85,7 @@ namespace RazorWebApp.Controllers.Rights
                 return Unauthorized();
 
             // Authorization
-            if (!controllerHelper.Authorize(authUserModel, (long)SystemDatasetsEnum.Rights, RightsEnum.R))
+            if (!AuthorizationHelper.IsAuthorized(authUserModel, (long)SystemDatasetsEnum.Rights, RightsEnum.R))
                 return Forbid();
 
             // Get data from database

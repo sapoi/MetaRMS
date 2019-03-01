@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorWebApp", "RazorWebApp\RazorWebApp.csproj", "{03FAD660-EFA2-4969-B47D-2AAF08EAA55B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{F2667988-58B6-4A87-89A0-0478819E4970}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLibrary", "SharedLibrary\SharedLibrary.csproj", "{105F69E9-8486-44E4-BF68-BB6C03CB7578}"
 EndProject
 Global

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RazorWebApp.Helpers;
 using RazorWebApp.Repositories;
-using Server;
 using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
 using SharedLibrary.Structures;

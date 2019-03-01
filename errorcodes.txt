@@ -13,34 +13,31 @@
     1002    ERROR   Username is required.
     1003    ERROR   Password is required.
     1004    ERROR   Invalid application name.
-    1005    ERROR   User {loginCredentials.Username} does not exist in application {loginCredentials.LoginApplicationName}.
-    1006    ERROR   Could not log in: combination of application name {loginCredentials.LoginApplicationName}, username {loginCredentials.Username} and password does not exist.
+    1005    ERROR   User {0} does not exist in application {1}.
+    1006    ERROR   Could not log in: combination of application name {0}, username {1} and password does not exist.
     1007    ERROR   You are not authorized to read this data.
     1008    ERROR   Server error - data from server could not be parsed.
-
 
 2000 DATA DATASETS
     2001    ERROR   Dataset with id {0} not found.
     2002    INFO    New data in dataset {0} created successfully.
     2003    ERROR   Combination of application name {0}, dataset {1} and id {2} does not exist.
-            INFO    Data from dataset \"{datasetName}\" deleted successfully.
-    2005    INFO    Data in dataset \"{datasetName}\" edited successfully.
+    2004    INFO    Data from dataset {0} deleted successfully.
+    2005    INFO    Data in dataset {0} edited successfully.
     2006    ERROR   No element data with id {0} found in dataset {1}.
     2007    ERROR   You are not allowed to read data of dataset {0}.
     2008    ERROR   You are not allowed to delete data of dataset {0}.
     2009    ERROR   You are not allowed to create data of dataset {0}.
     2010    ERROR   You are not allowed to edit data of dataset {0}.
     2011    INFO    You are not allowed to read any application datasets.
-
-
+    2012    ERROR   Data can not be deleted, because there is reference to this or related data, that has to be removed first.
 
 3000 USERS DATASET
     3001    ERROR   Username can not be an empty string.
     3002    ERROR   User named {0} already exists, please choose another username.
     3003    INFO    New user {0} created successfully with password set to {0}.
     3004    ERROR   Combination of application name {0} and user id {1} does not exist.
-            ERROR   Cannot delete last user in application. There has to be always at least one.
-            INFO    User \"{userModel.GetUsername()}\" deleted successfully.
+    3005    INFO    User {0} deleted successfully.
     3006    ERROR   No user with id {0} found.
     3007    INFO    User {0} edited successfully.
     3008    INFO    User {0} password reset successfully to {1}.
@@ -48,9 +45,8 @@
     3010    ERROR   You are not allowed to delete users.
     3011    ERROR   You are not allowed to create users.
     3012    ERROR   You are not allowed to edit users.
-    
-
-
+    3013    ERROR   Can not delete last user in application. There has to be always at least one.
+    3014    ERROR   User can not be deleted, because there is reference to this or related data, that has to be removed first.
 
 4000 RIGHTS DATASET
     4001    ERROR   Rights named {0} already exists, please choose another name.

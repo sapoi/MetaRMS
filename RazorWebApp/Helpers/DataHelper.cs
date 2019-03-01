@@ -4,19 +4,18 @@ using System.Linq;
 using Newtonsoft.Json;
 using RazorWebApp;
 using RazorWebApp.Cache;
-using Server;
 using SharedLibrary.Descriptors;
 using SharedLibrary.Enums;
 using SharedLibrary.Models;
 
 namespace SharedLibrary.Helpers
 {
+    // backend
     public class DataHelper
     {
         List<(string Name, string Type)> referenceIndexTypeTuple;
         ApplicationModel applicationModel;
         ReferenceCache referenceCache;
-        // DatabaseContext databaseContext;
 
         public DataHelper(DatabaseContext databaseContext, ApplicationModel applicationModel, long datasetId)
         {
@@ -36,42 +35,6 @@ namespace SharedLibrary.Helpers
             // }
             model.Data = JsonConvert.SerializeObject(preparedDictionary);
         }
-        // public List<Dictionary<String, List<Object>>> PrepareForClient(List<BaseModelWithApplicationAndData> data, long datasetId)
-        // {
-        //     List<Dictionary<String, List<Object>>> modifiedData = new List<Dictionary<String, List<Object>>>();
-        //     // find attributes with references
-        //     setReferencesIndices(datasetId);
-        //     // take each row from data
-        //     foreach (var row in data)
-        //     {
-        //         var modifiedDataRow = row.DataDictionary;
-        //         // add text representation for references
-        //         translateIDToText(modifiedDataRow);
-        //         // add dbID
-        //         addDBId(modifiedDataRow, row.Id);
-        //         // id dataset is SystemDatasetsEnum.Users
-        //         if (datasetId == (long)SystemDatasetsEnum.Users)
-        //         {
-        //             // add rights with id
-        //             modifiedDataRow.Add("RIGHTSId", new List<object> { new Tuple<string, string>( ((UserModel)row).RightsId.ToString(), ((UserModel)row).Rights.Name) } );
-        //         }
-        //         modifiedData.Add(modifiedDataRow);
-        //     }
-        //     return modifiedData;
-        // }
-        // public Dictionary<String, List<Object>> PrepareOneRowForClient(ref BaseModel row, long datasetId)
-        // {
-        //     setReferencesIndices(datasetId);
-
-        //     // take each row from data
-        //     foreach (var row in data)
-        //     {
-        //         // add text representation for references
-        //         translateIDToText(row.DataDictionary);
-        //         // add dbID
-        //         addDBId(row.DataDictionary, row.Id);
-        //     }
-        // }
         void setReferencesIndices(long datasetId)
         {
             referenceIndexTypeTuple = new List<(string Name, string Type)>();
@@ -110,10 +73,5 @@ namespace SharedLibrary.Helpers
                 }
             }
         }
-        // void addDBId(Dictionary<string, List<object>> row, long id)
-        // {
-        //     // serializing list containing DBId, because every data is expected to be in a list
-        //     row.Add("DBId", new List<object>() { id } );
-        // }
     }
 }

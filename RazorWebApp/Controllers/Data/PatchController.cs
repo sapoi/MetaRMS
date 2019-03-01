@@ -10,7 +10,6 @@ using RazorWebApp.Helpers;
 using System.Security.Claims;
 using SharedLibrary.Enums;
 using SharedLibrary.Structures;
-using Server;
 
 namespace RazorWebApp.Controllers.Data
 {
@@ -65,7 +64,7 @@ namespace RazorWebApp.Controllers.Data
             }
 
             // Authorization
-            if (!controllerHelper.Authorize(authUserModel, datasetDescriptor.Id, RightsEnum.RU))
+            if (!AuthorizationHelper.IsAuthorized(authUserModel, datasetDescriptor.Id, RightsEnum.RU))
                 return Forbid();
 
             #region VALIDATIONS

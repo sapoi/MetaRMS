@@ -9,7 +9,6 @@ using RazorWebApp.Repositories;
 using RazorWebApp.Helpers;
 using System.Collections.Generic;
 using SharedLibrary.Structures;
-using Server;
 
 namespace RazorWebApp.Controllers.Data
 {
@@ -63,7 +62,7 @@ namespace RazorWebApp.Controllers.Data
             }
 
             // Authorization
-            if (!controllerHelper.Authorize(authUserModel, datasetDescriptor.Id, RightsEnum.R))
+            if (!AuthorizationHelper.IsAuthorized(authUserModel, datasetDescriptor.Id, RightsEnum.R))
                 return Forbid();
 
             // Get data from database
@@ -116,7 +115,7 @@ namespace RazorWebApp.Controllers.Data
             }
             
             // Authorization
-            if (!controllerHelper.Authorize(authUserModel, datasetDescriptor.Id, RightsEnum.R))
+            if (!AuthorizationHelper.IsAuthorized(authUserModel, datasetDescriptor.Id, RightsEnum.R))
                 return Forbid();
 
             // Get data from database

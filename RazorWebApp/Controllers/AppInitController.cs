@@ -18,7 +18,6 @@ using SharedLibrary.Enums;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
 using RazorWebApp.Repositories;
-using Server;
 
 namespace RazorWebApp.Controllers
 {

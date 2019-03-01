@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using Server;
 using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
 using SharedLibrary.Models;
@@ -126,6 +125,13 @@ namespace RazorWebApp.Repositories
                 (long)SystemDatasetsEnum.Users, 
                 model.Where(u => u.ApplicationId == applicationId).Select(u => u.Id).ToList()
             );
+        }
+
+
+        public List<UserModel> GetAllByApplicationIdAndDataContentLike(long applicationId, string dataDictionaryLike)
+        {
+            return model.Where(u => u.ApplicationId == applicationId && u.Data.Contains(dataDictionaryLike))
+                        .ToList();
         }
     }
 }

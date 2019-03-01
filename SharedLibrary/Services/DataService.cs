@@ -10,15 +10,11 @@ using SharedLibrary.Models;
 
 namespace SharedLibrary.Services
 {
-    public class DataService : IDataService
+    public class DataService : BaseService, IDataService
     {
-        private HttpClient client;
-        public DataService()
+        public DataService() : base()
         {
-            client = new HttpClient();
-            client.BaseAddress = new Uri("http://sapoi.aspifyhost.com/api/data");
-            client.DefaultRequestHeaders.Clear();
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            client.BaseAddress = new Uri(baseAddress + "data");
         }
 
         public async Task<HttpResponseMessage> GetAll(long datasetId, string token)
@@ -44,13 +40,13 @@ namespace SharedLibrary.Services
             return response;
         }
 
-        public async Task<HttpResponseMessage> DeleteById(long id, string token)
+        public async Task<HttpResponseMessage> DeleteById(long datasetId, long id, string token)
         {
             // adding JWT token value to authorization header
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             // GET request to server with authorization header containing JWT token value
-            var address = new Uri(client.BaseAddress.OriginalString + "/delete/" + id);
-            var response = await client.GetAsync(address);
+            var address = new Uri(client.BaseAddress.OriginalString + "/delete/"  + datasetId + "/" + id);
+            var response = await client.DeleteAsync(address);
 
             return response;
         }

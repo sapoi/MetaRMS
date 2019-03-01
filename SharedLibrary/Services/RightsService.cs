@@ -10,15 +10,11 @@ using SharedLibrary.Models;
 
 namespace SharedLibrary.Services
 {
-    public class RightsService : IRightsService
+    public class RightsService : BaseService, IRightsService
     {
-        private HttpClient client;
-        public RightsService()
+        public RightsService() : base()
         {
-            client = new HttpClient();
-            client.BaseAddress = new Uri("http://sapoi.aspifyhost.com/api/rights");
-            client.DefaultRequestHeaders.Clear();
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            client.BaseAddress = new Uri(baseAddress + "rights");
         }
 
         public async Task<HttpResponseMessage> GetAll(string token)
@@ -48,7 +44,7 @@ namespace SharedLibrary.Services
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             // GET request to server with authorization header containing JWT token value
             var address = new Uri(client.BaseAddress.OriginalString + "/delete/" + id);
-            var response = await client.GetAsync(address);
+            var response = await client.DeleteAsync(address);
 
             return response;
         }

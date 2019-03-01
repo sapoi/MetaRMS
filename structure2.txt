@@ -31,8 +31,6 @@
 │   │       └── ResetPasswordController.cs
 │   ├── Helpers
 │   │   ├── AccessHelper.cs
-│   │   ├── AccessHelper_server_version.cs
-│   │   ├── AuthorizationHelper.cs
 │   │   ├── CacheAccessHelper.cs
 │   │   ├── ControllerHelper.cs
 │   │   ├── DataHelper.cs
@@ -89,6 +87,7 @@
 │   │   │   ├── Get.cshtml
 │   │   │   └── Get.cshtml.cs
 │   │   ├── _Layout.cshtml
+│   │   ├── _ViewImports.cshtml ✅ - dont know why, but really important
 │   │   └── _ViewImports.cshtml ✅ - dont know why, but really important
 │   ├── Program.cs
 │   ├── RazorWebApp.csproj

@@ -1,56 +1,110 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Xml.Serialization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.Sqlite;
-using Newtonsoft.Json;
-using SharedLibrary.Models;
 using System.Linq;
 using SharedLibrary.Helpers;
 using RazorWebApp.Repositories;
 using RazorWebApp.Helpers;
 using System.Security.Claims;
 using SharedLibrary.Enums;
-using Server;
+using SharedLibrary.Structures;
 
 namespace RazorWebApp.Controllers.Data
 {
     [Route("api/data/[controller]")]
     public class DeleteController : Controller
     {
-        private readonly DatabaseContext _context;
+        /// <summary>
+        /// Database context for repository.
+        /// </summary>
+        private readonly DatabaseContext context;
 
         public DeleteController(DatabaseContext context)
         {
-            _context = context;
+            this.context = context;
         }
+        /// <summary>
+        /// API endpoint for deleting data.
+        /// </summary>
+        /// <returns>Messages about action result</returns>
+        /// <response code="200">If data successfully deleted</response>
+        /// <response code="401">If user is not authenticated</response>
+        /// <response code="403">If user is not autorized to delete data</response>
+        /// <response code="404">If input is not valid or data can not be deleted</response>
         [Authorize]
-        [HttpGet]
-        [Route("{appName}/{datasetName}/{id}")]
-        public IActionResult DeleteById(string appName, string datasetName, long id)
+        [HttpDelete]
+        [Route("{datasetId}/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(403)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteById(long datasetId, long id)
         {
-            var controllerHelper = new ControllerHelper(_context);
+            // List of messages
+            var messages = new List<Message>();
+
             // Authentication
+            var controllerHelper = new ControllerHelper(context);
             var authUserModel = controllerHelper.Authenticate(HttpContext.User.Identity as ClaimsIdentity);
             if (authUserModel == null)
                 return Unauthorized();
+
             // Dataset descriptor
-            var datasetDescriptor = authUserModel.Application.ApplicationDescriptor.Datasets.FirstOrDefault(d => d.Name == datasetName);
+            var datasetDescriptor = authUserModel.Application.ApplicationDescriptor.Datasets.FirstOrDefault(d => d.Id == datasetId);
             if (datasetDescriptor == null)
-                return BadRequest($"ERROR: Dataset name \"{datasetName}\" not found.");
+            {
+                messages.Add(new Message(MessageTypeEnum.Error, 
+                                                  2001, 
+                                                  new List<string>(){ datasetId.ToString() }));
+                Logger.LogMessagesToConsole(messages);
+                return BadRequest(messages);
+            }
+            
             // Authorization
-            if (!controllerHelper.Authorize(authUserModel, datasetDescriptor.Id, RightsEnum.CRUD))
+            if (!AuthorizationHelper.IsAuthorized(authUserModel, datasetDescriptor.Id, RightsEnum.CRUD))
                 return Forbid();
+
+            #region VALIDATIONS
+
             // Get data from database
-            var dataRepository = new DataRepository(_context);
+            var dataRepository = new DataRepository(context);
             var dataModel = dataRepository.GetById(authUserModel.ApplicationId, datasetDescriptor.Id, id);
             if (dataModel == null)
-                return BadRequest($"ERROR: Combination of application name \"{authUserModel.Application.LoginApplicationName}\", dataset \"{datasetName}\" and id \"{id}\" does not exist.");
-            dataRepository.Remove(dataModel);
-            return Ok($"INFO: Data from dataset \"{datasetName}\" deleted successfully.");
+            {
+                messages.Add(new Message(MessageTypeEnum.Error, 
+                                                  2006, 
+                                                  new List<string>(){ id.ToString(), 
+                                                                      datasetDescriptor.Name 
+                                                                    }));
+                Logger.LogMessagesToConsole(messages);
+                return BadRequest(messages);
+            }
+           
+            // Delete validity check
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                // Set to delete or remove all references from data referencing dataModel to delete
+                if (controllerHelper.IfCanBeDeletedPerformDeleteActions(authUserModel, dataModel))
+                {
+                    // Remove model itself
+                    dataRepository.Remove(dataModel);
+                    // Save all performed changes into the database
+                    transaction.Commit();
+                    messages.Add(new Message(MessageTypeEnum.Info, 
+                                              2004, 
+                                              new List<string>(){ datasetDescriptor.Name }));
+                    return Ok(messages);
+                }
+                // DataModel to delete or other model that should be deleted can not be deleted
+                transaction.Rollback();
+                messages.Add(new Message(MessageTypeEnum.Error, 
+                                              2012, 
+                                              new List<string>()));
+                return BadRequest(messages);
+            }
+
+            #endregion
         }
     }
 }

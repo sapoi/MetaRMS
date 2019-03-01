@@ -10,15 +10,11 @@ using SharedLibrary.Structures;
 
 namespace SharedLibrary.Services
 {
-    public class AccountService : IAccountService
+    public class AccountService : BaseService, IAccountService
     {
-        private HttpClient client;
-        public AccountService()
+        public AccountService() : base()
         {
-            client = new HttpClient();
-            client.BaseAddress = new Uri("http://sapoi.aspifyhost.com/api/account");
-            client.DefaultRequestHeaders.Clear();
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            client.BaseAddress = new Uri(baseAddress + "account");
         }
 
         public async Task<HttpResponseMessage> Login(LoginCredentials loginCredentials)

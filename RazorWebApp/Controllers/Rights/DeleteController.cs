@@ -9,7 +9,6 @@ using System.Security.Claims;
 using SharedLibrary.Enums;
 using SharedLibrary.Structures;
 using SharedLibrary.Helpers;
-using Server;
 
 namespace RazorWebApp.Controllers.Rights
 {
@@ -34,7 +33,7 @@ namespace RazorWebApp.Controllers.Rights
         /// <response code="403">If user is not autorized to delete rights</response>
         /// <response code="404">If input is not valid</response>
         [Authorize]
-        [HttpPost]
+        [HttpDelete]
         [Route("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
@@ -52,7 +51,7 @@ namespace RazorWebApp.Controllers.Rights
                 return Unauthorized();
 
             // Authorization
-            if (!controllerHelper.Authorize(authUserModel, (long)SystemDatasetsEnum.Rights, RightsEnum.CRUD))
+            if (!AuthorizationHelper.IsAuthorized(authUserModel, (long)SystemDatasetsEnum.Rights, RightsEnum.CRUD))
                 return Forbid();
             
             #region VALIDATIONS

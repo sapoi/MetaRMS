@@ -1,56 +1,106 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Xml.Serialization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.Sqlite;
-using Newtonsoft.Json;
-using SharedLibrary.Models;
-using System.Linq;
-using SharedLibrary.Helpers;
 using RazorWebApp.Repositories;
 using RazorWebApp.Helpers;
 using System.Security.Claims;
 using SharedLibrary.Enums;
-using Server;
+using System.Collections.Generic;
+using SharedLibrary.Structures;
+using SharedLibrary.Helpers;
 
 namespace RazorWebApp.Controllers.User
 {
     [Route("api/user/[controller]")]
     public class DeleteController : Controller
     {
-        private readonly DatabaseContext _context;
+        /// <summary>
+        /// Database context for repository.
+        /// </summary>
+        private readonly DatabaseContext context;
 
         public DeleteController(DatabaseContext context)
         {
-            _context = context;
+            this.context = context;
         }
+        /// <summary>
+        /// API endpoint for deleting users.
+        /// </summary>
+        /// <returns>Messages about action result</returns>
+        /// <response code="200">If user successfully deleted</response>
+        /// <response code="401">If user is not authenticated</response>
+        /// <response code="403">If user is not autorized to delete users</response>
+        /// <response code="404">If input is not valid or user can not be deleted</response>
         [Authorize]
-        [HttpGet]
-        [Route("{appName}/{id}")]
-        public IActionResult DeleteById(string appName, long id)
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(403)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteById(long id)
         {
-            var controllerHelper = new ControllerHelper(_context);
+            // List of messages
+            var messages = new List<Message>();
+
             // Authentication
+            var controllerHelper = new ControllerHelper(context);
             var authUserModel = controllerHelper.Authenticate(HttpContext.User.Identity as ClaimsIdentity);
             if (authUserModel == null)
                 return Unauthorized();
+
             // Authorization
-            if (!controllerHelper.Authorize(authUserModel, (long)SystemDatasetsEnum.Users, RightsEnum.CRUD))
+            if (!AuthorizationHelper.IsAuthorized(authUserModel, (long)SystemDatasetsEnum.Users, RightsEnum.CRUD))
                 return Forbid();
+
+            #region VALIDATIONS
+
             // Get data from database
-            var userRepository = new UserRepository(_context);
+            var userRepository = new UserRepository(context);
             var userModel = userRepository.GetById(authUserModel.ApplicationId, id);
             if (userModel == null)
-                return BadRequest($"ERROR: Combination of application name \"{authUserModel.Application.LoginApplicationName}\" and user id \"{id}\" does not exist.");
-            //TODO VALIDACE
-            // zajistit ze posledni uzivatel nepujde smazat - vzdy musi byt alespon 1 uzivatel aplikace
+            {
+                messages.Add(new Message(MessageTypeEnum.Error, 
+                                                  3004, 
+                                                  new List<string>(){ authUserModel.Application.LoginApplicationName,
+                                                                      id.ToString()
+                                                                    }));
+                Logger.LogMessagesToConsole(messages);
+                return BadRequest(messages);
+            }
+            // Can not delete last user of the application
             if (userRepository.GetAllByApplicationId(authUserModel.ApplicationId).Count <= 1)
-                return BadRequest("ERROR: Cannot delete last user in application. There has to be always at least one.");
-            userRepository.Remove(userModel);
-            return Ok($"INFO: User \"{userModel.GetUsername()}\" deleted successfully.");
+            {
+                messages.Add(new Message(MessageTypeEnum.Error, 
+                                                  3013, 
+                                                  new List<string>()));
+                return BadRequest(messages);
+            }
+
+            // Delete validity check
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                // Set to delete or remove all references from data referencing userModel to delete
+                if (controllerHelper.IfCanBeDeletedPerformDeleteActions(authUserModel, userModel))
+                {
+                    // Remove model itself
+                    userRepository.Remove(userModel);
+                    // Save all performed changes into the database
+                    transaction.Commit();
+                    messages.Add(new Message(MessageTypeEnum.Info, 
+                                              3005, 
+                                              new List<string>(){ userModel.GetUsername() }));
+                    return Ok(messages);
+                }
+                // UserModel to delete or other model that should be deleted can not be deleted
+                transaction.Rollback();
+                messages.Add(new Message(MessageTypeEnum.Error, 
+                                              3014, 
+                                              new List<string>()));
+                return BadRequest(messages);
+            }
+
+            #endregion
         }
     }
 }

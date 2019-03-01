@@ -91,7 +91,7 @@ namespace RazorWebApp.Pages.Rights
                 Logger.LogToConsole($"Rights not found for user with token {token.Value}.");
                 return RedirectToPage("/Errors/ServerError");
             }
-            if (AccessHelper.GetRights(rights, (long)SystemDatasetsEnum.Rights) < RightsEnum.CRU)
+            if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Rights, RightsEnum.CRU))
                 return RedirectToPage("/Rights/Get", new { messages = new List<Message>() {
                     new Message(MessageTypeEnum.Error, 
                                 4010, 
@@ -135,7 +135,7 @@ namespace RazorWebApp.Pages.Rights
             // Authorization
             var rights = await AccessHelper.GetUserRights(cache, accountService, token);
             // If user is not authorized to create, add message and redirect to get page
-            if (AccessHelper.GetRights(rights, (long)SystemDatasetsEnum.Rights) < RightsEnum.CRU)
+            if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Rights, RightsEnum.CRU))
             {
                 return RedirectToPage("/Rights/Get", new { messages = new List<Message>() {
                     new Message(MessageTypeEnum.Error, 

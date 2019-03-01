@@ -8,6 +8,7 @@ using System.Security.Cryptography.X509Certificates;
  
 namespace SharedLibrary.Helpers
 {
+    // backend
     public class PasswordHelper
     {
         static HashAlgorithm hashAlgorithm = new SHA384Managed();

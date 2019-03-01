@@ -11,6 +11,7 @@ using static SharedLibrary.Structures.JWTToken;
 
 namespace RazorWebApp.Helpers
 {
+    // frontend
     public class CacheAccessHelper
     {
         static List<string> cacheKeys = new List<string>();

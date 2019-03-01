@@ -154,7 +154,7 @@ namespace RazorWebApp.Pages.Data
             #endregion
 
             // Authorization
-            if (ActiveDatasetRights >= RightsEnum.R)
+            if (AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.R))
             {
                 // Data request to the server via dataService
                 var response = await dataService.GetAll(ActiveDatasetDescriptor.Id, token.Value);
@@ -228,7 +228,7 @@ namespace RazorWebApp.Pages.Data
                 return await OnGetAsync(datasetName);
             }
             // If user is not authorized to delete, add message and display page again
-            if (AccessHelper.GetRights(rights, ActiveDatasetDescriptor.Id) < RightsEnum.CRUD)
+            if (!AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.CRUD))
             {
                 // Set messages to cookie
                 TempData["Messages"] = JsonConvert.SerializeObject(
@@ -239,7 +239,7 @@ namespace RazorWebApp.Pages.Data
             }
 
             // Delete request to the server via rightsService
-            var response = await dataService.DeleteById(dataId, token.Value);
+            var response = await dataService.DeleteById(ActiveDatasetDescriptor.Id, dataId, token.Value);
             var messages = new List<Message>();
             try
             {

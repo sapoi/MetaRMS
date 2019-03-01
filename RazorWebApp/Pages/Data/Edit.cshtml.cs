@@ -138,7 +138,7 @@ namespace RazorWebApp.Pages.Data
             }
 
             // Authorization
-            if (AccessHelper.GetRights(rights, ActiveDatasetDescriptor.Id) < RightsEnum.RU)
+            if (!AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.RU))
                 return RedirectToPage("/Data/Get", new { messages = new List<Message>() {
                     new Message(MessageTypeEnum.Error, 
                                 2010, 
@@ -234,7 +234,7 @@ namespace RazorWebApp.Pages.Data
             }
 
             // Authorization
-            if (AccessHelper.GetRights(rights, ActiveDatasetDescriptor.Id) < RightsEnum.RU)
+            if (!AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.RU))
             {
                 return RedirectToPage("/Data/Get", new { messages = new List<Message>() {
                     new Message(MessageTypeEnum.Error, 

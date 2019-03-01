@@ -7,7 +7,7 @@ using RazorWebApp.Helpers;
 using System.Security.Claims;
 using SharedLibrary.Enums;
 using SharedLibrary.Structures;
-using Server;
+using SharedLibrary.Helpers;
 
 namespace RazorWebApp.Controllers.User
 {
@@ -50,7 +50,7 @@ namespace RazorWebApp.Controllers.User
                 return Unauthorized();
 
             // Authorization
-            if (!controllerHelper.Authorize(authUserModel, (long)SystemDatasetsEnum.Rights, RightsEnum.RU))
+            if (!AuthorizationHelper.IsAuthorized(authUserModel, (long)SystemDatasetsEnum.Rights, RightsEnum.RU))
                 return Forbid();
 
             // Get data from database

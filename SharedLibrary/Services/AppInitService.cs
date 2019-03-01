@@ -11,15 +11,11 @@ using SharedLibrary.Models;
 
 namespace SharedLibrary.Services
 {
-    public class AppInitService : IAppInitService
+    public class AppInitService : BaseService, IAppInitService
     {
-        private HttpClient client;
-        public AppInitService()
+        public AppInitService() : base()
         {
-            client = new HttpClient();
-            client.BaseAddress = new Uri("http://sapoi.aspifyhost.com/api/appinit");
-            client.DefaultRequestHeaders.Clear();
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            client.BaseAddress = new Uri(baseAddress + "appinit");
         }
 
         public async Task<HttpResponseMessage> InitializeApplication(string email, IFormFile file)
