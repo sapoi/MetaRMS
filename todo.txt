@@ -18,6 +18,7 @@
 
 -----------------------
 TODO
+    - napsat kdyz pri login se neda pripojit k "serveru" - ted to spadne
     - delsi doba prihlaseni - delsi platnost tokenu
     - salt to passwords
     - kdyz je default heslo, vyzadovat zmenu na safe

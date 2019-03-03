@@ -6,7 +6,8 @@ namespace SharedLibrary.Services
     public abstract class BaseService
     {
         protected HttpClient client;
-        protected Uri baseAddress = new Uri("http://localhost:5000/api/");
+        // protected Uri baseAddress = new Uri("http://localhost:5000/api/");
+        protected Uri baseAddress = new Uri("http://sapoi.aspifyhost.com/api/");
         public BaseService()
         {
             client = new HttpClient();
