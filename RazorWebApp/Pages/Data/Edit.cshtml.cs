@@ -245,15 +245,15 @@ namespace RazorWebApp.Pages.Data
             // Prepare new data model
             var validationHelper = new ValidationHelper();
             validationHelper.ValidateValueList(DataDictionary, ActiveDatasetDescriptor.Attributes);
-            var patchedDataModel = new DataModel(){
+            var dataModelToPut = new DataModel(){
                 Id = DataId,
                 ApplicationId = token.ApplicationId, 
                 DatasetId = ActiveDatasetDescriptor.Id,
                 Data = JsonConvert.SerializeObject(DataDictionary)
             };
 
-            // Patch request to the server via rightsService
-            var response = await dataService.Patch(patchedDataModel, token.Value);
+            // Put request to the server via rightsService
+            var response = await dataService.Put(dataModelToPut, token.Value);
             var messages = new List<Message>();
             try
             {
@@ -275,7 +275,7 @@ namespace RazorWebApp.Pages.Data
                 // Otherwise try parse error messages and display them at the edit page
                 else
                 {
-                    messages = JsonConvert.DeserializeObject<List<Message>>(await response.Content.ReadAsStringAsync());
+                    messages = JsonConvert.DeserializeObject<List<Message>>(await response.Content.ReadAsStringAsync()) ?? throw new JsonSerializationException();
                 }
             }
             catch (JsonSerializationException e)

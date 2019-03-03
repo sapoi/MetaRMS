@@ -231,7 +231,7 @@ namespace RazorWebApp.Pages.Data
                 // Otherwise try parse error messages and display them at the create page
                 else
                 {
-                    messages = JsonConvert.DeserializeObject<List<Message>>(await response.Content.ReadAsStringAsync());
+                    messages = JsonConvert.DeserializeObject<List<Message>>(await response.Content.ReadAsStringAsync()) ?? throw new JsonSerializationException();
                 }
             }
             catch (JsonSerializationException e)

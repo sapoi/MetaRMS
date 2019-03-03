@@ -95,7 +95,7 @@ namespace RazorWebApp.Pages.Rights
             {
                 try
                 {
-                    Messages = JsonConvert.DeserializeObject<List<Message>>((string)serializedMessages);
+                    Messages = JsonConvert.DeserializeObject<List<Message>>((string)serializedMessages) ?? throw new JsonSerializationException();
                 }
                 catch (JsonSerializationException e)
                 {
@@ -205,7 +205,7 @@ namespace RazorWebApp.Pages.Rights
                                              new List<string>()));
                 // Otherwise try parse error messages
                 else
-                    messages = JsonConvert.DeserializeObject<List<Message>>(await response.Content.ReadAsStringAsync());
+                    messages = JsonConvert.DeserializeObject<List<Message>>(await response.Content.ReadAsStringAsync()) ?? throw new JsonSerializationException();
             }
             catch (JsonSerializationException e)
             {

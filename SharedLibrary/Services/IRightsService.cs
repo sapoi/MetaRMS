@@ -15,7 +15,7 @@ namespace SharedLibrary.Services
         Task<HttpResponseMessage> GetAll(string token);
         Task<HttpResponseMessage> GetById(long id, string token);
         Task<HttpResponseMessage> DeleteById(long id, string token);
-        Task<HttpResponseMessage> Patch(RightsModel patchedRightsModel, string token);
+        Task<HttpResponseMessage> Put(RightsModel rightsModelToPut, string token);
         Task<HttpResponseMessage> Create(RightsModel newRightsModel, string token);
     }
 }

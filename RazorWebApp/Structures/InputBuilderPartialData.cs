@@ -8,7 +8,7 @@ namespace RazorWebApp.Structures
 {
     /// <summary>
     /// InputBuilderPartialData class contains properties necessary for _InputBuilderPartial.cshtml file
-    /// to display dataset data for create and patch requests in a correct form.
+    /// to display dataset data for create and put requests in a correct form.
     /// </summary>
     public class InputBuilderPartialData
     {

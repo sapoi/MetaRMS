@@ -15,7 +15,7 @@ namespace SharedLibrary.Services
         Task<HttpResponseMessage> GetAll(string token);
         Task<HttpResponseMessage> GetById(long id, string token);
         Task<HttpResponseMessage> DeleteById(long id, string token);
-        Task<HttpResponseMessage> Patch(UserModel patchedUserModel, string token);
+        Task<HttpResponseMessage> Put(UserModel userModelToPut, string token);
         Task<HttpResponseMessage> Create(UserModel newUserModel, string token);
         Task<HttpResponseMessage> ResetPasswordById(long id, string token);
 

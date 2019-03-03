@@ -225,7 +225,7 @@ namespace RazorWebApp.Pages.User
             }
             var validationHelper = new ValidationHelper();
             validationHelper.ValidateValueList(UserDataDictionary, ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes);
-            UserModel patchedUserModel = new UserModel() { 
+            UserModel userModelToPut = new UserModel() { 
                 Id = UserId,
                 ApplicationId = token.ApplicationId, 
                 RightsId = UserRightsId,
@@ -233,7 +233,7 @@ namespace RazorWebApp.Pages.User
             };
 
             // Create request to the server via userService
-            var response = await userService.Patch(patchedUserModel, token.Value);
+            var response = await userService.Put(userModelToPut, token.Value);
             var messages = new List<Message>();
             try
             {
@@ -255,7 +255,7 @@ namespace RazorWebApp.Pages.User
                 // Otherwise try parse error messages and display them at the create page
                 else
                 {
-                    messages = JsonConvert.DeserializeObject<List<Message>>(await response.Content.ReadAsStringAsync());
+                    messages = JsonConvert.DeserializeObject<List<Message>>(await response.Content.ReadAsStringAsync()) ?? throw new JsonSerializationException();
                 }
             }
             catch (JsonSerializationException e)

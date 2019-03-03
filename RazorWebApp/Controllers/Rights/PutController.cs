@@ -13,32 +13,32 @@ using SharedLibrary.Helpers;
 namespace RazorWebApp.Controllers.Rights
 {
     [Route("api/rights/[controller]")]
-    public class PatchController : Controller
+    public class PutController : Controller
     {
         /// <summary>
         /// Database context for repository.
         /// </summary>
         private readonly DatabaseContext context;
 
-        public PatchController(DatabaseContext context)
+        public PutController(DatabaseContext context)
         {
             this.context = context;
         }
         /// <summary>
-        /// API endpoint for patching rights.
+        /// API endpoint for putting rights.
         /// </summary>
         /// <returns>Messages about action result</returns>
-        /// <response code="200">If rights successfully patched</response>
+        /// <response code="200">If rights successfully putted</response>
         /// <response code="401">If user is not authenticated</response>
-        /// <response code="403">If user is not autorized to patch rights</response>
+        /// <response code="403">If user is not autorized to put rights</response>
         /// <response code="404">If input is not valid</response>
         [Authorize]
-        [HttpPost]
+        [HttpPut]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [ProducesResponseType(404)]
-        public IActionResult Patch([FromBody] RightsModel fromBodyRightsModel)
+        public IActionResult Put([FromBody] RightsModel fromBodyRightsModel)
         {
             // List of messages to return to the client
             var messages = new List<Message>();

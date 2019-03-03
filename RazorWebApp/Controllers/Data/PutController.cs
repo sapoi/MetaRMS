@@ -14,40 +14,38 @@ using SharedLibrary.Structures;
 namespace RazorWebApp.Controllers.Data
 {
     [Route("api/data/[controller]")]
-    public class PatchController : Controller
+    public class PutController : Controller
     {
         /// <summary>
         /// Database context for repository.
         /// </summary>
         private readonly DatabaseContext context;
 
-        public PatchController(DatabaseContext context)
+        public PutController(DatabaseContext context)
         {
             this.context = context;
         }
         /// <summary>
-        /// API endpoint for patching data.
+        /// API endpoint for putting data.
         /// </summary>
         /// <returns>Messages about action result</returns>
-        /// <response code="200">If data successfully patched</response>
+        /// <response code="200">If data successfully putted</response>
         /// <response code="401">If user is not authenticated</response>
-        /// <response code="403">If user is not autorized to patch data</response>
+        /// <response code="403">If user is not autorized to put data</response>
         /// <response code="404">If input is not valid</response>
         [Authorize]
-        [HttpPost]
+        [HttpPut]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [ProducesResponseType(404)]
-        [Authorize]
-        [HttpPost]
-        public IActionResult Patch([FromBody] DataModel fromBodyDataModel)
+        public IActionResult Put([FromBody] DataModel fromBodyDataModel)
         {
             // List of messages to return to the client
             var messages = new List<Message>();
 
             // Authentication
-             var controllerHelper = new ControllerHelper(context);
+            var controllerHelper = new ControllerHelper(context);
             var authUserModel = controllerHelper.Authenticate(HttpContext.User.Identity as ClaimsIdentity);
             if (authUserModel == null)
                 return Unauthorized();

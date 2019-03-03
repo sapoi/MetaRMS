@@ -17,17 +17,17 @@
 │   │   │   ├── CreateController.cs
 │   │   │   ├── DeleteController.cs
 │   │   │   ├── GetController.cs
-│   │   │   └── PatchController.cs
+│   │   │   └── PutController.cs
 │   │   ├── Rights
 │   │   │   ├── CreateController.cs
 │   │   │   ├── DeleteController.cs
 │   │   │   ├── GetController.cs
-│   │   │   └── PatchController.cs
+│   │   │   └── PutController.cs
 │   │   └── User
 │   │       ├── CreateController.cs
 │   │       ├── DeleteController.cs
 │   │       ├── GetController.cs
-│   │       ├── PatchController.cs
+│   │       ├── PutController.cs
 │   │       └── ResetPasswordController.cs
 │   ├── Helpers
 │   │   ├── AccessHelper.cs

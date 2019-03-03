@@ -1,6 +1,5 @@
 
 -----------------------
-
 🙈 NOT SUPPORTED
     - validace min u referenci na klientovi (bootstrap-select nema implementovano -> pro min=1 je pot5eba nastavit required=true)
     - unique
@@ -13,15 +12,17 @@
 🕓 FURTHER WORK
     - join and parametrize create, update and delete methods due to code duplicity for data, users and rights on both server and client
     - povolit uzivatelum zpetne editovat nektere casti application descriptoru (napr popisy datasetu)
+    - add support for HttpPatch to allow partial updates
+    - renumber error codes for more logic
+    - support for patch not just put
 
 -----------------------
 TODO
     - delsi doba prihlaseni - delsi platnost tokenu
     - salt to passwords
-    - nastavovat user datasetu id - AppInitController
     - kdyz je default heslo, vyzadovat zmenu na safe
         - ✴️ zmena hesla - nekontrolovat delku/spec znaky stareho hesla - vyresi se zavedenim vynuceni zmeny default hesla
-    - zobrazovat nekde jmeno prihlaseneho uzivatele
+    - zobrazovat nekde jmeno prihlaseneho uzivatele - too complicated - v pages nemam user
     - message preparer
     - ✴️🔥🔥🔥 pridat detail dat - po kliknuti na referenci - nutne - kdyz ma uzivatel pouze R prava, nezobrazil by se mu detail pomoci edit
     - ValueList jako dict <string, ...>
@@ -33,18 +34,9 @@ TODO
         defaultpasswordchange ✴️        ✴️
     - ❗️ refresh token (https://www.blinkingcaret.com/2018/05/30/refresh-tokens-in-asp-net-core-web-api/)
     
-    APPLICATION INITILIZATION
-        - 🔸 app init kontrola ze je vzdy soubor v service a controlleru
-    
-
     REFAKTORING
-        - pouzivat [HttpPost]?
-        - ✅ mazani delat pres httpdelete
-        - ✅ Server.Helpers.AuthHelper - Authorize prejmenovat na IsAuthorized a presunout do SharedLibrary
-            - ✅ prepsat authorization v pages
         - rozdelit accesshepler 
         - pomocne app init metody z kontrolleru nekam jinam
-        - ✅ spojit rights, user a data servicy do jedne -> pridat baseservice
         - presunout getTextForReference
         
     JAVASCRIPT
@@ -92,6 +84,8 @@ TODO
 
 -----------------------
 JSON VALIDACE
+    - 🔸 app init kontrola ze je vzdy soubor v service a controlleru
+    - ukladat app descriptor jako indented https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_Formatting.htm
     - validace deskriptoru ye obsahuje app name a vsechno ostatni co je povinne ... pokud to nebude obsahovta (napr max delka hesla, ...), nastavit default a nekde rict, co je defalut
     - validace DefaultLang - vytvorit enum a kontrolovat proti nemu
     - validace/ pripadne doplnit u username a password type string - ne - username je typu username a password typu password a kazde muze byt v user datasetu prave 1x
@@ -119,6 +113,8 @@ JSON VALIDACE
     - kdyz je atribut reference, musi mit ondeleteaction - kontrolovat, ze je z enumu
     - ondelete action tam, kde jsou referencovani uzivatele nesmi byt cascade, aby se nevzmazal i posledni uzivatel aplikace
     - kazda reference musi mit ondeleteaction
+    - nastavovat user datasetu id - AppInitController
+    - zadne datasety se nesmi jmenovat stejne
 
     - temer jakakoli hodnota atributu muze byt null!!!
 
@@ -232,6 +228,11 @@ HOTOVO
     - ✅ validace dat dat na serveru
     - ✅ odstranit login stranku - misto ni je index
     - ✅ nejdou videt polozky menu na mobilu
+    - ✅ spojit rights, user a data servicy do jedne -> pridat baseservice
+    - ✅ pouzivat [HttpPut]
+    - ✅ mazani delat pres httpdelete
+    - ✅ Server.Helpers.AuthHelper - Authorize prejmenovat na IsAuthorized a presunout do SharedLibrary
+        - ✅ prepsat authorization v pages
 
 -----------------------
 ZRUŠENO
@@ -257,6 +258,9 @@ ZRUŠENO
     - 🅾️ metoda na kontrolu tokenu a appname do Validations
     - ️️️️️🅾️ udelat a dat app name validator nekam zvlast
     - 🅾️ if user deleted, log him out first
+    - 🅾️ pouzivat [HttpPatch]?
+            - https://medium.com/backticks-tildes/restful-api-design-put-vs-patch-4a061aa3ed0b
+                - spis se chovam jako put, navic patch neni soucastio httpclienta
     
 
 -----------------------
@@ -323,7 +327,7 @@ JSON requirements
     🆗 "Required": vsechno, true x false, nepovinny
     🅾️ "Unique": TODO
     🆗 "Safer": true x false, jen password TODO test
-    "Min": cislo, jen pro int, float, 🅾️ reference TODO pro reference, a nove i jen pro string, text, username, password
+    🆗 "Min": cislo, jen pro int, float, reference, a nove i jen pro string, text, username, password
     🆗 "Max": cislo, jen pro int, float, reference, a nove i jen pro string, text, username, password
 
 

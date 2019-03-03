@@ -182,13 +182,13 @@ namespace RazorWebApp.Pages.Rights
             }
 
             // Prepare edited RightsModel
-            RightsModel patchedRightsModel = new RightsModel(){ ApplicationId = token.ApplicationId, 
+            RightsModel rightsModelToPut = new RightsModel(){ ApplicationId = token.ApplicationId, 
                                                                 Id = RightsId,
                                                                 Name = RightsName, 
                                                                 Data = JsonConvert.SerializeObject(RightsDictionary) };
 
-            // Patch request to the server via rightsService
-            var response = await rightsService.Patch(patchedRightsModel, token.Value);
+            // Put request to the server via rightsService
+            var response = await rightsService.Put(rightsModelToPut, token.Value);
             var messages = new List<Message>();
             try
             {
@@ -212,7 +212,7 @@ namespace RazorWebApp.Pages.Rights
                 // Otherwise try parse error messages and display them at the get page
                 else
                 {
-                    messages = JsonConvert.DeserializeObject<List<Message>>(await response.Content.ReadAsStringAsync());
+                    messages = JsonConvert.DeserializeObject<List<Message>>(await response.Content.ReadAsStringAsync()) ?? throw new JsonSerializationException();
                 }
             }
             catch (JsonSerializationException e)

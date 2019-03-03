@@ -51,7 +51,7 @@ namespace SharedLibrary.Services
             return response;
         }
 
-        public async Task<HttpResponseMessage> Patch(DataModel dataModel, string token)
+        public async Task<HttpResponseMessage> Put(DataModel dataModel, string token)
         {
             // adding JWT token value to authorization header
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -59,8 +59,8 @@ namespace SharedLibrary.Services
             string jsonData = JsonConvert.SerializeObject(dataModel);
             var jsonDataContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             // GET request to server with authorization header containing JWT token value
-            var address = new Uri(client.BaseAddress.OriginalString + "/patch/");
-            var response = await client.PostAsync(address, jsonDataContent);
+            var address = new Uri(client.BaseAddress.OriginalString + "/put/");
+            var response = await client.PutAsync(address, jsonDataContent);
 
             return response;
         }
