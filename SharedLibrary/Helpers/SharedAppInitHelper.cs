@@ -10,7 +10,7 @@ using SharedLibrary.Structures;
 
 namespace SharedLibrary.Helpers
 {
-    public class AppInitHelper
+    public class SharedAppInitHelper
     {
         public List<Message> ValidateJSONAgainstSchema(JObject jObjectApplicationDescriptor)
         {

@@ -27,6 +27,7 @@ namespace RazorWebApp.Controllers.Rights
         /// <summary>
         /// API endpoint for deleting rights.
         /// </summary>
+        /// <param name="id">Id of rights to delete</param>
         /// <returns>Messages about action result</returns>
         /// <response code="200">If rights successfully deleted</response>
         /// <response code="401">If user is not authenticated</response>

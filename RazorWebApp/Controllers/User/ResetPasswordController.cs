@@ -26,6 +26,7 @@ namespace RazorWebApp.Controllers.User
         /// <summary>
         /// API endpoint resetting user password.
         /// </summary>
+        /// <param name="id">Id of user to reset the password</param>
         /// <returns>Messages about action result</returns>
         /// <response code="200">If user pasword was sucessfully reset</response>
         /// <response code="401">If user is not authenticated</response>

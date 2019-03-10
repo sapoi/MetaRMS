@@ -26,6 +26,7 @@ namespace RazorWebApp.Controllers.User
         /// <summary>
         /// API endpoint for deleting users.
         /// </summary>
+        /// <param name="id">Id of user to delete</param>
         /// <returns>Messages about action result</returns>
         /// <response code="200">If user successfully deleted</response>
         /// <response code="401">If user is not authenticated</response>

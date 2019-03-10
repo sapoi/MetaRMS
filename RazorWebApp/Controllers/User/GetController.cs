@@ -66,6 +66,7 @@ namespace RazorWebApp.Controllers.User
         /// <summary>
         /// API endpoint for getting user by id.
         /// </summary>
+        /// <param name="id">Id of user to get</param>
         /// <returns>UserModel or messages about action result</returns>
         /// <response code="200">If user successfully sent</response>
         /// <response code="401">If user is not authenticated</response>

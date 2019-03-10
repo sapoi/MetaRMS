@@ -14,6 +14,7 @@ using System.Text;
 using RazorWebApp.Repositories;
 using SharedLibrary.Structures;
 using Newtonsoft.Json.Linq;
+using RazorWebApp.Helpers;
 
 namespace RazorWebApp.Controllers
 {
@@ -75,10 +76,10 @@ namespace RazorWebApp.Controllers
                     return BadRequest(messages);
                 }
             }
-            var appInitHelper = new AppInitHelper();
+            var sharedAppInitHelper = new SharedAppInitHelper();
 
             // With successfully parsed JSON file, validate it against schema
-            var schemaValidationMessages = appInitHelper.ValidateJSONAgainstSchema(applicationDescriptorJObject);
+            var schemaValidationMessages = sharedAppInitHelper.ValidateJSONAgainstSchema(applicationDescriptorJObject);
             // If validation JSON is not valid return errors
             if (schemaValidationMessages.Count != 0)
                 return BadRequest(schemaValidationMessages);
@@ -95,7 +96,7 @@ namespace RazorWebApp.Controllers
                                          new List<string>(){ applicationDescriptor.LoginApplicationName }));
             }
             // Validate datasets and attributes
-            messages.AddRange(appInitHelper.ValidateDescriptor(applicationDescriptor));
+            messages.AddRange(sharedAppInitHelper.ValidateDescriptor(applicationDescriptor));
 
             if (messages.Count != 0)
                 return BadRequest(messages);
@@ -103,7 +104,7 @@ namespace RazorWebApp.Controllers
             #endregion
 
             // Set default values to the application descriptor
-            appInitHelper.SetDefaultDescriptorValues(applicationDescriptor);
+            sharedAppInitHelper.SetDefaultDescriptorValues(applicationDescriptor);
 
             #region create new application
 
@@ -121,14 +122,15 @@ namespace RazorWebApp.Controllers
                 // Random password 8 chars long
                 var newPassword = PasswordHelper.GenerateRandomPassword(8);
                 // Admin rights
-                var newRights = getAdminRights(newApplication, applicationDescriptor);
+                var appInitHelper = new AppInitHelper();
+                var newRights = appInitHelper.GetAdminRights(newApplication, applicationDescriptor);
                 var rightsRepository = new RightsRepository(context);
                 rightsRepository.Add(newRights);
                 var newUser = new UserModel
                 {
                     Application = newApplication,
                     Password = PasswordHelper.ComputeHash(newPassword),
-                    Data = getDefaultAdminDataDictionary(applicationDescriptor.SystemDatasets.UsersDatasetDescriptor),
+                    Data = appInitHelper.GetDefaultAdminDataDictionary(applicationDescriptor.SystemDatasets.UsersDatasetDescriptor),
                     Rights = newRights
                 };
                 var userRepository = new UserRepository(context);
@@ -137,7 +139,7 @@ namespace RazorWebApp.Controllers
                 // Try to send login details to admin account to email from parametres
                 try
                 {
-                    sendEmailWithCredentials(email, applicationDescriptor.ApplicationName, newApplication.LoginApplicationName, newPassword);
+                    appInitHelper.SendEmailWithCredentials(email, applicationDescriptor.ApplicationName, newApplication.LoginApplicationName, newPassword);
                 }
                 catch
                 {
@@ -159,83 +161,6 @@ namespace RazorWebApp.Controllers
                                 0027, 
                                 new List<string>(){ applicationDescriptor.ApplicationName, email }));
             return Ok(messages);
-        }
-        /// <summary>
-        /// Creates a JSON formatted string of admin data containing username admin and wit all the other attributes blank
-        /// </summary>
-        /// <param name="usersDatasetDescriptor">User dataset descriptor of the new application</param>
-        /// <returns>Default user data for admin user</returns>
-        string getDefaultAdminDataDictionary(UsersDatasetDescriptor usersDatasetDescriptor)
-        {
-            // Build a string based on system user dataset descriptor
-            StringBuilder sb = new StringBuilder("{");
-            foreach (var attribute in usersDatasetDescriptor.Attributes)
-            {
-                // If attribute type is usermane, set value to "admin"
-                if (attribute.Type == "username")
-                    sb.Append($"\"{attribute.Name}\":[\"admin\"],");
-                // Othewise keep the value list empty
-                else
-                    sb.Append($"\"{attribute.Name}\":[],");
-            }
-            // Last comma is not a problem for parsing
-            sb.Append("}");
-            return sb.ToString();
-        }
-        /// <summary>
-        /// Returns default rights for admin
-        /// </summary>
-        /// <param name="applicationModel">Model of application the rights belongs to</param>
-        /// <param name="applicationDescriptor">Descriptor of the application</param>
-        /// <returns>Admin RightsModel</returns>
-        RightsModel getAdminRights(ApplicationModel applicationModel, ApplicationDescriptor applicationDescriptor)
-        {
-            var rights = new RightsModel();
-            rights.Application = applicationModel;
-            rights.Name = "admin";
-
-            // Full CRUD rights for all datasets
-            Dictionary<long, RightsEnum> rightsDict = new Dictionary<long, RightsEnum>();
-            rightsDict[(long)SystemDatasetsEnum.Users] = RightsEnum.CRUD;
-            rightsDict[(long)SystemDatasetsEnum.Rights] = RightsEnum.CRUD;
-            foreach (var dataset in applicationDescriptor.Datasets)
-            {
-                rightsDict[dataset.Id] = RightsEnum.CRUD;
-            }
-
-            // Serialize rights to JSON
-            rights.Data = JsonConvert.SerializeObject(rightsDict);
-            return rights;
-        }
-        /// <summary>
-        /// Sends confirmation email about application creation to provided email address
-        /// </summary>
-        /// <param name="email">Email address to end the email to</param>
-        /// <param name="applicationName">Name of the application</param>
-        /// <param name="loginApplicationName">Login name of the application</param>
-        /// <param name="password">Admin password</param>
-        void sendEmailWithCredentials(string email, string applicationName, string loginApplicationName, string password)
-        {
-            // Create SMTP client
-            var client = new SmtpClient
-                {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
-                    EnableSsl = true,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential("sapoiapps@gmail.com", "sapoisapoi")
-                };
-
-            // Create message
-            MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("sapoiapps@gmail.com");
-            mailMessage.To.Add(email);
-            mailMessage.Body = $"Application Name: {loginApplicationName} \nUsername: admin \nPassword: {password}";
-            mailMessage.Subject = $"{applicationName} admin login credentials";
-
-            // Send email
-            client.Send(mailMessage);
         }
     }
 }

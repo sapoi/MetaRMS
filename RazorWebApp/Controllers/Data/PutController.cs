@@ -28,6 +28,7 @@ namespace RazorWebApp.Controllers.Data
         /// <summary>
         /// API endpoint for putting data.
         /// </summary>
+        /// <param name="fromBodyDataModel">Changed DataModel</param>
         /// <returns>Messages about action result</returns>
         /// <response code="200">If data successfully putted</response>
         /// <response code="401">If user is not authenticated</response>
@@ -68,8 +69,8 @@ namespace RazorWebApp.Controllers.Data
             #region VALIDATIONS
 
             // Recieved data ApplicationId must be the same as of authorized user
-            var validationsHelper = new ValidationsHelper();
-            messages = validationsHelper.ValidateApplicationId(fromBodyDataModel.ApplicationId, authUserModel.ApplicationId);
+            var sharedValidationHelper = new SharedValidationHelper();
+            messages = sharedValidationHelper.ValidateApplicationId(fromBodyDataModel.ApplicationId, authUserModel.ApplicationId);
             if (messages.Count != 0)
                 return BadRequest(messages);
             fromBodyDataModel.Application = authUserModel.Application;
@@ -91,7 +92,7 @@ namespace RazorWebApp.Controllers.Data
             
             // Input data validations
             var validReferencesIdsDictionary = controllerHelper.GetAllReferencesIdsDictionary(authUserModel.Application);
-            messages = validationsHelper.ValidateDataByApplicationDescriptor(datasetDescriptor, 
+            messages = sharedValidationHelper.ValidateDataByApplicationDescriptor(datasetDescriptor, 
                                                                              dataModel.DataDictionary, 
                                                                              validReferencesIdsDictionary);
             if (messages.Count != 0)

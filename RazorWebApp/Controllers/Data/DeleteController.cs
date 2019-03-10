@@ -27,6 +27,8 @@ namespace RazorWebApp.Controllers.Data
         /// <summary>
         /// API endpoint for deleting data.
         /// </summary>
+        /// <param name="datasetId">Id of dataset the data are from</param>
+        /// <param name="id">Id of the data</param>
         /// <returns>Messages about action result</returns>
         /// <response code="200">If data successfully deleted</response>
         /// <response code="401">If user is not authenticated</response>

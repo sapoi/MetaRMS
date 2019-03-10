@@ -9,16 +9,6 @@ public class TokenHelper
     {
         accessToken = token;
     }
-    // public string GetLoginApplicationName() not in the claims anymore
-    // {
-    //     var handler = new JwtSecurityTokenHandler();
-    //     var token = handler.ReadToken(_accessToken.Value) as JwtSecurityToken;
-    //     var claim =  token.Claims.First(c => c.Type == "LoginApplicationName");
-    //     if (claim == null)
-    //         return null;
-    //     return claim.Value;
-        
-    // }
     public long? GetUserId()
     {
         var handler = new JwtSecurityTokenHandler();

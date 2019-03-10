@@ -33,6 +33,7 @@ namespace RazorWebApp.Controllers.User
         /// <summary>
         /// API endpoint for creating user.
         /// </summary>
+        /// <param name="fromBodyUserModel">New UserModel</param>
         /// <returns>Messages about action result</returns>
         /// <response code="200">If user successfully created</response>
         /// <response code="401">If user is not authenticated</response>
@@ -62,8 +63,8 @@ namespace RazorWebApp.Controllers.User
             #region VALIDATIONS
 
             // New user ApplicationId must be the same as of authorized user
-            var validationsHelper = new ValidationsHelper();
-            messages = validationsHelper.ValidateApplicationId(fromBodyUserModel.ApplicationId, authUserModel.ApplicationId);
+            var sharedValidationHelper = new SharedValidationHelper();
+            messages = sharedValidationHelper.ValidateApplicationId(fromBodyUserModel.ApplicationId, authUserModel.ApplicationId);
             if (messages.Count != 0)
                 return BadRequest(messages);
             fromBodyUserModel.Application = authUserModel.Application;
@@ -90,7 +91,7 @@ namespace RazorWebApp.Controllers.User
 
             // Input data validations
             var validReferencesIdsDictionary = controllerHelper.GetAllReferencesIdsDictionary(authUserModel.Application);
-            messages = validationsHelper.ValidateDataByApplicationDescriptor(authUserModel.Application.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor, 
+            messages = sharedValidationHelper.ValidateDataByApplicationDescriptor(authUserModel.Application.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor, 
                                                                                fromBodyUserModel.DataDictionary, 
                                                                                validReferencesIdsDictionary);
             if (messages.Count != 0)

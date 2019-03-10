@@ -24,6 +24,7 @@ namespace RazorWebApp.Controllers.Account.Settings
         /// <summary>
         /// API endpoint for password change.
         /// </summary>
+        /// <param name="passwords">PasswordChangeStructure with passwords</param>
         /// <returns>Error of info message about action result</returns>
         /// <response code="200">If password successfully changed</response>
         /// <response code="401">If user is not authenticated</response>
@@ -80,8 +81,8 @@ namespace RazorWebApp.Controllers.Account.Settings
             // If passwords are required to be safer by application descriptor
             if (authUserModel.Application.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.PasswordAttribute.Safer == true)
             {
-                var validationsHelper = new ValidationsHelper();
-                if (!validationsHelper.IsPasswordSafer(passwords.NewPassword))
+                var sharedValidationHelper = new SharedValidationHelper();
+                if (!sharedValidationHelper.IsPasswordSafer(passwords.NewPassword))
                 {
                     messages.Add(new Message(MessageTypeEnum.Error, 
                                                       5004, 

@@ -12,9 +12,9 @@ using SharedLibrary.Structures;
 namespace SharedLibrary.Helpers
 {
     /// <summary>
-    /// The ValidationsHelper class contains helper methods for input validations by application descriptor.
+    /// The SharedValidationHelper class contains helper methods for input validations by application descriptor.
     /// </summary>
-    public class ValidationsHelper
+    public class SharedValidationHelper
     {
         /// <summary>
         /// Returns true of password fulfills safety requirements defined by the regular expression

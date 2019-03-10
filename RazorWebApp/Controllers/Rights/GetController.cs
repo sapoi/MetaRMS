@@ -61,6 +61,7 @@ namespace RazorWebApp.Controllers.Rights
         /// <summary>
         /// API endpoint for getting rights by id.
         /// </summary>
+        /// <param name="id">Id of rights to get</param>
         /// <returns>RightsModel or messages about action result</returns>
         /// <response code="200">If rights successfully sent</response>
         /// <response code="401">If user is not authenticated</response>

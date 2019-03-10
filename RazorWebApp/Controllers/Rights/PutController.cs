@@ -27,6 +27,7 @@ namespace RazorWebApp.Controllers.Rights
         /// <summary>
         /// API endpoint for putting rights.
         /// </summary>
+        /// <param name="fromBodyRightsModel">Changed RightsModel</param>
         /// <returns>Messages about action result</returns>
         /// <response code="200">If rights successfully putted</response>
         /// <response code="401">If user is not authenticated</response>
@@ -56,8 +57,8 @@ namespace RazorWebApp.Controllers.Rights
             #region VALIDATIONS
 
             // Received rights ApplicationId must be the same as of authorized user
-            var validationsHelper = new ValidationsHelper();
-            messages = validationsHelper.ValidateApplicationId(fromBodyRightsModel.ApplicationId, authUserModel.ApplicationId);
+            var sharedValidationHelper = new SharedValidationHelper();
+            messages = sharedValidationHelper.ValidateApplicationId(fromBodyRightsModel.ApplicationId, authUserModel.ApplicationId);
             if (messages.Count != 0)
                 return BadRequest(messages);
             fromBodyRightsModel.Application = authUserModel.Application;
@@ -90,7 +91,7 @@ namespace RazorWebApp.Controllers.Rights
             }
             
             // Rights data validity and logic validity
-            messages = validationsHelper.ValidateRights(authUserModel.Application.ApplicationDescriptor,
+            messages = sharedValidationHelper.ValidateRights(authUserModel.Application.ApplicationDescriptor,
                                                         fromBodyRightsModel.DataDictionary);
             if (messages.Count != 0)
                 return BadRequest(messages);

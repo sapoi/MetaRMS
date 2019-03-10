@@ -27,6 +27,7 @@ namespace RazorWebApp.Controllers.Data
         /// <summary>
         /// API endpoint for getting all data by dataset id.
         /// </summary>
+        /// <param name="datasetId">Id of dataset to get the data from</param>
         /// <returns>List of DataModels or messages about action result</returns>
         /// <response code="200">If data successfully sent</response>
         /// <response code="401">If user is not authenticated</response>
@@ -80,6 +81,8 @@ namespace RazorWebApp.Controllers.Data
         /// <summary>
         /// API endpoint for getting data by dataset id and data id.
         /// </summary>
+        /// <param name="datasetId">Id of dataset the data are from</param>
+        /// <param name="id">Id of the data to get</param>
         /// <returns>DataModel or messages about action result</returns>
         /// <response code="200">If data successfully sent</response>
         /// <response code="401">If user is not authenticated</response>

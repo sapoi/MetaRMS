@@ -19,37 +19,34 @@
 
 -----------------------
 TODO
-    - remove == "username" and == "password" from code
-    - pro typ bool je nullable vzdy true - proc?
-    - tocici se kolecko pri validaci aplikace
-    - vytvoreni admina porusi required u system user datasetu dat - vsechny hodnoty ma nevyplnene
-    - zdokumentovat parametry v controllerech
-    - napsat kdyz pri login se neda pripojit k "serveru" - ted to spadne
-    - delsi doba prihlaseni - delsi platnost tokenu
-    - salt to passwords
-    - kdyz je default heslo, vyzadovat zmenu na safe
-        - ✴️ zmena hesla - nekontrolovat delku/spec znaky stareho hesla - vyresi se zavedenim vynuceni zmeny default hesla
-    - zobrazovat nekde jmeno prihlaseneho uzivatele - too complicated - v pages nemam user
-    - ✴️🔥🔥🔥 pridat detail dat - po kliknuti na referenci - nutne - kdyz ma uzivatel pouze R prava, nezobrazil by se mu detail pomoci edit
-    - ValueList jako dict <string, ...>
-                C  U          x    odesilat model
-        data    ✅ ✅                   ✅
-        users   ✅ ✅                   ✅
-        rights  ✅ ✅                   ✅
-        settings              ✅        ✅
-        defaultpasswordchange ✴️        ✴️
-    - ❗️ refresh token (https://www.blinkingcaret.com/2018/05/30/refresh-tokens-in-asp-net-core-web-api/)
-    
-    REFAKTORING
-        - rozdelit accesshepler 
-        - pomocne app init metody z kontrolleru nekam jinam
-        - presunout getTextForReference
+    HIGH PRIORITY
+        - pro typ bool je nullable vzdy true - proc?
+        - vytvoreni admina porusi required u system user datasetu dat - vsechny hodnoty ma nevyplnene
+        - napsat kdyz pri login se neda pripojit k "serveru" - ted to spadne
+        - delsi doba prihlaseni - delsi platnost tokenu
+        - salt to passwords
+        - kdyz je default heslo, vyzadovat zmenu na safe
+            - ✴️ zmena hesla - nekontrolovat delku/spec znaky stareho hesla - vyresi se zavedenim vynuceni zmeny default hesla
+        - ValueList jako dict <string, ...>
+                    C  U          x    odesilat model
+            data    ✅ ✅                   ✅
+            users   ✅ ✅                   ✅
+            rights  ✅ ✅                   ✅
+            settings              ✅        ✅
+            defaultpasswordchange ✴️        ✴️
+        - ✴️🔥🔥🔥 pridat detail dat - po kliknuti na referenci - nutne - kdyz ma uzivatel pouze R prava, nezobrazil by se mu detail pomoci edit
+        - ❗️ refresh token (https://www.blinkingcaret.com/2018/05/30/refresh-tokens-in-asp-net-core-web-api/)
         
     JAVASCRIPT
         - 🔥 javascript popup okna pri delete, ...
         - 🔥 users alert jestli doopravdy vyresetovat heslo
         ️- 🔥 new password equal validation
         - prilinkovat skripty 1.10. str 20
+
+    LOW PRIORITY
+        - remove == "username" and == "password" from code
+        - tocici se kolecko pri validaci aplikace
+        - zobrazovat nekde jmeno prihlaseneho uzivatele - too complicated - v pages nemam user
 
     MULTILINGUAL SUPPORT
         - preklady: nazvy tlacitek, rights dataset, rights.get nazvy sloupcu tabluky, settings
@@ -267,6 +264,8 @@ HOTOVO
     - ✅ vlozit emoji do db
     - ✅ message preparer
     - ✅ message priprava pomoci stringbuilderu
+    - ✅ zdokumentovat parametry v controllerech
+    - ✅ pomocne app init metody z kontrolleru nekam jinam
 
 -----------------------
 ZRUŠENO
@@ -300,6 +299,8 @@ ZRUŠENO
         - 🅾️ reference nevede sama na sebe
         - 🅾️ reference nejsou v USER datasetu
         - 🅾️ nazvy atributu nesmi byt BDId a RIGHTSId
+    - 🅾️ rozdelit accesshepler 
+    - 🅾️ presunout getTextForReference
     
     
 
@@ -370,12 +371,6 @@ JSON requirements
     🆗 "Min": cislo, jen pro int, float, reference, a nove i jen pro string, text, username, password
     🆗 "Max": cislo, jen pro int, float, reference, a nove i jen pro string, text, username, password
 
-
-- podminky
-    - zadne datasety se nesmi jmenovat stejne
-
-- system datasety
-    - uz obsahuji prava
 
 
 

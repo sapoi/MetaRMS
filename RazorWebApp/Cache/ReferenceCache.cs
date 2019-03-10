@@ -72,9 +72,6 @@ namespace RazorWebApp.Cache
                     }
                     if (!attributeDescriptor.Equals(lastAttributeDescriptor))
                     {
-                        // if (level == 0)
-                        //     text += " - ";
-                        // else
                         text += " | ";
                     }
                 }
