@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -20,12 +21,13 @@ namespace SharedLibrary.Services
 
         public async Task<HttpResponseMessage> InitializeApplication(string email, IFormFile file)
         {
-            //TODO pada kdyz je file null
-            //if (file == null)
+            Stream stream = new MemoryStream();
+            if (file != null)
+                stream = file.OpenReadStream();
             var data = new MultipartFormDataContent
             {
                 {new StringContent(email), "email"},
-                {new StreamContent(file.OpenReadStream()), "file", "file"}
+                {new StreamContent(stream), "file", "file"}
             };
             return await client.PostAsync(client.BaseAddress, data);
         }

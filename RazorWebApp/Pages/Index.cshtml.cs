@@ -1,68 +1,120 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
 using RazorWebApp.Helpers;
+using SharedLibrary.Helpers;
 using SharedLibrary.Services;
 using SharedLibrary.Structures;
 
 namespace RazorWebApp.Pages
 {
+    /// <summary>
+    /// The IndexModel class in RazorWebApp.Pages namespace is used as support for Index.cshtml page. 
+    /// The page is used to display login form.
+    /// </summary>
     public class IndexModel : PageModel
     {
-        private readonly IAccountService _accountService;
-        private IMemoryCache _cache;
-
+        /// <summary>
+        /// Service for user account based requests to the server.
+        /// </summary>
+        private readonly IAccountService accountService;
+        /// <summary>
+        /// In-memory cache service.
+        /// </summary>
+        private IMemoryCache cache;
+        /// <summary>
+        /// Constructor for initializing services and cache.
+        /// </summary>
+        /// <param name="accountService">Account service to be used</param>
+        /// <param name="memoryCache">Cache to be used</param>
         public IndexModel(IAccountService accountService, IMemoryCache memoryCache)
         {
-            this._accountService = accountService;
-            this._cache = memoryCache;
+            this.accountService = accountService;
+            this.cache = memoryCache;
         }
-
+        /// <summary>
+        /// Login credentials from input.
+        /// </summary>
+        /// <value>Login credentials class instance</value>
         [BindProperty]
-        public LoginCredentials Input { get; set; }
-        public string Message { get; set; }
-        public IActionResult OnGet(string message = null)
+        public LoginCredentials LoginCredentials { get; set; }
+        /// <summary>
+        /// Messages property contains list of messages for user.
+        /// </summary>
+        /// <value>List of Message structure</value>
+        public List<Message> Messages { get; set; }
+        /// <summary>
+        /// This method is used when there is a GET request to Index.cshtml page.
+        /// </summary>
+        /// <returns>The page.</returns>
+        public IActionResult OnGet()
         {
-            // get AccessToken from PageModel
+            // Get AccessToken from PageModel
             var token = AccessHelper.GetTokenFromPageModel(this);
-            // if there is no token, log info and redirect user to login page
-            if (token == null)
-            {
-                Message = message;
-                //TODO
-                return Page();
-            }
-            return RedirectToPage("/Data/Get");
-        }
-
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
-        {
-            if (ModelState.IsValid)
-            {
-                // zisk tokenu, pokud jsou přihlašovací údaje správné
-                var response = await _accountService.Login(Input);
-                if (!response.IsSuccessStatusCode)
-                {
-                    string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-                    Message = message.Substring(1, message.Length - 2);
-                    return Page();
-                }
-                var jsonToken = response.Content.ReadAsStringAsync().Result;
-                // ulozeni tokenu do session storage
-                HttpContext.Session.SetString("sessionJWT", jsonToken);
-                var token = AccessHelper.GetTokenFromPageModel(this);
-                // pokud jiz neni v cahe, nacist appliction descriptor a ulozit ho do ni
-                await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, token);
-
+            // If there is a token, redirect to Data
+            if (token != null)
                 return RedirectToPage("/Data/Get");
+
+            // Messages
+            Messages = new List<Message>();
+            // Get messages from cookie
+            var serializedMessages = TempData["Messages"];
+            TempData.Remove("Messages");
+            if (serializedMessages != null)
+            {
+                try
+                {
+                    Messages = JsonConvert.DeserializeObject<List<Message>>((string)serializedMessages) ?? throw new JsonSerializationException();
+                }
+                catch (JsonSerializationException e)
+                {
+                    Logger.LogToConsole($"Messages {serializedMessages} serialization failed for user with token {token.Value}");
+                    Logger.LogExceptionToConsole(e);
+                }    
             }
-            //TODO vypsat nejakou chybu
+            LoginCredentials = new LoginCredentials();
+            LoginCredentials.LoginApplicationName = "";
+            LoginCredentials.Username = "";
+            LoginCredentials.Password = "";
+            return Page();
+        }
+        /// <summary>
+        /// OnPostAsync method is invoked after clicking on Log in button.
+        /// </summary>
+        /// <returns>Redirect to Data/Get page or the same page with validation messages.</returns>
+        public async Task<IActionResult> OnPostAsync()
+        {
+            // Log in request to the server via accountService
+            var response = await accountService.Login(LoginCredentials);
+            var messages = new List<Message>();
+            try
+            {
+                // If response status code if successfull, parse and save token and redirect to get page
+                if (response.IsSuccessStatusCode)
+                {
+                    var JWTToken = response.Content.ReadAsStringAsync().Result;
+                    // Save token to the session
+                    HttpContext.Session.SetString("sessionJWT", JWTToken);
+                    var token = AccessHelper.GetTokenFromPageModel(this);
+                    return RedirectToPage("/Data/Get");
+                }
+                // Otherwise try parse error messages and display them at the create page
+                else
+                {
+                    messages = JsonConvert.DeserializeObject<List<Message>>(await response.Content.ReadAsStringAsync()) ?? throw new JsonSerializationException();
+                }
+            }
+            catch (JsonSerializationException e)
+            {
+                // In case of JSON parsing error, create server error message
+                messages.Add(MessageHepler.Create1007());
+                Logger.LogExceptionToConsole(e);
+            }
+            Messages = messages;
             return Page();
         }
     }

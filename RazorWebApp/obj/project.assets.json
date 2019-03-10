@@ -2752,6 +2752,18 @@
           "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {}
         }
       },
+      "Newtonsoft.Json.Schema/3.0.10": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.Schema.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.Schema.dll": {}
+        }
+      },
       "Remotion.Linq/2.1.1": {
         "type": "package",
         "dependencies": {
@@ -4738,6 +4750,7 @@
           "Microsoft.AspNetCore.Mvc": "2.0.2",
           "Microsoft.EntityFrameworkCore.Design": "2.0.2",
           "Microsoft.EntityFrameworkCore.Sqlite": "2.0.2",
+          "Newtonsoft.Json.Schema": "3.0.10",
           "System.IdentityModel.Tokens.Jwt": "5.2.4"
         },
         "compile": {
@@ -5021,6 +5034,7 @@
       "type": "package",
       "path": "microsoft.aspnetcore.authentication/2.0.3",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.xml",
         "microsoft.aspnetcore.authentication.2.0.3.nupkg.sha512",
@@ -5032,6 +5046,7 @@
       "type": "package",
       "path": "microsoft.aspnetcore.authentication.abstractions/2.0.2",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Abstractions.xml",
         "microsoft.aspnetcore.authentication.abstractions.2.0.2.nupkg.sha512",
@@ -5043,6 +5058,7 @@
       "type": "package",
       "path": "microsoft.aspnetcore.authentication.cookies/2.0.3",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Cookies.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Cookies.xml",
         "microsoft.aspnetcore.authentication.cookies.2.0.3.nupkg.sha512",
@@ -5054,6 +5070,7 @@
       "type": "package",
       "path": "microsoft.aspnetcore.authentication.core/2.0.2",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Core.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Core.xml",
         "microsoft.aspnetcore.authentication.core.2.0.2.nupkg.sha512",
@@ -5210,6 +5227,7 @@
       "type": "package",
       "path": "microsoft.aspnetcore.cryptography.internal/2.0.2",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.xml",
         "microsoft.aspnetcore.cryptography.internal.2.0.2.nupkg.sha512",
@@ -5221,6 +5239,7 @@
       "type": "package",
       "path": "microsoft.aspnetcore.cryptography.keyderivation/2.0.2",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
         "microsoft.aspnetcore.cryptography.keyderivation.2.0.2.nupkg.sha512",
@@ -5232,6 +5251,7 @@
       "type": "package",
       "path": "microsoft.aspnetcore.dataprotection/2.0.2",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.AspNetCore.DataProtection.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.DataProtection.xml",
         "microsoft.aspnetcore.dataprotection.2.0.2.nupkg.sha512",
@@ -5243,6 +5263,7 @@
       "type": "package",
       "path": "microsoft.aspnetcore.dataprotection.abstractions/2.0.2",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.AspNetCore.DataProtection.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.DataProtection.Abstractions.xml",
         "microsoft.aspnetcore.dataprotection.abstractions.2.0.2.nupkg.sha512",
@@ -5353,6 +5374,7 @@
       "type": "package",
       "path": "microsoft.aspnetcore.http/2.0.2",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.AspNetCore.Http.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Http.xml",
         "microsoft.aspnetcore.http.2.0.2.nupkg.sha512",
@@ -5375,6 +5397,7 @@
       "type": "package",
       "path": "microsoft.aspnetcore.http.extensions/2.0.2",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.AspNetCore.Http.Extensions.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Http.Extensions.xml",
         "microsoft.aspnetcore.http.extensions.2.0.2.nupkg.sha512",
@@ -5408,6 +5431,7 @@
       "type": "package",
       "path": "microsoft.aspnetcore.identity/2.0.2",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.AspNetCore.Identity.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Identity.xml",
         "microsoft.aspnetcore.identity.2.0.2.nupkg.sha512",
@@ -5419,6 +5443,7 @@
       "type": "package",
       "path": "microsoft.aspnetcore.identity.entityframeworkcore/2.0.2",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml",
         "microsoft.aspnetcore.identity.entityframeworkcore.2.0.2.nupkg.sha512",
@@ -5890,6 +5915,7 @@
       "type": "package",
       "path": "microsoft.aspnetcore.webutilities/2.0.2",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.xml",
         "microsoft.aspnetcore.webutilities.2.0.2.nupkg.sha512",
@@ -6591,6 +6617,7 @@
       "type": "package",
       "path": "microsoft.extensions.identity.core/2.0.2",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Extensions.Identity.Core.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Identity.Core.xml",
         "microsoft.extensions.identity.core.2.0.2.nupkg.sha512",
@@ -6602,6 +6629,7 @@
       "type": "package",
       "path": "microsoft.extensions.identity.stores/2.0.2",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Extensions.Identity.Stores.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Identity.Stores.xml",
         "microsoft.extensions.identity.stores.2.0.2.nupkg.sha512",
@@ -6780,6 +6808,7 @@
       "type": "package",
       "path": "microsoft.extensions.webencoders/2.0.1",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Extensions.WebEncoders.dll",
         "lib/netstandard2.0/Microsoft.Extensions.WebEncoders.xml",
         "microsoft.extensions.webencoders.2.0.1.nupkg.sha512",
@@ -7107,6 +7136,7 @@
       "type": "package",
       "path": "microsoft.net.http.headers/2.0.2",
       "files": [
+        ".nupkg.metadata",
         "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll",
         "lib/netstandard2.0/Microsoft.Net.Http.Headers.xml",
         "microsoft.net.http.headers.2.0.2.nupkg.sha512",
@@ -7744,6 +7774,29 @@
         "lib/netstandard1.3/Newtonsoft.Json.Bson.xml",
         "newtonsoft.json.bson.1.0.1.nupkg.sha512",
         "newtonsoft.json.bson.nuspec"
+      ]
+    },
+    "Newtonsoft.Json.Schema/3.0.10": {
+      "sha512": "uDNsnCTUOryhTtujD297nLj+lyxIQ4H54o4TiPBsB0w06COs03eoHRvHFAflI8LbEtsezcdooT8rAcJ8nM08ew==",
+      "type": "package",
+      "path": "newtonsoft.json.schema/3.0.10",
+      "files": [
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net35/Newtonsoft.Json.Schema.dll",
+        "lib/net35/Newtonsoft.Json.Schema.xml",
+        "lib/net40/Newtonsoft.Json.Schema.dll",
+        "lib/net40/Newtonsoft.Json.Schema.xml",
+        "lib/net45/Newtonsoft.Json.Schema.dll",
+        "lib/net45/Newtonsoft.Json.Schema.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.Schema.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.Schema.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.Schema.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.Schema.xml",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.Schema.dll",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.Schema.xml",
+        "newtonsoft.json.schema.3.0.10.nupkg.sha512",
+        "newtonsoft.json.schema.nuspec"
       ]
     },
     "Remotion.Linq/2.1.1": {
@@ -10158,6 +10211,7 @@
       "type": "package",
       "path": "system.private.datacontractserialization/4.3.0",
       "files": [
+        ".nupkg.metadata",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.3/System.Private.DataContractSerialization.dll",
@@ -11085,6 +11139,7 @@
       "type": "package",
       "path": "system.runtime.serialization.primitives/4.3.0",
       "files": [
+        ".nupkg.metadata",
         "System.Runtime.Serialization.Primitives.4.3.0.nupkg.sha512",
         "System.Runtime.Serialization.Primitives.nuspec",
         "ThirdPartyNotices.txt",
@@ -11156,6 +11211,7 @@
       "type": "package",
       "path": "system.runtime.serialization.xml/4.3.0",
       "files": [
+        ".nupkg.metadata",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -12563,6 +12619,7 @@
       "type": "package",
       "path": "system.xml.xmlserializer/4.3.0",
       "files": [
+        ".nupkg.metadata",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -12739,6 +12796,7 @@
       "Microsoft.EntityFrameworkCore.Design >= 2.0.2",
       "Microsoft.EntityFrameworkCore.Sqlite >= 2.0.2",
       "Microsoft.NETCore.App >= 2.0.0",
+      "Newtonsoft.Json.Schema >= 3.0.10",
       "SharedLibrary >= 1.0.0",
       "System.Linq.Dynamic.Core >= 1.0.10",
       "bootstrap-select >= 1.13.3"
@@ -12815,6 +12873,10 @@
             "target": "Package",
             "version": "[2.0.0, )",
             "autoReferenced": true
+          },
+          "Newtonsoft.Json.Schema": {
+            "target": "Package",
+            "version": "[3.0.10, )"
           },
           "System.Linq.Dynamic.Core": {
             "target": "Package",

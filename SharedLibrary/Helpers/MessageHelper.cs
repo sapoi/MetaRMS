@@ -7,10 +7,6 @@ namespace SharedLibrary.Helpers
 {
     public static class MessageHepler
     {
-        public static Message Create1008()
-        {
-            return new Message(MessageTypeEnum.Error, 1008, new List<string>());
-        }
         public static Message Create1007()
         {
             return new Message(MessageTypeEnum.Error, 1007, new List<string>());

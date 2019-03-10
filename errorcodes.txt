@@ -1,12 +1,32 @@
     code    type    text with placeholders
 0001 APPLICATION INITIALIZATION
-            ERROR   JSON file is in incorrect format, please read again about page.
-            ERROR   Application name {applicationDescriptor.LoginApplicationName} already exists, please choose another.
-            ERROR   Application descriptor contains invalid attribute name \"DBId\"
-            ... dalsi errory app deskriptoru ...
-            ERROR   Email {mail} address is not valid, please choose another.
-            INFO    Application {applicationDescriptor.ApplicationName} was created successfully and login credentials were sent to email {email}.
-
+    0001    ERROR   JSON file with application descriptor is required.
+    0002    ERROR   {0}
+    0003    ERROR   Login application name {0} already exists, please choose another. (You can keep Application name the same, the conflict is only with Login application name.)
+    0004    ERROR   Each dataset name must be unique, but name {0} used {1} times.
+    0005    ERROR   Invalid name of dataset {0}. Names {1} can not be used.
+    0006    ERROR   Invalid name of dataset {0}. Names {number} can not be used.
+    0007    ERROR   Each dataset must contain at least one required attribute, but dataset {0} contains none.
+    0008    ERROR   Each attribute in dataset must have unique name, but in dataset {0} attribute name {1} is used {2} times.
+    0009    ERROR   Password attribute {0} must have its type set to "password".
+    0010    ERROR   Invalid reference in dataset {0} attribute {1} is of type {2}, but there is no dataset with such name.
+    0011    ERROR   Attribute {0} in dataset {1} is of type reference, but does not have a on delete action.
+    0012    ERROR   Attribute {0} in dataset {1} is of type system user dataset. Attributes of such type cannot have a on delete action set to cascade.
+    0013    ERROR   Attribute {0} in dataset {1} is of a basic type. Attributes of such type cannot have a on delete action set.
+    0014    ERROR   Password attribute {0} must be required.
+    0015    ERROR   Attribute {0} in dataset {1} cannot be of type "password".
+    0016    ERROR   Attribute {0} in dataset {1} cannot have value Safer set.
+    0017    ERROR   Attribute {0} in dataset {1} cannot have Min value greater than Max value.
+    0018    ERROR   Attribute {0} in dataset {1} cannot have Min value less than or equal to 0.
+    0019    ERROR   Attribute {0} in dataset {1} cannot have Max value less than or equal to 0.
+    0020    ERROR   Attribute {0} in dataset {1} cannot be of type "username".
+    0021    ERROR   There must be exactly one attribute of type "username" in dataset {0}, but {1} found.
+    0022    ERROR   Username attribute {0} in dataset {1} must be required.
+    0023    ERROR   Username attribute {0} in dataset {1} must be unique.
+    0024    ERROR   References cannot have Min property set and Required property set to flase, but attribute {0} in dataset {1} has so.
+    0025    ERROR   References with Required property set to true on Min property greater than 0 cannot have OnDeleteAction set to SetEmpty, but attribute {0} in dataset {1} has so.
+    0026    ERROR   Email address {0} is not valid, please choose another.
+    0027    INFO    Application {0} was created successfully and login credentials were sent to email {1}.
 
 1000 GENERAL APPLICATION
     1001    ERROR   Application name is required.

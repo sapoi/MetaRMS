@@ -1,16 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Net.Mail;
-using System.Xml.Serialization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.Sqlite;
 using Newtonsoft.Json;
-using SharedLibrary;
 using SharedLibrary.Descriptors;
 using SharedLibrary.Models;
 using SharedLibrary.Helpers;
@@ -18,139 +12,211 @@ using SharedLibrary.Enums;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
 using RazorWebApp.Repositories;
+using SharedLibrary.Structures;
+using Newtonsoft.Json.Linq;
 
 namespace RazorWebApp.Controllers
 {
     [Route("api/[controller]")]
     public class AppInitController : Controller
     {
-        private readonly DatabaseContext _context;
+        /// <summary>
+        /// Database context for repository.
+        /// </summary>
+        private readonly DatabaseContext context;
 
         public AppInitController(DatabaseContext context)
         {
-            _context = context;
+            this.context = context;
         }
+        /// <summary>
+        /// API endpoint for creating new application.
+        /// </summary>
+        /// <param name="email">Email address to send the login data to</param>
+        /// <param name="file">File containing application descriptor in JSON format</param>
+        /// <returns>Messages about action result</returns>
+        /// <response code="200">If application successfully created</response>
+        /// <response code="404">If input is not valid</response>
         [AllowAnonymous]
         [HttpPost]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
         public IActionResult Create(string email, IFormFile file)
         {
-            var stringFile = string.Empty;
+            // List of messages to return to the client
+            var messages = new List<Message>();
+
+            #region application descriptor validations
+
+            // File with JSON application descriptor is required
+            if (file == null)
+            {
+                messages.Add(new Message(MessageTypeEnum.Error, 
+                                         0001, 
+                                         new List<string>()));
+                return BadRequest(messages);
+            }
+
+            // Get JObject from input file
+            JObject applicationDescriptorJObject;
             using (var reader = new StreamReader(file.OpenReadStream()))
             {
-                stringFile = reader.ReadToEnd();
+                // Try to parse file to JObject - only valid JSON files are parsed
+                try 
+                {
+                    applicationDescriptorJObject = JObject.Parse(reader.ReadToEnd());
+                }
+                // If parsing was unsuccessfull, return error message containing location of error
+                catch (JsonReaderException e)
+                {
+                    messages.Add(new Message(MessageTypeEnum.Error, 
+                                         0002, 
+                                         new List<string>(){ e.Message }));
+                    return BadRequest(messages);
+                }
             }
-            ApplicationDescriptor applicationDescriptor;
-            try
-            {
-                applicationDescriptor = JsonConvert.DeserializeObject<ApplicationDescriptor>(stringFile);
-            }
-            catch
-            {
-                //TODO detekovat, kde je chyba
-                return BadRequest("JSON file is in incorrect format, please read again about page.");
-            }
-            // check if LoginApplicationName is unique
-            var applicationRepository = new ApplicationRepository(_context);
+            var appInitHelper = new AppInitHelper();
+
+            // With successfully parsed JSON file, validate it against schema
+            var schemaValidationMessages = appInitHelper.ValidateJSONAgainstSchema(applicationDescriptorJObject);
+            // If validation JSON is not valid return errors
+            if (schemaValidationMessages.Count != 0)
+                return BadRequest(schemaValidationMessages);
+            // Get ApplicationDescriptor class instance from JObject
+            var applicationDescriptor = applicationDescriptorJObject.ToObject<ApplicationDescriptor>();
+
+            // LoginApplicationName must be unique
+            var applicationRepository = new ApplicationRepository(context);
             var applicationModel = applicationRepository.GetByLoginApplicationName(applicationDescriptor.LoginApplicationName);
             if (applicationModel != null)
             {
-                //TODO error
-                //ModelState.AddModelError("ErrorCode", "001");
-                //return BadRequest(ModelState);
-                return BadRequest($"Application name {applicationDescriptor.LoginApplicationName} already exists, please choose another.");
+                messages.Add(new Message(MessageTypeEnum.Error, 
+                                         0003, 
+                                         new List<string>(){ applicationDescriptor.LoginApplicationName }));
             }
-            // check if no dataset atribute has name BDId
-            if (applicationDescriptor.Datasets.Any(d => d.Attributes.Any(a => a.Name == "DBId")))
-                return BadRequest($"Application descriptor contains invalid attribute name \"DBId\"");
-                //TODO otestovat
-            // add unique Id for each dataset
-            for (int i = 0; i < applicationDescriptor.Datasets.Count; i++)
+            // Validate datasets and attributes
+            messages.AddRange(appInitHelper.ValidateDescriptor(applicationDescriptor));
+
+            if (messages.Count != 0)
+                return BadRequest(messages);
+
+            #endregion
+
+            // Set default values to the application descriptor
+            appInitHelper.SetDefaultDescriptorValues(applicationDescriptor);
+
+            #region create new application
+
+            using (var transaction = context.Database.BeginTransaction())
             {
-                applicationDescriptor.Datasets[i].Id = i + 1;
-            }
-            // add id -1 to users dataset
-            applicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Id = (long)SystemDatasetsEnum.Users;
-            using (var transaction = _context.Database.BeginTransaction())
-            {
+                // Create new application and add it to the database
+                var serializedApplicationDescriptor = JsonConvert.SerializeObject(applicationDescriptor);
+                var newApplication = new ApplicationModel { 
+                    LoginApplicationName = applicationDescriptor.LoginApplicationName, 
+                    ApplicationDescriptorJSON = serializedApplicationDescriptor
+                    };
+                applicationRepository.Add(newApplication);
+
+                // Create new admin account for the application
+                // Random password 8 chars long
+                var newPassword = PasswordHelper.GenerateRandomPassword(8);
+                // Admin rights
+                var newRights = getAdminRights(newApplication, applicationDescriptor);
+                var rightsRepository = new RightsRepository(context);
+                rightsRepository.Add(newRights);
+                var newUser = new UserModel
+                {
+                    Application = newApplication,
+                    Password = PasswordHelper.ComputeHash(newPassword),
+                    Data = getDefaultAdminDataDictionary(applicationDescriptor.SystemDatasets.UsersDatasetDescriptor),
+                    Rights = newRights
+                };
+                var userRepository = new UserRepository(context);
+                userRepository.Add(newUser);
+
+                // Try to send login details to admin account to email from parametres
                 try
                 {
-                    // create new application and add it to DB
-                    string serializedApplicationDescriptor = JsonConvert.SerializeObject(applicationDescriptor);
-                    ApplicationModel newApplication = new ApplicationModel { 
-                        LoginApplicationName = applicationDescriptor.LoginApplicationName, 
-                        ApplicationDescriptorJSON = serializedApplicationDescriptor
-                        };
-                    applicationRepository.Add(newApplication);
-                    // _context.ApplicationDbSet.Add(newApplication);
-                    // create new admin account for new application and add it to DB
-                    string newPassword = PasswordHelper.GenerateRandomPassword(8);
-                    RightsModel newRights = getAdminRights(newApplication, applicationDescriptor);
-                    var rightsRepository = new RightsRepository(_context);
-                    rightsRepository.Add(newRights);
-                    // _context.RightsDbSet.Add(newRights);
-                    UserModel newUser = new UserModel
-                    {
-                        Application = newApplication,
-                        Password = PasswordHelper.ComputeHash(newPassword),
-                        Data = getDefaultAdminDataDictionary(applicationDescriptor.SystemDatasets.UsersDatasetDescriptor),
-                        Rights = newRights
-                    };
-                    var userRepository = new UserRepository(_context);
-                    userRepository.Add(newUser);
-                    // _context.UserDbSet.Add(newUser);
-                    // try to send login details to admin account to email from parametres
-                    sendEmailWithCredentials(email, newApplication.LoginApplicationName, newPassword);
-                    transaction.Commit();
+                    sendEmailWithCredentials(email, applicationDescriptor.ApplicationName, newApplication.LoginApplicationName, newPassword);
                 }
                 catch
                 {
-                    return BadRequest("Email address is not valid, please choose another.");
+                    messages.Add(new Message(MessageTypeEnum.Error, 
+                                0026, 
+                                new List<string>(){ email }));
+                    return BadRequest(messages);
                 }
+
+                // Commit all 
+                transaction.Commit();
             }
-            // if everythong was ok, save changes to DB and return Ok
-            _context.SaveChangesAsync();
-            return Ok($"Application {applicationDescriptor.ApplicationName} was created successfully and login credentials were sent to email {email}.");
+            // If everythong was ok, save changes to the database
+            context.SaveChangesAsync();
+
+            #endregion
+
+            messages.Add(new Message(MessageTypeEnum.Error, 
+                                0027, 
+                                new List<string>(){ applicationDescriptor.ApplicationName, email }));
+            return Ok(messages);
         }
-        // creates empty user data based on application descriptor
+        /// <summary>
+        /// Creates a JSON formatted string of admin data containing username admin and wit all the other attributes blank
+        /// </summary>
+        /// <param name="usersDatasetDescriptor">User dataset descriptor of the new application</param>
+        /// <returns>Default user data for admin user</returns>
         string getDefaultAdminDataDictionary(UsersDatasetDescriptor usersDatasetDescriptor)
         {
+            // Build a string based on system user dataset descriptor
             StringBuilder sb = new StringBuilder("{");
             foreach (var attribute in usersDatasetDescriptor.Attributes)
             {
-                // [] bacause it is an empty list
-                // if attribute type is usermane, set value to "admin"
+                // If attribute type is usermane, set value to "admin"
                 if (attribute.Type == "username")
                     sb.Append($"\"{attribute.Name}\":[\"admin\"],");
-                // othewise keep the value list empty
+                // Othewise keep the value list empty
                 else
                     sb.Append($"\"{attribute.Name}\":[],");
             }
-            // last comma is not a problem for parsing
+            // Last comma is not a problem for parsing
             sb.Append("}");
             return sb.ToString();
         }
-        RightsModel getAdminRights(ApplicationModel appModel, ApplicationDescriptor appDescriptor)
+        /// <summary>
+        /// Returns default rights for admin
+        /// </summary>
+        /// <param name="applicationModel">Model of application the rights belongs to</param>
+        /// <param name="applicationDescriptor">Descriptor of the application</param>
+        /// <returns>Admin RightsModel</returns>
+        RightsModel getAdminRights(ApplicationModel applicationModel, ApplicationDescriptor applicationDescriptor)
         {
-            RightsModel rights = new RightsModel();
-            rights.Application = appModel;
+            var rights = new RightsModel();
+            rights.Application = applicationModel;
             rights.Name = "admin";
 
+            // Full CRUD rights for all datasets
             Dictionary<long, RightsEnum> rightsDict = new Dictionary<long, RightsEnum>();
-            // key -1 is representing table users
             rightsDict[(long)SystemDatasetsEnum.Users] = RightsEnum.CRUD;
-            // key -2 is representing table rights
             rightsDict[(long)SystemDatasetsEnum.Rights] = RightsEnum.CRUD;
-            // positive integers are representing datasets
-            foreach (var dataset in appDescriptor.Datasets)
+            foreach (var dataset in applicationDescriptor.Datasets)
             {
                 rightsDict[dataset.Id] = RightsEnum.CRUD;
             }
-            // serialize rights to JSON
+
+            // Serialize rights to JSON
             rights.Data = JsonConvert.SerializeObject(rightsDict);
             return rights;
         }
-        void sendEmailWithCredentials(string email, string loginApplicationName, string password)
+        /// <summary>
+        /// Sends confirmation email about application creation to provided email address
+        /// </summary>
+        /// <param name="email">Email address to end the email to</param>
+        /// <param name="applicationName">Name of the application</param>
+        /// <param name="loginApplicationName">Login name of the application</param>
+        /// <param name="password">Admin password</param>
+        void sendEmailWithCredentials(string email, string applicationName, string loginApplicationName, string password)
         {
+            // Create SMTP client
             var client = new SmtpClient
                 {
                     Host = "smtp.gmail.com",
@@ -161,11 +227,14 @@ namespace RazorWebApp.Controllers
                     Credentials = new NetworkCredential("sapoiapps@gmail.com", "sapoisapoi")
                 };
 
+            // Create message
             MailMessage mailMessage = new MailMessage();
             mailMessage.From = new MailAddress("sapoiapps@gmail.com");
             mailMessage.To.Add(email);
             mailMessage.Body = $"Application Name: {loginApplicationName} \nUsername: admin \nPassword: {password}";
-            mailMessage.Subject = "Admin login credentials";
+            mailMessage.Subject = $"{applicationName} admin login credentials";
+
+            // Send email
             client.Send(mailMessage);
         }
     }

@@ -2,5 +2,5 @@
 @model List<Message>
 
 @foreach (var message in Model) {
-    <span>@message.GetMessage()</span>
+    <div><b>@message.MessageType:</b> @message.GetMessage()</div>
 }

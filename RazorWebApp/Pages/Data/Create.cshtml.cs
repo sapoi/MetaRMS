@@ -237,7 +237,7 @@ namespace RazorWebApp.Pages.Data
             catch (JsonSerializationException e)
             {
                 // In case of JSON parsing error, create server error message
-                messages.Add(MessageHepler.Create1008());
+                messages.Add(MessageHepler.Create1007());
                 Logger.LogExceptionToConsole(e);
             }
 

@@ -14,7 +14,7 @@
 <div class="container-fluid logged-page-content">
     <div class="col-sm-12">
         <!-- Messages -->
-        @if (Model.Messages != null || Model.Messages.Count != 0){
+        @if (Model.Messages != null && Model.Messages.Count != 0){
             Html.RenderPartial("Shared/_MessagesPartial", Model.Messages);
         }
         

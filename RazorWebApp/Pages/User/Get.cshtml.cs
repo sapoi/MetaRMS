@@ -150,7 +150,7 @@ namespace RazorWebApp.Pages.User
                 catch (JsonSerializationException e)
                 {
                     // In case of JSON parsing error, create server error message
-                    Messages.Add(MessageHepler.Create1008());
+                    Messages.Add(MessageHepler.Create1007());
                     Logger.LogExceptionToConsole(e);
                 }       
             }
@@ -210,7 +210,7 @@ namespace RazorWebApp.Pages.User
             catch (JsonSerializationException e)
             {
                 // In case of JSON parsing error, create server error message
-                messages.Add(MessageHepler.Create1008());
+                messages.Add(MessageHepler.Create1007());
                 Logger.LogExceptionToConsole(e);
             }
             
@@ -266,7 +266,7 @@ namespace RazorWebApp.Pages.User
             catch (JsonSerializationException e)
             {
                 // In case of JSON parsing error, create server error message
-                messages.Add(MessageHepler.Create1008());
+                messages.Add(MessageHepler.Create1007());
                 Logger.LogExceptionToConsole(e);
             }
             
