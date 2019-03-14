@@ -45,7 +45,6 @@ namespace SharedLibrary.Descriptors
         /// <value>
         /// If Unique value is set to true, the attribute value is required to be unique within the dataset.
         /// </value>
-        //TODO not yet supported in code
         public bool? Unique { get; set; }
         /// <summary>
         /// Safer property.
@@ -62,6 +61,7 @@ namespace SharedLibrary.Descriptors
         /// <value>
         /// For simple data type attributes, Min value means for numeric types (int, float, year) minimal value
         /// and for text types (text, string, username, password) means minimal string length.
+        /// For reference types it means minimum of references that the attribute must contain.
         /// </value>
         public int? Min { get; set; }
         /// <summary>
@@ -73,9 +73,13 @@ namespace SharedLibrary.Descriptors
         /// For reference types it means maximum of references that the attribute can contain.
         /// </value>
         public int? Max { get; set; }
-
-
-
+        /// <summary>
+        /// OnDeleteAction property.
+        /// </summary>
+        /// <value>
+        /// This value is valie only for attributes of reference type. For these attributes this value tells what should
+        /// happen when model referenced in that attribute is deleted. The value is from OnDeleteActionEnum.
+        /// </value>
         public OnDeleteActionEnum OnDeleteAction { get; set; }
     }
 }

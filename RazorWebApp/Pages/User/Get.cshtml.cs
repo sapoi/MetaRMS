@@ -112,7 +112,7 @@ namespace RazorWebApp.Pages.User
             }
             // Rights
             var rights = await AccessHelper.GetUserRights(cache, accountService, token);
-            UsersRights = AccessHelper.GetRights(rights, (long)SystemDatasetsEnum.Users);
+            UsersRights = AuthorizationHelper.GetRights(rights, (long)SystemDatasetsEnum.Users);
             // Menu data
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
             if (UsersRights == null || MenuData == null)
@@ -129,7 +129,7 @@ namespace RazorWebApp.Pages.User
             if (AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Users, RightsEnum.R))
             {
                 // Data request to the server via userService
-                var response = await userService.GetAll(token.Value);
+                var response = await userService.GetAll(token);
                 try
                 {
                     // If response status code if successfull, try parse data
@@ -181,14 +181,16 @@ namespace RazorWebApp.Pages.User
             {
                 // Set messages to cookie
                 TempData["Messages"] = JsonConvert.SerializeObject(
-                    new List<Message>(){ new Message(MessageTypeEnum.Error, 
-                                                     3010, 
-                                                     new List<string>())});
+                    new List<Message>(){ 
+                        new Message(MessageTypeEnum.Error, 
+                                    3010, 
+                                    new List<string>())
+                });
                 return await OnGetAsync();
             }
             
             // Reset password request to the server via userService
-            var response = await userService.ResetPasswordById(dataId, token.Value);
+            var response = await userService.ResetPasswordById(dataId, token);
             var messages = new List<Message>();
             try
             {
@@ -237,14 +239,16 @@ namespace RazorWebApp.Pages.User
             {
                 // Set messages to cookie
                 TempData["Messages"] = JsonConvert.SerializeObject(
-                    new List<Message>(){ new Message(MessageTypeEnum.Error, 
-                                                     3010, 
-                                                     new List<string>())});
+                    new List<Message>(){ 
+                        new Message(MessageTypeEnum.Error, 
+                                    3010, 
+                                    new List<string>())
+                    });
                 return await OnGetAsync();
             }
             
             // Delete request to the server via userService
-            var response = await userService.DeleteById(dataId, token.Value);
+            var response = await userService.DeleteById(dataId, token);
             var messages = new List<Message>();
             try
             {

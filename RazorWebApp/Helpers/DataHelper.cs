@@ -11,28 +11,37 @@ using SharedLibrary.Models;
 namespace SharedLibrary.Helpers
 {
     // backend
+    /// <summary>
+    /// 
+    /// </summary>
     public class DataHelper
     {
         List<(string Name, string Type)> referenceIndexTypeTuple;
+        /// <summary>
+        /// 
+        /// </summary>
         ApplicationModel applicationModel;
+        /// <summary>
+        /// Cache for reading and storing references
+        /// </summary>
         ReferenceCache referenceCache;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="databaseContext"></param>
+        /// <param name="applicationModel"></param>
+        /// <param name="datasetId"></param>
         public DataHelper(DatabaseContext databaseContext, ApplicationModel applicationModel, long datasetId)
         {
             this.applicationModel = applicationModel;
-            // this.databaseContext = databaseContext;
             this.referenceCache = new ReferenceCache(databaseContext, applicationModel);
-            // find attributes with references
+            // Find attributes with references
             setReferencesIndices(datasetId);
         }
         public void PrepareOneRowForClient(IBaseModelWithApplicationAndData model)
         {
             var preparedDictionary = model.DataDictionary;
             translateIDToText(preparedDictionary);
-            // foreach (var item in model.DataDictionary)
-            // {
-            //     if (applicationModel.ApplicationDescriptor. item.Key)
-            // }
             model.Data = JsonConvert.SerializeObject(preparedDictionary);
         }
         void setReferencesIndices(long datasetId)
@@ -65,7 +74,7 @@ namespace SharedLibrary.Helpers
                     if (long.TryParse(stringId.ToString(), out id))
                     {
                         string value = "";
-                        value += referenceCache.getTextForReference(attribute.Type, id);
+                        value += referenceCache.GetTextForReference(attribute.Type, id);
                         row[attribute.Name].Add( new Tuple<string, string>(id.ToString(), value) );
                         if (!stringId.Equals(lastId))
                             value += ", ";

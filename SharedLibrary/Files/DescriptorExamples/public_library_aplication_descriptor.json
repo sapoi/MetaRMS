@@ -1,0 +1,289 @@
+{
+    "ApplicationName": "Kenmore Municipal library",
+    "LoginApplicationName": "kenmore_municipal_library",
+    "DefaultLanguage": "en",
+    "SystemDatasets": {
+        "UsersDatasetDescriptor": {
+            "Name": "Library emploees",
+            "Description": "This dataset contains all employees of the Kenmore Municipal library including their position.",
+            "PasswordAttribute": {
+                "Name": "Password",
+                "Description": "Employee's password. It is required that the password contains lower- and upper-case letter and number.",
+                "Type": "password",
+                "Required": true,
+                "Safer": true,
+                "Min": 8,
+                "Max": 20
+            },
+            "Attributes": [
+                {
+                    "Name": "Username",
+                    "Description": "Login username",
+                    "Type": "username",
+                    "Required": true,
+                    "Unique": true
+                },
+                {
+                    "Name": "Position",
+                    "Description": "Users position at the library.",
+                    "Type": "Positions",
+                    "OnDeleteAction": "protect"
+                },
+                {
+                    "Name": "Boss",
+                    "Description": "Employee's boss and person responsible for checking responsibilities.",
+                    "Type": "Library emploees",
+                    "Max": 1,
+                    "OnDeleteAction": "protect"
+                }
+            ]
+        }
+    },
+    "Datasets": [
+        {
+            "Name": "Borrowings",
+            "Description": "This dataset contains borrowings of books to a reader. One borrowing can contain at most 10 books and should last for 1 month (should enad at the same date as started, but one month later).",
+            "Attributes": [
+                {
+                    "Name": "Reader",
+                    "Description": "Reader borrowing the books. If a person does not have a reader account yet, create it first at the Readers dataset.",
+                    "Type": "Reader",
+                    "Required": true,
+                    "Min": 1,
+                    "Max": 1,
+                    "OnDeleteAction": "cascade"
+                },
+                {
+                    "Name": "State of the borrowing",
+                    "Type": "Borrowing states",
+                    "Required": true,
+                    "OnDeleteAction": "protect"
+                },
+                {
+                    "Name": "Books",
+                    "Description": "At most 10 books the reader is borrowing. If reader wants to borrow more books, new borrowing has to be created.",
+                    "Type": "Books",
+                    "Required": true,
+                    "Min": 1,
+                    "Max": 10,
+                    "OnDeleteAction": "cascade"
+                },
+                {
+                    "Name": "Date of borrowing",
+                    "Description": "Date when the borrowing took place - it should always be today.",
+                    "Type": "datetime",
+                    "Required": true
+                },
+                {
+                    "Name": "Expected date of return",
+                    "Description": "Date when the books should be returned - it should always a month later.",
+                    "Type": "date",
+                    "Required": true
+                },
+                {
+                    "Name": "Date of return",
+                    "Description": "Date when the books were really returned.",
+                    "Type": "date"
+                }
+            ]
+        },
+        {
+            "Name": "Readers",
+            "Description": "This dataset contains readers with account in the library.",
+            "Attributes": [
+                {
+                    "Name": "Full name",
+                    "Description": "Reader's full name.",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Library ID",
+                    "Description": "Reader's library ID.",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Birth date",
+                    "Description": "Birth date ot the reader.",
+                    "Type": "date",
+                    "Required": true
+                },
+                {
+                    "Name": "Library ID valid until",
+                    "Description": "Date until when the library ID is valid.",
+                    "Type": "date",
+                    "Required": true
+                },
+                {
+                    "Name": "Email address",
+                    "Description": "Reader's email address.",
+                    "Type": "email"
+                },
+                {
+                    "Name": "Telephone",
+                    "Description": "Reader's telephone.",
+                    "Type": "tel"
+                }
+            ]
+        },
+        {
+            "Name": "Books",
+            "Description": "This dataset contains books available in the library.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Description": "Name of the book.",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Authors",
+                    "Description": "Book authors.",
+                    "Type": "Authors",
+                    "Required": true,
+                    "Min": 1,
+                    "OnDeleteAction": "protect"
+                },
+                {
+                    "Name": "Location",
+                    "Description": "Location of the book in the library. Value should be in format <section abbreviation>-<row>, for example SCIE-45 or ROMA-12",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Year of publication",
+                    "Type": "year",
+                    "Required": true
+                },
+                {
+                    "Name": "Genres",
+                    "Type": "Genres",
+                    "OnDeleteAction": "setEmpty"
+                },
+                {
+                    "Name": "Original price",
+                    "Type": "float",
+                    "Required": true
+                }
+            ]
+        },
+        {
+            "Name": "Authors",
+            "Description": "This dataset contains authors of books in the library.",
+            "Attributes": [
+                {
+                    "Name": "Full name",
+                    "Description": "Reader's full name.",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Birth date",
+                    "Description": "Birth date ot the reader.",
+                    "Type": "date",
+                    "Required": true
+                },
+                {
+                    "Name": "Genres",
+                    "Description": "Genres in which the author belongs.",
+                    "Type": "Genres"
+                }
+            ]
+        },
+        {
+            "Name": "Payroll",
+            "Description": "This dataset contains employees payroll.",
+            "Attributes": [
+                {
+                    "Name": "Employee",
+                    "Type": "Library employees",
+                    "Required": true,
+                    "OnDeleteAction": "cascade"
+                },
+                {
+                    "Name": "Start date",
+                    "Description": "Date when the employee has started the job.",
+                    "Type": "date",
+                    "Required": true
+                },
+                {
+                    "Name": "Wage",
+                    "Description": "Employee's wage.",
+                    "Type": "float",
+                    "Required": true
+                },
+                {
+                    "Name": "Wage units",
+                    "Type": "Wage units",
+                    "Required": true,
+                    "OnDeleteAction": "protect"
+                }
+            ]
+        },
+        {
+            "Name": "Genres",
+            "Description": "This dataset contains enumeration of book genres.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Description": "Name of the genre.",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Subgenres",
+                    "Description": "List of genre subgenres.",
+                    "Type": "Genre",
+                    "OnDeleteAction": "setEmpty"
+                }
+            ]
+        },
+        {
+            "Name": "Borrowing states",
+            "Description": "This dataset contains enumeration of borrowing states.",
+            "Attributes": [
+                {
+                    "Name": "State",
+                    "Description": "State of the borrowing.",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Color",
+                    "Description": "Color of the state.",
+                    "Type": "color",
+                    "Required": true
+                }
+            ]
+        },
+        {
+            "Name": "Positions",
+            "Description": "Positions of employees in the library.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Description": "Name of the position.",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Responsibilities",
+                    "Description": "Employee's responsibilities at the library.",
+                    "Type": "text"
+                }
+            ]
+        },
+        {
+            "Name": "Wage units",
+            "Description": "This dataset contains enumeration of wage units.",
+            "Attributes": [
+                {
+                    "Name": "Wage unit",
+                    "Type": "string",
+                    "Required": true
+                }
+            ]
+        }
+    ]
+}

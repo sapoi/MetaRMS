@@ -5,13 +5,32 @@ namespace RazorWebApp
 {
     public class DatabaseContext : DbContext
     {
+        /// <summary>
+        /// Database set representing applications table.
+        /// </summary>
+        /// <value>ApplicationModel DbSet</value>
         public DbSet<ApplicationModel> ApplicationDbSet { get; set; }
+        /// <summary>
+        /// Database set representing users table.
+        /// </summary>
+        /// <value>UserModel DbSet</value>
         public DbSet<UserModel> UserDbSet { get; set; }
+        /// <summary>
+        /// Database set representing data table.
+        /// </summary>
+        /// <value>DataModel DbSet</value>
         public DbSet<DataModel> DataDbSet { get; set; }
+        /// <summary>
+        /// Database set representing rights table.
+        /// </summary>
+        /// <value>RightsModel DbSet</value>
         public DbSet<RightsModel> RightsDbSet { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
-
+        /// <summary>
+        /// This method sets delete behavior to each model.
+        /// </summary>
+        /// <param name="modelBuilder">ModelBuilder to use</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // OnDelete ApplicationModel

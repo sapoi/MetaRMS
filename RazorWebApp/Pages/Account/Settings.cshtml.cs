@@ -92,7 +92,7 @@ namespace RazorWebApp.Pages.Account
                 return Page();
             }
             var response = await _accountService.ChangePassword(PasswordChangeStructure, 
-                                                                token.Value);
+                                                                token);
             string message = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             if (!response.IsSuccessStatusCode)

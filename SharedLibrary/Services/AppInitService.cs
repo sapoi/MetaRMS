@@ -18,12 +18,21 @@ namespace SharedLibrary.Services
         {
             client.BaseAddress = new Uri(baseAddress + "appinit");
         }
-
+        /// <summary>
+        /// This method sends HTTP POST request with email and file containing application descriptor
+        /// in JSON format to the server to create a new application.
+        /// </summary>
+        /// <param name="email">Email to sent the login credentials to</param>
+        /// <param name="file">File with application descriptor in JSON format</param>
+        /// <returns>Response from the server.</returns>
         public async Task<HttpResponseMessage> InitializeApplication(string email, IFormFile file)
         {
+            // Create new empty stream
             Stream stream = new MemoryStream();
+            // If file is not empty, read into the stream
             if (file != null)
                 stream = file.OpenReadStream();
+            // Create multipart content
             var data = new MultipartFormDataContent
             {
                 {new StringContent(email), "email"},

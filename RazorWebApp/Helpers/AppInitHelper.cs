@@ -83,7 +83,7 @@ namespace RazorWebApp.Helpers
             mailMessage.From = new MailAddress("sapoiapps@gmail.com");
             mailMessage.To.Add(email);
             mailMessage.Body = $"Application Name: {loginApplicationName} \nUsername: admin \nPassword: {password}";
-            mailMessage.Subject = $"{applicationName} admin login credentials";
+            mailMessage.Subject = $"MetaRMS - {applicationName} admin login credentials";
 
             // Send email
             client.Send(mailMessage);

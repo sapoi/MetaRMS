@@ -86,12 +86,12 @@ namespace RazorWebApp.Controllers.User
 
             // Authentication
             var controllerHelper = new ControllerHelper(context);
-            var requestUserModel = controllerHelper.Authenticate(HttpContext.User.Identity as ClaimsIdentity);
-            if (requestUserModel == null)
+            var authUserModel = controllerHelper.Authenticate(HttpContext.User.Identity as ClaimsIdentity);
+            if (authUserModel == null)
                 return Unauthorized();
 
             // Authorization
-            if (!AuthorizationHelper.IsAuthorized(requestUserModel,(long)SystemDatasetsEnum.Users, RightsEnum.R))
+            if (!AuthorizationHelper.IsAuthorized(authUserModel,(long)SystemDatasetsEnum.Users, RightsEnum.R))
                 return Forbid();
 
             // Get data from database
@@ -104,6 +104,10 @@ namespace RazorWebApp.Controllers.User
                                                   new List<string>(){ id.ToString() }));
                 return BadRequest(messages);
             }
+
+            // Prepare data for client
+            DataHelper dataHelper = new DataHelper(context, authUserModel.Application, (long)SystemDatasetsEnum.Users);
+            dataHelper.PrepareOneRowForClient(userModel);
 
             return Ok(userModel);
         }

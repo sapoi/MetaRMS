@@ -92,10 +92,15 @@ namespace RazorWebApp.Pages.Rights
                 return RedirectToPage("/Errors/ServerError");
             }
             if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Rights, RightsEnum.CRU))
-                return RedirectToPage("/Rights/Get", new { messages = new List<Message>() {
-                    new Message(MessageTypeEnum.Error, 
-                                4010, 
-                                new List<string>())}});
+            {
+                TempData["Messages"] = JsonConvert.SerializeObject(
+                    new List<Message>() {
+                        new Message(MessageTypeEnum.Error, 
+                                    4010, 
+                                    new List<string>())
+                    });
+                return RedirectToPage("/Rights/Get");
+            }
 
             # region PAGE DATA PREPARATION
 
@@ -137,10 +142,13 @@ namespace RazorWebApp.Pages.Rights
             // If user is not authorized to create, add message and redirect to get page
             if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Rights, RightsEnum.CRU))
             {
-                return RedirectToPage("/Rights/Get", new { messages = new List<Message>() {
-                    new Message(MessageTypeEnum.Error, 
-                                4010, 
-                                new List<string>())}});
+                TempData["Messages"] = JsonConvert.SerializeObject(
+                    new List<Message>() {
+                        new Message(MessageTypeEnum.Error, 
+                                    4010, 
+                                    new List<string>())
+                    });
+                return RedirectToPage("/Rights/Get");
             }
 
             // Prepare new RightsModel
@@ -149,7 +157,7 @@ namespace RazorWebApp.Pages.Rights
                                                             Data = JsonConvert.SerializeObject(NewRightsDictionary) };
             
             // Create request to the server via rightsService
-            var response = await rightsService.Create(newRightsModel, token.Value);
+            var response = await rightsService.Create(newRightsModel, token);
             var messages = new List<Message>();
             try
             {

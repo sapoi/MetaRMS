@@ -142,7 +142,7 @@ namespace RazorWebApp.Pages.Data
             // Active dataset descriptor
             ActiveDatasetDescriptor = AccessHelper.GetActiveDatasetDescriptor(ApplicationDescriptor, rights, datasetName);
             // And its rights
-            ActiveDatasetRights = AccessHelper.GetRights(rights, ActiveDatasetDescriptor.Id);
+            ActiveDatasetRights = AuthorizationHelper.GetRights(rights, ActiveDatasetDescriptor.Id);
             if (ActiveDatasetDescriptor == null || ActiveDatasetRights == null || MenuData == null)
             {
                 Logger.LogToConsole($"ReadAuthorizedDatasets, ActiveDatasetDescriptor, ActiveDatasetRights or MenuData failed loading for user with token {token.Value}.");
@@ -157,7 +157,7 @@ namespace RazorWebApp.Pages.Data
             if (AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.R))
             {
                 // Data request to the server via dataService
-                var response = await dataService.GetAll(ActiveDatasetDescriptor.Id, token.Value);
+                var response = await dataService.GetAll(ActiveDatasetDescriptor.Id, token);
                 try
                 {
                     // If response status code if successfull, try parse data
@@ -232,14 +232,16 @@ namespace RazorWebApp.Pages.Data
             {
                 // Set messages to cookie
                 TempData["Messages"] = JsonConvert.SerializeObject(
-                    new List<Message>(){ new Message(MessageTypeEnum.Error, 
-                                                     2008, 
-                                                     new List<string>(){datasetName})});
+                    new List<Message>(){ 
+                        new Message(MessageTypeEnum.Error, 
+                                    2008, 
+                                    new List<string>(){datasetName})
+                    });
                 return await OnGetAsync();
             }
 
             // Delete request to the server via rightsService
-            var response = await dataService.DeleteById(ActiveDatasetDescriptor.Id, dataId, token.Value);
+            var response = await dataService.DeleteById(ActiveDatasetDescriptor.Id, dataId, token);
             var messages = new List<Message>();
             try
             {

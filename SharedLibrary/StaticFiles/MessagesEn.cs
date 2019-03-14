@@ -67,7 +67,7 @@ namespace SharedLibrary.StaticFiles
             {3005, "User {0} deleted successfully."},
             {3006, "No user with id {0} found."},
             {3007, "User {0} edited successfully."},
-            {3008, "User {0} password reset successfully to {1}."},
+            {3008, "User {0} password reset successfully to {0}."},
             {3009, "You are not allowed to read users."},
             {3010, "You are not allowed to delete users."},
             {3011, "You are not allowed to create users."},
@@ -109,7 +109,10 @@ namespace SharedLibrary.StaticFiles
             {6011, "Rights value for dataset {0} is missing."},
             {6012, "Rights value for dataset {0} is in a incorrect format, number between 0 and 4 expected, but {1} received."},
             {6013, "If dataset {0} has read rights, dataset {1} also must have read rights."},
-            {6014, "Recieved application id {0} does not correspond to application id {1} of the authorized user."}
+            {6014, "Recieved application id {0} does not correspond to application id {1} of the authorized user."},
+            {6015, "Invalid type {0} for attribute {1}. {0} is not a reference type."},
+            {6016, "References must be integer numbers, but for attribute {0} value {1} was received."},
+            {6017, "Invalid reference {0} for attribute {1}, no such id in the database."}
         };
     }
 }

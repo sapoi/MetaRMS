@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.Models;
+using SharedLibrary.Structures;
 
 namespace SharedLibrary.Services
 {
@@ -12,12 +13,12 @@ namespace SharedLibrary.Services
     /// </summary>
     public interface IUserService  
     {           
-        Task<HttpResponseMessage> GetAll(string token);
-        Task<HttpResponseMessage> GetById(long id, string token);
-        Task<HttpResponseMessage> DeleteById(long id, string token);
-        Task<HttpResponseMessage> Put(UserModel userModelToPut, string token);
-        Task<HttpResponseMessage> Create(UserModel newUserModel, string token);
-        Task<HttpResponseMessage> ResetPasswordById(long id, string token);
+        Task<HttpResponseMessage> GetAll(JWTToken token);
+        Task<HttpResponseMessage> GetById(long userId, JWTToken token);
+        Task<HttpResponseMessage> DeleteById(long userId, JWTToken token);
+        Task<HttpResponseMessage> Put(UserModel userModel, JWTToken token);
+        Task<HttpResponseMessage> Create(UserModel userModel, JWTToken token);
+        Task<HttpResponseMessage> ResetPasswordById(long userId, JWTToken token);
 
     }
 }

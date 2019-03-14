@@ -131,10 +131,15 @@ namespace RazorWebApp.Pages.Data
 
             // Authorization
             if (!AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.CRU))
-                return RedirectToPage("/Data/Get", new { messages = new List<Message>() {
-                    new Message(MessageTypeEnum.Error, 
-                                2009, 
-                                new List<string>(){datasetName})}});
+            {
+                TempData["Messages"] = JsonConvert.SerializeObject(
+                    new List<Message>() {
+                        new Message(MessageTypeEnum.Error, 
+                                    2010, 
+                                    new List<string>(){datasetName})
+                    });
+                return RedirectToPage("/Data/Get");
+            }
 
             # region PAGE DATA PREPARATION
 
@@ -147,7 +152,7 @@ namespace RazorWebApp.Pages.Data
             foreach (var attribute in ActiveDatasetDescriptor.Attributes)
                 NewDataDictionary.Add(attribute.Name, new List<string>());
             // SelectData
-            DataLoadingHelper dlh = new DataLoadingHelper();
+            HTMLSelectHelper dlh = new HTMLSelectHelper();
             SelectData = await dlh.FillSelectData(ApplicationDescriptor, 
                                                     ActiveDatasetDescriptor.Attributes, 
                                                     userService, 
@@ -193,15 +198,18 @@ namespace RazorWebApp.Pages.Data
             // Authorization
             if (!AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.CRU))
             {
-                return RedirectToPage("/Data/Get", new { messages = new List<Message>() {
-                    new Message(MessageTypeEnum.Error, 
-                                2009, 
-                                new List<string>(){DatasetName})}});
+                TempData["Messages"] = JsonConvert.SerializeObject(
+                    new List<Message>() {
+                        new Message(MessageTypeEnum.Error, 
+                                    2009, 
+                                    new List<string>(){DatasetName})
+                    });
+                return RedirectToPage("/Data/Get");
             }
 
             // Prepare new data model
             var validationHelper = new ValidationHelper();
-            validationHelper.ValidateValueList(NewDataDictionary, ActiveDatasetDescriptor.Attributes);
+            validationHelper.ValidateDataDictionary(NewDataDictionary, ActiveDatasetDescriptor.Attributes);
             var newDataModel = new DataModel(){
                 ApplicationId = token.ApplicationId, 
                 DatasetId = ActiveDatasetDescriptor.Id,
@@ -209,7 +217,7 @@ namespace RazorWebApp.Pages.Data
             };
 
             // Create request to the server via rightsService
-            var response = await dataService.Create(newDataModel, token.Value);
+            var response = await dataService.Create(newDataModel, token);
             var messages = new List<Message>();
             try
             {
@@ -246,7 +254,7 @@ namespace RazorWebApp.Pages.Data
             // Read authorized datasets
             // ReadAuthorizedDatasets = AccessHelper.GetReadAuthorizedDatasets(ApplicationDescriptor, rights);
             // SelectData
-            DataLoadingHelper dlh = new DataLoadingHelper();
+            HTMLSelectHelper dlh = new HTMLSelectHelper();
             SelectData = await dlh.FillSelectData(ApplicationDescriptor, 
                                                     ActiveDatasetDescriptor.Attributes, 
                                                     userService, 

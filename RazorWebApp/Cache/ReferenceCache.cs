@@ -1,51 +1,53 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Memory;
-using Newtonsoft.Json;
 using RazorWebApp.Repositories;
 using SharedLibrary.Descriptors;
 using SharedLibrary.Enums;
 using SharedLibrary.Models;
-using SharedLibrary.Services;
-using static SharedLibrary.Structures.JWTToken;
 
 namespace RazorWebApp.Cache
 {
     public class ReferenceCache
     {
-        Dictionary<string, Dictionary<long, string>> _referenceCache;
-        DatabaseContext _context;
-        ApplicationModel _application;
-        public ReferenceCache(DatabaseContext context, ApplicationModel application)
+        Dictionary<string, Dictionary<long, string>> referenceCache;
+        DatabaseContext context;
+        ApplicationModel applicationModel;
+        public ReferenceCache(DatabaseContext context, ApplicationModel applicationModel)
         {
-            _referenceCache = new Dictionary<string, Dictionary<long, string>>();
-            _context = context;
-            _application = application;
+            this.referenceCache = new Dictionary<string, Dictionary<long, string>>();
+            this.context = context;
+            this.applicationModel = applicationModel;
         }
-        public string getTextForReference(string type, long id, int level = 0)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="id"></param>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        public string GetTextForReference(string type, long id, int level = 0)
         {
-            // if text is already in cache, just return it
-            if (_referenceCache.ContainsKey(type) && _referenceCache[type].ContainsKey(id))
-                return _referenceCache[type][id];
-            // otherwise load it into cache and return it
+            // If text is already in cache, just return it
+            if (referenceCache.ContainsKey(type) && referenceCache[type].ContainsKey(id))
+                return referenceCache[type][id];
+            // Otherwise load it into cache and return it
             string value = "";
             bool found = false;
-            if (type == _application.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name)
+            if (type == applicationModel.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name)
             {
-                UserRepository userRepository = new UserRepository(_context);
+                UserRepository userRepository = new UserRepository(context);
                 UserModel userModel = userRepository.GetById(id);
                 found = true;
                 value = userModel.GetUsername();
             }
             else
             {
-                DataRepository dataRepository = new DataRepository(_context);
+                DataRepository dataRepository = new DataRepository(context);
                 DataModel dataModel = dataRepository.GetById(id);
-                DatasetDescriptor datasetDescriptor = _application.ApplicationDescriptor.Datasets.Where(d => d.Name == type).FirstOrDefault();
+                DatasetDescriptor datasetDescriptor = applicationModel.ApplicationDescriptor.Datasets.Where(d => d.Name == type).FirstOrDefault();
                 if (datasetDescriptor == null)
-                    throw new Exception($"[ERROR]: Dataset {type} not in application {_application.LoginApplicationName} with id {_application.Id}.\n");
+                    throw new Exception($"[ERROR]: Dataset {type} not in application {applicationModel.LoginApplicationName} with id {applicationModel.Id}.\n");
                 string text = "";
                 List<AttributeDescriptor> attributeDescriptors = new List<AttributeDescriptor>();
                 for (int i = 0; i < Math.Min(3, datasetDescriptor.Attributes.Count); i++)
@@ -60,7 +62,7 @@ namespace RazorWebApp.Cache
                         long dataId;
                         bool isReference = !AttributeType.Types.Contains(attributeDescriptor.Type);
                         if (isReference && level <= 3 && long.TryParse(data[j].ToString(), out dataId))
-                            text += "(" + getTextForReference(attributeDescriptor.Type, dataId, level++) + ")";
+                            text += "(" + GetTextForReference(attributeDescriptor.Type, dataId, level++) + ")";
                         else
                         {
                             if (!isReference)
@@ -79,10 +81,10 @@ namespace RazorWebApp.Cache
             }
             if (found)
             {
-                if (!_referenceCache.ContainsKey(type))
-                    _referenceCache.Add(type, new Dictionary<long, string>() { { id, value } });
+                if (!referenceCache.ContainsKey(type))
+                    referenceCache.Add(type, new Dictionary<long, string>() { { id, value } });
                 else
-                    _referenceCache[type].Add(id, value);
+                    referenceCache[type].Add(id, value);
             }
             return value;
         }

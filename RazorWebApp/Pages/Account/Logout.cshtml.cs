@@ -29,7 +29,7 @@ namespace RazorWebApp.Pages.Account
                 return RedirectToPage("/Index");
 
             // logout on server
-            await _accountService.Logout(token.Value);
+            await _accountService.Logout(token);
             // clear cookies on client
             foreach (var cookieKey in Request.Cookies.Keys)
             {

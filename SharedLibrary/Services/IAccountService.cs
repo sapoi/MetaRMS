@@ -13,9 +13,9 @@ namespace SharedLibrary.Services
     public interface IAccountService  
     {           
         Task<HttpResponseMessage> Login(LoginCredentials data); 
-        Task<HttpResponseMessage> Logout(string token); 
-        Task<HttpResponseMessage> GetApplicationDescriptor(string token);
-        Task<HttpResponseMessage> GetRights(string token);
-        Task<HttpResponseMessage> ChangePassword(PasswordChangeStructure passwords, string token);
+        Task<HttpResponseMessage> Logout(JWTToken token); 
+        Task<HttpResponseMessage> GetApplicationDescriptor(JWTToken token);
+        Task<HttpResponseMessage> GetRightsModel(JWTToken token);
+        Task<HttpResponseMessage> ChangePassword(PasswordChangeStructure passwords, JWTToken token);
     }
 }

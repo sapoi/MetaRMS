@@ -139,10 +139,15 @@ namespace RazorWebApp.Pages.Data
 
             // Authorization
             if (!AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.RU))
-                return RedirectToPage("/Data/Get", new { messages = new List<Message>() {
-                    new Message(MessageTypeEnum.Error, 
-                                2010, 
-                                new List<string>(){datasetName})}});
+            {
+                TempData["Messages"] = JsonConvert.SerializeObject(
+                    new List<Message>() {
+                        new Message(MessageTypeEnum.Error, 
+                                    2010, 
+                                    new List<string>(){datasetName})
+                    });
+                return RedirectToPage("/Data/Get");
+            }
 
             # region PAGE DATA PREPARATION
 
@@ -153,7 +158,7 @@ namespace RazorWebApp.Pages.Data
             DataId = 0;
             DataDictionary = new Dictionary<string, List<string>>();
             // SelectData
-            DataLoadingHelper dlh = new DataLoadingHelper();
+            HTMLSelectHelper dlh = new HTMLSelectHelper();
             SelectData = await dlh.FillSelectData(ApplicationDescriptor, 
                                                     ActiveDatasetDescriptor.Attributes, 
                                                     userService, 
@@ -161,7 +166,7 @@ namespace RazorWebApp.Pages.Data
                                                     token);
             // Data request to the server via dataService
             DataModel dataModel;
-            var response = await dataService.GetById(ActiveDatasetDescriptor.Id, id, token.Value);
+            var response = await dataService.GetById(ActiveDatasetDescriptor.Id, id, token);
             try
             {
                 // If response status code if successfull, try parse data
@@ -236,15 +241,18 @@ namespace RazorWebApp.Pages.Data
             // Authorization
             if (!AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.RU))
             {
-                return RedirectToPage("/Data/Get", new { messages = new List<Message>() {
-                    new Message(MessageTypeEnum.Error, 
-                                2010, 
-                                new List<string>(){DatasetName})}});
+                TempData["Messages"] = JsonConvert.SerializeObject(
+                    new List<Message>() {
+                        new Message(MessageTypeEnum.Error, 
+                                    2010, 
+                                    new List<string>(){DatasetName})
+                    });
+                return RedirectToPage("/Data/Get");
             }
             
             // Prepare new data model
             var validationHelper = new ValidationHelper();
-            validationHelper.ValidateValueList(DataDictionary, ActiveDatasetDescriptor.Attributes);
+            validationHelper.ValidateDataDictionary(DataDictionary, ActiveDatasetDescriptor.Attributes);
             var dataModelToPut = new DataModel(){
                 Id = DataId,
                 ApplicationId = token.ApplicationId, 
@@ -253,7 +261,7 @@ namespace RazorWebApp.Pages.Data
             };
 
             // Put request to the server via rightsService
-            var response = await dataService.Put(dataModelToPut, token.Value);
+            var response = await dataService.Put(dataModelToPut, token);
             var messages = new List<Message>();
             try
             {
@@ -290,7 +298,7 @@ namespace RazorWebApp.Pages.Data
             // Read authorized datasets
             // ReadAuthorizedDatasets = AccessHelper.GetReadAuthorizedDatasets(ApplicationDescriptor, rights);
             // SelectData
-            DataLoadingHelper dlh = new DataLoadingHelper();
+            HTMLSelectHelper dlh = new HTMLSelectHelper();
             SelectData = await dlh.FillSelectData(ApplicationDescriptor, 
                                                     ActiveDatasetDescriptor.Attributes, 
                                                     userService, 

@@ -112,7 +112,7 @@ namespace RazorWebApp.Pages.Rights
             }
             // Rights
             var rights = await AccessHelper.GetUserRights(cache, accountService, token);
-            RightsRights = AccessHelper.GetRights(rights, (long)SystemDatasetsEnum.Rights);
+            RightsRights = AuthorizationHelper.GetRights(rights, (long)SystemDatasetsEnum.Rights);
             // Menu data
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
             if (RightsRights == null || MenuData == null)
@@ -129,7 +129,7 @@ namespace RazorWebApp.Pages.Rights
             if (AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Rights, RightsEnum.R))
             {
                 // Data request to the server via rightsService
-                var response = await rightsService.GetAll(token.Value);
+                var response = await rightsService.GetAll(token);
                 try
                 {
                     // If response status code if successfull, try parse data
@@ -181,14 +181,16 @@ namespace RazorWebApp.Pages.Rights
             {
                 // Set messages to cookie
                 TempData["Messages"] = JsonConvert.SerializeObject(
-                    new List<Message>(){ new Message(MessageTypeEnum.Error, 
-                                                     4009, 
-                                                     new List<string>())});
+                    new List<Message>(){ 
+                        new Message(MessageTypeEnum.Error, 
+                                    4009, 
+                                    new List<string>())
+                    });
                 return await OnGetAsync();
             }
             
             // Delete request to the server via rightsService
-            var response = await rightsService.DeleteById(dataId, token.Value);
+            var response = await rightsService.DeleteById(dataId, token);
             var messages = new List<Message>();
             try
             {

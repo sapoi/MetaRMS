@@ -126,8 +126,13 @@ namespace RazorWebApp.Repositories
                 model.Where(u => u.ApplicationId == applicationId).Select(u => u.Id).ToList()
             );
         }
-
-
+        /// <summary>
+        /// This method returns list of UserModels for application from parametres, that also have dataDictionaryLike 
+        /// value from parametres in Data attribute. This is used when looking for references.
+        /// </summary>
+        /// <param name="applicationId">Id of application to filter by.</param>
+        /// <param name="dataDictionaryLike">Value to look for in Data attribute.</param>
+        /// <returns>List of UserModels with Data containing value from parameter dataDictionaryLike.</returns>
         public List<UserModel> GetAllByApplicationIdAndDataContentLike(long applicationId, string dataDictionaryLike)
         {
             return model.Where(u => u.ApplicationId == applicationId && u.Data.Contains(dataDictionaryLike))

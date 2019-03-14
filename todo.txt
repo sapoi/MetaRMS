@@ -16,26 +16,35 @@
     - renumber error codes for more logic
     - support for patch not just put
     - dodelat testy
+    - MULTILINGUAL SUPPORT
+        - preklady: nazvy tlacitek, rights dataset, rights.get nazvy sloupcu tabluky, settings
+        - uzivatelum pridat jazyk a pri vytvreni uzivatale nastavit jako default jazyk aplikace + do settings dat zmenu jazyka
+        - Message.GetMessage() pouzivat language
+    - zobrazovat nekde jmeno prihlaseneho uzivatele - too complicated - v pages nemam user
+    - vyuzivat color
+    - u tyoe string umoznit regex
 
------------------------
-TODO
-    HIGH PRIORITY
-        - pro typ bool je nullable vzdy true - proc?
-        - vytvoreni admina porusi required u system user datasetu dat - vsechny hodnoty ma nevyplnene
-        - napsat kdyz pri login se neda pripojit k "serveru" - ted to spadne
-        - delsi doba prihlaseni - delsi platnost tokenu
-        - salt to passwords
-        - kdyz je default heslo, vyzadovat zmenu na safe
-            - ✴️ zmena hesla - nekontrolovat delku/spec znaky stareho hesla - vyresi se zavedenim vynuceni zmeny default hesla
-        - ValueList jako dict <string, ...>
+💩 KNOWN ISSUES
+    - vytvoreni admina porusi required u system user datasetu dat - vsechny hodnoty ma nevyplnene
+    - kdyz je default heslo, vyzadovat zmenu na safe
+        - ✴️ zmena hesla - nekontrolovat delku/spec znaky stareho hesla - vyresi se zavedenim vynuceni zmeny default hesla
+    - ValueList jako dict <string, ...>
                     C  U          x    odesilat model
             data    ✅ ✅                   ✅
             users   ✅ ✅                   ✅
             rights  ✅ ✅                   ✅
             settings              ✅        ✅
             defaultpasswordchange ✴️        ✴️
-        - ✴️🔥🔥🔥 pridat detail dat - po kliknuti na referenci - nutne - kdyz ma uzivatel pouze R prava, nezobrazil by se mu detail pomoci edit
+    - ✴️🔥🔥🔥 pridat detail dat - po kliknuti na referenci - nutne - kdyz ma uzivatel pouze R prava, nezobrazil by se mu detail pomoci edit
         - ❗️ refresh token (https://www.blinkingcaret.com/2018/05/30/refresh-tokens-in-asp-net-core-web-api/)
+        
+
+-----------------------
+TODO
+    HIGH PRIORITY
+        - napsat kdyz pri login se neda pripojit k "serveru" - ted to spadne
+        - delsi doba prihlaseni - delsi platnost tokenu
+        - salt to passwords
         
     JAVASCRIPT
         - 🔥 javascript popup okna pri delete, ...
@@ -46,12 +55,7 @@ TODO
     LOW PRIORITY
         - remove == "username" and == "password" from code
         - tocici se kolecko pri validaci aplikace
-        - zobrazovat nekde jmeno prihlaseneho uzivatele - too complicated - v pages nemam user
-
-    MULTILINGUAL SUPPORT
-        - preklady: nazvy tlacitek, rights dataset, rights.get nazvy sloupcu tabluky, settings
-        - uzivatelum pridat jazyk a pri vytvreni uzivatale nastavit jako default jazyk aplikace + do settings dat zmenu jazyka
-        - Message.GetMessage() pouzivat language
+        - text password pri zmene hesla nahradit za SystemDatasets.UsersDatasetDescriptor.PasswordAttribute.Name
 
     DESIGN
         - footer
@@ -64,25 +68,7 @@ TODO
             - logout menu not as list
 
 
-    DELETE
-        - ✅ ondelete action tam, kde jsou referencovani uzivatele nesmi byt cascade, aby se nevzmazal i posledni uzivatel aplikace
-        - ✅ set empty na requierd atributu
-        - ✅ pouze pro mazani dat a uzivatelu (rights uz se kontroluji a mohou byt referencovane jen u uzivatelu jako fk v db)
-        - ✅ mazani dat - gkeep
-            - ✅ pri mazani uzivatelu/dat kontrolovat, jestli na ne nekde nevede reference
-        - 🧡 on delete actions (cca https://dev.mysql.com/doc/refman/8.0/en/create-table-foreign-keys.html):
-            - I want to delete rowA from table1 and rowA is referenced in table2, if attribute in table@ containing rowA as reference has onDelete set to:
-                - cascade - rowA will be deleted, all rows referencing rowA in table2 will be deleted
-                - setEmpty - rowA will be deleted, all values of attributess referencing rowA in table2 will be set to empty
-                - protect - no rows will be deleted
-            - what if rowA is referenced anywhere else?
-                - first check whereever rowA can be referenced and the onDelete settings -> do not start delete before this
-                - check if it really is referenced
-                - then 
-                    - if anything is protect return message and do not delete anything
-                    - if anything is cascade, check if cascade can be deleted the same way as checking if rowA can be deleted
-                    - if everything is setEmpty, delete and set empty
-        - ✅ uz je? - pri editu a updatu kontrolovat ze reference existuji i na serveru
+    
 
 -----------------------
 TEXT
@@ -112,6 +98,39 @@ TEXT
     - udelat to jako web service
         - soap - XML a ja mam json
         - rest - ??
+    
+    - v jakem formatu bude application descriptor   
+        - XML
+            + umi to zpracovet c#
+            - moc dat
+            - je jednoduche v tagach udelat chyby
+            + vypada jako html (je to jednoduche)
+            + na zpracovani existuje spousta fci
+        - json
+            + umi to zpracovet c#
+            + existuji db, ktere ho umi prochazet rychle
+            + pokud by nekdo udelal frontend apliaci treba v php, json je na zpracovani mnohem lepsi - staci ho jen nacist
+        - neon
+            ? umi ho zpracovat nejaka db
+            - asi ho neumi c#
+        - yaml
+
+    - database
+        - mysgl
+        - postgresql
+        - sqlite
+            + cheap solution, pote chci zmenit db
+            + running directly on filesystem - will work for hosting without database engine
+        - mssql, oracle, ...
+    - database abstraction layer
+    - database schema management
+        - migration
+        - ORM 
+            + chci, protoze ten projekt teprve zacina,
+            + I can prepare mapping between db and classes in advance
+        - notorm 
+            - nepotrebuju, protoze k db bude pristupovat nikdo jiny nez muj server
+
 
 -----------------------
 HOTOVO
@@ -266,6 +285,27 @@ HOTOVO
     - ✅ message priprava pomoci stringbuilderu
     - ✅ zdokumentovat parametry v controllerech
     - ✅ pomocne app init metody z kontrolleru nekam jinam
+    - ✅ UserService.ResetPasswordById pouzivat POST nebo tak neco misto GET
+    - ✅ DELETE
+        - ✅ ondelete action tam, kde jsou referencovani uzivatele nesmi byt cascade, aby se nevzmazal i posledni uzivatel aplikace
+        - ✅ set empty na requierd atributu
+        - ✅ pouze pro mazani dat a uzivatelu (rights uz se kontroluji a mohou byt referencovane jen u uzivatelu jako fk v db)
+        - ✅ mazani dat - gkeep
+            - ✅ pri mazani uzivatelu/dat kontrolovat, jestli na ne nekde nevede reference
+        - ✅ on delete actions (cca https://dev.mysql.com/doc/refman/8.0/en/create-table-foreign-keys.html):
+            - I want to delete rowA from table1 and rowA is referenced in table2, if attribute in table@ containing rowA as reference has onDelete set to:
+                - cascade - rowA will be deleted, all rows referencing rowA in table2 will be deleted
+                - setEmpty - rowA will be deleted, all values of attributess referencing rowA in table2 will be set to empty
+                - protect - no rows will be deleted
+            - what if rowA is referenced anywhere else?
+                - first check whereever rowA can be referenced and the onDelete settings -> do not start delete before this
+                - check if it really is referenced
+                - then 
+                    - if anything is protect return message and do not delete anything
+                    - if anything is cascade, check if cascade can be deleted the same way as checking if rowA can be deleted
+                    - if everything is setEmpty, delete and set empty
+        - ✅ uz je? - pri editu a updatu kontrolovat ze reference existuji i na serveru
+    - 
 
 -----------------------
 ZRUŠENO
@@ -301,6 +341,7 @@ ZRUŠENO
         - 🅾️ nazvy atributu nesmi byt BDId a RIGHTSId
     - 🅾️ rozdelit accesshepler 
     - 🅾️ presunout getTextForReference
+    - 🅾️ pro typ bool je nullable vzdy true - proc?
     
     
 

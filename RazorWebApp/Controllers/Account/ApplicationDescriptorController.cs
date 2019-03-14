@@ -36,9 +36,6 @@ namespace RazorWebApp.Controllers.Account
         [ProducesResponseType(401)]
         public IActionResult Get()
         {
-            // List of messages to return to the client
-            var messages = new List<Message>();
-
             // Authentication
             var controllerHelper = new ControllerHelper(context);
             var authUserModel = controllerHelper.Authenticate(HttpContext.User.Identity as ClaimsIdentity);

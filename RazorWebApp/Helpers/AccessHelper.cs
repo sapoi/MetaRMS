@@ -13,6 +13,7 @@ using SharedLibrary.Descriptors;
 using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
 using SharedLibrary.Services;
+using SharedLibrary.Structures;
 using static SharedLibrary.Structures.JWTToken;
 
 namespace RazorWebApp.Helpers
@@ -26,7 +27,7 @@ namespace RazorWebApp.Helpers
         /// </summary>
         /// <param name="model">Page model to get the token from</param>
         /// <returns>Valid token or null</returns>
-        public static AccessToken GetTokenFromPageModel(PageModel model)
+        public static JWTToken GetTokenFromPageModel(PageModel model)
         {
             // Get session data from page model
             var sessionData = model.HttpContext.Session.GetString("sessionJWT");
@@ -36,10 +37,10 @@ namespace RazorWebApp.Helpers
                 return null;
             }
             // Parse token from session data
-            AccessToken token;
+            JWTToken token;
             try
             {
-                token = JsonConvert.DeserializeObject<AccessToken>(sessionData);
+                token = JsonConvert.DeserializeObject<JWTToken>(sessionData);
             }
             catch
             {
@@ -70,16 +71,16 @@ namespace RazorWebApp.Helpers
             // Return valid token
             return token;
         }
-        public static RightsEnum? GetRights(Dictionary<long, RightsEnum> rights, long datasetId)
-        {
-            if (rights.Keys.Contains(datasetId))
-                return rights[datasetId];
-            return null;
-        }
-        public static async Task<ApplicationDescriptor> GetApplicationDescriptor(IMemoryCache _cache, IAccountService _accountService, AccessToken token)
+        // public static RightsEnum? GetRights(Dictionary<long, RightsEnum> rights, long datasetId)
+        // {
+        //     if (rights.Keys.Contains(datasetId))
+        //         return rights[datasetId];
+        //     return null;
+        // }
+        public static async Task<ApplicationDescriptor> GetApplicationDescriptor(IMemoryCache _cache, IAccountService _accountService, JWTToken token)
         {
             // get application descriptor from cache
-            ApplicationDescriptor applicationDescriptor = await CacheAccessHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, token);
+            ApplicationDescriptor applicationDescriptor = await CacheHelper.GetApplicationDescriptorFromCacheAsync(_cache, _accountService, token);
             // if no application descriptor was found in token, log info and redirect user to login page
             if (applicationDescriptor == null)
             {
@@ -88,10 +89,10 @@ namespace RazorWebApp.Helpers
             }
             return applicationDescriptor;
         }
-        public static async Task<Dictionary<long, RightsEnum>> GetUserRights(IMemoryCache _cache, IAccountService _accountService, AccessToken token)
+        public static async Task<Dictionary<long, RightsEnum>> GetUserRights(IMemoryCache _cache, IAccountService _accountService, JWTToken token)
         {
             // get user rights from cache
-            var rights = await CacheAccessHelper.GetRightsFromCacheAsync(_cache, _accountService, token);
+            var rights = await CacheHelper.GetRightsFromCacheAsync(_cache, _accountService, token);
             if (rights == null)
             {
                 Logger.LogToConsole("nenalezena prava uzivatele");

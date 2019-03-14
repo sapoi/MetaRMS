@@ -26,11 +26,6 @@ namespace SharedLibrary.Structures
         /// </summary>
         /// <value>Placehorders contain a list of strings used in GetMessage method.</value>
         public List<string> Placeholders { get; }
-        // /// <summary>
-        // /// Language property.
-        // /// </summary>
-        // /// <value>Language property represents a language of the message from LanguageEnum</value>
-        // public LanguageEnum Language { get; }
         /// <summary>
         /// AttributeName property.
         /// </summary>

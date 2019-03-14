@@ -12,10 +12,7 @@
             </a>
         </div>
         <span class="navbar-text pull-right">
-            <!-- <a asp-page="../Account/Logout" class=""> -->
-                <i class="fas fa-user"></i>
-                Username
-            <!-- </a> -->
+            <!-- TODO display username <i class="fas fa-user"></i>Username -->
         </span>
     </div>
 </nav>
@@ -23,6 +20,7 @@
 <!-- Sidebar menu -->
 <div class="navbar fixed-left collapse navbar-collapse navbar-inverse" id="sidebarCollapse">
 	<ul class="navbar-nav">
+        <!-- User defined datasets -->
 		@foreach (var dataset in Model.ReadAuthorizedDatasets) 
         {
             string link = "~/Data/Get/" + dataset.Name;
@@ -32,10 +30,6 @@
 		}
 	</ul>
     <ul class="navbar-nav">
-        <!-- <li role="separator" class="divider nav-item"></li> -->
-
-        <!-- System datasets button displayed if user has at least read rights to each of them and user setings -->
-            
         <!-- Users -->
         @if (Model.NavbarRights[(long)SystemDatasetsEnum.Users] >= RightsEnum.R) 
         {

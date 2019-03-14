@@ -124,10 +124,15 @@ namespace RazorWebApp.Pages.User
                 return RedirectToPage("/Errors/ServerError");
             }
             if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Users, RightsEnum.RU))
-                return RedirectToPage("/User/Get", new { messages = new List<Message>() {
-                    new Message(MessageTypeEnum.Error, 
-                                3012, 
-                                new List<string>())}});
+            {
+                TempData["Messages"] = JsonConvert.SerializeObject(
+                    new List<Message>() {
+                        new Message(MessageTypeEnum.Error, 
+                                    3012, 
+                                    new List<string>())
+                    });
+                return RedirectToPage("/User/Get");
+            }
 
             # region PAGE DATA PREPARATION
 
@@ -144,7 +149,7 @@ namespace RazorWebApp.Pages.User
 
             // Data request to the server via userService
             UserModel userModel;
-            var response = await userService.GetById(id, token.Value);
+            var response = await userService.GetById(id, token);
             try
             {
                 // If response status code if successfull, try parse data
@@ -180,13 +185,13 @@ namespace RazorWebApp.Pages.User
                 Logger.LogExceptionToConsole(e);
             } 
             // SelectData
-            DataLoadingHelper dlh = new DataLoadingHelper();
+            HTMLSelectHelper dlh = new HTMLSelectHelper();
             SelectData = await dlh.FillSelectData(ApplicationDescriptor, 
                                                     ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes, 
                                                     userService, 
                                                     dataService, 
                                                     token);
-            // UserRightsList
+            // UserRightsData
             UserRightsData = await dlh.FillUserRightsData(rightsService, token);
             
             #endregion
@@ -209,10 +214,13 @@ namespace RazorWebApp.Pages.User
             // If user is not authorized to create, add message and redirect to get page
             if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Users, RightsEnum.RU))
             {
-                return RedirectToPage("/User/Get", new { messages = new List<Message>() {
-                    new Message(MessageTypeEnum.Error, 
-                                3012, 
-                                new List<string>())}});
+                TempData["Messages"] = JsonConvert.SerializeObject(
+                    new List<Message>() {
+                        new Message(MessageTypeEnum.Error, 
+                                    3012, 
+                                    new List<string>())
+                    });
+                return RedirectToPage("/User/Get");
             }
 
             // Validate and prepare UserModel
@@ -224,7 +232,7 @@ namespace RazorWebApp.Pages.User
                 return RedirectToPage("/Errors/ServerError");
             }
             var validationHelper = new ValidationHelper();
-            validationHelper.ValidateValueList(UserDataDictionary, ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes);
+            validationHelper.ValidateDataDictionary(UserDataDictionary, ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes);
             UserModel userModelToPut = new UserModel() { 
                 Id = UserId,
                 ApplicationId = token.ApplicationId, 
@@ -233,7 +241,7 @@ namespace RazorWebApp.Pages.User
             };
 
             // Create request to the server via userService
-            var response = await userService.Put(userModelToPut, token.Value);
+            var response = await userService.Put(userModelToPut, token);
             var messages = new List<Message>();
             try
             {
@@ -267,13 +275,13 @@ namespace RazorWebApp.Pages.User
             // Menu data
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
             // SelectData
-            DataLoadingHelper dlh = new DataLoadingHelper();
+            HTMLSelectHelper dlh = new HTMLSelectHelper();
             SelectData = await dlh.FillSelectData(ApplicationDescriptor, 
                                                     ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes, 
                                                     userService, 
                                                     dataService, 
                                                     token);
-            // UserRightsList
+            // UserRightsData
             UserRightsData = await dlh.FillUserRightsData(rightsService, token);
             // Messages
             Messages = messages;

@@ -64,10 +64,14 @@ namespace RazorWebApp.Repositories
                         .GroupBy(d => d.DatasetId)
                         .ToDictionary(key => key.Key, value => value.Select(d => d.Id).ToList());
         }
-
-
-
-
+        /// <summary>
+        /// This method returns list of DataModels for application and dataset from parametres, that also have 
+        /// dataDictionaryLike value from parametres in Data attribute. This is used when looking for references.
+        /// </summary>
+        /// <param name="applicationId">Id of application to filter by.</param>
+        /// <param name="datasetId">Id of dataset to filter by.</param>
+        /// <param name="dataDictionaryLike">Value to look for in Data attribute.</param>
+        /// <returns>List of DataModels with Data containing value from parameter dataDictionaryLike.</returns>
         public List<DataModel> GetAllByApplicationIdAndDatasetIdAndDataContentLike(long applicationId, long datasetId, string dataDictionaryLike)
         {
             return model.Where(d => d.ApplicationId == applicationId && d.DatasetId == datasetId && 

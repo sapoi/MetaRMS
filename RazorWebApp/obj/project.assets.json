@@ -15,6 +15,12 @@
           "jQuery": "[1.9.1, 4.0.0)"
         }
       },
+      "BuildBundlerMinifier/2.8.391": {
+        "type": "package",
+        "build": {
+          "build/BuildBundlerMinifier.targets": {}
+        }
+      },
       "jQuery/1.9.1": {
         "type": "package"
       },
@@ -4871,6 +4877,26 @@
         "content/Scripts/i18n/defaults-zh_CN.min.js",
         "content/Scripts/i18n/defaults-zh_TW.js",
         "content/Scripts/i18n/defaults-zh_TW.min.js"
+      ]
+    },
+    "BuildBundlerMinifier/2.8.391": {
+      "sha512": "+EJJ0URQVxRfk3jdmB9/WpFH3Q50tiA1paccMBlmbibPdQ8tuoeXLXDmnUGn9n5W5MM1Nu1CtSTiefiaWbGbqw==",
+      "type": "package",
+      "path": "buildbundlerminifier/2.8.391",
+      "files": [
+        ".signature.p7s",
+        "build/BuildBundlerMinifier.targets",
+        "buildbundlerminifier.2.8.391.nupkg.sha512",
+        "buildbundlerminifier.nuspec",
+        "tools/net46/BundlerMinifier.dll",
+        "tools/net46/NUglify.dll",
+        "tools/net46/Newtonsoft.Json.dll",
+        "tools/netcoreapp2.0/BundlerMinifier.dll",
+        "tools/netcoreapp2.0/NUglify.dll",
+        "tools/netcoreapp2.0/Newtonsoft.Json.dll",
+        "tools/netstandard1.3/BundlerMinifier.dll",
+        "tools/netstandard1.3/NUglify.dll",
+        "tools/netstandard1.3/Newtonsoft.Json.dll"
       ]
     },
     "jQuery/1.9.1": {
@@ -12789,6 +12815,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "BuildBundlerMinifier >= 2.8.391",
       "JsonDotNet.CustomContractResolvers >= 2.0.0",
       "Microsoft.AspNetCore.All >= 2.0.5",
       "Microsoft.AspNetCore.Hosting.Abstractions >= 2.0.2",
@@ -12845,6 +12872,10 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
+          "BuildBundlerMinifier": {
+            "target": "Package",
+            "version": "[2.8.391, )"
+          },
           "JsonDotNet.CustomContractResolvers": {
             "target": "Package",
             "version": "[2.0.0, )"

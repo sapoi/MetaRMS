@@ -98,10 +98,15 @@ namespace RazorWebApp.Pages.Rights
                 return RedirectToPage("/Errors/ServerError");
             }
             if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Rights, RightsEnum.RU))
-                return RedirectToPage("/Rights/Get", new { messages = new List<Message>() {
-                    new Message(MessageTypeEnum.Error, 
-                                4011, 
-                                new List<string>())}});
+            {
+                TempData["Messages"] = JsonConvert.SerializeObject(
+                    new List<Message>() {
+                        new Message(MessageTypeEnum.Error, 
+                                    4011, 
+                                    new List<string>())
+                    });
+                return RedirectToPage("/Rights/Get");
+            }
 
             # region PAGE DATA PREPARATION
 
@@ -120,7 +125,7 @@ namespace RazorWebApp.Pages.Rights
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
             // Data request to the server via rightsService
             RightsModel rightsModel;
-            var response = await rightsService.GetById(id, token.Value);
+            var response = await rightsService.GetById(id, token);
             try
             {
                 // If response status code if successfull, try parse data
@@ -172,13 +177,16 @@ namespace RazorWebApp.Pages.Rights
 
             // Authorization
             var rights = await AccessHelper.GetUserRights(cache, accountService, token);
-            // If user is not authorized to create, add message and redirect to get page
+            // If user is not authorized to edit, add message and redirect to get page
             if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Rights, RightsEnum.RU))
             {
-                return RedirectToPage("/Rights/Get", new { messages = new List<Message>() {
-                    new Message(MessageTypeEnum.Error, 
-                                4010, 
-                                new List<string>())}});
+                TempData["Messages"] = JsonConvert.SerializeObject(
+                    new List<Message>() {
+                        new Message(MessageTypeEnum.Error, 
+                                    4011, 
+                                    new List<string>())
+                    });
+                return RedirectToPage("/Rights/Get");
             }
 
             // Prepare edited RightsModel
@@ -188,7 +196,7 @@ namespace RazorWebApp.Pages.Rights
                                                                 Data = JsonConvert.SerializeObject(RightsDictionary) };
 
             // Put request to the server via rightsService
-            var response = await rightsService.Put(rightsModelToPut, token.Value);
+            var response = await rightsService.Put(rightsModelToPut, token);
             var messages = new List<Message>();
             try
             {
@@ -196,7 +204,7 @@ namespace RazorWebApp.Pages.Rights
                 if (response.IsSuccessStatusCode)
                 {
                     // Delete old version of rights from cache
-                    CacheAccessHelper.RemoveRightsFromCache(cache);
+                    CacheHelper.RemoveRightsFromCache(cache, token.ApplicationId);
                     // Set messages to cookie
                     TempData["Messages"] = await response.Content.ReadAsStringAsync();
                     return RedirectToPage("/Rights/Get");
