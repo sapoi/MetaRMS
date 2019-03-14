@@ -212,9 +212,9 @@ namespace SharedLibrary.Helpers
                         messages.Add(new Message(MessageTypeEnum.Error, 
                             0011, 
                             new List<string>(){ attributeDescriptor.Name, datasetDescriptor.Name }));
-                    // And if attribute is of type system users dataset, then the OnDeleteAction cannot be Cascade,
+                    // And if attribute is in system users dataset, then the OnDeleteAction cannot be Cascade,
                     // to prevent deleting last user of the application by accident.
-                    if (attributeDescriptor.Type == applicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name
+                    if (datasetDescriptor == applicationDescriptor.SystemDatasets.UsersDatasetDescriptor
                         && attributeDescriptor.OnDeleteAction == OnDeleteActionEnum.Cascade)
                         messages.Add(new Message(MessageTypeEnum.Error, 
                             0012, 

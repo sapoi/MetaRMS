@@ -293,7 +293,7 @@ HOTOVO
         - ✅ mazani dat - gkeep
             - ✅ pri mazani uzivatelu/dat kontrolovat, jestli na ne nekde nevede reference
         - ✅ on delete actions (cca https://dev.mysql.com/doc/refman/8.0/en/create-table-foreign-keys.html):
-            - I want to delete rowA from table1 and rowA is referenced in table2, if attribute in table@ containing rowA as reference has onDelete set to:
+            - I want to delete rowA from table1 and rowA is referenced in table2, if attribute in table2 containing rowA as reference has onDelete set to:
                 - cascade - rowA will be deleted, all rows referencing rowA in table2 will be deleted
                 - setEmpty - rowA will be deleted, all values of attributess referencing rowA in table2 will be set to empty
                 - protect - no rows will be deleted

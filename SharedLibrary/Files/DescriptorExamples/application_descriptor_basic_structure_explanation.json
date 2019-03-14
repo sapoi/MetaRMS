@@ -27,6 +27,7 @@
                     "Max": "optional positive integer number value of maximal username length"
                 }
                 // Other system user dataset attributes ... - the structure is the same as for attributes in the the user defined datasets described below
+                // Except that reference type attributes cannot have OnDeleteFunction set to cascade
             ]
         }
     },
@@ -46,24 +47,14 @@
                     "Max": "optional positive integer number value that means for numeric types (int, float, year) maximal valueand for text types (text, string, username, password) means maximal string length"
                 },
                 {
-                    // Example of attribute of type reference to user defined datasets
+                    // Example of attribute of type reference
                     "Name": "name of the attribute - this must be unique within a dataset attributes",
                     "Description": "optional attribute description",
-                    "Type": "type of reference attribute must correspond to a name of any dataset in the application descriptor",
+                    "Type": "type of reference attribute must be SystemDatasets.UsersDatasetDescriptor.Name or correspond to a name of any user defined dataset in the application descriptor",
                     "Required": "optional boolean value, if set to true, the attribute is required to be filled, if this value is not present false is filled automatically",
                     "Min": "optional positive integer number value that means minimum of references that the attribute must contain",
                     "Max": "optional positive integer number value that means maximum of references that the attribute can contain",
                     "OnDeleteAction": "possible values are cascade, setEmpty, protect"
-                },
-                {
-                    // Example of attribute of type reference to system user_dataset
-                    "Name": "name of the attribute - this must be unique within a dataset attributes",
-                    "Description": "optional attribute description",
-                    "Type": "this value must be exactly the same as SystemDatasets.UsersDatasetDescriptor.Name",
-                    "Required": "optional boolean value, if set to true, the attribute is required to be filled, if this value is not present false is filled automatically",
-                    "Min": "optional positive integer number value that means minimum of references that the attribute must contain",
-                    "Max": "optional positive integer number value that means maximum of references that the attribute can contain",
-                    "OnDeleteAction": "possible values are setEmpty, protect"
                 }
                 // Other dataset attributes ... 
             ]

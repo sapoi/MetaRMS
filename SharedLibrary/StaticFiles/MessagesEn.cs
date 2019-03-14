@@ -19,7 +19,7 @@ namespace SharedLibrary.StaticFiles
             {0009, "Password attribute {0} must have its type set to 'password'."},
             {0010, "Invalid reference in dataset {0} attribute {1} is of type {2}, but there is no dataset with such name."},
             {0011, "Attribute {0} in dataset {1} is of type reference, but does not have a on delete action."},
-            {0012, "Attribute {0} in dataset {1} is of type system user dataset. Attributes of such type cannot have a on delete action set to cascade."},
+            {0012, "Attribute {0} in system users dataset {1} is of reference type. Reference type attributes in system users dataset cannot have a on delete action set to cascade."},
             {0013, "Attribute {0} in dataset {1} is of a basic type. Attributes of such type cannot have a on delete action set."},
             {0014, "Password attribute {0} must be required."},
             {0015, "Attribute {0} in dataset {1} cannot be of type 'password'."},

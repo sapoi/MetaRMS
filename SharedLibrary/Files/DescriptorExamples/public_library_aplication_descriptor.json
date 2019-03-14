@@ -4,7 +4,7 @@
     "DefaultLanguage": "en",
     "SystemDatasets": {
         "UsersDatasetDescriptor": {
-            "Name": "Library emploees",
+            "Name": "Library employees",
             "Description": "This dataset contains all employees of the Kenmore Municipal library including their position.",
             "PasswordAttribute": {
                 "Name": "Password",
@@ -27,12 +27,12 @@
                     "Name": "Position",
                     "Description": "Users position at the library.",
                     "Type": "Positions",
-                    "OnDeleteAction": "protect"
+                    "OnDeleteAction": "cascade"
                 },
                 {
                     "Name": "Boss",
                     "Description": "Employee's boss and person responsible for checking responsibilities.",
-                    "Type": "Library emploees",
+                    "Type": "Library employees",
                     "Max": 1,
                     "OnDeleteAction": "protect"
                 }
@@ -47,7 +47,7 @@
                 {
                     "Name": "Reader",
                     "Description": "Reader borrowing the books. If a person does not have a reader account yet, create it first at the Readers dataset.",
-                    "Type": "Reader",
+                    "Type": "Readers",
                     "Required": true,
                     "Min": 1,
                     "Max": 1,
@@ -187,7 +187,8 @@
                 {
                     "Name": "Genres",
                     "Description": "Genres in which the author belongs.",
-                    "Type": "Genres"
+                    "Type": "Genres",
+                    "OnDeleteAction": "setEmpty"
                 }
             ]
         },
@@ -234,7 +235,7 @@
                 {
                     "Name": "Subgenres",
                     "Description": "List of genre subgenres.",
-                    "Type": "Genre",
+                    "Type": "Genres",
                     "OnDeleteAction": "setEmpty"
                 }
             ]

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "2d841ba0ae3470faf8c608a16958675ef5b07e8f"
+    "signature": "2b7eef5e1a281ef3bb4b294704f249460d108ab9"
   },
   "compilationOptions": {
     "defines": [
@@ -23,6 +23,7 @@
     ".NETCoreApp,Version=v2.0": {
       "RazorWebApp/1.0.0": {
         "dependencies": {
+          "BuildBundlerMinifier": "2.8.391",
           "JsonDotNet.CustomContractResolvers": "2.0.0",
           "Microsoft.AspNetCore.All": "2.0.5",
           "Microsoft.AspNetCore.Hosting.Abstractions": "2.0.2",
@@ -30,6 +31,7 @@
           "Microsoft.EntityFrameworkCore.Design": "2.0.2",
           "Microsoft.EntityFrameworkCore.Sqlite": "2.0.2",
           "Microsoft.NETCore.App": "2.0.0",
+          "Newtonsoft.Json.Schema": "3.0.10",
           "SharedLibrary": "1.0.0",
           "System.Linq.Dynamic.Core": "1.0.10",
           "bootstrap-select": "1.13.3"
@@ -52,6 +54,7 @@
           "jQuery": "1.9.1"
         }
       },
+      "BuildBundlerMinifier/2.8.391": {},
       "jQuery/1.9.1": {},
       "JsonDotNet.CustomContractResolvers/2.0.0": {
         "dependencies": {
@@ -2384,6 +2387,17 @@
           "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {}
         }
       },
+      "Newtonsoft.Json.Schema/3.0.10": {
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.Schema.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.Schema.dll": {}
+        }
+      },
       "Remotion.Linq/2.1.1": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -3805,6 +3819,7 @@
           "Microsoft.AspNetCore.Mvc": "2.0.2",
           "Microsoft.EntityFrameworkCore.Design": "2.0.2",
           "Microsoft.EntityFrameworkCore.Sqlite": "2.0.2",
+          "Newtonsoft.Json.Schema": "3.0.10",
           "System.IdentityModel.Tokens.Jwt": "5.2.4"
         },
         "runtime": {
@@ -4011,6 +4026,13 @@
       "sha512": "sha512-wLMAXqzrYryb/n2B2Ko9zAY3nma8qvrfJ+8cL+Cs8rp6sWO87oEimZhBQfG2DGnTrW8JCnJoj8m0+Q3XKrs8Sw==",
       "path": "bootstrap-select/1.13.3",
       "hashPath": "bootstrap-select.1.13.3.nupkg.sha512"
+    },
+    "BuildBundlerMinifier/2.8.391": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+EJJ0URQVxRfk3jdmB9/WpFH3Q50tiA1paccMBlmbibPdQ8tuoeXLXDmnUGn9n5W5MM1Nu1CtSTiefiaWbGbqw==",
+      "path": "buildbundlerminifier/2.8.391",
+      "hashPath": "buildbundlerminifier.2.8.391.nupkg.sha512"
     },
     "jQuery/1.9.1": {
       "type": "package",
@@ -5297,6 +5319,13 @@
       "path": "newtonsoft.json.bson/1.0.1",
       "hashPath": "newtonsoft.json.bson.1.0.1.nupkg.sha512",
       "runtimeStoreManifestName": "aspnetcore-store-2.0.0-linux-x64.xml;aspnetcore-store-2.0.0-osx-x64.xml;aspnetcore-store-2.0.0-win7-x64.xml;aspnetcore-store-2.0.0-win7-x86.xml"
+    },
+    "Newtonsoft.Json.Schema/3.0.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uDNsnCTUOryhTtujD297nLj+lyxIQ4H54o4TiPBsB0w06COs03eoHRvHFAflI8LbEtsezcdooT8rAcJ8nM08ew==",
+      "path": "newtonsoft.json.schema/3.0.10",
+      "hashPath": "newtonsoft.json.schema.3.0.10.nupkg.sha512"
     },
     "Remotion.Linq/2.1.1": {
       "type": "package",

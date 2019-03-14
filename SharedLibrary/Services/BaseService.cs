@@ -13,15 +13,17 @@ namespace SharedLibrary.Services
         /// HttpClient instance 
         /// </summary>
         protected HttpClient client;
-        /// <summary>
-        /// Local base address to connect to the server
-        /// </summary>
-        protected Uri baseAddress = new Uri("http://localhost:5000/api/");
-        /// <summary>
-        /// Production base address to connect to the server
-        /// </summary>
-        // protected Uri baseAddress = new Uri("http://sapoi.aspifyhost.com/api/");
-        
+        #if DEBUG
+            /// <summary>
+            /// Local base address to connect to the server
+            /// </summary>
+            protected Uri baseAddress = new Uri("http://localhost:5000/api/");
+        #else
+            /// <summary>
+            /// Production base address to connect to the server
+            /// </summary>
+            protected Uri baseAddress = new Uri("http://sapoi.aspifyhost.com/api/");
+        #endif
         /// <summary>
         /// BaseService constructor for client initialization
         /// </summary>
