@@ -1,6 +1,6 @@
 {
     "ApplicationName": "Kenmore Municipal library",
-    "LoginApplicationName": "kenmore_municipal_library",
+    "LoginApplicationName": "kenmore_municipal_library2",
     "DefaultLanguage": "en",
     "SystemDatasets": {
         "UsersDatasetDescriptor": {
@@ -27,7 +27,7 @@
                     "Name": "Position",
                     "Description": "Users position at the library.",
                     "Type": "Positions",
-                    "OnDeleteAction": "cascade"
+                    "OnDeleteAction": "protect"
                 },
                 {
                     "Name": "Boss",

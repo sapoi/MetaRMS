@@ -157,7 +157,7 @@ namespace RazorWebApp.Controllers
 
             #endregion
 
-            messages.Add(new Message(MessageTypeEnum.Error, 
+            messages.Add(new Message(MessageTypeEnum.Info, 
                                 0027, 
                                 new List<string>(){ applicationDescriptor.ApplicationName, email }));
             return Ok(messages);

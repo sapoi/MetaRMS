@@ -27,7 +27,6 @@
 💩 KNOWN ISSUES
     - vytvoreni admina porusi required u system user datasetu dat - vsechny hodnoty ma nevyplnene
     - kdyz je default heslo, vyzadovat zmenu na safe
-        - ✴️ zmena hesla - nekontrolovat delku/spec znaky stareho hesla - vyresi se zavedenim vynuceni zmeny default hesla
     - ValueList jako dict <string, ...>
                     C  U          x    odesilat model
             data    ✅ ✅                   ✅
@@ -45,6 +44,7 @@ TODO
         - napsat kdyz pri login se neda pripojit k "serveru" - ted to spadne
         - delsi doba prihlaseni - delsi platnost tokenu
         - salt to passwords
+        - ✴️ zmena hesla - nekontrolovat delku/spec znaky stareho hesla - vyresi se zavedenim vynuceni zmeny default hesla
         
     JAVASCRIPT
         - 🔥 javascript popup okna pri delete, ...
@@ -355,7 +355,8 @@ ZRUŠENO
     - deploy dat
         - cd RazorWebApp
         - dotnet build
-        - dotnet publish
+        - NE dotnet publish
+        - ANO dotnet publish -c Release (mam tam #if debug directivu)
         - ...RazorWebApp/bin/Debug/netcoreapp2.0/publish/
         - https://stackoverflow.com/questions/39238850/how-to-set-aspnetcore-environment-in-publish-file
     - databaze
