@@ -41,6 +41,7 @@
 -----------------------
 TODO
     HIGH PRIORITY
+        - rename RazorWebApp na MetaRMSServer
         - napsat kdyz pri login se neda pripojit k "serveru" - ted to spadne
         - delsi doba prihlaseni - delsi platnost tokenu
         - salt to passwords
@@ -56,6 +57,7 @@ TODO
         - remove == "username" and == "password" from code
         - tocici se kolecko pri validaci aplikace
         - text password pri zmene hesla nahradit za SystemDatasets.UsersDatasetDescriptor.PasswordAttribute.Name
+        - pri Create v controllerect vracet CreatedAtAction - vraci 201
 
     DESIGN
         - footer

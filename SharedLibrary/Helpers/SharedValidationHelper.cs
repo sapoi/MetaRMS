@@ -223,7 +223,7 @@ namespace SharedLibrary.Helpers
                     break;
                 case "date":
                     try {
-                        DateTime parsedDate = DateTime.ParseExact(dataDictionaryValues[0].ToString(), "d", CultureInfo.InvariantCulture);
+                        DateTime parsedDate = DateTime.Parse(dataDictionaryValues[0].ToString());
                     }
                     catch (FormatException) {
                         hasTypeError = true;
