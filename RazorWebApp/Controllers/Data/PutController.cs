@@ -93,7 +93,7 @@ namespace RazorWebApp.Controllers.Data
             // Input data validations
             var validReferencesIdsDictionary = controllerHelper.GetAllReferencesIdsDictionary(authUserModel.Application);
             messages = sharedValidationHelper.ValidateDataByApplicationDescriptor(datasetDescriptor, 
-                                                                             dataModel.DataDictionary, 
+                                                                             fromBodyDataModel.DataDictionary, 
                                                                              validReferencesIdsDictionary);
             if (messages.Count != 0)
                 return BadRequest(messages);

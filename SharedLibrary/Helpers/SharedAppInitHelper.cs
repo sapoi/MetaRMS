@@ -324,7 +324,7 @@ namespace SharedLibrary.Helpers
                                 0022, 
                                 new List<string>(){ usernameAttribute.Name, applicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name }));
             // Username attribute must be unique
-            if (usernameAttribute.Required != true)
+            if (usernameAttribute.Unique != true)
                 messages.Add(new Message(MessageTypeEnum.Error, 
                                 0023, 
                                 new List<string>(){ usernameAttribute.Name, applicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name }));

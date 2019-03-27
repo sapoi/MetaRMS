@@ -2,28 +2,28 @@
 {
     "ApplicationName": "name of the application displayed after login",
     "LoginApplicationName": "name of the application used for login, this name must be unique between all applications",
-    "DefaultLanguage": "defalut language - currenly only en is supported",
+    "DefaultLanguage": "default language - currently only en is supported",
     "SystemDatasets": {
         "UsersDatasetDescriptor": {
             "Name": "name of system users dataset",
             "Description": "optional description of system users dataset",
             "PasswordAttribute": {
                 "Name": "name of password attribute",
-                "Description": "optional password description - usefull especially if safer is set tu true",
+                "Description": "optional password description - useful especially if safer is set to true",
                 "Type": "password",
                 "Required": true,
-                "Safer": "optional boolean value, true means that tha password must contain lower- and upper-case character and number, if this value is not present false is filled automatically",
-                "Min": "optional positive integer number value of minimal password length",
+                "Safer": "optional boolean value, true means that the password must contain lower- and upper-case character and number, if this value is not present false is filled automatically",
+                "Min": "optional positive integer number value of minimum password length",
                 "Max": "optional positive integer number value of maximal password length"
             },
             "Attributes": [
                 {
                     "Name": "name of the username attribute",
-                    "Description": "optional descriptoin of the username attribute",
+                    "Description": "optional description of the username attribute",
                     "Type": "username",
                     "Required": true,
                     "Unique": true,
-                    "Min": "optional positive integer number value of minimal username length",
+                    "Min": "optional positive integer number value of minimum username length",
                     "Max": "optional positive integer number value of maximal username length"
                 }
                 // Other system user dataset attributes ... - the structure is the same as for attributes in the the user defined datasets described below
@@ -44,7 +44,7 @@
                     "Type": "type of attribute data, available values for basic type are color, date, datetime, email, month, int, float, year, tel, string, time, url, bool, text",
                     "Required": "optional boolean value, if set to true, the attribute is required to be filled, if this value is not present false is filled automatically",
                     "Min": "optional positive integer number value that means for numeric types (int, float, year) minimal value and for text types (text, string, username, password) means minimal string length",
-                    "Max": "optional positive integer number value that means for numeric types (int, float, year) maximal valueand for text types (text, string, username, password) means maximal string length"
+                    "Max": "optional positive integer number value that means for numeric types (int, float, year) maximal value and for text types (text, string, username, password) means maximal string length"
                 },
                 {
                     // Example of attribute of type reference
@@ -56,9 +56,10 @@
                     "Max": "optional positive integer number value that means maximum of references that the attribute can contain",
                     "OnDeleteAction": "possible values are cascade, setEmpty, protect"
                 }
-                // Other dataset attributes ... 
+                // Other dataset attributes ...
             ]
         }
         // Other user defined datasets ...
     ]
-}
+ }
+ 

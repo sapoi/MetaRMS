@@ -54,6 +54,10 @@ namespace RazorWebApp
                     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;       
                 })
+                .AddCookie(options =>
+                {
+                    options.Cookie.Expiration = TimeSpan.FromHours(5);
+                })
                 .AddJwtBearer(cfg =>
                 {
                     cfg.RequireHttpsMetadata = false;

@@ -143,14 +143,14 @@
   >
 	<!-- Prepare input data -->
 	@{ var inputData = new List<string>(); }
-	@if (Model.InValue.GetType() == typeof(List<Tuple<string, string>>))
+	@try
 	{
 		@foreach (var inValue in Model.InValue)
 		{
 			inputData.Add(JsonConvert.DeserializeObject<Tuple<string, string>>(inValue).Item1);
 		}
 	}
-	else
+	catch
 	{
 		inputData = Model.InValue;
 	}

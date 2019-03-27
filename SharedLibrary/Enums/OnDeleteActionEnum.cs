@@ -20,13 +20,14 @@ namespace SharedLibrary.Enums
         /// OnDeleteActionEnum.Cascade in attribute of type reference means, that when model referenced 
         /// in that attribute is deleted, the model having it as attribute value will be deleted as well 
         /// if possible. OnDeleteActionEnum.Cascade can not be used for non reference types. Also it can 
-        /// not be used in attributes of type system used dataset reference so that the last user of the 
-        /// application can box be accidentally deleted.
+        /// not be used in attributes of type system users dataset reference so that the last user of the 
+        /// application cannot be accidentally deleted.
         /// </summary>
         Cascade = 2,
         /// <summary>
-        /// OnDeleteActionEnum.Protect in attribute of type reference means, that delete action on model 
-        /// referenced in that attribute is performed
+        /// OnDeleteActionEnum.Protect in attribute of type reference means, that if delete action on model 
+        /// referenced in that attribute is performed, it is stopped due to this protection and none of
+        /// the models is deleted. OnDeleteActionEnum.Cascade can not be used for non reference types.
         /// </summary>
         Protect = 3
     }

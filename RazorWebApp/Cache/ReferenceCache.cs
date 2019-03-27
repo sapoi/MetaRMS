@@ -5,6 +5,7 @@ using RazorWebApp.Repositories;
 using SharedLibrary.Descriptors;
 using SharedLibrary.Enums;
 using SharedLibrary.Models;
+using System.Text;
 
 namespace RazorWebApp.Cache
 {
@@ -13,80 +14,90 @@ namespace RazorWebApp.Cache
         Dictionary<string, Dictionary<long, string>> referenceCache;
         DatabaseContext context;
         ApplicationModel applicationModel;
+        UserRepository userRepository;
+        DataRepository dataRepository;
         public ReferenceCache(DatabaseContext context, ApplicationModel applicationModel)
         {
             this.referenceCache = new Dictionary<string, Dictionary<long, string>>();
             this.context = context;
             this.applicationModel = applicationModel;
+            this.userRepository = new UserRepository(context);
+            this.dataRepository = new DataRepository(context);
         }
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="id"></param>
+        /// <param name="type">Type of the reference</param>
+        /// <param name="id">Id to get the text representation for</param>
         /// <param name="level"></param>
         /// <returns></returns>
         public string GetTextForReference(string type, long id, int level = 0)
         {
             // If text is already in cache, just return it
             if (referenceCache.ContainsKey(type) && referenceCache[type].ContainsKey(id))
-                return referenceCache[type][id];
+               return referenceCache[type][id];
             // Otherwise load it into cache and return it
             string value = "";
-            bool found = false;
+            // If reference is of type system user
             if (type == applicationModel.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name)
             {
-                UserRepository userRepository = new UserRepository(context);
                 UserModel userModel = userRepository.GetById(id);
-                found = true;
                 value = userModel.GetUsername();
+                addToCache(type, id, value);
             }
+            // If reference is of type user defined dataset
             else
             {
-                DataRepository dataRepository = new DataRepository(context);
                 DataModel dataModel = dataRepository.GetById(id);
                 DatasetDescriptor datasetDescriptor = applicationModel.ApplicationDescriptor.Datasets.Where(d => d.Name == type).FirstOrDefault();
                 if (datasetDescriptor == null)
                     throw new Exception($"[ERROR]: Dataset {type} not in application {applicationModel.LoginApplicationName} with id {applicationModel.Id}.\n");
-                string text = "";
-                List<AttributeDescriptor> attributeDescriptors = new List<AttributeDescriptor>();
-                for (int i = 0; i < Math.Min(3, datasetDescriptor.Attributes.Count); i++)
-                    attributeDescriptors.Add(datasetDescriptor.Attributes[i]);
-                var lastAttributeDescriptor = attributeDescriptors.Last();
-                foreach (var attributeDescriptor in attributeDescriptors)
+                var sb = new StringBuilder("");
+                // Get text representation for first at most 3 attributes of dataModel
+                foreach (var attributeDescriptor in datasetDescriptor.Attributes.Take(3))
                 {
-                    List<object> data = dataModel.DataDictionary[attributeDescriptor.Name];
-                    for (int j = 0; j < Math.Min(2, data.Count); j++)
+                    // For basic types get the value and for reference types get first 3  references and get their text representation
+                    foreach (var dataDictionaryValue in dataModel.DataDictionary[attributeDescriptor.Name].Take(3))
                     {
-                        // pokud je atribut reference, dohledej jeho hodnotu
-                        long dataId;
+                        // If dataDictionaryValue is reference, get its representation
                         bool isReference = !AttributeType.Types.Contains(attributeDescriptor.Type);
-                        if (isReference && level <= 3 && long.TryParse(data[j].ToString(), out dataId))
-                            text += "(" + GetTextForReference(attributeDescriptor.Type, dataId, level++) + ")";
+                        if (isReference)
+                        {
+                            long dataId;
+                            if (level > 4)
+                                sb.Append("...");
+                            else if (long.TryParse(dataDictionaryValue.ToString(), out dataId))
+                                sb.Append("(" + GetTextForReference(attributeDescriptor.Type, dataId, ++level) + ")");
+                            else
+                            {
+                                // Error - reference could not be parsed
+                                sb.Append("!!!");
+                            }
+                        }
+                        // If dataDictionaryValue is not reference, get its value
                         else
                         {
-                            if (!isReference)
-                                found = true;
-                            text += data[j].ToString();
+                            sb.Append(dataDictionaryValue);
                         }
-                        if (!(j == Math.Min(2, data.Count)-1))
-                            text += ", ";
+                        if (!attributeDescriptor.Equals(dataModel.DataDictionary[attributeDescriptor.Name].Take(3).Last()))
+                            sb.Append(", ");
                     }
-                    if (!attributeDescriptor.Equals(lastAttributeDescriptor))
+                    if (!attributeDescriptor.Equals(datasetDescriptor.Attributes.Take(3).Last()))
                     {
-                        text += " | ";
+                        sb.Append(" | ");
                     }
                 }
-                value = text;
-            }
-            if (found)
-            {
-                if (!referenceCache.ContainsKey(type))
-                    referenceCache.Add(type, new Dictionary<long, string>() { { id, value } });
-                else
-                    referenceCache[type].Add(id, value);
+                value = sb.ToString();
+                addToCache(type, id, value);
             }
             return value;
+        }
+        void addToCache(string type, long id, string value)
+        {
+            if (!referenceCache.ContainsKey(type))
+                referenceCache.Add(type, new Dictionary<long, string>() { { id, value } });
+            else if (!referenceCache[type].ContainsKey(id))
+                referenceCache[type].Add(id, value);
         }
     }
 }

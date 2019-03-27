@@ -1,6 +1,29 @@
+@using SharedLibrary.Enums 
 @using SharedLibrary.Structures;
 @model List<Message>
 
-@foreach (var message in Model) {
-    <div><b>@message.MessageType:</b> @message.GetMessage()</div>
+@if (Model.Any(m => m.MessageType == MessageTypeEnum.Info))
+{
+    <div class="alert alert-success">
+        @foreach (var message in Model.Where(m => m.MessageType == MessageTypeEnum.Info)) 
+        {
+            <div><b>@message.MessageType:</b> @message.GetMessage()</div>
+        }
+    </div>
+} else if (Model.Any(m => m.MessageType == MessageTypeEnum.Warning))
+{
+    <div class="alert alert-warning">
+        @foreach (var message in Model.Where(m => m.MessageType == MessageTypeEnum.Warning)) 
+        {
+            <div><b>@message.MessageType:</b> @message.GetMessage()</div>
+        }
+    </div>
+} else if (Model.Any(m => m.MessageType == MessageTypeEnum.Error))
+{
+    <div class="alert alert-danger">
+        @foreach (var message in Model.Where(m => m.MessageType == MessageTypeEnum.Error)) 
+        {
+            <div><b>@message.MessageType:</b> @message.GetMessage()</div>
+        }
+    </div>
 }

@@ -143,7 +143,7 @@ namespace RazorWebApp.Helpers
                 {
                     sb.Append(dataDictionary[attribute.Name].FirstOrDefault());
                 }
-                // It the attribute is of reference type get first at most 3 values and build them into one string
+                // If the attribute is of reference type get first at most 3 values and build them into one string
                 else 
                 {
                     if (dataDictionary[attribute.Name].Count > 0)

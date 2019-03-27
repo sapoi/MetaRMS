@@ -22,7 +22,8 @@
         - Message.GetMessage() pouzivat language
     - zobrazovat nekde jmeno prihlaseneho uzivatele - too complicated - v pages nemam user
     - vyuzivat color
-    - u tyoe string umoznit regex
+    - u type string umoznit regex
+    - offer users to download complete data of their application
 
 💩 KNOWN ISSUES
     - vytvoreni admina porusi required u system user datasetu dat - vsechny hodnoty ma nevyplnene
@@ -41,6 +42,13 @@
 -----------------------
 TODO
     HIGH PRIORITY
+        - funguje v jsonschematu:
+                    "not": {
+                                "enum": ["color", "date", "datetime", "email", "month", "int", "float", "year", "tel", "string", "time", "url", "username", "password", "bool", "text"],
+                                "pattern": "{[0-1]+}"
+                            }
+        - zdokumentovat API https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio-mac
+        - testy - bod stabilita aplikace - vypadá to líp
         - rename RazorWebApp na MetaRMSServer
         - napsat kdyz pri login se neda pripojit k "serveru" - ted to spadne
         - delsi doba prihlaseni - delsi platnost tokenu
@@ -54,6 +62,7 @@ TODO
         - prilinkovat skripty 1.10. str 20
 
     LOW PRIORITY
+        - ukladani dan na server by melo byt jako - client POST -> ulozeni dat -> ze serveru prijde REDIRECT -> client GET na adresu z redirectu -> 
         - remove == "username" and == "password" from code
         - tocici se kolecko pri validaci aplikace
         - text password pri zmene hesla nahradit za SystemDatasets.UsersDatasetDescriptor.PasswordAttribute.Name
@@ -83,12 +92,12 @@ TEXT
     - uziv dok jako tutorial
     - 2 ukazkove aplikace
     - 3 uzivatele - programatori co chcou pripojit aplikaci (mobilni), admini, knihovnice
-    ! pustit nekde na webu
+    - ✅ pustit nekde na webu
     - ➡️ verejne zpristupnit nekolik ukazkovych aplikaci s jsonem a prihlasovacimi udaji na R prava ke vsem datasetum
     radkovani ne 2, ale 1 nebo 1.25
     - psat to postupne od zacatku a ne na preskacku
     - napsat uz ted podrobnou osnovu ke vsemu
-    - vice prikladu v uvoduv uvodu napsat, co by mohli vsechno uzivatele chtit a potrebvat
+    - ✅ vice prikladu v uvoduv uvodu napsat, co by mohli vsechno uzivatele chtit a potrebvat
     - v requirements to rozepsat a az nakonec dat seznam tect 
     
     - jak jsem resila validace pomoci messagi, ale vlastne by to slo pomoci modelstate, ale neslo
@@ -102,6 +111,7 @@ TEXT
         - rest - ??
     
     - v jakem formatu bude application descriptor   
+        - plaintext
         - XML
             + umi to zpracovet c#
             - moc dat
@@ -132,6 +142,51 @@ TEXT
             + I can prepare mapping between db and classes in advance
         - notorm 
             - nepotrebuju, protoze k db bude pristupovat nikdo jiny nez muj server
+
+    - dealing with statelessness
+        - url parametres
+            - tady nikdy nesmi byt ulozene session id
+            - no secret data - all accessed urls are stored in Access Logs bz servers (nginx, ...)
+        - cookies 
+        - session - larger data to carry around = messages
+            - large enough session ID ???
+    - forms validation
+        - everzthing received from html is a string -> validations
+        - preserving user modifications in the form if not filled right = sticky forms
+    - flash messages - 5.14
+        - after performin one time action
+        - where?
+            - url - I must delete it later form the history
+
+    - how long should session hold?
+        - at least 1-2 hour
+
+    - security
+            - data integrity + backups, making system available to users
+            - authentication
+            - authorization
+            - 
+        - secure infrastructure
+        - authentication 
+            - credentials x certificate
+            - password security - encripted in db, salt
+                - porovnani hesla co mi prislo a hash hesla z db by melo mit random delay aby se zabranilo "tiny attack"
+        - how to send password?
+            - http authentication
+                - password must be send with every request - nono (ale u posilani porad tokenu to nevadi - jedno heslo pouzivaji lide na vice stranek)
+            - security tokens
+                - pokud nekdo chce vlastni instanci metarms, musi zmenit secret tokenu
+                - server can validate it, but does not need to remember it
+                - logout user permanently
+                    - v tokenu je creation timestamp a v db je datum a tokeny pred tim datem jsou neplatne
+        - authorization
+            - define security model = relation of objects (=datasets), authorities, operations
+            - roles = indirection between users and ???
+            - models
+
+
+        
+
 
 
 -----------------------
@@ -365,6 +420,9 @@ ZRUŠENO
         - zkopirovat
         - 🍑 jak vygenerovat novou?
     - 🍑 ukazkove aplikace?
+
+    - potrebuju www na zacatku?
+        - ne, ale potrebuju kvuli analytikam dodrzovat jen jednu variantu
 
 ---------
 

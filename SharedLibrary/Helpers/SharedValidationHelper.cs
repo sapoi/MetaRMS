@@ -252,7 +252,7 @@ namespace SharedLibrary.Helpers
                     break;
                 case "int":
                     isNumber = true;
-                    // Valid year values are C# ints
+                    // Valid integer number values are C# ints
                     int parsedInt;
                     if (!int.TryParse(dataDictionaryValues[0].ToString(), out parsedInt))
                         hasTypeError = true;
@@ -260,11 +260,15 @@ namespace SharedLibrary.Helpers
                     break;
                 case "float":
                     isNumber = true;
-                    // Valid year values are C# floats
-                    float parsedFloat;
-                    if (!float.TryParse(dataDictionaryValues[0].ToString(), out parsedFloat))
+                    // Valid floatiog point number values are C# floats
+                    try
+                    {
+                        // CultureInfo.InvariantCulture is necessary since server might have different culture
+                        parsedNumber = float.Parse(dataDictionaryValues[0].ToString(), CultureInfo.InvariantCulture);
+                    }
+                    catch (FormatException) {
                         hasTypeError = true;
-                    parsedNumber = parsedFloat;
+                    }
                     break;
                 case "year":
                     isNumber = true;
