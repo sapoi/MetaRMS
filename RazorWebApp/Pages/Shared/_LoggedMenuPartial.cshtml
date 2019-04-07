@@ -20,7 +20,7 @@
 <!-- Sidebar menu -->
 <div class="navbar fixed-left collapse navbar-collapse navbar-inverse" id="sidebarCollapse">
 	<ul class="navbar-nav">
-        <!-- User defined datasets -->
+        <!-- User-defined datasets -->
 		@foreach (var dataset in Model.ReadAuthorizedDatasets) 
         {
             string link = "~/Data/Get/" + dataset.Name;

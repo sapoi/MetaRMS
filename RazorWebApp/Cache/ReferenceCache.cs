@@ -45,7 +45,7 @@ namespace RazorWebApp.Cache
                 value = userModel.GetUsername();
                 addToCache(type, id, value);
             }
-            // If reference is of type user defined dataset
+            // If reference is of type user-defined dataset
             else
             {
                 DataModel dataModel = dataRepository.GetById(id);

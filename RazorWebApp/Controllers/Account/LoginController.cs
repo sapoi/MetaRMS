@@ -102,7 +102,7 @@ namespace RazorWebApp.Controllers.Account
                 issuer: configuration["TokenAuthentication:Issuer"],
                 audience: configuration["TokenAuthentication:Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddDays(60),
+                expires: DateTime.UtcNow.AddMinutes(60),
                 notBefore: DateTime.UtcNow,
                 signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenAuthentication:SecretKey"])),
                         SecurityAlgorithms.HmacSha256)

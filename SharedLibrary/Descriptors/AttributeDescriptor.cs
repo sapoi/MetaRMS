@@ -28,8 +28,8 @@ namespace SharedLibrary.Descriptors
         /// </summary>
         /// <value>
         /// Attribute type defines type of data that the attribute contains.
-        /// This value can be a simple data type from Enums.AttributeType or a reference.
-        /// References can be to arbitrary user defined dataset or system users dataset by using its name as a type value.
+        /// This value can be a basic data type from Enums.AttributeType or a reference.
+        /// References can be to arbitrary user-defined dataset or system users dataset by using its name as a type value.
         /// </value>
         public string Type { get; set; }
         /// <summary>
@@ -59,7 +59,7 @@ namespace SharedLibrary.Descriptors
         /// Min property.
         /// </summary>
         /// <value>
-        /// For simple data type attributes, Min value means for numeric types (int, float, year) minimal value
+        /// For basic data type attributes, Min value means for numeric types (int, float, year) minimal value
         /// and for text types (text, string, username, password) means minimal string length.
         /// For reference types it means minimum of references that the attribute must contain.
         /// </value>
@@ -68,7 +68,7 @@ namespace SharedLibrary.Descriptors
         /// Max property.
         /// </summary>
         /// <value>
-        /// For simple data type attributes, Max value means for numeric types (int, float, year) maximal value
+        /// For basic data type attributes, Max value means for numeric types (int, float, year) maximal value
         /// and for text types (text, string, username, password) means maximal string length.
         /// For reference types it means maximum of references that the attribute can contain.
         /// </value>

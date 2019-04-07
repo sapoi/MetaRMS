@@ -36,7 +36,7 @@ namespace SharedLibrary.Descriptors
         /// <summary>
         /// Datasets property.
         /// </summary>
-        /// <value>Datasets list contains user defined datasets.</value>
+        /// <value>Datasets list contains user-defined datasets.</value>
         public List<DatasetDescriptor> Datasets { get; set; }
         /// <summary>
         /// Function used to get an AttributeDescriptor for username.

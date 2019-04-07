@@ -32,9 +32,8 @@ namespace SharedLibrary.StaticFiles
             {0022, "Username attribute {0} in dataset {1} must be required."},
             {0023, "Username attribute {0} in dataset {1} must be unique."},
             {0024, "References cannot have Min property set and Required property set to flase, but attribute {0} in dataset {1} has so."},
-            {0025, "References with Required property set to true on Min property greater than 0 cannot have OnDeleteAction set to SetEmpty, but attribute {0} in dataset {1} has so."},
-            {0026, "Email address {0} is not valid, please choose another."},
-            {0027, "Application {0} was created successfully and login credentials were sent to email {1}."},
+            {0025, "Email address {0} is not valid, please choose another."},
+            {0026, "Application {0} was created successfully and login credentials were sent to email {1}."},
 
             // 1xxx GENERAL APPLICATION
             {1001, "Application name is required."},

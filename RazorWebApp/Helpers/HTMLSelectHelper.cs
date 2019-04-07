@@ -74,7 +74,7 @@ namespace RazorWebApp.Helpers
                         HttpResponseMessage response;
                         List<AttributeDescriptor> shownAttributes = new List<AttributeDescriptor>();
                         selectData.Add(attribute.Type, new List<SelectListItem>());
-                        // If attribute type reference is system user dataset
+                        // If attribute type reference is system users dataset
                         if (attribute.Type == applicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name)
                         {
                             response = await userService.GetAll(token);
@@ -90,14 +90,14 @@ namespace RazorWebApp.Helpers
                             foreach (var item in userModelList)
                                 selectData[attribute.Type].Add(new SelectListItem { Value = item.Id.ToString(), Text = item.GetUsername() });
                         }
-                        // If attribute type reference is user defined dataset
+                        // If attribute type reference is user-defined dataset
                         else
                         {
                             var sourceDataset = applicationDescriptor.Datasets.FirstOrDefault(d => d.Name == attribute.Type);
                             // If source dataset was not found in the application descriptor
                             if (sourceDataset == null)
                             {
-                                Logger.LogToConsole($"DataLoadingHepler source name {attribute.Type} not found in user defined descriptors in application {applicationDescriptor.LoginApplicationName}.");
+                                Logger.LogToConsole($"DataLoadingHepler source name {attribute.Type} not found in user-defined descriptors in application {applicationDescriptor.LoginApplicationName}.");
                                 selectData[attribute.Type] = new List<SelectListItem>();
                                 continue;
                             }
@@ -105,7 +105,7 @@ namespace RazorWebApp.Helpers
                             // If response from the server was not successfull, add empty list for attribute type key
                             if (!response.IsSuccessStatusCode)
                             {
-                                Logger.LogToConsole($"DataLoadingHepler request to user defined dataset {attribute.Type} did not return any results in application {applicationDescriptor.LoginApplicationName}.");
+                                Logger.LogToConsole($"DataLoadingHepler request to user-defined dataset {attribute.Type} did not return any results in application {applicationDescriptor.LoginApplicationName}.");
                                 selectData[attribute.Type] = new List<SelectListItem>();
                                 continue;
                             }

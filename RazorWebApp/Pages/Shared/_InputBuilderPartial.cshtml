@@ -46,7 +46,7 @@
 	</textarea>
 } else if (AttributeType.Types.Contains(@Model.Attribute.Type))
 {
-<!-- For types that use input tag - all simple attribute types except bool and text -->
+<!-- For types that use input tag - all basic type attribute except bool and text -->
 	<input 	name="@Model.OutValue"
 			value="@(Model.InValue != null && Model.InValue.Count() >= 1 ? Model.InValue[0] : "")"
 	       	class="form-control"

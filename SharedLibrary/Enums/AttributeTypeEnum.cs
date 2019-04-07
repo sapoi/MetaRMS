@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace SharedLibrary.Enums
 {
     /// <summary>
-    /// List of simple data types, that can be used at attribute type.
+    /// List of basic data types, that can be used at attribute type.
     /// </summary>
     public static class AttributeType
     {
@@ -40,7 +40,7 @@ namespace SharedLibrary.Enums
             /// </summary>
             "int",
             /// <summary>
-            /// "float" represents signed or unsigned floating point number between
+            /// "float" represents signed or unsigned floating point number
             /// corresponding to C# float stored as list containing one string 
             /// Example: ["-12.34"]
             /// </summary>

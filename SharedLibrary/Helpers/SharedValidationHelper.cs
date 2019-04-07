@@ -74,7 +74,7 @@ namespace SharedLibrary.Helpers
         List<Message> validateRightsData(ApplicationDescriptor applicationDescriptor, Dictionary<long, RightsEnum> rightsDictionary)
         {
             var messages = new List<Message>();
-            // Check user defined datasets
+            // Check user-defined datasets
             var datasetsToCheck = new List<DatasetDescriptor>();
             datasetsToCheck.AddRange(applicationDescriptor.Datasets);
             // And users dataset
@@ -112,7 +112,7 @@ namespace SharedLibrary.Helpers
         List<Message> validateRightsLogic(ApplicationDescriptor applicationDescriptor, Dictionary<long, RightsEnum> rightsDictionary)
         {
             var messages = new List<Message>();
-            // Check user defined datasets
+            // Check user-defined datasets
             var datasetsToCheck = new List<DatasetDescriptor>();
             datasetsToCheck.AddRange(applicationDescriptor.Datasets);
             // And users dataset

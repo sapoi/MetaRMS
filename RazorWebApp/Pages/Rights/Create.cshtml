@@ -25,7 +25,7 @@
                 <label>Name</label>
                 <input value="@Model.NewRightsName" name="NewRightsName" class="form-control">
             </div>
-            <!-- Rights for user defined datasets -->
+            <!-- Rights for user-defined datasets -->
             @foreach (var dataset in Model.ApplicationDescriptor.Datasets){ 
                 <div class="form-group">
                     <label>@dataset.Name</label>

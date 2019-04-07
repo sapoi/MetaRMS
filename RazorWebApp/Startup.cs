@@ -34,12 +34,17 @@ namespace RazorWebApp
             services.AddSingleton(typeof(IRightsService), typeof(RightsService));
             services.AddSingleton(typeof(IUserService), typeof(UserService));
 
-            services.AddMvc();
+            // services.AddMvc();
 
+            services.AddSession();
             // In-memory cache registration, so it can be used in controllers
             services.AddMemoryCache();
-            //services.AddDistributedMemoryCache(); // uz nevim proc to tady bylo
-            services.AddSession();
+            // services.AddDistributedMemoryCache(); // uz nevim proc to tady bylo
+            // services.AddDistributedRedisCache(options =>
+            // {
+            //     // o.Configuration = Configuration.GetConnectionString("Redis");
+            //     options.Configuration = "redis-18644.c100.us-east-1-4.ec2.cloud.redislabs.com:18644,password=3QFe1OMqrPtBtbsOPxFTiTZyojSGod02";
+            // });
             #endregion
 
             #region Server

@@ -19,7 +19,7 @@ namespace RazorWebApp.Helpers
                 // before sending new values to API, the key needs to be reentered with empty values
                 if (!dataDictionary.Keys.Contains(attribute.Name))
                     dataDictionary.Add(attribute.Name, new List<string>());
-                // If simple type field for attributeName is not filled in, dataDictionary[attributeName][0] == null
+                // If basic type field for attributeName is not filled in, dataDictionary[attributeName][0] == null
                 // the database and backend does not accept null as value, so the whole dataDictionary[attributeName]
                 // needs to be replaced by new List<string>
                 if (dataDictionary[attribute.Name].Count == 1 && dataDictionary[attribute.Name][0] == null)

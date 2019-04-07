@@ -18,8 +18,8 @@ namespace RazorWebApp.Structures
         /// <value>List of objects</value>
         public List<object> CellContent { get; set; }
         /// <summary>
-        /// Attribute the content belongs to. This value is necessary for distinguishing between simple and reference types
-        /// and for reference types between User dataset and user defined datasets.
+        /// Attribute the content belongs to. This value is necessary for distinguishing between basic and reference types
+        /// and for reference types between User dataset and user-defined datasets.
         /// </summary>
         /// <value>AttributeDescriptor</value>
         public AttributeDescriptor Attribute { get; set; }

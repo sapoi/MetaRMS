@@ -18,7 +18,7 @@ namespace RazorWebApp.Helpers
         /// <returns>Default user data for admin user</returns>
         public string GetDefaultAdminDataDictionary(UsersDatasetDescriptor usersDatasetDescriptor)
         {
-            // Build a string based on system user dataset descriptor
+            // Build a string based on system users dataset descriptor
             StringBuilder sb = new StringBuilder("{");
             foreach (var attribute in usersDatasetDescriptor.Attributes)
             {

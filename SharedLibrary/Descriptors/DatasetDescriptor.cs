@@ -3,8 +3,8 @@ using System.Collections.Generic;
 namespace SharedLibrary.Descriptors
 {
     /// <summary>
-    /// DatasetDescriptor class describes single one user defined dataset.
-    /// This descriptor is used whenever accessing user defined dataset within the project.
+    /// DatasetDescriptor class describes single one user-defined dataset.
+    /// This descriptor is used whenever accessing user-defined dataset within the project.
     /// </summary>
     public class DatasetDescriptor
     {

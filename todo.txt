@@ -26,7 +26,7 @@
     - offer users to download complete data of their application
 
 💩 KNOWN ISSUES
-    - vytvoreni admina porusi required u system user datasetu dat - vsechny hodnoty ma nevyplnene
+    - vytvoreni admina porusi required u system users datasetu dat - vsechny hodnoty ma nevyplnene
     - kdyz je default heslo, vyzadovat zmenu na safe
     - ValueList jako dict <string, ...>
                     C  U          x    odesilat model
@@ -42,6 +42,7 @@
 -----------------------
 TODO
     HIGH PRIORITY
+        - lepe formatovat datum a cas pri zobrazeni (payroll, authors)
         - funguje v jsonschematu:
                     "not": {
                                 "enum": ["color", "date", "datetime", "email", "month", "int", "float", "year", "tel", "string", "time", "url", "username", "password", "bool", "text"],
@@ -184,7 +185,19 @@ TEXT
             - roles = indirection between users and ???
             - models
 
+    - errors (prezentace 28.3. str 8)
+        - user errors
+        - temporary errors
+        - hard errors -> log -> what to log?
+            - log to
+                - file
+                - database 
+    
+    - caching
+        - obzvlast kdyz mam ORM
+        - musi mit expiraci!!!
 
+    - 
         
 
 

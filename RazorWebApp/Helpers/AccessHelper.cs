@@ -49,6 +49,13 @@ namespace RazorWebApp.Helpers
             }
             // Get application id and user id from token
             TokenHelper tokenHelper = new TokenHelper(token);
+            // Check if token not expired
+            if (tokenHelper.IsExpired())
+            {
+                // And if token is expired, remove it from page model and return null
+                model.HttpContext.Session.Remove("sessionJWT");
+                return null;
+            }
             // Application id
             var applicationId = tokenHelper.GetApplicationId();
             // If token did not contain application id

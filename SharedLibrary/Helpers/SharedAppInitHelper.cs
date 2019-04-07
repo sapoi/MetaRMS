@@ -161,7 +161,7 @@ namespace SharedLibrary.Helpers
         {
             List<Message> messages = new List<Message>();
 
-            // Attributes of user defined datasets
+            // Attributes of user-defined datasets
             foreach (var dataset in applicationDescriptor.Datasets)
             {
                 foreach (var attribute in dataset.Attributes)
@@ -219,12 +219,6 @@ namespace SharedLibrary.Helpers
                         messages.Add(new Message(MessageTypeEnum.Error, 
                             0012, 
                             new List<string>(){ attributeDescriptor.Name, datasetDescriptor.Name, attributeDescriptor.Type }));
-                    // And if attribute is Required or has Min > 0, then OnDeleteAction cannot be SetEmpty
-                    if ((attributeDescriptor.Required == true || (attributeDescriptor.Min != null && attributeDescriptor.Min > 0))
-                        && attributeDescriptor.OnDeleteAction == OnDeleteActionEnum.SetEmpty)
-                        messages.Add(new Message(MessageTypeEnum.Error, 
-                            0025, 
-                            new List<string>(){ attributeDescriptor.Name, datasetDescriptor.Name }));
                     // If Min is set, Required cannot be false
                     if (attributeDescriptor.Min != null && attributeDescriptor.Required == false)
                         messages.Add(new Message(MessageTypeEnum.Error, 

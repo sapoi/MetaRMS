@@ -144,7 +144,7 @@ namespace RazorWebApp.Controllers
                 catch
                 {
                     messages.Add(new Message(MessageTypeEnum.Error, 
-                                0026, 
+                                0025, 
                                 new List<string>(){ email }));
                     return BadRequest(messages);
                 }
@@ -158,7 +158,7 @@ namespace RazorWebApp.Controllers
             #endregion
 
             messages.Add(new Message(MessageTypeEnum.Info, 
-                                0027, 
+                                0026, 
                                 new List<string>(){ applicationDescriptor.ApplicationName, email }));
             return Ok(messages);
         }

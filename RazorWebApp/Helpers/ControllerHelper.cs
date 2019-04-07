@@ -133,6 +133,10 @@ namespace RazorWebApp.Helpers
                     else if (attribute.OnDeleteAction == OnDeleteActionEnum.SetEmpty)
                     {
                         var dataDictionary = model.DataDictionary;
+                        // If deletion of this value would break Required or Min property, stop deletion
+                        // Only Min preperty needs to be tested since if Min < 0, then Required is true
+                        if (dataDictionary[attribute.Name].Count - 1 < attribute.Min)
+                            return false;
                         dataDictionary[attribute.Name].RemoveAll(i => i.ToString() == modelToDelete.Id.ToString());
                         model.Data = JsonConvert.SerializeObject(dataDictionary);
                     }
