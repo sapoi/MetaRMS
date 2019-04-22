@@ -11,17 +11,19 @@ using RazorWebApp.Helpers;
 using RazorWebApp.Structures;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SharedLibrary.Structures;
+using System.Linq;
 using SharedLibrary.Helpers;
 using SharedLibrary.Enums;
 using System.Net;
+using System;
 
 namespace RazorWebApp.Pages.Data
 {
     /// <summary>
-    /// The CreateModel class in RazorWebApp.Pages.Data namespace is used as support for Create.cshtml page. 
-    /// The page is used to create new application data for dataset.
+    /// The EditModel class in Core.Pages.Data namespace is used as support for Edit.cshtml page. 
+    /// The page is used to edit existing application data for dataset.
     /// </summary>
-    public class CreateModel : PageModel
+    public class EditModel : PageModel
     {
         /// <summary>
         /// Service for DataModel based requests to the server.
@@ -46,7 +48,7 @@ namespace RazorWebApp.Pages.Data
         /// <param name="accountService">Account service to be used</param>
         /// <param name="userService">User service to be used</param>
         /// <param name="memoryCache">Cache to be used</param>
-        public CreateModel(IDataService dataService, IAccountService accountService, IUserService userService, IMemoryCache memoryCache)
+        public EditModel(IDataService dataService, IAccountService accountService, IUserService userService, IMemoryCache memoryCache)
         {
             this.dataService = dataService;
             this.accountService = accountService;
@@ -54,17 +56,23 @@ namespace RazorWebApp.Pages.Data
             this.cache = memoryCache;
         }
         /// <summary>
+        /// Id of the data to edit.
+        /// </summary>
+        /// <value>long</value>
+        [BindProperty]
+        public long DataId { get; set; }
+        /// <summary>
         /// DatasetName property contains name of dataset the new data belongs to.
         /// </summary>
         /// <value>string containing dataset name</value>
         [BindProperty]
         public string DatasetName { get; set; }
         /// <summary>
-        /// Dictionary containing string attribute name as key and list of strings as the values.
+        /// Dictionary containing string attribute name as key and list of objects as the values.
         /// </summary>
         /// <value>Dictionary of string and list of strings</value>
         [BindProperty]
-        public Dictionary<string, List<string>> NewDataDictionary { get; set; }
+        public Dictionary<string, List<string>> DataDictionary { get; set; }
         /// <summary>
         /// SelectData property contains data used for select html input fields.
         /// The key is attribute type and value is list of possible select values.
@@ -98,10 +106,10 @@ namespace RazorWebApp.Pages.Data
         /// <value>List of Message structure</value>
         public List<Message> Messages { get; set; }
         /// <summary>
-        /// This method is used when there is a GET request to Data/Create.cshtml page
+        /// This method is used when there is a GET request to Data/Edit.cshtml page
         /// </summary>
         /// <returns>The page.</returns>
-        public async Task<IActionResult> OnGetAsync(string datasetName)
+        public async Task<IActionResult> OnGetAsync(string datasetName, long id)
         {
             // Authentication
             var token = AccessHelper.GetTokenFromPageModel(this);
@@ -130,7 +138,7 @@ namespace RazorWebApp.Pages.Data
             }
 
             // Authorization
-            if (!AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.CRU))
+            if (!AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.RU))
             {
                 TempData["Messages"] = JsonConvert.SerializeObject(
                     new List<Message>() {
@@ -141,16 +149,14 @@ namespace RazorWebApp.Pages.Data
                 return RedirectToPage("/Data/Get");
             }
 
-            # region PAGE DATA PREPARATION
+            #region PAGE DATA PREPARATION
 
             Messages = new List<Message>();
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
             // ReadAuthorizedDatasets = AccessHelper.GetReadAuthorizedDatasets(ApplicationDescriptor, rights);
-            DatasetName = ActiveDatasetDescriptor.Name;
-            // NewDataDictionary - prepare keys
-            NewDataDictionary = new Dictionary<string, List<string>>();
-            foreach (var attribute in ActiveDatasetDescriptor.Attributes)
-                NewDataDictionary.Add(attribute.Name, new List<string>());
+            DatasetName = "";
+            DataId = 0;
+            DataDictionary = new Dictionary<string, List<string>>();
             // SelectData
             HTMLSelectHelper dlh = new HTMLSelectHelper();
             SelectData = await dlh.FillSelectData(ApplicationDescriptor, 
@@ -158,9 +164,46 @@ namespace RazorWebApp.Pages.Data
                                                     userService, 
                                                     dataService, 
                                                     token);
+            // Data request to the server via dataService
+            DataModel dataModel;
+            var response = await dataService.GetById(ActiveDatasetDescriptor.Id, id, token);
+            try
+            {
+                // If response status code if successfull, try parse data
+                if (response.IsSuccessStatusCode)
+                {
+                    dataModel = JsonConvert.DeserializeObject<DataModel>(await response.Content.ReadAsStringAsync());
+                    // Data dictionary, id and dataset name
+                    DatasetName = ActiveDatasetDescriptor.Name;
+                    DataId = dataModel.Id;
+                    // Convert Dictionary<string, List<object>> from dataModel to Dictionary<string, List<string>> expected by html page
+                    DataDictionary = dataModel.DataDictionary.ToDictionary(k => k.Key, k => k.Value.ConvertAll(x => Convert.ToString(x)));
+                }
+                // If user is not authenticated, redirect to login page
+                else if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    return RedirectToPage("/Index");
+                // If user is not authorized, add message
+                else if (response.StatusCode == HttpStatusCode.Forbidden)
+                    Messages.Add(new Message(MessageTypeEnum.Error, 
+                                                4011, 
+                                                new List<string>()));
+                // Otherwise try parse error messages and display them at the get page
+                else
+                {
+                    // Set messages to cookie
+                    TempData["Messages"] = await response.Content.ReadAsStringAsync();
+                    return RedirectToPage("/Data/Get");
+                }
+            }
+            catch (JsonSerializationException e)
+            {
+                // In case of JSON parsing error, create server error message
+                Messages.Add(MessageHepler.Create1007());
+                Logger.LogExceptionToConsole(e);
+            } 
             
             #endregion
-        
+            
             return Page();
         }
         /// <summary>
@@ -196,28 +239,29 @@ namespace RazorWebApp.Pages.Data
             }
 
             // Authorization
-            if (!AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.CRU))
+            if (!AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.RU))
             {
                 TempData["Messages"] = JsonConvert.SerializeObject(
                     new List<Message>() {
                         new Message(MessageTypeEnum.Error, 
-                                    2009, 
+                                    2010, 
                                     new List<string>(){DatasetName})
                     });
                 return RedirectToPage("/Data/Get");
             }
-
+            
             // Prepare new data model
             var validationHelper = new ValidationHelper();
-            validationHelper.ValidateDataDictionary(NewDataDictionary, ActiveDatasetDescriptor.Attributes);
-            var newDataModel = new DataModel(){
+            validationHelper.ValidateDataDictionary(DataDictionary, ActiveDatasetDescriptor.Attributes);
+            var dataModelToPut = new DataModel(){
+                Id = DataId,
                 ApplicationId = token.ApplicationId, 
                 DatasetId = ActiveDatasetDescriptor.Id,
-                Data = JsonConvert.SerializeObject(NewDataDictionary)
+                Data = JsonConvert.SerializeObject(DataDictionary)
             };
 
-            // Create request to the server via rightsService
-            var response = await dataService.Create(newDataModel, token);
+            // Put request to the server via rightsService
+            var response = await dataService.Put(dataModelToPut, token);
             var messages = new List<Message>();
             try
             {
@@ -236,7 +280,7 @@ namespace RazorWebApp.Pages.Data
                     messages.Add(new Message(MessageTypeEnum.Error, 
                                              2009, 
                                              new List<string>(){DatasetName}));
-                // Otherwise try parse error messages and display them at the create page
+                // Otherwise try parse error messages and display them at the edit page
                 else
                 {
                     messages = JsonConvert.DeserializeObject<List<Message>>(await response.Content.ReadAsStringAsync()) ?? throw new JsonSerializationException();

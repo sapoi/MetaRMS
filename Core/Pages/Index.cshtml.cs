@@ -14,7 +14,7 @@ using SharedLibrary.StaticFiles;
 namespace RazorWebApp.Pages
 {
     /// <summary>
-    /// The IndexModel class in RazorWebApp.Pages namespace is used as support for Index.cshtml page. 
+    /// The IndexModel class in Core.Pages namespace is used as support for Index.cshtml page. 
     /// The page is used to display login form.
     /// </summary>
     public class IndexModel : PageModel

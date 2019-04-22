@@ -6,30 +6,40 @@ using SharedLibrary.Services;
 using SharedLibrary.Models;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Caching.Memory;
+using System.Linq;
 using SharedLibrary.Descriptors;
 using RazorWebApp.Helpers;
-using SharedLibrary.Enums;
 using RazorWebApp.Structures;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SharedLibrary.Structures;
 using SharedLibrary.Helpers;
+using SharedLibrary.Enums;
 using System.Net;
 
-namespace RazorWebApp.Pages.Rights
+namespace RazorWebApp.Pages.User
 {
     /// <summary>
-    /// The CreateModel class in RazorWebApp.Pages.Rights namespace is used as support for Create.cshtml page. 
-    /// The page is used to create new application rights.
+    /// The CreateModel class in Core.Pages.User namespace is used as support for Create.cshtml page. 
+    /// The page is used to create new application user.
     /// </summary>
     public class CreateModel : PageModel
     {
+        /// <summary>
+        /// Service for user based requests to the server.
+        /// </summary>
+        private readonly IUserService userService;
+        /// <summary>
+        /// Service for user account based requests to the server.
+        /// </summary>
+        private readonly IAccountService accountService;
         /// <summary>
         /// Service for RightsModel based requests to the server.
         /// </summary>
         private readonly IRightsService rightsService;
         /// <summary>
-        /// Service for user account based requests to the server.
+        /// Service for DataModel based requests to the server.
         /// </summary>
-        private readonly IAccountService accountService;
+        private readonly IDataService dataService;
         /// <summary>
         /// In-memory cache service.
         /// </summary>
@@ -37,32 +47,47 @@ namespace RazorWebApp.Pages.Rights
         /// <summary>
         /// Constructor for initializing services and cache.
         /// </summary>
-        /// <param name="rightsService">Rights service to be used</param>
+        /// <param name="userService">User service to be used</param>
         /// <param name="accountService">Account service to be used</param>
+        /// <param name="rightsService">Rights service to be used</param>
+        /// <param name="dataService">Data service to be used</param>
         /// <param name="memoryCache">Cache to be used</param>
-        public CreateModel(IRightsService rightsService, IAccountService accountService, IMemoryCache memoryCache)
+        public CreateModel(IUserService userService, IAccountService accountService, IRightsService rightsService, IDataService dataService, IMemoryCache memoryCache)
         {
-            this.rightsService = rightsService;
+            this.userService = userService;
             this.accountService = accountService;
+            this.rightsService = rightsService;
+            this.dataService = dataService;
             this.cache = memoryCache;
         }
         /// <summary>
-        /// Name of the new rights.
+        /// Id of rights for the new created user
         /// </summary>
-        /// <value>string</value>
+        /// <value>Long number</value>
         [BindProperty]
-        public string NewRightsName { get; set; }
+        public long NewUserRightsId { get; set; }
         /// <summary>
-        /// Dictionary containing rights value for each dataset.
+        /// Dictionary containing string attribute name as key and list of strings as the values.
         /// </summary>
-        /// <value>Dictionary of long and RightsEnum</value>
+        /// <value>Dictionary of string and list of strings</value>
         [BindProperty]
-        public Dictionary<long, RightsEnum> NewRightsDictionary { get; set; }
+        public Dictionary<string, List<string>> NewUserDataDictionary { get; set; }
+        /// <summary>
+        /// SelectData property contains data used for select html input fields.
+        /// The key is attribute type and value is list of possible select values.
+        /// </summary>
+        /// <value>Dictionary string and list of SelectListItem</value>
+        public Dictionary<string, List<SelectListItem>> SelectData { get; set; }
         /// <summary>
         /// ApplicationDescriptor property contains descriptor of the signed user.
         /// </summary>
         /// <value>ApplicationDescriptor class</value>
         public ApplicationDescriptor ApplicationDescriptor { get; set; }
+        /// <summary>
+        /// Enumerable of application's available user rights.
+        /// </summary>
+        /// <value>IEnumerable of SelectListItem</value>
+        public IEnumerable<SelectListItem> UserRightsData { get; set; }
         /// <summary>
         /// MenuData property contains data necessary for _LoggedMenuPartial.
         /// </summary>
@@ -74,7 +99,7 @@ namespace RazorWebApp.Pages.Rights
         /// <value>List of Message structure</value>
         public List<Message> Messages { get; set; }
         /// <summary>
-        /// This method is used when there is a GET request to Rights/Create.cshtml page
+        /// This method is used when there is a GET request to User/Create.cshtml page
         /// </summary>
         /// <returns>The page.</returns>
         public async Task<IActionResult> OnGetAsync()
@@ -91,15 +116,15 @@ namespace RazorWebApp.Pages.Rights
                 Logger.LogToConsole($"Rights not found for user with token {token.Value}.");
                 return RedirectToPage("/Error");
             }
-            if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Rights, RightsEnum.CRU))
+            if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Users, RightsEnum.CRU))
             {
                 TempData["Messages"] = JsonConvert.SerializeObject(
                     new List<Message>() {
                         new Message(MessageTypeEnum.Error, 
-                                    4010, 
+                                    3011, 
                                     new List<string>())
                     });
-                return RedirectToPage("/Rights/Get");
+                return RedirectToPage("/User/Get");
             }
 
             # region PAGE DATA PREPARATION
@@ -114,16 +139,22 @@ namespace RazorWebApp.Pages.Rights
             }
             // Menu data
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
-            // NewRightsDictionary - prepare keys
-            NewRightsDictionary = new Dictionary<long, RightsEnum>();
-            foreach (var key in ApplicationDescriptor.Datasets)
-                NewRightsDictionary.Add(key.Id, 0);
-            NewRightsDictionary.Add(((long)SystemDatasetsEnum.Users), 0);
-            NewRightsDictionary.Add(((long)SystemDatasetsEnum.Rights), 0);
-            NewRightsName = "";
-
+            // NewUserDataDictionary - prepare keys
+            NewUserDataDictionary = new Dictionary<string, List<string>>();
+            foreach (var attribute in ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes)
+                NewUserDataDictionary.Add(attribute.Name, new List<string>());
+            // SelectData
+            HTMLSelectHelper dlh = new HTMLSelectHelper();
+            SelectData = await dlh.FillSelectData(ApplicationDescriptor, 
+                                                    ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes, 
+                                                    userService, 
+                                                    dataService, 
+                                                    token);
+            // UserRightsData
+            UserRightsData = await dlh.FillUserRightsData(rightsService, token);
+            
             #endregion
-
+        
             return Page();
         }
         /// <summary>
@@ -140,24 +171,35 @@ namespace RazorWebApp.Pages.Rights
             // Authorization
             var rights = await AccessHelper.GetUserRights(cache, accountService, token);
             // If user is not authorized to create, add message and redirect to get page
-            if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Rights, RightsEnum.CRU))
+            if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Users, RightsEnum.CRU))
             {
                 TempData["Messages"] = JsonConvert.SerializeObject(
                     new List<Message>() {
                         new Message(MessageTypeEnum.Error, 
-                                    4010, 
+                                    3011, 
                                     new List<string>())
                     });
-                return RedirectToPage("/Rights/Get");
+                return RedirectToPage("/User/Get");
             }
 
-            // Prepare new RightsModel
-            RightsModel newRightsModel = new RightsModel(){ ApplicationId = token.ApplicationId, 
-                                                            Name = NewRightsName, 
-                                                            Data = JsonConvert.SerializeObject(NewRightsDictionary) };
-            
-            // Create request to the server via rightsService
-            var response = await rightsService.Create(newRightsModel, token);
+            // Validate and prepare new UserModel
+            // Application descriptor
+            ApplicationDescriptor = await AccessHelper.GetApplicationDescriptor(cache, accountService, token);
+            if (ApplicationDescriptor == null)
+            {
+                Logger.LogToConsole($"Application descriptor for user with token {token.Value} not found.");
+                return RedirectToPage("/Error");
+            }
+            var validationHelper = new ValidationHelper();
+            validationHelper.ValidateDataDictionary(NewUserDataDictionary, ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes);
+            UserModel newUserModel = new UserModel() { 
+                ApplicationId = token.ApplicationId, 
+                RightsId = NewUserRightsId,
+                Data = JsonConvert.SerializeObject(NewUserDataDictionary) 
+            };
+
+            // Create request to the server via userService
+            var response = await userService.Create(newUserModel, token);
             var messages = new List<Message>();
             try
             {
@@ -166,7 +208,7 @@ namespace RazorWebApp.Pages.Rights
                 {
                     // Set messages to cookie
                     TempData["Messages"] = await response.Content.ReadAsStringAsync();
-                    return RedirectToPage("/Rights/Get");
+                    return RedirectToPage("/User/Get");
                 }
                 // If user is not authenticated, redirect to login page
                 else if (response.StatusCode == HttpStatusCode.Unauthorized)
@@ -174,7 +216,7 @@ namespace RazorWebApp.Pages.Rights
                 // If user is not authorized, add message
                 else if (response.StatusCode == HttpStatusCode.Forbidden)
                     messages.Add(new Message(MessageTypeEnum.Error, 
-                                             4010, 
+                                             3011, 
                                              new List<string>()));
                 // Otherwise try parse error messages and display them at the create page
                 else
@@ -188,13 +230,17 @@ namespace RazorWebApp.Pages.Rights
                 messages.Add(MessageHepler.Create1007());
                 Logger.LogExceptionToConsole(e);
             }
-
-            // Application descriptor
-            ApplicationDescriptor = await AccessHelper.GetApplicationDescriptor(cache, accountService, token);
-            if (ApplicationDescriptor == null)
-                return RedirectToPage("/Error");
             // Menu data
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
+            // SelectData
+            HTMLSelectHelper dlh = new HTMLSelectHelper();
+            SelectData = await dlh.FillSelectData(ApplicationDescriptor, 
+                                                    ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes, 
+                                                    userService, 
+                                                    dataService, 
+                                                    token);
+            // UserRightsData
+            UserRightsData = await dlh.FillUserRightsData(rightsService, token);
             // Messages
             Messages = messages;
 

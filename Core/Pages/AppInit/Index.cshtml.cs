@@ -13,7 +13,7 @@ using SharedLibrary.Enums;
 namespace RazorWebApp.Pages.Appinit
 {
     /// <summary>
-    /// The IndexModel class in RazorWebApp.Pages.AppInit namespace is used as support for Index.cshtml page. 
+    /// The IndexModel class in Core.Pages.AppInit namespace is used as support for Index.cshtml page. 
     /// The page is used to create a new application.
     /// </summary>
     public class IndexModel : PageModel

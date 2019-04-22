@@ -1,0 +1,87 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/Core.csproj",
+    "projectName": "Core",
+    "projectPath": "/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/Core.csproj",
+    "outputPath": "/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/obj/",
+    "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+    ],
+    "originalTargetFrameworks": [
+      "netcoreapp2.0"
+    ],
+    "frameworks": {
+      "netcoreapp2.0": {
+        "projectReferences": {
+          "/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/SharedLibrary/SharedLibrary.csproj": {
+            "projectPath": "/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/SharedLibrary/SharedLibrary.csproj"
+          }
+        }
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netcoreapp2.0": {
+      "dependencies": {
+        "BuildBundlerMinifier": {
+          "target": "Package",
+          "version": "[2.8.391, )"
+        },
+        "JsonDotNet.CustomContractResolvers": {
+          "target": "Package",
+          "version": "[2.0.0, )"
+        },
+        "Microsoft.AspNetCore.All": {
+          "target": "Package",
+          "version": "[2.0.5, )"
+        },
+        "Microsoft.AspNetCore.Hosting.Abstractions": {
+          "target": "Package",
+          "version": "[2.0.2, )"
+        },
+        "Microsoft.AspNetCore.Mvc": {
+          "target": "Package",
+          "version": "[2.0.2, )"
+        },
+        "Microsoft.EntityFrameworkCore.Design": {
+          "target": "Package",
+          "version": "[2.0.2, )"
+        },
+        "Microsoft.EntityFrameworkCore.Sqlite": {
+          "target": "Package",
+          "version": "[2.0.2, )"
+        },
+        "Microsoft.NETCore.App": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.0.0, )",
+          "autoReferenced": true
+        },
+        "Newtonsoft.Json.Schema": {
+          "target": "Package",
+          "version": "[3.0.10, )"
+        },
+        "System.Linq.Dynamic.Core": {
+          "target": "Package",
+          "version": "[1.0.10, )"
+        },
+        "bootstrap-select": {
+          "target": "Package",
+          "version": "[1.13.3, )"
+        }
+      },
+      "imports": [
+        "net461"
+      ],
+      "assetTargetFallback": true,
+      "warn": true
+    }
+  }
+}

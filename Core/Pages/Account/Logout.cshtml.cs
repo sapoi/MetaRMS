@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authentication;
 namespace RazorWebApp.Pages.Account
 {
     /// <summary>
-    /// The LogoutModel class in RazorWebApp.Pages.Account namespace is used as support for Logout.cshtml page. 
+    /// The LogoutModel class in Core.Pages.Account namespace is used as support for Logout.cshtml page. 
     /// The page is used to log out a logged user.
     /// </summary>
     public class LogoutModel : PageModel

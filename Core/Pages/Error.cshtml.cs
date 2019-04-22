@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace RazorWebApp.Pages
 {
     /// <summary>
-    /// The ErrorModel class in RazorWebApp.Pages namespace is used as support for Error.cshtml page. 
+    /// The ErrorModel class in Core.Pages namespace is used as support for Error.cshtml page. 
     /// The page is used to display server error annoucement.
     /// </summary>
     public class ErrorModel : PageModel

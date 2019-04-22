@@ -18,7 +18,7 @@ using System.Linq;
 namespace RazorWebApp.Pages.Data
 {
     /// <summary>
-    /// The GetModel class in RazorWebApp.Pages.Data namespace is used as support for Get.cshtml page. 
+    /// The GetModel class in Core.Pages.Data namespace is used as support for Get.cshtml page. 
     /// The page is used to display all application data for user-defined datasets, as well as create, 
     /// edit and delete action buttons.
     /// </summary>

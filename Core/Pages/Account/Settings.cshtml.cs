@@ -22,7 +22,7 @@ using System.Net;
 namespace RazorWebApp.Pages.Account
 {
     /// <summary>
-    /// The SettingsModel class in RazorWebApp.Pages.Account namespace is used as support for Settings.cshtml page. 
+    /// The SettingsModel class in Core.Pages.Account namespace is used as support for Settings.cshtml page. 
     /// The page is used to change existing password of the logged user.
     /// </summary>
     public class SettingsModel : PageModel

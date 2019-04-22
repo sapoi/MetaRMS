@@ -17,7 +17,7 @@ using System.Net;
 namespace RazorWebApp.Pages.User
 {
     /// <summary>
-    /// The GetModel class in RazorWebApp.Pages.Users namespace is used as support for Get.cshtml page. 
+    /// The GetModel class in Core.Pages.Users namespace is used as support for Get.cshtml page. 
     /// The page is used to display all application users, as well as create, edit and delete action buttons.
     /// </summary>
     public class GetModel : PageModel

@@ -17,7 +17,7 @@ using System.Net;
 namespace RazorWebApp.Pages.Rights
 {
     /// <summary>
-    /// The GetModel class in RazorWebApp.Pages.Rights namespace is used as support for Get.cshtml page. 
+    /// The GetModel class in Core.Pages.Rights namespace is used as support for Get.cshtml page. 
     /// The page is used to display all application rights, as well as create, edit and delete action buttons.
     /// </summary>
     public class GetModel : PageModel
