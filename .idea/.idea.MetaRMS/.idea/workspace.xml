@@ -2,48 +2,355 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="46c7c9e6-bed5-4482-9176-71709e68e581" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Core/obj/RazorWebApp.csproj.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MetaRMS/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MetaRMS/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MetaRMS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MetaRMS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/AccessHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Helpers/AccessHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/AuthorizationHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Helpers/AuthorizationHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/CacheAccessHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Helpers/CacheAccessHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/DataLoadingHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Helpers/DataLoadingHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Account/Settings.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/Account/Settings.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Create.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Create.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Edit.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Edit.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Get.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Get.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Create.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Create.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Edit.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Edit.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Get.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Get.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/User/Create.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/User/Create.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/User/Edit.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/User/Edit.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/User/Get.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Pages/User/Get.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/SharedLibrary.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/SharedLibrary.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/SharedLibrary.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/SharedLibrary.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.csprojAssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Controllers/Account/LoginController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Controllers/Account/LoginController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/Server.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/Server.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/Server.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/Server.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/SharedLibrary.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/SharedLibrary.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/SharedLibrary.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Server/bin/Debug/netcoreapp2.0/SharedLibrary.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/obj/Debug/netcoreapp2.0/Server.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Server/obj/Debug/netcoreapp2.0/Server.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/obj/Debug/netcoreapp2.0/Server.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Server/obj/Debug/netcoreapp2.0/Server.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/obj/Debug/netcoreapp2.0/Server.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Server/obj/Debug/netcoreapp2.0/Server.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/Helpers/Logger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/Helpers/Logger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/Helpers/TokenHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/Helpers/TokenHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/Structures/JWTToken.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/Structures/JWTToken.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/bin/Debug/netstandard2.0/SharedLibrary.dll" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/bin/Debug/netstandard2.0/SharedLibrary.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/bin/Debug/netstandard2.0/SharedLibrary.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/bin/Debug/netstandard2.0/SharedLibrary.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/obj/Debug/netstandard2.0/SharedLibrary.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/obj/Debug/netstandard2.0/SharedLibrary.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/obj/Debug/netstandard2.0/SharedLibrary.dll" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/obj/Debug/netstandard2.0/SharedLibrary.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedLibrary/obj/Debug/netstandard2.0/SharedLibrary.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/obj/Debug/netstandard2.0/SharedLibrary.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/errorcodes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/errorcodes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structure.txt" beforeDir="false" afterPath="$PROJECT_DIR$/structure.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/todo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MetaRMS.sln" beforeDir="false" afterPath="$PROJECT_DIR$/MetaRMS.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MetaRMS.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/MetaRMS.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Cache/ReferenceCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Cache/ReferenceCache.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/Account/ApplicationDescriptorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/Account/ApplicationDescriptorController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/Account/LoginController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/Account/LoginController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/Account/LogoutController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/Account/LogoutController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/Account/RightsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/Account/RightsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/Account/Settings/PasswordController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/Account/Settings/PasswordController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/AppInitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/AppInitController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/Data/CreateController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/Data/CreateController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/Data/DeleteController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/Data/DeleteController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/Data/GetController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/Data/GetController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/Data/PutController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/Data/PutController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/Rights/CreateController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/Rights/CreateController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/Rights/DeleteController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/Rights/DeleteController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/Rights/GetController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/Rights/GetController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/Rights/PutController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/Rights/PutController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/User/CreateController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/User/CreateController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/User/DeleteController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/User/DeleteController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/User/GetController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/User/GetController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/User/PutController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/User/PutController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Controllers/User/ResetPasswordController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Controllers/User/ResetPasswordController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/AccessHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Helpers/AccessHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/AppInitHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Helpers/AppInitHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/CacheHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Helpers/CacheHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/ControllerHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Helpers/ControllerHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/DataHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Helpers/DataHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/HTMLSelectHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Helpers/HTMLSelectHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/PasswordHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Helpers/PasswordHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Helpers/ValidationHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Helpers/ValidationHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Model.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Model.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/About.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/About.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/About.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/About.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Account/Logout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Account/Logout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Account/Logout.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Account/Logout.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Account/Settings.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Account/Settings.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Account/Settings.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Account/Settings.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/AppInit/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/AppInit/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/AppInit/Index.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/AppInit/Index.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Data/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Create.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Data/Create.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Data/Edit.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Edit.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Data/Edit.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Get.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Data/Get.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Data/Get.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Data/Get.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Error.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Error.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Error.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Error.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Index.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Index.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Rights/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Create.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Rights/Create.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Rights/Edit.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Edit.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Rights/Edit.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Get.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Rights/Get.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Rights/Get.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Rights/Get.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Shared/_GetBuilderPartial.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Shared/_GetBuilderPartial.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Shared/_InputBuilderPartial.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Shared/_InputBuilderPartial.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Shared/_LoggedMenuPartial.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Shared/_LoggedMenuPartial.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Shared/_LogoutMenuPartial.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Shared/_LogoutMenuPartial.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/Shared/_MessagesPartial.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/Shared/_MessagesPartial.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/User/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/User/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/User/Create.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/User/Create.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/User/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/User/Edit.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/User/Edit.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/User/Edit.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/User/Get.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/User/Get.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/User/Get.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/User/Get.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/_ViewImports.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/_ViewImports.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Pages/_ViewStart.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Pages/_ViewStart.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/RazorWebApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Core.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Repositories/ApplicationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Repositories/ApplicationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Repositories/BaseRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Repositories/BaseRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Repositories/DataRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Repositories/DataRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Repositories/RightsRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Repositories/RightsRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Repositories/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Structures/GetBuilderPartialData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Structures/GetBuilderPartialData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Structures/InputBuilderPartialData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Structures/InputBuilderPartialData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/Structures/LoggedMenuPartial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Structures/LoggedMenuPartial.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/RazorWebApp.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/Core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/Core.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.runtimeconfig.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/RazorWebApp.runtimeconfig.dev.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/RazorWebApp.runtimeconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/RazorWebApp.runtimeconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/SharedLibrary.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/SharedLibrary.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/SharedLibrary.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/SharedLibrary.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/JsonDotNet.CustomContractResolvers.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/JsonDotNet.CustomContractResolvers.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.Cookies.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.Cookies.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.Core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Cryptography.Internal.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Cryptography.Internal.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.DataProtection.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.DataProtection.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.DataProtection.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.DataProtection.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Hosting.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Hosting.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Hosting.Server.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Hosting.Server.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.Extensions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.Extensions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.Features.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.Features.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Identity.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.Identity.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.WebUtilities.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.AspNetCore.WebUtilities.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.Data.Sqlite.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.Data.Sqlite.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.Design.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.Design.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.Relational.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.Relational.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.Sqlite.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.Sqlite.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Caching.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Caching.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Caching.Memory.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Caching.Memory.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Configuration.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Configuration.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.FileProviders.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.FileProviders.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Hosting.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Hosting.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Identity.Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Identity.Core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Identity.Stores.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Identity.Stores.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Logging.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Logging.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Logging.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Logging.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Options.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.Options.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.WebEncoders.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.Extensions.WebEncoders.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.IdentityModel.JsonWebTokens.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.IdentityModel.JsonWebTokens.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.IdentityModel.Logging.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.IdentityModel.Logging.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.IdentityModel.Tokens.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.IdentityModel.Tokens.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Microsoft.Net.Http.Headers.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Microsoft.Net.Http.Headers.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Newtonsoft.Json.Schema.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Newtonsoft.Json.Schema.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/Newtonsoft.Json.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/Newtonsoft.Json.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/RazorWebApp.PrecompiledViews.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/RazorWebApp.PrecompiledViews.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/RazorWebApp.PrecompiledViews.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/RazorWebApp.PrecompiledViews.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/RazorWebApp.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/RazorWebApp.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/RazorWebApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/RazorWebApp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/RazorWebApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/RazorWebApp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/RazorWebApp.runtimeconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/RazorWebApp.runtimeconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/SharedLibrary.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/SharedLibrary.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/SharedLibrary.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/SharedLibrary.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/System.IdentityModel.Tokens.Jwt.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/System.IdentityModel.Tokens.Jwt.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/System.Linq.Dynamic.Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/System.Linq.Dynamic.Core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/bundleconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/bundleconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/web.config" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/web.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/css/site.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/css/site.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/css/site.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/images/banner1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/images/banner1.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/images/banner2.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/images/banner2.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/images/banner3.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/images/banner3.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/images/banner4.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/images/banner4.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/js/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/js/site.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/js/site.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/js/site.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/.bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/.bower.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/js/npm.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/js/npm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery-validation-unobtrusive/.bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery-validation-unobtrusive/.bower.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/.bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/.bower.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/LICENSE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/dist/additional-methods.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/dist/additional-methods.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/dist/jquery.validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/dist/jquery.validate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery/.bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery/.bower.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery/LICENSE.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery/dist/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery/dist/jquery.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery/dist/jquery.min.map" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Debug/netcoreapp2.0/publish/wwwroot/lib/jquery/dist/jquery.min.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/RazorWebApp.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/RazorWebApp.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/RazorWebApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/RazorWebApp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/RazorWebApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/RazorWebApp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/RazorWebApp.runtimeconfig.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/RazorWebApp.runtimeconfig.dev.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/RazorWebApp.runtimeconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/RazorWebApp.runtimeconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/SharedLibrary.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/SharedLibrary.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/SharedLibrary.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/SharedLibrary.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/JsonDotNet.CustomContractResolvers.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/JsonDotNet.CustomContractResolvers.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.Cookies.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.Cookies.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.Core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Authentication.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Cryptography.Internal.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Cryptography.Internal.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.DataProtection.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.DataProtection.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.DataProtection.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.DataProtection.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Hosting.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Hosting.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Hosting.Server.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Hosting.Server.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.Extensions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.Extensions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.Features.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.Features.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Http.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Identity.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.Identity.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.WebUtilities.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.AspNetCore.WebUtilities.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.Data.Sqlite.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.Data.Sqlite.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.Design.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.Design.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.Relational.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.Relational.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.Sqlite.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.Sqlite.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.EntityFrameworkCore.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Caching.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Caching.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Caching.Memory.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Caching.Memory.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Configuration.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Configuration.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.FileProviders.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.FileProviders.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Hosting.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Hosting.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Identity.Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Identity.Core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Identity.Stores.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Identity.Stores.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Logging.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Logging.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Logging.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Logging.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Options.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.Options.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.WebEncoders.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.Extensions.WebEncoders.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.IdentityModel.JsonWebTokens.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.IdentityModel.JsonWebTokens.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.IdentityModel.Logging.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.IdentityModel.Logging.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.IdentityModel.Tokens.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.IdentityModel.Tokens.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Microsoft.Net.Http.Headers.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Microsoft.Net.Http.Headers.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Newtonsoft.Json.Schema.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Newtonsoft.Json.Schema.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/Newtonsoft.Json.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/Newtonsoft.Json.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/RazorWebApp.PrecompiledViews.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/RazorWebApp.PrecompiledViews.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/RazorWebApp.PrecompiledViews.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/RazorWebApp.PrecompiledViews.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/RazorWebApp.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/RazorWebApp.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/RazorWebApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/RazorWebApp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/RazorWebApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/RazorWebApp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/RazorWebApp.runtimeconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/RazorWebApp.runtimeconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/SharedLibrary.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/SharedLibrary.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/SharedLibrary.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/SharedLibrary.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/System.IdentityModel.Tokens.Jwt.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/System.IdentityModel.Tokens.Jwt.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/System.Linq.Dynamic.Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/System.Linq.Dynamic.Core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/bundleconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/bundleconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/web.config" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/web.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/css/site.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/css/site.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/css/site.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/images/banner1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/images/banner1.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/images/banner2.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/images/banner2.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/images/banner3.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/images/banner3.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/images/banner4.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/images/banner4.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/js/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/js/site.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/js/site.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/js/site.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/.bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/.bower.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/js/npm.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/bootstrap/dist/js/npm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery-validation-unobtrusive/.bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery-validation-unobtrusive/.bower.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/.bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/.bower.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/LICENSE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/dist/additional-methods.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/dist/additional-methods.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/dist/jquery.validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery-validation/dist/jquery.validate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery/.bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery/.bower.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery/LICENSE.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery/dist/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery/dist/jquery.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery/dist/jquery.min.map" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bin/Release/netcoreapp2.0/publish/wwwroot/lib/jquery/dist/jquery.min.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/bundleconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/bundleconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/Core/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/database1.db" beforeDir="false" afterPath="$PROJECT_DIR$/Core/database1.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/database2.db" beforeDir="false" afterPath="$PROJECT_DIR$/Core/database2.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/database3.db" beforeDir="false" afterPath="$PROJECT_DIR$/Core/database3.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Debug/netcoreapp2.0/RazorWebApp.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Debug/netcoreapp2.0/RazorWebApp.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.PrecompiledViews.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Debug/netcoreapp2.0/RazorWebApp.PrecompiledViews.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.PrecompiledViews.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Debug/netcoreapp2.0/RazorWebApp.PrecompiledViews.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Debug/netcoreapp2.0/RazorWebApp.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.csproj.CopyComplete" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Debug/netcoreapp2.0/RazorWebApp.csproj.CopyComplete" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.csproj.CoreCompileInputs (Hana Nekvindová's conflicted copy 2019-02-27).cache" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Debug/netcoreapp2.0/RazorWebApp.csproj.CoreCompileInputs (Hana Nekvindová's conflicted copy 2019-02-27).cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Debug/netcoreapp2.0/RazorWebApp.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Debug/netcoreapp2.0/RazorWebApp.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Debug/netcoreapp2.0/RazorWebApp.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Debug/netcoreapp2.0/RazorWebApp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/RazorWebApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Debug/netcoreapp2.0/RazorWebApp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/microsoft.aspnetcore.mvc.razor.viewcompilation.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Debug/netcoreapp2.0/microsoft.aspnetcore.mvc.razor.viewcompilation.rsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Debug/netcoreapp2.0/project.razor.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Debug/netcoreapp2.0/project.razor.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/RazorWebApp.csproj.EntityFrameworkCore.targets" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/RazorWebApp.csproj.EntityFrameworkCore.targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/RazorWebApp.csproj.nuget.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/RazorWebApp.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/RazorWebApp.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/RazorWebApp.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/RazorWebApp.csproj.nuget.g.targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Release/netcoreapp2.0/RazorWebApp.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Release/netcoreapp2.0/RazorWebApp.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Release/netcoreapp2.0/RazorWebApp.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Release/netcoreapp2.0/RazorWebApp.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Release/netcoreapp2.0/RazorWebApp.PrecompiledViews.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Release/netcoreapp2.0/RazorWebApp.PrecompiledViews.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Release/netcoreapp2.0/RazorWebApp.PrecompiledViews.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Release/netcoreapp2.0/RazorWebApp.PrecompiledViews.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Release/netcoreapp2.0/RazorWebApp.csproj.CopyComplete" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Release/netcoreapp2.0/RazorWebApp.csproj.CopyComplete" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Release/netcoreapp2.0/RazorWebApp.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Release/netcoreapp2.0/RazorWebApp.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Release/netcoreapp2.0/RazorWebApp.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Release/netcoreapp2.0/RazorWebApp.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Release/netcoreapp2.0/RazorWebApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Release/netcoreapp2.0/RazorWebApp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Release/netcoreapp2.0/RazorWebApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Release/netcoreapp2.0/RazorWebApp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/Release/netcoreapp2.0/microsoft.aspnetcore.mvc.razor.viewcompilation.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/Release/netcoreapp2.0/microsoft.aspnetcore.mvc.razor.viewcompilation.rsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/css/site.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/css/site.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/css/site.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/images/banner1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/images/banner1.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/images/banner2.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/images/banner2.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/images/banner3.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/images/banner3.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/images/banner4.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/images/banner4.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/js/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/js/site.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/js/site.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/js/site.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/bootstrap/.bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/bootstrap/.bower.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/bootstrap/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/bootstrap/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/bootstrap/dist/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/bootstrap/dist/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/bootstrap/dist/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/bootstrap/dist/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/bootstrap/dist/js/npm.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/bootstrap/dist/js/npm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/jquery-validation-unobtrusive/.bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/jquery-validation-unobtrusive/.bower.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/jquery-validation/.bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/jquery-validation/.bower.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/jquery-validation/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/jquery-validation/LICENSE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/jquery-validation/dist/additional-methods.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/jquery-validation/dist/additional-methods.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/jquery-validation/dist/jquery.validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/jquery-validation/dist/jquery.validate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/jquery/.bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/jquery/.bower.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/jquery/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/jquery/LICENSE.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/jquery/dist/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/jquery/dist/jquery.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RazorWebApp/wwwroot/lib/jquery/dist/jquery.min.map" beforeDir="false" afterPath="$PROJECT_DIR$/Core/wwwroot/lib/jquery/dist/jquery.min.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedLibrary/obj/SharedLibrary.csproj.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/obj/SharedLibrary.csproj.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedLibrary/obj/SharedLibrary.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/obj/SharedLibrary.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedLibrary/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedLibrary/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/SharedLibrary/obj/project.packagespec.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,16 +359,134 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Core/Pages/Account/Logout.cshtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="3" lean-forward="true" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+              <folding>
+                <marker date="1555950965486" expanded="true" signature="45:85" ph="@..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Core/Pages/Data/Create.cshtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="257">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+              <folding>
+                <marker date="1555950893212" expanded="true" signature="82:149" ph="@..." />
+                <marker date="1555950893212" expanded="true" signature="273:1918" ph="&lt;div.../&gt;" />
+                <marker date="1555950893212" expanded="true" signature="327:1911" ph="&lt;div.../&gt;" />
+                <marker date="1555950893212" expanded="true" signature="385:528" ph="@..." />
+                <marker date="1555950893212" expanded="true" signature="442:528" ph="{...}" />
+                <marker date="1555950893212" expanded="true" signature="623:1900" ph="&lt;form.../&gt;" />
+                <marker date="1555950893212" expanded="true" signature="768:1752" ph="@..." />
+                <marker date="1555950893212" expanded="true" signature="836:1752" ph="{...}" />
+                <marker date="1555950893212" expanded="true" signature="854:1738" ph="&lt;div.../&gt;" />
+                <marker date="1555950893212" expanded="true" signature="1008:1715" ph="@..." />
+                <marker date="1555950893212" expanded="true" signature="1129:1649" ph="{...}" />
+                <marker date="1555950893212" expanded="true" signature="1765:1884" ph="&lt;div.../&gt;" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Core/Pages/Account/Logout.cshtml.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+              <folding>
+                <marker date="1555950746918" expanded="false" signature="6:323" ph="..." />
+                <marker date="1555950746918" expanded="true" signature="353:1902" ph="{...}" />
+                <marker date="1555950746918" expanded="true" signature="360:549" ph="/// The LogoutModel class in Core.Pages.Account namespace is used as support for Logout.cshtml page.  ... " />
+                <marker date="1555950746918" expanded="true" signature="590:1900" ph="{...}" />
+                <marker date="1555950746918" expanded="true" signature="605:708" ph="/// Service for user account based requests to the server. ... " />
+                <marker date="1555950746918" expanded="true" signature="774:947" ph="/// Constructor for initializing services and cache. ... " />
+                <marker date="1555950746918" expanded="true" signature="1006:1076" ph="{...}" />
+                <marker date="1555950746918" expanded="true" signature="1085:1291" ph="/// This method is used when there is a GET request to Account/Logout.cshtml page ... " />
+                <marker date="1555950746918" expanded="true" signature="1345:1894" ph="{...}" />
+                <marker date="1555950746918" expanded="true" signature="1710:1790" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Core/Pages/Rights/Create.cshtml.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+              <folding>
+                <marker date="1555950746334" expanded="false" signature="6:444" ph="..." />
+                <marker date="1555950746334" expanded="true" signature="473:8869" ph="{...}" />
+                <marker date="1555950746334" expanded="true" signature="480:676" ph="/// The CreateModel class in Core.Pages.Rights namespace is used as support for Create.cshtml page.  ... " />
+                <marker date="1555950746334" expanded="true" signature="717:8867" ph="{...}" />
+                <marker date="1555950746334" expanded="true" signature="732:834" ph="/// Service for RightsModel based requests to the server. ... " />
+                <marker date="1555950746334" expanded="true" signature="898:1001" ph="/// Service for user account based requests to the server. ... " />
+                <marker date="1555950746334" expanded="true" signature="1067:1140" ph="/// In-memory cache service. ... " />
+                <marker date="1555950746334" expanded="true" signature="1185:1495" ph="/// Constructor for initializing services and cache. ... " />
+                <marker date="1555950746334" expanded="true" signature="1610:1766" ph="{...}" />
+                <marker date="1555950746334" expanded="true" signature="1775:1881" ph="/// Name of the new rights. ... " />
+                <marker date="1555950746334" expanded="true" signature="1963:2125" ph="/// Dictionary containing rights value for each dataset. ... " />
+                <marker date="1555950746334" expanded="true" signature="2235:2409" ph="/// ApplicationDescriptor property contains descriptor of the signed user. ... " />
+                <marker date="1555950746334" expanded="true" signature="2491:2664" ph="/// MenuData property contains data necessary for _LoggedMenuPartial. ... " />
+                <marker date="1555950746334" expanded="true" signature="2733:2888" ph="/// Messages property contains list of messages for user. ... " />
+                <marker date="1555950746334" expanded="true" signature="2949:3115" ph="/// This method is used when there is a GET request to Rights/Create.cshtml page ... " />
+                <marker date="1555950746334" expanded="true" signature="3169:5214" ph="{...}" />
+                <marker date="1555950746334" expanded="true" signature="3506:3676" ph="{...}" />
+                <marker date="1555950746334" expanded="true" signature="3784:4159" ph="{...}" />
+                <marker date="1555950746334" expanded="true" signature="3907:4089" ph="{...}" />
+                <marker date="1555950746334" expanded="false" signature="4173:5176" ph="PAGE DATA PREPARATION" />
+                <marker date="1555950746334" expanded="true" signature="4444:4630" ph="{...}" />
+                <marker date="1555950746334" expanded="true" signature="5223:5428" ph="/// OnPostAsync method is invoked after clicking on Submit button. ... " />
+                <marker date="1555950746334" expanded="true" signature="5483:8861" ph="{...}" />
+                <marker date="1555950746334" expanded="true" signature="5985:6360" ph="{...}" />
+                <marker date="1555950746334" expanded="true" signature="6108:6290" ph="{...}" />
+                <marker date="1555950746334" expanded="true" signature="6459:6699" ph="{...}" />
+                <marker date="1555950746334" expanded="true" signature="6917:8153" ph="{...}" />
+                <marker date="1555950746334" expanded="true" signature="7080:7307" ph="{...}" />
+                <marker date="1555950746334" expanded="true" signature="7940:8139" ph="{...}" />
+                <marker date="1555950746334" expanded="true" signature="8202:8415" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>RazorWebApp</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Core/Pages/AppInit/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/_ViewImports.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/SharedLibrary/Enums/SystemDatasetsEnum.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/SharedLibrary/Enums/RightsEnum.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/SharedLibrary/Enums/AttributeTypeEnum.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/Data/Get.cshtml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/Data/Get.cshtml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedLibrary/Models/ApplicationModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Server/Controllers/Data/GetController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Server/Controllers/Data/CreateController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Server/Controllers/User/GetController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/Data/Create.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/Data/Edit.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Startup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/User/Get.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/User/Create.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/User/Edit.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/Rights/Get.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/Rights/Create.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/Rights/Edit.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/Rights/Create.cshtml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedLibrary/Structures/LoginCredentials.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedLibrary/Structures/JWTToken.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedLibrary/Descriptors/DatasetDescriptor.cs" root0="FORCE_HIGHLIGHTING" />
@@ -69,9 +494,9 @@
     <setting file="file://$PROJECT_DIR$/SharedLibrary/Descriptors/UsersDatasetDescriptor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedLibrary/Descriptors/SystemDatasetDescriptor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedLibrary/Descriptors/ApplicationDescriptor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/SharedLibrary/Enums/SystemDatasetsEnum.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/SharedLibrary/Enums/RightsEnum.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/SharedLibrary/Enums/AttributeTypeEnum.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/Account/Logout.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/Account/Logout.cshtml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Pages/Account/Settings.cshtml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -86,6 +511,22 @@
         <option value="$PROJECT_DIR$/SharedLibrary/Enums/SystemDatasetsEnum.cs" />
         <option value="$PROJECT_DIR$/SharedLibrary/Descriptors/ApplicationDescriptor.cs" />
         <option value="$PROJECT_DIR$/SharedLibrary/Structures/LoginCredentials.cs" />
+        <option value="$PROJECT_DIR$/Core/Pages/Account/Logout.cshtml.cs" />
+        <option value="$PROJECT_DIR$/Core/Pages/Index.cshtml" />
+        <option value="$PROJECT_DIR$/Core/Pages/_ViewImports.cshtml" />
+        <option value="$PROJECT_DIR$/Core/Pages/Data/Get.cshtml" />
+        <option value="$PROJECT_DIR$/Core/Pages/Data/Create.cshtml" />
+        <option value="$PROJECT_DIR$/Core/Pages/Data/Edit.cshtml" />
+        <option value="$PROJECT_DIR$/Core/Pages/User/Get.cshtml" />
+        <option value="$PROJECT_DIR$/Core/Pages/Rights/Create.cshtml" />
+        <option value="$PROJECT_DIR$/Core/Pages/Rights/Edit.cshtml" />
+        <option value="$PROJECT_DIR$/Core/Pages/User/Create.cshtml" />
+        <option value="$PROJECT_DIR$/Core/Pages/User/Edit.cshtml" />
+        <option value="$PROJECT_DIR$/Core/Pages/Rights/Get.cshtml" />
+        <option value="$PROJECT_DIR$/Core/Pages/Account/Logout.cshtml" />
+        <option value="$PROJECT_DIR$/Core/Pages/Account/Settings.cshtml" />
+        <option value="$PROJECT_DIR$/Core/Pages/AppInit/Index.cshtml" />
+        <option value="$PROJECT_DIR$/Core/Core.csproj" />
       </list>
     </option>
   </component>
@@ -99,14 +540,55 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="FileSystemExplorer" />
       <pane id="AssemblyExplorer" />
+      <pane id="FileSystemExplorer" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
             <path>
               <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="Loading solution..." type="24d0babc:SolutionExplorerModelNode" />
+              <item name="MetaRMS" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="MetaRMS" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Core" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="MetaRMS" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Core" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Pages" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="MetaRMS" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Core" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Pages" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Account" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="MetaRMS" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Core" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Pages" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Account" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Logout.cshtml" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="MetaRMS" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Core" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Pages" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Rights" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="MetaRMS" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Core" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Pages" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Rights" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Create.cshtml" type="24d0babc:SolutionExplorerModelNode" />
             </path>
           </expand>
           <select />
@@ -169,11 +651,12 @@
       <workItem from="1550309760099" duration="184000" />
       <workItem from="1550309986054" duration="36000" />
       <workItem from="1550310102187" duration="675000" />
+      <workItem from="1555949734121" duration="1016000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7641000" />
+    <option name="totallyTimeSpent" value="8657000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -186,8 +669,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24717286" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25121164" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -201,13 +685,13 @@
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49919224" weight="0.329927" />
       <window_info anchor="bottom" id="NuGet" order="7" sideWeight="0.3562197" weight="0.270073" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49596122" visible="true" weight="0.329927" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4951535" visible="true" weight="0.10948905" />
       <window_info anchor="bottom" id="Inspection Results" order="10" weight="0.32868218" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Unit Tests" order="12" />
       <window_info anchor="bottom" id="REST Client" order="13" />
       <window_info anchor="bottom" id="Terminal" order="14" />
-      <window_info active="true" anchor="bottom" id="Event Log" order="15" sideWeight="0.50403875" side_tool="true" visible="true" weight="0.329927" />
+      <window_info anchor="bottom" id="Event Log" order="15" sideWeight="0.5048465" side_tool="true" weight="0.68029195" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -233,73 +717,9 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Server/data.xml" />
-    <entry file="file://$PROJECT_DIR$/Server/Controllers/Data/CreateController.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-          <folding>
-            <marker date="1540474465095" expanded="false" signature="6:331" ph="..." />
-            <marker date="1540474465095" expanded="true" signature="366:1891" ph="{...}" />
-            <marker date="1540474465095" expanded="true" signature="452:1889" ph="{...}" />
-            <marker date="1540474465095" expanded="true" signature="567:619" ph="{...}" />
-            <marker date="1540474465095" expanded="true" signature="856:1883" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/Controllers/Data/GetController.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-          <folding>
-            <marker date="1548067277442" expanded="false" signature="6:468" ph="..." />
-            <marker date="1548067277442" expanded="true" signature="503:8639" ph="{...}" />
-            <marker date="1548067277442" expanded="true" signature="586:8637" ph="{...}" />
-            <marker date="1548067277442" expanded="true" signature="698:750" ph="{...}" />
-            <marker date="1548067277442" expanded="true" signature="759:930" ph="/* if user from HttpContext has at least Read rights to dataset from parameter returns all dataset data ... */" />
-            <marker date="1548067277442" expanded="true" signature="1095:7054" ph="{...}" />
-            <marker date="1548067277442" expanded="true" signature="1423:1515" ph="/* TODO muze spadnout ... */" />
-            <marker date="1548067277442" expanded="true" signature="1732:1966" ph="/* ApplicationModel application = (from a in _context.ApplicationDbSet ... */" />
-            <marker date="1548067277442" expanded="true" signature="2365:2460" ph="/* check if user has rights to see dataset datasetName ... */" />
-            <marker date="1548067277442" expanded="true" signature="2919:3102" ph="/* var user = (from u in _context.UserDbSet ... */" />
-            <marker date="1548067277442" expanded="true" signature="3188:3487" ph="/* read user's rights from DB ... */" />
-            <marker date="1548067277442" expanded="true" signature="4117:4558" ph="/* List&lt;DataModel&gt; query = (from p in _context.DataDbSet ... */" />
-            <marker date="1548067277442" expanded="true" signature="4690:4775" ph="{...}" />
-            <marker date="1548067277442" expanded="true" signature="4961:7044" ph="/* var referenceIndexTypeTuple = new List&lt;(string Name, string Type)&gt;(); ... */" />
-            <marker date="1548067277442" expanded="true" signature="7222:8631" ph="{...}" />
-            <marker date="1548067277442" expanded="true" signature="7410:7644" ph="/* ApplicationModel application = (from a in _context.ApplicationDbSet ... */" />
-            <marker date="1548067277442" expanded="true" signature="8212:8454" ph="/* DataModel query = (from p in _context.DataDbSet ... */" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/Controllers/User/GetController.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="116" column="2" selection-start-line="116" selection-start-column="2" selection-end-line="116" selection-end-column="2" />
-          <folding>
-            <marker date="1548587349695" expanded="false" signature="6:494" ph="..." />
-            <marker date="1548587349695" expanded="true" signature="529:6237" ph="{...}" />
-            <marker date="1548587349695" expanded="true" signature="612:6235" ph="{...}" />
-            <marker date="1548587349695" expanded="true" signature="724:776" ph="{...}" />
-            <marker date="1548587349695" expanded="true" signature="785:945" ph="/* if user from HttpContext has at least Read rights to rights table returns all rights data ... */" />
-            <marker date="1548587349695" expanded="true" signature="1076:4716" ph="{...}" />
-            <marker date="1548587349695" expanded="true" signature="1404:1496" ph="/* TODO muze spadnout ... */" />
-            <marker date="1548587349695" expanded="true" signature="1714:1948" ph="/* ApplicationModel application = (from a in _context.ApplicationDbSet ... */" />
-            <marker date="1548587349695" expanded="true" signature="2069:2285" ph="/* ApplicationDescriptorHelper adh = new ApplicationDescriptorHelper(application.ApplicationDescriptorJSON); ... */" />
-            <marker date="1548587349695" expanded="true" signature="2745:2928" ph="/* var user = (from u in _context.UserDbSet ... */" />
-            <marker date="1548587349695" expanded="true" signature="3016:3219" ph="/* read user's rights from DB ... */" />
-            <marker date="1548587349695" expanded="true" signature="3893:4148" ph="/* List&lt;UserModel&gt; allUsers = _context.UserDbSet.Where(u =&gt; u.Application.LoginApplicationName == appName) ... */" />
-            <marker date="1548587349695" expanded="true" signature="4298:4639" ph="{...}" />
-            <marker date="1548587349695" expanded="true" signature="4329:4397" ph="/* ignore large JSON data ... */" />
-            <marker date="1548587349695" expanded="true" signature="4850:6229" ph="{...}" />
-            <marker date="1548587349695" expanded="true" signature="5038:5272" ph="/* ApplicationModel application = (from a in _context.ApplicationDbSet ... */" />
-            <marker date="1548587349695" expanded="true" signature="5630:5871" ph="/* var userModel = _context.UserDbSet.Where(u =&gt; u.Application.LoginApplicationName == appName &amp;&amp; u.Id ==id) ... */" />
-            <marker date="1548587349695" expanded="true" signature="6011:6080" ph="/* ignore large JSON data ... */" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/Controllers/Data/CreateController.cs" />
+    <entry file="file://$PROJECT_DIR$/Server/Controllers/Data/GetController.cs" />
+    <entry file="file://$PROJECT_DIR$/Server/Controllers/User/GetController.cs" />
     <entry file="file://$PROJECT_DIR$/SharedLibrary/Models/ApplicationModel.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-52">
@@ -454,6 +874,142 @@
             <marker date="1549815000847" expanded="true" signature="1608:2242" ph="{...}" />
             <marker date="1549815000847" expanded="true" signature="1680:2049" ph="/// Function used to get an AttributeDescriptor for username. ... " />
             <marker date="1549815000847" expanded="true" signature="2107:2234" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/Pages/User/Get.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="3" column="15" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+          <folding>
+            <marker date="1555950914461" expanded="false" signature="13:55" ph="..." />
+            <marker date="1555950914461" expanded="true" signature="89:192" ph="@..." />
+            <marker date="1555950914461" expanded="true" signature="316:4858" ph="&lt;div.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="370:4851" ph="&lt;div.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="428:571" ph="@..." />
+            <marker date="1555950914461" expanded="true" signature="485:571" ph="{...}" />
+            <marker date="1555950914461" expanded="true" signature="651:4840" ph="@..." />
+            <marker date="1555950914461" expanded="true" signature="690:4840" ph="{...}" />
+            <marker date="1555950914461" expanded="true" signature="981:1168" ph="{...}" />
+            <marker date="1555950914461" expanded="true" signature="1012:1154" ph="&lt;form.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="1231:4830" ph="&lt;div.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="1278:4811" ph="&lt;table.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="1320:1935" ph="&lt;thead.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="1352:1906" ph="&lt;tr.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="1445:1708" ph="@..." />
+            <marker date="1555950914461" expanded="true" signature="1550:1708" ph="{...}" />
+            <marker date="1555950914461" expanded="true" signature="1584:1678" ph="&lt;th.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="1799:1876" ph="&lt;th.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="1956:4786" ph="&lt;tbody.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="1988:4757" ph="@..." />
+            <marker date="1555950914461" expanded="true" signature="2022:4757" ph="{...}" />
+            <marker date="1555950914461" expanded="true" signature="2052:4731" ph="&lt;tr.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="2089:3040" ph="@..." />
+            <marker date="1555950914461" expanded="true" signature="2194:3040" ph="{...}" />
+            <marker date="1555950914461" expanded="true" signature="2232:3006" ph="&lt;td.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="2277:2964" ph="@..." />
+            <marker date="1555950914461" expanded="true" signature="2406:2867" ph="{...}" />
+            <marker date="1555950914461" expanded="true" signature="3074:3170" ph="&lt;td.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="3314:4115" ph="@..." />
+            <marker date="1555950914461" expanded="true" signature="3355:4115" ph="{...}" />
+            <marker date="1555950914461" expanded="true" signature="3426:3724" ph="&lt;td.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="3471:3682" ph="&lt;form.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="3761:4081" ph="&lt;td.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="3806:4039" ph="&lt;form.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="4245:4697" ph="@..." />
+            <marker date="1555950914461" expanded="true" signature="4288:4697" ph="{...}" />
+            <marker date="1555950914461" expanded="true" signature="4359:4663" ph="&lt;td.../&gt;" />
+            <marker date="1555950914461" expanded="true" signature="4404:4621" ph="&lt;form.../&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/Pages/Account/Logout.cshtml.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+          <folding>
+            <marker date="1555950746918" expanded="false" signature="6:323" ph="..." />
+            <marker date="1555950746918" expanded="true" signature="353:1902" ph="{...}" />
+            <marker date="1555950746918" expanded="true" signature="360:549" ph="/// The LogoutModel class in Core.Pages.Account namespace is used as support for Logout.cshtml page.  ... " />
+            <marker date="1555950746918" expanded="true" signature="590:1900" ph="{...}" />
+            <marker date="1555950746918" expanded="true" signature="605:708" ph="/// Service for user account based requests to the server. ... " />
+            <marker date="1555950746918" expanded="true" signature="774:947" ph="/// Constructor for initializing services and cache. ... " />
+            <marker date="1555950746918" expanded="true" signature="1006:1076" ph="{...}" />
+            <marker date="1555950746918" expanded="true" signature="1085:1291" ph="/// This method is used when there is a GET request to Account/Logout.cshtml page ... " />
+            <marker date="1555950746918" expanded="true" signature="1345:1894" ph="{...}" />
+            <marker date="1555950746918" expanded="true" signature="1710:1790" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/Pages/Rights/Create.cshtml.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+          <folding>
+            <marker date="1555950746334" expanded="false" signature="6:444" ph="..." />
+            <marker date="1555950746334" expanded="true" signature="473:8869" ph="{...}" />
+            <marker date="1555950746334" expanded="true" signature="480:676" ph="/// The CreateModel class in Core.Pages.Rights namespace is used as support for Create.cshtml page.  ... " />
+            <marker date="1555950746334" expanded="true" signature="717:8867" ph="{...}" />
+            <marker date="1555950746334" expanded="true" signature="732:834" ph="/// Service for RightsModel based requests to the server. ... " />
+            <marker date="1555950746334" expanded="true" signature="898:1001" ph="/// Service for user account based requests to the server. ... " />
+            <marker date="1555950746334" expanded="true" signature="1067:1140" ph="/// In-memory cache service. ... " />
+            <marker date="1555950746334" expanded="true" signature="1185:1495" ph="/// Constructor for initializing services and cache. ... " />
+            <marker date="1555950746334" expanded="true" signature="1610:1766" ph="{...}" />
+            <marker date="1555950746334" expanded="true" signature="1775:1881" ph="/// Name of the new rights. ... " />
+            <marker date="1555950746334" expanded="true" signature="1963:2125" ph="/// Dictionary containing rights value for each dataset. ... " />
+            <marker date="1555950746334" expanded="true" signature="2235:2409" ph="/// ApplicationDescriptor property contains descriptor of the signed user. ... " />
+            <marker date="1555950746334" expanded="true" signature="2491:2664" ph="/// MenuData property contains data necessary for _LoggedMenuPartial. ... " />
+            <marker date="1555950746334" expanded="true" signature="2733:2888" ph="/// Messages property contains list of messages for user. ... " />
+            <marker date="1555950746334" expanded="true" signature="2949:3115" ph="/// This method is used when there is a GET request to Rights/Create.cshtml page ... " />
+            <marker date="1555950746334" expanded="true" signature="3169:5214" ph="{...}" />
+            <marker date="1555950746334" expanded="true" signature="3506:3676" ph="{...}" />
+            <marker date="1555950746334" expanded="true" signature="3784:4159" ph="{...}" />
+            <marker date="1555950746334" expanded="true" signature="3907:4089" ph="{...}" />
+            <marker date="1555950746334" expanded="false" signature="4173:5176" ph="PAGE DATA PREPARATION" />
+            <marker date="1555950746334" expanded="true" signature="4444:4630" ph="{...}" />
+            <marker date="1555950746334" expanded="true" signature="5223:5428" ph="/// OnPostAsync method is invoked after clicking on Submit button. ... " />
+            <marker date="1555950746334" expanded="true" signature="5483:8861" ph="{...}" />
+            <marker date="1555950746334" expanded="true" signature="5985:6360" ph="{...}" />
+            <marker date="1555950746334" expanded="true" signature="6108:6290" ph="{...}" />
+            <marker date="1555950746334" expanded="true" signature="6459:6699" ph="{...}" />
+            <marker date="1555950746334" expanded="true" signature="6917:8153" ph="{...}" />
+            <marker date="1555950746334" expanded="true" signature="7080:7307" ph="{...}" />
+            <marker date="1555950746334" expanded="true" signature="7940:8139" ph="{...}" />
+            <marker date="1555950746334" expanded="true" signature="8202:8415" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/Pages/Account/Logout.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="3" lean-forward="true" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+          <folding>
+            <marker date="1555950965486" expanded="true" signature="45:85" ph="@..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/Pages/Data/Create.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <marker date="1555950893212" expanded="true" signature="82:149" ph="@..." />
+            <marker date="1555950893212" expanded="true" signature="273:1918" ph="&lt;div.../&gt;" />
+            <marker date="1555950893212" expanded="true" signature="327:1911" ph="&lt;div.../&gt;" />
+            <marker date="1555950893212" expanded="true" signature="385:528" ph="@..." />
+            <marker date="1555950893212" expanded="true" signature="442:528" ph="{...}" />
+            <marker date="1555950893212" expanded="true" signature="623:1900" ph="&lt;form.../&gt;" />
+            <marker date="1555950893212" expanded="true" signature="768:1752" ph="@..." />
+            <marker date="1555950893212" expanded="true" signature="836:1752" ph="{...}" />
+            <marker date="1555950893212" expanded="true" signature="854:1738" ph="&lt;div.../&gt;" />
+            <marker date="1555950893212" expanded="true" signature="1008:1715" ph="@..." />
+            <marker date="1555950893212" expanded="true" signature="1129:1649" ph="{...}" />
+            <marker date="1555950893212" expanded="true" signature="1765:1884" ph="&lt;div.../&gt;" />
           </folding>
         </state>
       </provider>
