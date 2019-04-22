@@ -11,13 +11,13 @@ using SharedLibrary.Helpers;
 using SharedLibrary.Enums;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
-using RazorWebApp.Repositories;
+using Core.Helpers;
+using Core.Repositories;
 using SharedLibrary.Structures;
 using Newtonsoft.Json.Linq;
-using RazorWebApp.Helpers;
 using SharedLibrary.StaticFiles;
 
-namespace RazorWebApp.Controllers
+namespace Core.Controllers
 {
     [Route("api/[controller]")]
     public class AppInitController : Controller

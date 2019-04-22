@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using RazorWebApp.Repositories;
 using SharedLibrary.Descriptors;
 using SharedLibrary.Enums;
 using SharedLibrary.Models;
 using System.Text;
+using Core.Repositories;
 
-namespace RazorWebApp.Cache
+namespace Core.Cache
 {
     public class ReferenceCache
     {

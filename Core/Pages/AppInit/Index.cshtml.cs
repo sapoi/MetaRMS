@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using SharedLibrary.Helpers;
 using SharedLibrary.Enums;
 
-namespace RazorWebApp.Pages.Appinit
+namespace Core.Pages.Appinit
 {
     /// <summary>
     /// The IndexModel class in Core.Pages.AppInit namespace is used as support for Index.cshtml page. 

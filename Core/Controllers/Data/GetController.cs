@@ -5,12 +5,12 @@ using System.Linq;
 using SharedLibrary.Helpers;
 using System.Security.Claims;
 using SharedLibrary.Enums;
-using RazorWebApp.Repositories;
-using RazorWebApp.Helpers;
 using System.Collections.Generic;
+using Core.Helpers;
+using Core.Repositories;
 using SharedLibrary.Structures;
 
-namespace RazorWebApp.Controllers.Data
+namespace Core.Controllers.Data
 {
     [Route("api/data/[controller]")]
     public class GetController : Controller

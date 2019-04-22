@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Core.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using RazorWebApp.Repositories;
 using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
 using SharedLibrary.Structures;
 using SharedLibrary.StaticFiles;
 
-namespace RazorWebApp.Controllers.Account
+namespace Core.Controllers.Account
 {
     [Route("api/account/[controller]")]
     public class LoginController : Controller

@@ -4,7 +4,7 @@ using SharedLibrary.Descriptors;
 using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace RazorWebApp.Structures
+namespace Core.Structures
 {
     /// <summary>
     /// InputBuilderPartialData class contains properties necessary for _InputBuilderPartial.cshtml file

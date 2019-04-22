@@ -10,7 +10,7 @@ using SharedLibrary.Services;
 using SharedLibrary.Structures;
 using SharedLibrary.StaticFiles;
 
-namespace RazorWebApp.Helpers
+namespace Core.Helpers
 {
     /// <summary>
     /// CacheHelper is used by the Razor pages to get application descriptors and user rights from the cache.

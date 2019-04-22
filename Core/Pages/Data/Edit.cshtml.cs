@@ -7,8 +7,6 @@ using SharedLibrary.Models;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Caching.Memory;
 using SharedLibrary.Descriptors;
-using RazorWebApp.Helpers;
-using RazorWebApp.Structures;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SharedLibrary.Structures;
 using System.Linq;
@@ -16,8 +14,10 @@ using SharedLibrary.Helpers;
 using SharedLibrary.Enums;
 using System.Net;
 using System;
+using Core.Helpers;
+using Core.Structures;
 
-namespace RazorWebApp.Pages.Data
+namespace Core.Pages.Data
 {
     /// <summary>
     /// The EditModel class in Core.Pages.Data namespace is used as support for Edit.cshtml page. 

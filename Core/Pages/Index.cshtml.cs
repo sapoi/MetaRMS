@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Core.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
-using RazorWebApp.Helpers;
 using SharedLibrary.Helpers;
 using SharedLibrary.Services;
 using SharedLibrary.Structures;
 using SharedLibrary.StaticFiles;
 
-namespace RazorWebApp.Pages
+namespace Core.Pages
 {
     /// <summary>
     /// The IndexModel class in Core.Pages namespace is used as support for Index.cshtml page. 

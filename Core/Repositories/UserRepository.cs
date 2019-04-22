@@ -7,7 +7,7 @@ using SharedLibrary.Helpers;
 using SharedLibrary.Models;
 using SharedLibrary.StaticFiles;
 
-namespace RazorWebApp.Repositories
+namespace Core.Repositories
 {
     /// <summary>
     /// Repository for UserModels.

@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.Models;
 using System.Linq;
 using SharedLibrary.Helpers;
-using RazorWebApp.Repositories;
 using System.Security.Claims;
-using RazorWebApp.Helpers;
+using Core.Helpers;
+using Core.Repositories;
 using SharedLibrary.Enums;
 using SharedLibrary.Structures;
 
-namespace RazorWebApp.Controllers.Data
+namespace Core.Controllers.Data
 {
     [Route("api/data/[controller]")]
     public class CreateController : Controller

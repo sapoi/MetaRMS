@@ -6,11 +6,11 @@ using System.Security.Claims;
 using System.Net.Http;
 using Newtonsoft.Json;
 using SharedLibrary.Descriptors;
-using RazorWebApp.Repositories;
-using RazorWebApp.Helpers;
+using Core.Repositories;
 using System.Collections.Generic;
+using Core.Helpers;
 using SharedLibrary.Structures;
-namespace RazorWebApp.Controllers.Account
+namespace Core.Controllers.Account
 {
     [Route("api/account/[controller]")]
     public class ApplicationDescriptorController : Controller

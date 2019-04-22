@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace RazorWebApp.Controllers.Account
+namespace Core.Controllers.Account
 {
     [Route("api/account/[controller]")]
     public class LogoutController : Controller

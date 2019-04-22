@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using SharedLibrary.Descriptors;
 using SharedLibrary.Enums;
 
-namespace RazorWebApp.Structures
+namespace Core.Structures
 {
     /// <summary>
     /// LoggedMenuPartialData class contains properties necessary for _LoggedMenuPartial.cshtml file

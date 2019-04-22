@@ -7,14 +7,14 @@ using SharedLibrary.Models;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Caching.Memory;
 using SharedLibrary.Descriptors;
-using RazorWebApp.Helpers;
 using SharedLibrary.Enums;
-using RazorWebApp.Structures;
 using SharedLibrary.Structures;
 using SharedLibrary.Helpers;
 using System.Net;
+using Core.Helpers;
+using Core.Structures;
 
-namespace RazorWebApp.Pages.Rights
+namespace Core.Pages.Rights
 {
     /// <summary>
     /// The EditModel class in Core.Pages.Rights namespace is used as support for Edit.cshtml page. 

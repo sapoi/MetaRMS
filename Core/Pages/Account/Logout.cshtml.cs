@@ -5,11 +5,11 @@ using SharedLibrary.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using System.Net;
+using Core.Helpers;
 using SharedLibrary.Structures;
-using RazorWebApp.Helpers;
 using Microsoft.AspNetCore.Authentication;
 
-namespace RazorWebApp.Pages.Account
+namespace Core.Pages.Account
 {
     /// <summary>
     /// The LogoutModel class in Core.Pages.Account namespace is used as support for Logout.cshtml page. 

@@ -7,7 +7,7 @@ using SharedLibrary.Descriptors;
 using SharedLibrary.Enums;
 using SharedLibrary.Models;
 
-namespace RazorWebApp.Helpers
+namespace Core.Helpers
 {
     public class AppInitHelper
     {

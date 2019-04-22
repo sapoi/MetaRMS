@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.Models;
 using System.Linq;
 using SharedLibrary.Helpers;
-using RazorWebApp.Repositories;
-using RazorWebApp.Helpers;
 using System.Security.Claims;
+using Core.Helpers;
+using Core.Repositories;
 using SharedLibrary.Enums;
 using SharedLibrary.Structures;
 
-namespace RazorWebApp.Controllers.Data
+namespace Core.Controllers.Data
 {
     [Route("api/data/[controller]")]
     public class PutController : Controller

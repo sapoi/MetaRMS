@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace RazorWebApp.Pages
+namespace Core.Pages
 {
     /// <summary>
     /// The ErrorModel class in Core.Pages namespace is used as support for Error.cshtml page. 

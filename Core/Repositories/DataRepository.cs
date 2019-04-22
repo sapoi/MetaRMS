@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using SharedLibrary.Models;
 using System.Linq.Dynamic.Core;
 
-namespace RazorWebApp.Repositories
+namespace Core.Repositories
 {
     /// <summary>
     /// Repository for DataModels.

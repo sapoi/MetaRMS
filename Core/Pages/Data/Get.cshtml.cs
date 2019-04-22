@@ -6,16 +6,16 @@ using SharedLibrary.Services;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Caching.Memory;
 using SharedLibrary.Descriptors;
-using RazorWebApp.Helpers;
 using SharedLibrary.Enums;
-using RazorWebApp.Structures;
 using SharedLibrary.Models;
 using SharedLibrary.Structures;
 using SharedLibrary.Helpers;
 using System.Net;
 using System.Linq;
+using Core.Helpers;
+using Core.Structures;
 
-namespace RazorWebApp.Pages.Data
+namespace Core.Pages.Data
 {
     /// <summary>
     /// The GetModel class in Core.Pages.Data namespace is used as support for Get.cshtml page. 

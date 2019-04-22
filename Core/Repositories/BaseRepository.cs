@@ -2,7 +2,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SharedLibrary.Models;
 
-namespace RazorWebApp.Repositories
+namespace Core.Repositories
 {
     /// <summary>
     /// Repository classes are here to be the only and only one access poins to the database

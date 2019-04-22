@@ -1,7 +1,7 @@
 using System.Linq;
 using SharedLibrary.Models;
 
-namespace RazorWebApp.Repositories
+namespace Core.Repositories
 {
     /// <summary>
     /// Repository for ApplicationModels.

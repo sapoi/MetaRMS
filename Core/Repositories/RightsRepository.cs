@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using SharedLibrary.Enums;
 using SharedLibrary.Models;
 
-namespace RazorWebApp.Repositories
+namespace Core.Repositories
 {
     /// <summary>
     /// Repository for RightsModels.

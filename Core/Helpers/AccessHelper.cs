@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Structures;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
-using RazorWebApp.Structures;
 using SharedLibrary.Descriptors;
 using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
@@ -13,7 +13,7 @@ using SharedLibrary.Services;
 using SharedLibrary.Structures;
 using SharedLibrary.StaticFiles;
 
-namespace RazorWebApp.Helpers
+namespace Core.Helpers
 {
     // frontend
     /// <summary>

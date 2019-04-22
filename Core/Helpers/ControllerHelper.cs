@@ -1,18 +1,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using Core.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using RazorWebApp;
-using RazorWebApp.Repositories;
+using Core;
 using SharedLibrary.Descriptors;
 using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
 using SharedLibrary.Models;
 using SharedLibrary.StaticFiles;
 
-namespace RazorWebApp.Helpers
+namespace Core.Helpers
 {
     /// <summary>
     /// ControllerHelper contains methods used by controllers on the server. 

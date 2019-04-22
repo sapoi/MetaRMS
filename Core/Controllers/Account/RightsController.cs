@@ -7,11 +7,11 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using SharedLibrary.Descriptors;
 using System.Collections.Generic;
+using Core.Helpers;
 using SharedLibrary.Enums;
-using RazorWebApp.Repositories;
-using RazorWebApp.Helpers;
+using Core.Repositories;
 
-namespace RazorWebApp.Controllers.Account
+namespace Core.Controllers.Account
 {
     [Route("api/account/[controller]")]
     public class RightsController : Controller

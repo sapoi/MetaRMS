@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using Core.Helpers;
+using Core.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RazorWebApp.Helpers;
-using RazorWebApp.Repositories;
 using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
 using SharedLibrary.Structures;
 
-namespace RazorWebApp.Controllers.Account.Settings
+namespace Core.Controllers.Account.Settings
 {
     [Route("api/account/settings/[controller]")]
     public class PasswordController : Controller

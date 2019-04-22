@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.Models;
-using RazorWebApp.Repositories;
-using RazorWebApp.Helpers;
 using System.Security.Claims;
+using Core.Helpers;
+using Core.Repositories;
 using SharedLibrary.Enums;
 using SharedLibrary.Structures;
 using SharedLibrary.Helpers;
 
-namespace RazorWebApp.Controllers.Rights
+namespace Core.Controllers.Rights
 {
     [Route("api/rights/[controller]")]
     public class DeleteController : Controller

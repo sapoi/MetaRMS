@@ -8,15 +8,15 @@ using Newtonsoft.Json;
 using Microsoft.Extensions.Caching.Memory;
 using System.Linq;
 using SharedLibrary.Descriptors;
-using RazorWebApp.Helpers;
-using RazorWebApp.Structures;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SharedLibrary.Structures;
 using SharedLibrary.Helpers;
 using SharedLibrary.Enums;
 using System.Net;
+using Core.Helpers;
+using Core.Structures;
 
-namespace RazorWebApp.Pages.User
+namespace Core.Pages.User
 {
     /// <summary>
     /// The CreateModel class in Core.Pages.User namespace is used as support for Create.cshtml page. 

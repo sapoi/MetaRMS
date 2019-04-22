@@ -13,7 +13,7 @@ using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
 using System.Text;
 
-namespace RazorWebApp.Helpers
+namespace Core.Helpers
 {
     /// <summary>
     /// This helper is used by Razor pages for loading additional values for selects.

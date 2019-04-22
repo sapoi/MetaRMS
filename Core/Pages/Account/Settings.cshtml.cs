@@ -11,15 +11,15 @@ using Microsoft.Extensions.Caching.Memory;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using SharedLibrary.Descriptors;
-using RazorWebApp.Helpers;
 using SharedLibrary.Enums;
-using RazorWebApp.Structures;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SharedLibrary.Structures;
 using SharedLibrary.Helpers;
 using System.Net;
+using Core.Helpers;
+using Core.Structures;
 
-namespace RazorWebApp.Pages.Account
+namespace Core.Pages.Account
 {
     /// <summary>
     /// The SettingsModel class in Core.Pages.Account namespace is used as support for Settings.cshtml page. 
