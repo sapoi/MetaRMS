@@ -1,5 +1,6 @@
 @using SharedLibrary.Enums 
 @using Newtonsoft.Json
+@using SharedLibrary.StaticFiles
 @model RazorWebApp.Structures.InputBuilderPartialData
 
 @if (@Model.Attribute.Type == "bool")
@@ -75,7 +76,7 @@
 	       		case "year":
 	       			<text>type="text" pattern="-?[0-9][0-9]?[0-9]?[0-9]?"</text>
 	       			break;
-	       		case "tel":
+	       		case "phone":
 	       			<text>type="tel"</text>
 	       			break;
 	       		case "string":
@@ -98,6 +99,7 @@
 	       	}
 
 	       	@if (Model.Attribute.Type == "int" || Model.Attribute.Type == "float") {
+				// Year is not here since it is treated as text with pattern and does not support min and max validation
 	       		if (Model.Attribute.Min != null) {
 	       			<text>min="@Model.Attribute.Min"</text>
 	       		}
@@ -106,7 +108,7 @@
 	       		}
 	       	}
 			@if (Model.Attribute.Type == "text" || Model.Attribute.Type == "string" ||
-				 Model.Attribute.Type == "username" || Model.Attribute.Type == "password") {
+				Model.Attribute.Type == "username" || Model.Attribute.Type == "password") {
 				if (Model.Attribute.Max != null) {
 					<text>maxlength="@Model.Attribute.Max"</text>
 				}
@@ -114,7 +116,7 @@
 					<text>minlength="@Model.Attribute.Min"</text>
 				}
 				if (Model.Attribute.Type == "password" && Model.Attribute.Safer == true) {
-					<text>pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"</text>
+					<text>pattern="@Constants.SaferPasswordPattern"</text>
 				}
 			}
 
@@ -129,7 +131,13 @@
 	<select name="@Model.OutValue"
 		class="selectpicker form-control"
 		data-live-search="true"
-		@if (Model.Attribute.Max == null || Model.Attribute.Max > 1) 
+		@if (Model.Attribute.Max == null) 
+		{
+			<text>
+				multiple
+			</text>
+		}
+		@if (Model.Attribute.Max != null && Model.Attribute.Max > 1)
 		{
 			<text>
 				multiple

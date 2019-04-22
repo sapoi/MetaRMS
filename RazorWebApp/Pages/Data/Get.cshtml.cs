@@ -120,7 +120,7 @@ namespace RazorWebApp.Pages.Data
             if (ApplicationDescriptor == null)
             {
                 Logger.LogToConsole($"Application descriptor for user with token {token.Value} not found.");
-                return RedirectToPage("/Errors/ServerError");
+                return RedirectToPage("/Error");
             }
             // Rights
             var rights = await AccessHelper.GetUserRights(cache, accountService, token);
@@ -146,7 +146,7 @@ namespace RazorWebApp.Pages.Data
             if (ActiveDatasetDescriptor == null || ActiveDatasetRights == null || MenuData == null)
             {
                 Logger.LogToConsole($"ReadAuthorizedDatasets, ActiveDatasetDescriptor, ActiveDatasetRights or MenuData failed loading for user with token {token.Value}.");
-                return RedirectToPage("/Errors/ServerError");
+                return RedirectToPage("/Error");
             }
             // Data
             Data = new List<DataModel>();
@@ -220,7 +220,7 @@ namespace RazorWebApp.Pages.Data
             if (ApplicationDescriptor == null)
             {
                 Logger.LogToConsole($"Application descriptor for user with token {token.Value} not found.");
-                return RedirectToPage("/Errors/ServerError");
+                return RedirectToPage("/Error");
             }
             ActiveDatasetDescriptor = ApplicationDescriptor.Datasets.FirstOrDefault(d => d.Name == datasetName);
             if (ActiveDatasetDescriptor == null)

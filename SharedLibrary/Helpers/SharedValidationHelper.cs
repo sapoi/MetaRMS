@@ -8,6 +8,7 @@ using SharedLibrary.Descriptors;
 using SharedLibrary.Enums;
 using SharedLibrary.Models;
 using SharedLibrary.Structures;
+using SharedLibrary.StaticFiles;
 
 namespace SharedLibrary.Helpers
 {
@@ -18,14 +19,15 @@ namespace SharedLibrary.Helpers
     {
         /// <summary>
         /// Returns true if password fulfills safety requirements defined by the regular expression
-        /// from http://html5pattern.com/Passwords (at least 8 characters long and contain at least 
-        /// 1 upper and 1 lower-case letter and one number or special character)
+        /// from http://html5pattern.com/Passwords (at least number of characters defined in the
+        /// Constants static file characters long and contain at least 1 upper and 1 lower-case letter 
+        /// and 1 number or special character)
         /// </summary>
         /// <param name="password">String password to be validated</param>
         /// <returns>True if password is safe, otherwise false</returns>
         public bool IsPasswordSafer(string password)
         {
-            return Regex.IsMatch(password, @"(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$");
+            return Regex.IsMatch(password, Constants.SaferPasswordPattern);
         }
         /// <summary>
         /// This method validates if the two ids from parametres are equal.
@@ -278,7 +280,7 @@ namespace SharedLibrary.Helpers
                         hasTypeError = true;
                     parsedNumber = parsedYear;
                     break;
-                case "tel":
+                case "phone":
                     if (!dataDictionaryValues[0].ToString().All(c => "0123456789!().-,".Contains(c)))
                         hasTypeError = true;
                     break;
@@ -382,7 +384,7 @@ namespace SharedLibrary.Helpers
             }
 
             // Unique
-            // not implemented yet
+            // not implemented 
 
             // Min and max
             if (isNumber)

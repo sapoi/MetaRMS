@@ -4,18 +4,16 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using SharedLibrary.Descriptors;
-using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
 using SharedLibrary.Models;
 using SharedLibrary.Services;
 using SharedLibrary.Structures;
-using static SharedLibrary.Structures.JWTToken;
+using SharedLibrary.StaticFiles;
 
 namespace RazorWebApp.Helpers
 {
-    // frontend
     /// <summary>
-    /// CacheHelper 
+    /// CacheHelper is used by the Razor pages to get application descriptors and user rights from the cache.
     /// </summary>
     public class CacheHelper
     {
@@ -24,12 +22,13 @@ namespace RazorWebApp.Helpers
         /// </summary>
         static List<string> cacheKeys = new List<string>();
         /// <summary>
-        /// 
+        /// This method gets returns application descriptor based on application id in token.
+        /// If no descriptor is found, null is returned.
         /// </summary>
-        /// <param name="cache"></param>
-        /// <param name="accountService"></param>
-        /// <param name="token"></param>
-        /// <returns></returns>
+        /// <param name="cache">Cache to get the descriptor from</param>
+        /// <param name="accountService">Account service used for loading the descriptor if not present in the cache</param>
+        /// <param name="token">Token for authentication on the server side</param>
+        /// <returns>ApplicationDescriptor or null</returns>
         public static async Task<ApplicationDescriptor> GetApplicationDescriptorFromCacheAsync(IMemoryCache cache, IAccountService accountService, JWTToken token)
         {
             // Get application id from token
@@ -41,7 +40,7 @@ namespace RazorWebApp.Helpers
                 return null;
             }
             // Get application descriptor from cache if already there
-            var cacheKeyName = "Descriptor_" + applicationId;
+            var cacheKeyName = Constants.CacheDescriptorPrefix + applicationId;
             var applicationDescriptor = (ApplicationDescriptor)cache.Get(cacheKeyName);
             if (applicationDescriptor != null)
                 return applicationDescriptor;
@@ -64,12 +63,13 @@ namespace RazorWebApp.Helpers
             return applicationDescriptor;
         }
         /// <summary>
-        /// 
+        /// This method gets returns user rights based on rights id in token.
+        /// If no rights are found, null is returned.
         /// </summary>
-        /// <param name="cache"></param>
-        /// <param name="accountService"></param>
-        /// <param name="token"></param>
-        /// <returns></returns>
+        /// <param name="cache">Cache to get the rights from</param>
+        /// <param name="accountService">Account service used for loading the rights if not present in the cache</param>
+        /// <param name="token">Token for authentication on the server side</param>
+        /// <returns>RightsModel or null</returns>
         public static async Task<RightsModel> GetRightsFromCacheAsync(IMemoryCache cache, IAccountService accountService, JWTToken token)
         {
             // Get application name and user id from token
@@ -82,7 +82,7 @@ namespace RazorWebApp.Helpers
                 return null;
             }
             // Get rights from cache if already there
-            var cacheKeyName = "Rights_" + applicationId + '_' + userId;
+            var cacheKeyName = Constants.CacheRightsPrefix + applicationId + '_' + userId;
             var rightsModel = (RightsModel)cache.Get(cacheKeyName);
             if (rightsModel != null)
                 return rightsModel;
@@ -105,7 +105,7 @@ namespace RazorWebApp.Helpers
             return rightsModel;
         }
         /// <summary>
-        /// This method removes all "Rights_" + application entries from cache.
+        /// This method removes all Constants.CacheRightsPrefix + application entries from cache.
         /// </summary>
         /// <param name="cache">Cache to delete from</param>
         /// <param name="applicationId">For which application to delete the rights</param>
@@ -114,8 +114,8 @@ namespace RazorWebApp.Helpers
             var newCacheKeys = new List<string>();
             foreach (var key in cacheKeys)
             {
-                // Remove all Rights_ entries for a given application id
-                if(key.StartsWith("Rights_" + applicationId))
+                // Remove all Constants.CacheRightsPrefix entries for a given application id
+                if(key.StartsWith(Constants.CacheRightsPrefix + applicationId))
                     cache.Remove(key);
                 // Otherwise keep key in cache keys
                 else

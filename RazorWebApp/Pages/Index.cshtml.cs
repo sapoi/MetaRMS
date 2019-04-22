@@ -9,6 +9,7 @@ using RazorWebApp.Helpers;
 using SharedLibrary.Helpers;
 using SharedLibrary.Services;
 using SharedLibrary.Structures;
+using SharedLibrary.StaticFiles;
 
 namespace RazorWebApp.Pages
 {
@@ -98,7 +99,7 @@ namespace RazorWebApp.Pages
                 {
                     var JWTToken = response.Content.ReadAsStringAsync().Result;
                     // Save token to the session
-                    HttpContext.Session.SetString("sessionJWT", JWTToken);
+                    HttpContext.Session.SetString(Constants.SessionJWTKey, JWTToken);
                     var token = AccessHelper.GetTokenFromPageModel(this);
                     return RedirectToPage("/Data/Get");
                 }

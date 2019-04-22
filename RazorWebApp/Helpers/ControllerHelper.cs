@@ -10,6 +10,7 @@ using SharedLibrary.Descriptors;
 using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
 using SharedLibrary.Models;
+using SharedLibrary.StaticFiles;
 
 namespace RazorWebApp.Helpers
 {
@@ -36,15 +37,15 @@ namespace RazorWebApp.Helpers
         {
             // If user is not authenticated or JWT token does not contain claim named UserId
             if (identity == null || !identity.IsAuthenticated 
-                                 || identity.FindFirst("UserId") == null)
+                                 || identity.FindFirst(Constants.JWTClaimUserId) == null)
             {
                 return null;
             }
             // Get user id from UserId claim
             long userId;
-            if (!long.TryParse(identity.FindFirst("UserId").Value, out userId))
+            if (!long.TryParse(identity.FindFirst(Constants.JWTClaimUserId).Value, out userId))
             {
-                Logger.LogToConsole($"UserId claim with value \"{identity.FindFirst("UserId").Value}\" could not be parsed.");
+                Logger.LogToConsole($"{Constants.JWTClaimUserId} claim with value \"{identity.FindFirst(Constants.JWTClaimUserId).Value}\" could not be parsed.");
                 return null;
             }
             // Look for user in the database

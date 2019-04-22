@@ -63,7 +63,7 @@
                         "Name": {
                             "type": "string",
                             "not": {
-                                "enum": ["color", "date", "datetime", "email", "month", "int", "float", "year", "tel", "string", "time", "url", "username", "password", "bool", "text"],
+                                "enum": ["color", "date", "datetime", "email", "month", "int", "float", "year", "phone", "string", "time", "url", "username", "password", "bool", "text"],
                                 "pattern": "{[0-1]+}"
                             }
                         },
@@ -99,7 +99,7 @@
                     "Name": {
                         "type": "string",
                         "not": {
-                            "enum": ["color", "date", "datetime", "email", "month", "int", "float", "year", "tel", "string", "time", "url", "username", "password", "bool", "text"],
+                            "enum": ["color", "date", "datetime", "email", "month", "int", "float", "year", "phone", "string", "time", "url", "username", "password", "bool", "text"],
                             "pattern": ".*{[0-1]+}.*"
                         }
                     },

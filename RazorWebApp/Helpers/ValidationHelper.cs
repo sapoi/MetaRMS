@@ -7,7 +7,7 @@ namespace RazorWebApp.Helpers
     public class ValidationHelper
     {
         /// <summary>
-        /// This method validates and adds missimg attributes values to data dictionary received from the Razor pages.
+        /// This method validates and adds missing attributes values to data dictionary received from the Razor pages.
         /// </summary>
         /// <param name="dataDictionary">Data dictionary to validate</param>
         /// <param name="attributes">List of attributes that are required to be in the dataDictioanry</param>

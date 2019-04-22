@@ -114,7 +114,7 @@ namespace RazorWebApp.Pages.User
             if (rights == null)
             {
                 Logger.LogToConsole($"Rights not found for user with token {token.Value}.");
-                return RedirectToPage("/Errors/ServerError");
+                return RedirectToPage("/Error");
             }
             if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Users, RightsEnum.CRU))
             {
@@ -135,7 +135,7 @@ namespace RazorWebApp.Pages.User
             if (ApplicationDescriptor == null)
             {
                 Logger.LogToConsole($"Application descriptor for user with token {token.Value} not found.");
-                return RedirectToPage("/Errors/ServerError");
+                return RedirectToPage("/Error");
             }
             // Menu data
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
@@ -188,7 +188,7 @@ namespace RazorWebApp.Pages.User
             if (ApplicationDescriptor == null)
             {
                 Logger.LogToConsole($"Application descriptor for user with token {token.Value} not found.");
-                return RedirectToPage("/Errors/ServerError");
+                return RedirectToPage("/Error");
             }
             var validationHelper = new ValidationHelper();
             validationHelper.ValidateDataDictionary(NewUserDataDictionary, ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Attributes);

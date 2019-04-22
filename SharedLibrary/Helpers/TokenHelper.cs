@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using SharedLibrary.Structures;
 using System;
+using SharedLibrary.StaticFiles;
 
 namespace SharedLibrary.Helpers
 {
@@ -27,7 +28,7 @@ namespace SharedLibrary.Helpers
         {
             var handler = new JwtSecurityTokenHandler();
             var token = handler.ReadToken(accessToken.Value) as JwtSecurityToken;
-            var claim =  token.Claims.First(c => c.Type == "UserId");
+            var claim =  token.Claims.First(c => c.Type == Constants.JWTClaimUserId);
             if (claim == null)
                 return null;
             long id;
@@ -43,7 +44,7 @@ namespace SharedLibrary.Helpers
         {
             var handler = new JwtSecurityTokenHandler();
             var token = handler.ReadToken(accessToken.Value) as JwtSecurityToken;
-            var claim =  token.Claims.First(c => c.Type == "ApplicationId");
+            var claim =  token.Claims.First(c => c.Type == Constants.JWTClaimApplicationId);
             if (claim == null)
                 return null;
             long id;

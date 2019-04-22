@@ -12,7 +12,7 @@
                 "Type": "password",
                 "Required": true,
                 "Safer": true,
-                "Min": 8,
+                "Min": 10,
                 "Max": 20
             },
             "Attributes": [
@@ -122,8 +122,8 @@
                 },
                 {
                     "Name": "Telephone",
-                    "Description": "Reader's telephone.",
-                    "Type": "tel"
+                    "Description": "Reader's phone.",
+                    "Type": "phone"
                 }
             ]
         },

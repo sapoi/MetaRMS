@@ -70,7 +70,7 @@ namespace RazorWebApp.Controllers.User
             fromBodyUserModel.Application = authUserModel.Application;
             
             // New username must be nonempty
-            if (fromBodyUserModel.GetUsername() == null || fromBodyUserModel.GetUsername() == "")
+            if (String.IsNullOrEmpty(fromBodyUserModel.GetUsername()))
             {
                 messages.Add(new Message(MessageTypeEnum.Error, 
                                                   3001, 
@@ -101,6 +101,9 @@ namespace RazorWebApp.Controllers.User
 
             // Reset password to default
             userRepository.ResetPassword(fromBodyUserModel);
+
+            // Set defalut language from application
+            fromBodyUserModel.Language = fromBodyUserModel.Application.ApplicationDescriptor.DefaultLanguage;
 
             userRepository.Add(fromBodyUserModel);
             messages.Add(new Message(MessageTypeEnum.Info, 

@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
 using SharedLibrary.Models;
+using SharedLibrary.StaticFiles;
 
 namespace RazorWebApp.Repositories
 {
@@ -88,17 +89,19 @@ namespace RazorWebApp.Repositories
         /// <returns>Number of rows affected.</returns>
         public int SetPassword(UserModel user, string password)
         {
-            user.Password = PasswordHelper.ComputeHash(password);
+            user.PasswordSalt = PasswordHelper.GetSalt();
+            user.PasswordHash = PasswordHelper.ComputeHash(user.PasswordSalt + password);
             return databaseContext.SaveChanges();
         }
         /// <summary>
-        /// This method seth user password to default value (the same as the username).
+        /// This method sets user password to default value (the same as the username).
         /// </summary>
         /// <param name="user">UserModel that should have the password set.</param>
         /// <returns>Number of rows affected.</returns>
         public int ResetPassword(UserModel user)
         {
-            string password = user.GetUsername();
+            
+            string password = Constants.ResetPasswordValue;
             return this.SetPassword(user, password);
         }
         /// <summary>

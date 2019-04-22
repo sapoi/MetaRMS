@@ -5,6 +5,7 @@ using System.Web;
 using System.Text;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using SharedLibrary.StaticFiles;
  
 namespace SharedLibrary.Helpers
 {
@@ -18,12 +19,12 @@ namespace SharedLibrary.Helpers
         /// <summary>
         /// This method computes hash of string from parameter.
         /// </summary>
-        /// <param name="password">Password to be hashed</param>
+        /// <param name="saltWithPassword">Salt with password to be hashed</param>
         /// <returns>Hashed password.</returns>
-        public static string ComputeHash(string password)
+        public static string ComputeHash(string saltWithPassword)
         {
             // Convert password into a byte array
-            byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+            byte[] passwordBytes = Encoding.UTF8.GetBytes(saltWithPassword);
             // Get hash algorithm and compute 
             byte[] hashBytes = hashAlgorithm.ComputeHash(passwordBytes);
             // Convert result into a base64-encoded string
@@ -32,15 +33,17 @@ namespace SharedLibrary.Helpers
             return hashedPassword;
         }
         /// <summary>
-        /// This method checks if hashed password from parametres is eaqual to the hash from the parametres.
+        /// This method checks if hashed password together with salt from parametres is eaqual to 
+        /// the hash from the parametres.
         /// </summary>
+        /// <param name="salt">Salt added to the password</param>
         /// <param name="password">Password to validate</param>
         /// <param name="hash">Hash to validate password against</param>
         /// <returns>True if ashed password and hash are eaqual, false otherwise.</returns>
-        public static bool CheckHash(string password, string hash)
+        public static bool CheckHash(string salt, string password, string hash)
         {
             // Compute hash for password
-            string expectedHash = ComputeHash(password);
+            string expectedHash = ComputeHash(salt + password);
             // Check if computed hash == hash from parameter
             return (hash == expectedHash);
         }
@@ -61,6 +64,19 @@ namespace SharedLibrary.Helpers
             }
             return res.ToString();
         }
- 
+        /// <summary>
+        /// This method returns a new random salt for password.
+        /// </summary>
+        /// <returns>New random salt for password.</returns>
+        public static string GetSalt()
+        {
+            var saltLength = Constants.SaltLength;
+            var salt = new byte[saltLength];
+            using (var random = new RNGCryptoServiceProvider())
+            {
+                random.GetNonZeroBytes(salt);
+            }
+            return Convert.ToBase64String(salt);
+        }
     }
 }

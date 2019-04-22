@@ -65,7 +65,7 @@ namespace SharedLibrary.Helpers
             {
                 applicationDescriptor.Datasets[i].Id = i + 1;
             }
-            // Add id -1 to users dataset
+            // Add id SystemDatasetsEnum.Users to users dataset
             applicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Id = (long)SystemDatasetsEnum.Users;
             // Defalut values to attributes properties
             var allAttributeDescriptors = applicationDescriptor.Datasets.SelectMany(d => d.Attributes).ToList();
@@ -193,6 +193,12 @@ namespace SharedLibrary.Helpers
         List<Message> validateOneAttribute(ApplicationDescriptor applicationDescriptor, DatasetDescriptor datasetDescriptor, AttributeDescriptor attributeDescriptor, bool isPassword = false)
         {
             var messages = new List<Message>();
+
+            // Attribute name cannot contain {number}, because of error messages placeholders
+            if (Regex.IsMatch(attributeDescriptor.Name, "{[0-9]*}"))
+                messages.Add(new Message(MessageTypeEnum.Error, 
+                                         0029, 
+                                         new List<string>(){ attributeDescriptor.Name, datasetDescriptor.Name }));
             
             // Not a basic type
             if (!AttributeType.Types.Contains(attributeDescriptor.Type))
@@ -270,16 +276,41 @@ namespace SharedLibrary.Helpers
                 messages.Add(new Message(MessageTypeEnum.Error, 
                             0017, 
                             new List<string>(){ attributeDescriptor.Name, datasetDescriptor.Name }));
-            // Min > 0
-            if (attributeDescriptor.Min != null && attributeDescriptor.Min <= 0)
-                messages.Add(new Message(MessageTypeEnum.Error, 
-                            0018, 
-                            new List<string>(){ attributeDescriptor.Name, datasetDescriptor.Name }));
-            // Max > 0
-            if (attributeDescriptor.Max != null && attributeDescriptor.Max <= 0)
-                messages.Add(new Message(MessageTypeEnum.Error, 
-                            0019, 
-                            new List<string>(){ attributeDescriptor.Name, datasetDescriptor.Name }));
+            // Min and Max cannot be set for color, date, datetime, email, month, phone, time, url and bool
+            if (attributeDescriptor.Type == "color" || attributeDescriptor.Type == "date" ||
+                attributeDescriptor.Type == "datetime" || attributeDescriptor.Type == "email" ||
+                attributeDescriptor.Type == "month" || attributeDescriptor.Type == "phone" ||
+                attributeDescriptor.Type == "time" || attributeDescriptor.Type == "url" ||
+                attributeDescriptor.Type == "bool")
+            {
+                if (attributeDescriptor.Min != null)
+                    messages.Add(new Message(MessageTypeEnum.Error, 
+                                0027, 
+                                new List<string>(){ attributeDescriptor.Name, datasetDescriptor.Name }));
+                if (attributeDescriptor.Max != null)
+                    messages.Add(new Message(MessageTypeEnum.Error, 
+                                0028, 
+                                new List<string>(){ attributeDescriptor.Name, datasetDescriptor.Name }));
+            }
+            else // Attributes that can have Min and Max set
+            {
+                // Min > 0 and Max > 0 for text, string, username, password and references
+                if (attributeDescriptor.Type == "text" || attributeDescriptor.Type == "string" ||
+                    attributeDescriptor.Type == "username" || attributeDescriptor.Type == "password" ||
+                    !AttributeType.Types.Contains(attributeDescriptor.Type))
+                {
+                    // Min > 0
+                    if (attributeDescriptor.Min != null && attributeDescriptor.Min <= 0)
+                        messages.Add(new Message(MessageTypeEnum.Error, 
+                                    0018, 
+                                    new List<string>(){ attributeDescriptor.Name, datasetDescriptor.Name }));
+                    // Max > 0
+                    if (attributeDescriptor.Max != null && attributeDescriptor.Max <= 0)
+                        messages.Add(new Message(MessageTypeEnum.Error, 
+                                    0019, 
+                                    new List<string>(){ attributeDescriptor.Name, datasetDescriptor.Name }));
+                }
+            }
 
             return messages;
         }

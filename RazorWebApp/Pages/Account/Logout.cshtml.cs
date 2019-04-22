@@ -11,31 +11,42 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace RazorWebApp.Pages.Account
 {
+    /// <summary>
+    /// The LogoutModel class in RazorWebApp.Pages.Account namespace is used as support for Logout.cshtml page. 
+    /// The page is used to log out a logged user.
+    /// </summary>
     public class LogoutModel : PageModel
     {
-        private readonly IAccountService _accountService;
-
+        /// <summary>
+        /// Service for user account based requests to the server.
+        /// </summary>
+        private readonly IAccountService accountService;
+        /// <summary>
+        /// Constructor for initializing services and cache.
+        /// </summary>
+        /// <param name="accountService">Account service to be used</param>
         public LogoutModel(IAccountService accountService)
         {
-            this._accountService = accountService;
+            this.accountService = accountService;
         }
-
+        /// <summary>
+        /// This method is used when there is a GET request to Account/Logout.cshtml page
+        /// </summary>
+        /// <returns>Redirect to index page after user is logged out.</returns>
         public async Task<IActionResult> OnGetAsync()
         {
-            // validation
+            // Authentication
             var token = AccessHelper.GetTokenFromPageModel(this);
-            // if token is not valid, return to login page
             if (token == null)
                 return RedirectToPage("/Index");
-
-            // logout on server
-            await _accountService.Logout(token);
-            // clear cookies on client
+            // Logout on server
+            await accountService.Logout(token);
+            // Clear cookies on client
             foreach (var cookieKey in Request.Cookies.Keys)
             {
                 Response.Cookies.Delete(cookieKey);
             }
-            // redirect to index page with login
+            // Redirect to index page with login
             return RedirectToPage("/Index");
         }
     }

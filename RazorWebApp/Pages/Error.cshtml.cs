@@ -1,21 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorWebApp.Pages
 {
+    /// <summary>
+    /// The ErrorModel class in RazorWebApp.Pages namespace is used as support for Error.cshtml page. 
+    /// The page is used to display server error annoucement.
+    /// </summary>
     public class ErrorModel : PageModel
     {
-        public string RequestId { get; set; }
-
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-
-        public void OnGet()
+        /// <summary>
+        /// Constructor for initializing model.
+        /// </summary>
+        public ErrorModel() { }
+        /// <summary>
+        /// This method is used when there is a GET request to Error.cshtml page.
+        /// </summary>
+        /// <returns>The page.</returns>
+        public IActionResult OnGetAsync()
         {
-            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+            return Page();
         }
     }
 }

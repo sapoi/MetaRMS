@@ -24,9 +24,9 @@ namespace RazorWebApp.Structures
         /// Rights for users and rights.
         /// </summary>
         /// <value>Dictionary of long and RightsEnum</value>
-        public Dictionary<long, RightsEnum> NavbarRights { get; set; }
+        public Dictionary<long, RightsEnum> SystemDatasetsRights { get; set; }
         /// <summary>
-        /// List of datasets with at least read rights. These datasets will be displayed in menu.
+        /// List of user defined datasets with at least read rights. These datasets will be displayed in menu.
         /// </summary>
         /// <value>List of DatasetDescriptors</value>
         public List<DatasetDescriptor> ReadAuthorizedDatasets { get; set; }

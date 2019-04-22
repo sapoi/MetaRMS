@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
@@ -50,9 +51,9 @@ namespace RazorWebApp.Controllers.Account.Settings
             #region VALIDATIONS
 
             // All passwords must not be null or empty strings
-            if (passwords.OldPassword == null || passwords.OldPassword == "" ||
-                passwords.NewPassword == null || passwords.NewPassword == "" ||
-                passwords.NewPasswordCopy == null || passwords.NewPasswordCopy == "")
+            if (String.IsNullOrEmpty(passwords.OldPassword) ||
+                String.IsNullOrEmpty(passwords.NewPassword) ||
+                String.IsNullOrEmpty(passwords.NewPasswordCopy))
             {
                 messages.Add(new Message(MessageTypeEnum.Error, 
                                                   5001, 
@@ -70,7 +71,7 @@ namespace RazorWebApp.Controllers.Account.Settings
             }
 
             // Old password must be correct
-            if (authUserModel.Password != PasswordHelper.ComputeHash(passwords.OldPassword))
+            if (authUserModel.PasswordHash != PasswordHelper.ComputeHash(authUserModel.PasswordSalt + passwords.OldPassword))
             {
                 messages.Add(new Message(MessageTypeEnum.Error, 
                                                   5003, 
@@ -87,6 +88,22 @@ namespace RazorWebApp.Controllers.Account.Settings
                     messages.Add(new Message(MessageTypeEnum.Error, 
                                                       5004, 
                                                       new List<string>()));
+                    return BadRequest(messages);
+                }
+            }
+
+            // If minimal password length is set
+            var minPasswordLength = authUserModel.Application.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.PasswordAttribute.Min;
+            if (minPasswordLength != null)
+            {
+                if (passwords.NewPassword.Length < minPasswordLength)
+                {
+                    messages.Add(new Message(MessageTypeEnum.Error, 
+                                             5006, 
+                                             new List<string>() {
+                                                minPasswordLength.ToString(),
+                                                passwords.NewPassword.Length.ToString()
+                                             }));
                     return BadRequest(messages);
                 }
             }

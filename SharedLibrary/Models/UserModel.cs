@@ -34,12 +34,19 @@ namespace SharedLibrary.Models
         [ForeignKey("ApplicationId")]
         public ApplicationModel Application { get; set; }
         /// <summary>
-        /// Password property.
+        /// Hashed password property.
         /// </summary>
         /// <value>Contains user's hashed password.</value>
         [Required]
-        [Column("password")]
-        public string Password { get; set; }
+        [Column("password_hash")]
+        public string PasswordHash { get; set; }
+        /// <summary>
+        /// Password salt property.
+        /// </summary>
+        /// <value>Contains salt added to user's password.</value>
+        [Required]
+        [Column("password_salt")]
+        public string PasswordSalt { get; set; }
         /// <summary>
         /// Data property.
         /// </summary>

@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using RazorWebApp;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace RazorWebApp
 {
@@ -94,6 +96,11 @@ namespace RazorWebApp
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
+
+            // services.Configure<MvcOptions>(options =>
+            // {
+            //     options.Filters.Add(new RequireHttpsAttribute());
+            // });
             #endregion
         }
 
@@ -110,6 +117,10 @@ namespace RazorWebApp
             }
             app.UseStaticFiles();
             app.UseSession();
+
+            // // HTTPS
+            // var options = new RewriteOptions().AddRedirectToHttps();
+            // app.UseRewriter(options);
             
             app.UseAuthentication();
             app.UseMvc();

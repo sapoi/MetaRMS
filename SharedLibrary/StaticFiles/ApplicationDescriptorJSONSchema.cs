@@ -73,11 +73,7 @@ namespace SharedLibrary.StaticFiles
                     'type': 'object',
                     'properties': {
                         'Name': {
-                            'type': 'string',
-                            'not': {
-                                'enum': ['color', 'date', 'datetime', 'email', 'month', 'int', 'float', 'year', 'tel', 'string', 'time', 'url', 'username', 'password', 'bool', 'text'],
-                                'pattern': '{[0-1]+}'
-                            }
+                            'type': 'string'
                         },
                         'Description': {
                             'type': ['string', 'null']
@@ -109,11 +105,7 @@ namespace SharedLibrary.StaticFiles
                 'type': 'object',
                 'properties': {
                     'Name': {
-                        'type': 'string',
-                        'not': {
-                            'enum': ['color', 'date', 'datetime', 'email', 'month', 'int', 'float', 'year', 'tel', 'string', 'time', 'url', 'username', 'password', 'bool', 'text'],
-                            'pattern': '.*{[0-1]+}.*'
-                        }
+                        'type': 'string'
                     },
                     'Description': {
                         'type': ['string', 'null']

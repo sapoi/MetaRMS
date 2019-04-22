@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using SharedLibrary.StaticFiles;
 
 namespace SharedLibrary.Services
 {
@@ -17,12 +18,12 @@ namespace SharedLibrary.Services
             /// <summary>
             /// Local base address to connect to the server
             /// </summary>
-            protected Uri baseAddress = new Uri("http://localhost:5000/api/");
+            protected Uri baseAddress = new Uri(Constants.LocalServerBaseAddress);
         #else
             /// <summary>
             /// Production base address to connect to the server
             /// </summary>
-            protected Uri baseAddress = new Uri("http://sapoi.aspifyhost.com/api/");
+            protected Uri baseAddress = new Uri(Constants.SapoiAspifyServerBaseAddress);
         #endif
         /// <summary>
         /// BaseService constructor for client initialization

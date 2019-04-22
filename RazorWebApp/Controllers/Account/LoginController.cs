@@ -11,6 +11,7 @@ using RazorWebApp.Repositories;
 using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
 using SharedLibrary.Structures;
+using SharedLibrary.StaticFiles;
 
 namespace RazorWebApp.Controllers.Account
 {
@@ -82,7 +83,7 @@ namespace RazorWebApp.Controllers.Account
             var userRepository = new UserRepository(context);
             var user = userRepository.GetByApplicationIdAndUsername(applicationModel.Id, loginCredentials.Username);
             // User not found or password not correct
-            if (user == null || !PasswordHelper.CheckHash(loginCredentials.Password, user.Password))
+            if (user == null || !PasswordHelper.CheckHash(user.PasswordSalt, loginCredentials.Password, user.PasswordHash))
             {
                 messages.Add(new Message(MessageTypeEnum.Error, 
                                          1005, 
@@ -93,8 +94,8 @@ namespace RazorWebApp.Controllers.Account
             // Login credentials are valid, create JWT token
             var claims = new[]
             {
-                new Claim("UserId", user.Id.ToString()),
-                new Claim("ApplicationId", user.ApplicationId.ToString()),
+                new Claim(Constants.JWTClaimUserId, user.Id.ToString()),
+                new Claim(Constants.JWTClaimApplicationId, user.ApplicationId.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             var token = new JwtSecurityToken

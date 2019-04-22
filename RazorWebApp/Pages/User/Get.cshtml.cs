@@ -108,7 +108,7 @@ namespace RazorWebApp.Pages.User
             if (ApplicationDescriptor == null)
             {
                 Logger.LogToConsole($"Application descriptor for user with token {token.Value} not found.");
-                return RedirectToPage("/Errors/ServerError");
+                return RedirectToPage("/Error");
             }
             // Rights
             var rights = await AccessHelper.GetUserRights(cache, accountService, token);
@@ -118,7 +118,7 @@ namespace RazorWebApp.Pages.User
             if (UsersRights == null || MenuData == null)
             {
                 Logger.LogToConsole($"RightsRights or MenuData failed loading for user with token {token.Value}.");
-                return RedirectToPage("/Errors/ServerError");
+                return RedirectToPage("/Error");
             }
             // Data
             Data = new List<UserModel>();

@@ -78,7 +78,7 @@ namespace RazorWebApp.Controllers.User
             }
 
             // New username must be nonempty
-            if (fromBodyUserModel.GetUsername() == null || fromBodyUserModel.GetUsername() == "")
+            if (string.IsNullOrEmpty(fromBodyUserModel.GetUsername()))
             {
                 messages.Add(new Message(MessageTypeEnum.Error, 
                                                   3001, 

@@ -1,23 +1,41 @@
 ﻿@page
+@using SharedLibrary.StaticFiles
 @model ErrorModel
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = "Server Eroror";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<!-- MetaRMS header -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header pull-left">
+            <a asp-page="/Index" class="navbar-brand">
+                MetaRMS
+            </a>
+        </div>
+    </div>
+</nav>
 
-@if (Model.ShowRequestId)
-{
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
-    </p>
-}
-
-<h3>Development Mode</h3>
-<p>
-    Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
-</p>
-<p>
-    <strong>Development environment should not be enabled in deployed applications</strong>, as it can result in sensitive information from exceptions being displayed to end users. For local debugging, development environment can be enabled by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>, and restarting the application.
-</p>
+<!-- Application login body -->
+<div class="container-fluid">
+    <div class="row">
+        <!-- Heading -->
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <h2>Server error</h2>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Info -->
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <p>Please try your previous action once again.</p>
+            <p>
+                If the error persists, please contact MetaRMS administrator on 
+                <a href="@Constants.MetaRMAAdministratorContactEmail">@Constants.MetaRMAAdministratorContactEmail</a>.
+                Please provide your Login application name and Username you use when logging into the application.
+                Also describe what you were doing before this error occured.
+            </p>
+        </div>
+    </div>
+</div>

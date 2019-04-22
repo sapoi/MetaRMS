@@ -51,11 +51,11 @@ namespace SharedLibrary.Enums
             /// </summary>
             "year",
             /// <summary>
-            /// "tel" represents any phone number vit legal characters (numbers, "+", "(", ")", ".", "-" and ",") 
+            /// "phone" represents any phone number with legal characters (numbers, "+", "(", ")", ".", "-" and ",") 
             /// stored as list containing the string as first element
             /// Example: ["+123 (456)-789"]
             /// </summary>
-            "tel",
+            "phone",
             /// <summary>
             /// "string" represents any preferably short string stored as list containing the string as first element
             /// Example: ["Hello world!"]

@@ -24,49 +24,35 @@
     - vyuzivat color
     - u type string umoznit regex
     - offer users to download complete data of their application
+    - refresh token (https://www.blinkingcaret.com/2018/05/30/refresh-tokens-in-asp-net-core-web-api/)
 
 💩 KNOWN ISSUES
     - vytvoreni admina porusi required u system users datasetu dat - vsechny hodnoty ma nevyplnene
-    - kdyz je default heslo, vyzadovat zmenu na safe
-    - ValueList jako dict <string, ...>
-                    C  U          x    odesilat model
-            data    ✅ ✅                   ✅
-            users   ✅ ✅                   ✅
-            rights  ✅ ✅                   ✅
-            settings              ✅        ✅
-            defaultpasswordchange ✴️        ✴️
-    - ✴️🔥🔥🔥 pridat detail dat - po kliknuti na referenci - nutne - kdyz ma uzivatel pouze R prava, nezobrazil by se mu detail pomoci edit
-        - ❗️ refresh token (https://www.blinkingcaret.com/2018/05/30/refresh-tokens-in-asp-net-core-web-api/)
         
 
 -----------------------
 TODO
     HIGH PRIORITY
-        - lepe formatovat datum a cas pri zobrazeni (payroll, authors)
-        - funguje v jsonschematu:
-                    "not": {
-                                "enum": ["color", "date", "datetime", "email", "month", "int", "float", "year", "tel", "string", "time", "url", "username", "password", "bool", "text"],
-                                "pattern": "{[0-1]+}"
-                            }
-        - zdokumentovat API https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio-mac
-        - testy - bod stabilita aplikace - vypadá to líp
         - rename RazorWebApp na MetaRMSServer
+        - ✴️🔥🔥🔥 pridat detail dat - po kliknuti na referenci - nutne - kdyz ma uzivatel pouze R prava, nezobrazil by se mu detail pomoci edit
+        - zdokumentovat API https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio-mac
+        
+
+        - testy - bod stabilita aplikace - vypadá to líp
         - napsat kdyz pri login se neda pripojit k "serveru" - ted to spadne
         - delsi doba prihlaseni - delsi platnost tokenu
-        - salt to passwords
-        - ✴️ zmena hesla - nekontrolovat delku/spec znaky stareho hesla - vyresi se zavedenim vynuceni zmeny default hesla
+        - lepe formatovat datum a cas pri zobrazeni (payroll, authors)
         
     JAVASCRIPT
         - 🔥 javascript popup okna pri delete, ...
         - 🔥 users alert jestli doopravdy vyresetovat heslo
-        ️- 🔥 new password equal validation
+        ️- 🅾️ new password equal validation
         - prilinkovat skripty 1.10. str 20
 
     LOW PRIORITY
-        - ukladani dan na server by melo byt jako - client POST -> ulozeni dat -> ze serveru prijde REDIRECT -> client GET na adresu z redirectu -> 
+        - ukladani dat na server by melo byt jako - client POST -> ulozeni dat -> ze serveru prijde REDIRECT -> client GET na adresu z redirectu -> 
         - remove == "username" and == "password" from code
         - tocici se kolecko pri validaci aplikace
-        - text password pri zmene hesla nahradit za SystemDatasets.UsersDatasetDescriptor.PasswordAttribute.Name
         - pri Create v controllerect vracet CreatedAtAction - vraci 201
 
     DESIGN
@@ -84,22 +70,22 @@ TODO
 
 -----------------------
 TEXT
-    - ➡️ zkusit napsat uvod k bp v anglictine
+    - ✅ zkusit napsat uvod k bp v anglictine
     - 🔥 ➡️ bodova osnova
         - ta 1. kapitola v budoucim case (plan toho, co se bude delat)
-    - 🔥 ➡️ konkurence?
+    - ✅ konkurence?
     - dokumentacni komentare
-    - konkurence
+    - ✅ konkurence
     - uziv dok jako tutorial
     - 2 ukazkove aplikace
     - 3 uzivatele - programatori co chcou pripojit aplikaci (mobilni), admini, knihovnice
     - ✅ pustit nekde na webu
     - ➡️ verejne zpristupnit nekolik ukazkovych aplikaci s jsonem a prihlasovacimi udaji na R prava ke vsem datasetum
-    radkovani ne 2, ale 1 nebo 1.25
-    - psat to postupne od zacatku a ne na preskacku
+    - ✅ radkovani ne 2, ale 1 nebo 1.25
+    - ✅ psat to postupne od zacatku a ne na preskacku
     - napsat uz ted podrobnou osnovu ke vsemu
     - ✅ vice prikladu v uvoduv uvodu napsat, co by mohli vsechno uzivatele chtit a potrebvat
-    - v requirements to rozepsat a az nakonec dat seznam tect 
+    - ✅ v requirements to rozepsat a az nakonec dat seznam tect 
     
     - jak jsem resila validace pomoci messagi, ale vlastne by to slo pomoci modelstate, ale neslo
         - mohla jsem pouzit na validaci a prenaseni dat a erorru modelstate, ale vzhledem k tomu, ze pro jednotlive typy uzivatelem def 
@@ -375,6 +361,27 @@ HOTOVO
                     - if anything is cascade, check if cascade can be deleted the same way as checking if rowA can be deleted
                     - if everything is setEmpty, delete and set empty
         - ✅ uz je? - pri editu a updatu kontrolovat ze reference existuji i na serveru
+    - ✅ otestovat validace min a max na frontendu
+    - ✅ otestovat zmenu tel na phone + provest zmenu v deskriptoru v db
+    - ✅ pridat validaci min a max nesmi byt nastavene pro color, date, datetime, email, month, phone, time, url, bool
+    - ✅ min a max > 0 jen pro text, string, username, password a reference
+    - ✅ otestovat salt to passwords
+    - ✅ pri vytvareni uzivatele a reset password nastavit na MetaRMS123
+    - ✅ password change nekontrolovat old password delku
+    - ✅ nastavovat jazyk uzivatelum
+    - ✅ text password pri zmene hesla nahradit za SystemDatasets.UsersDatasetDescriptor.PasswordAttribute.Name
+    - ✅ funguje v jsonschematu: -> NE
+                "not": {
+                            "enum": ["color", "date", "datetime", "email", "month", "int", "float", "year", "tel", "string", "time", "url", "username", "password", "bool", "text"],
+                            "pattern": "{[0-1]+}"
+                        }
+    - ✅ValueList jako dict <string, ...>
+                    C  U          x    odesilat model
+            data    ✅ ✅                   ✅
+            users   ✅ ✅                   ✅
+            rights  ✅ ✅                   ✅
+            settings              ✅        ✅
+            🅾️ defaultpasswordchange ✴️        ✴️
     - 
 
 -----------------------
@@ -412,7 +419,8 @@ ZRUŠENO
     - 🅾️ rozdelit accesshepler 
     - 🅾️ presunout getTextForReference
     - 🅾️ pro typ bool je nullable vzdy true - proc?
-    
+    - 🅾️ zmena hesla - nekontrolovat delku/spec znaky stareho hesla - vyresi se zavedenim vynuceni zmeny default hesla
+    - 🅾️ kdyz je default heslo, vyzadovat zmenu na safe
     
 
 -----------------------
@@ -438,53 +446,52 @@ ZRUŠENO
         - ne, ale potrebuju kvuli analytikam dodrzovat jen jednu variantu
 
 ---------
-
 JSON requirements
-- minimal required structure:
-    - AppName (one)
-    - DefaultLanguage (one) - z nejakeho oficialniho enumu, pokusim se na nej napasovat preklad, pokud preklad pro ten jazyk nebude existovat, bere se en
-    - Users (one)
-        - PasswordAttribute
-        - Attributes
-            - Username
-    - Datasets (one)
-        - 
-- pokud nebude v atributu nullable, bere se jako true
-- pokud nebude v atributu unique, bere se jako false
-- pokud nebude uvedena u atributu max hodnota, bere se jako null, tedy nekonecno
-- v podstate se nemusi uvadet zadna false hodnota, protoze ta se nastavi default
-- atribut Name nesmi byt nazev podporovaneho typu (jako treba bool, int, currency (ale muze byt Currency)) - kvuli if v _InputBuilderPartial
+    - minimal required structure:
+        - AppName (one)
+        - DefaultLanguage (one) - z nejakeho oficialniho enumu, pokusim se na nej napasovat preklad, pokud preklad pro ten jazyk nebude existovat, bere se en
+        - Users (one)
+            - PasswordAttribute
+            - Attributes
+                - Username
+        - Datasets (one)
+            - 
+    - pokud nebude v atributu nullable, bere se jako true
+    - pokud nebude v atributu unique, bere se jako false
+    - pokud nebude uvedena u atributu max hodnota, bere se jako null, tedy nekonecno
+    - v podstate se nemusi uvadet zadna false hodnota, protoze ta se nastavi default
+    - atribut Name nesmi byt nazev podporovaneho typu (jako treba bool, int, currency (ale muze byt Currency)) - kvuli if v _InputBuilderPartial
 
 
 
 
-- podporované typy dat:
-    - string🆗, int🆗, float🆗
-    - date🆗, time🆗, datetime🆗 (kalendare a timepickery)
-    - year🆗 
-    - systémový dataset Users 🆗 
-    - uživatelské datasety (=dají se pomocí nich vyjádřit enumy) - v roletce bude zobrazeno 1. - 3. sloupec 🆗 
-    - text🆗 - multiline
-    - url🆗
-    - color🆗 - na zmenu barvy prostredi?
-    - email🆗
-    - username 🆗 - pouze v User datasetu a pouze 1x
-    - password 🆗 - pouze v User datasetu v password attribute
-    - bool 🆗 
+    - podporované typy dat:
+        - string🆗, int🆗, float🆗
+        - date🆗, time🆗, datetime🆗 (kalendare a timepickery)
+        - year🆗 
+        - systémový dataset Users 🆗 
+        - uživatelské datasety (=dají se pomocí nich vyjádřit enumy) - v roletce bude zobrazeno 1. - 3. sloupec 🆗 
+        - text🆗 - multiline
+        - url🆗
+        - color🆗 - na zmenu barvy prostredi?
+        - email🆗
+        - username 🆗 - pouze v User datasetu a pouze 1x
+        - password 🆗 - pouze v User datasetu v password attribute
+        - bool 🆗 
 
-    - required pro libovolny typ
+        - required pro libovolny typ
 
-    - min/max pro int, float ... TODO pro date, time, datetime
+        - min/max pro int, float ... TODO pro date, time, datetime
 
-- atributy
-    🆗 "Name": vsechno, povinne, unikatni
-    🆗 "Description": vsechno, nepovinny
-    🆗 "Type": vsechno, povinne, na vyber z podporovanych typu
-    🆗 "Required": vsechno, true x false, nepovinny
-    🅾️ "Unique": TODO
-    🆗 "Safer": true x false, jen password TODO test
-    🆗 "Min": cislo, jen pro int, float, reference, a nove i jen pro string, text, username, password
-    🆗 "Max": cislo, jen pro int, float, reference, a nove i jen pro string, text, username, password
+    - atributy
+        🆗 "Name": vsechno, povinne, unikatni
+        🆗 "Description": vsechno, nepovinny
+        🆗 "Type": vsechno, povinne, na vyber z podporovanych typu
+        🆗 "Required": vsechno, true x false, nepovinny
+        🅾️ "Unique": TODO
+        🆗 "Safer": true x false, jen password TODO test
+        🆗 "Min": cislo, jen pro int, float, reference, a nove i jen pro string, text, username, password
+        🆗 "Max": cislo, jen pro int, float, reference, a nove i jen pro string, text, username, password
 
 
 

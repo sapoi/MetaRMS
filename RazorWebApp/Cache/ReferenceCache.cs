@@ -11,18 +11,18 @@ namespace RazorWebApp.Cache
 {
     public class ReferenceCache
     {
-        Dictionary<string, Dictionary<long, string>> referenceCache;
         DatabaseContext context;
         ApplicationModel applicationModel;
         UserRepository userRepository;
         DataRepository dataRepository;
+        Dictionary<string, Dictionary<long, string>> referenceCache;
         public ReferenceCache(DatabaseContext context, ApplicationModel applicationModel)
         {
-            this.referenceCache = new Dictionary<string, Dictionary<long, string>>();
             this.context = context;
             this.applicationModel = applicationModel;
             this.userRepository = new UserRepository(context);
             this.dataRepository = new DataRepository(context);
+            this.referenceCache = new Dictionary<string, Dictionary<long, string>>();
         }
         /// <summary>
         /// 
@@ -33,12 +33,12 @@ namespace RazorWebApp.Cache
         /// <returns></returns>
         public string GetTextForReference(string type, long id, int level = 0)
         {
-            // If text is already in cache, just return it
+            // If text is already in cache, return it
             if (referenceCache.ContainsKey(type) && referenceCache[type].ContainsKey(id))
                return referenceCache[type][id];
             // Otherwise load it into cache and return it
             string value = "";
-            // If reference is of type system user
+            // If reference is of type system users dataset, get username as value
             if (type == applicationModel.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Name)
             {
                 UserModel userModel = userRepository.GetById(id);
@@ -92,12 +92,25 @@ namespace RazorWebApp.Cache
             }
             return value;
         }
+        /// <summary>
+        /// This method adds found value to the cache.
+        /// </summary>
+        /// <param name="type">Type of the value</param>
+        /// <param name="id">Id of the value</param>
+        /// <param name="value">The value itself</param>
         void addToCache(string type, long id, string value)
         {
+            // If cache does not already contain key for the value type
             if (!referenceCache.ContainsKey(type))
+            {
+                // Add new key-value pair under the newly added type
                 referenceCache.Add(type, new Dictionary<long, string>() { { id, value } });
+            }
             else if (!referenceCache[type].ContainsKey(id))
+            {
+                // Add new key-value pair under the type from the parameter
                 referenceCache[type].Add(id, value);
+            }
         }
     }
 }

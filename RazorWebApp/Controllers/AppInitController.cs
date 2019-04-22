@@ -15,6 +15,7 @@ using RazorWebApp.Repositories;
 using SharedLibrary.Structures;
 using Newtonsoft.Json.Linq;
 using RazorWebApp.Helpers;
+using SharedLibrary.StaticFiles;
 
 namespace RazorWebApp.Controllers
 {
@@ -119,19 +120,27 @@ namespace RazorWebApp.Controllers
                 applicationRepository.Add(newApplication);
 
                 // Create new admin account for the application
-                // Random password 8 chars long
-                var newPassword = PasswordHelper.GenerateRandomPassword(8);
+                // Random password
+                string newPassword;
+                var minPasswordLength = applicationDescriptor.SystemDatasets.UsersDatasetDescriptor.PasswordAttribute.Min;
+                if (minPasswordLength != null)
+                    newPassword = PasswordHelper.GenerateRandomPassword((int)minPasswordLength);
+                else
+                    newPassword = PasswordHelper.GenerateRandomPassword(Constants.MinSaferPasswordLength);
                 // Admin rights
                 var appInitHelper = new AppInitHelper();
                 var newRights = appInitHelper.GetAdminRights(newApplication, applicationDescriptor);
                 var rightsRepository = new RightsRepository(context);
                 rightsRepository.Add(newRights);
+                var salt = PasswordHelper.GetSalt();
                 var newUser = new UserModel
                 {
                     Application = newApplication,
-                    Password = PasswordHelper.ComputeHash(newPassword),
+                    PasswordHash = PasswordHelper.ComputeHash(salt + newPassword),
+                    PasswordSalt = salt,
                     Data = appInitHelper.GetDefaultAdminDataDictionary(applicationDescriptor.SystemDatasets.UsersDatasetDescriptor),
-                    Rights = newRights
+                    Rights = newRights,
+                    Language = applicationDescriptor.DefaultLanguage
                 };
                 var userRepository = new UserRepository(context);
                 userRepository.Add(newUser);

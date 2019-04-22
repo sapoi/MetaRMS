@@ -121,20 +121,20 @@ namespace RazorWebApp.Pages.Data
             if (ApplicationDescriptor == null)
             {
                 Logger.LogToConsole($"Application descriptor for user with token {token.Value} not found.");
-                return RedirectToPage("/Errors/ServerError");
+                return RedirectToPage("/Error");
             }
             // Active dataset descriptor
             var rights = await AccessHelper.GetUserRights(cache, accountService, token);
             if (rights == null)
             {
                 Logger.LogToConsole($"Rights not found for user with token {token.Value}.");
-                return RedirectToPage("/Errors/ServerError");
+                return RedirectToPage("/Error");
             }
             ActiveDatasetDescriptor = AccessHelper.GetActiveDatasetDescriptor(ApplicationDescriptor, rights, datasetName);
             if (ActiveDatasetDescriptor == null)
             {
                 Logger.LogToConsole($"Active dataset descriptor for dataset {datasetName} and user with token {token.Value} not found.");
-                return RedirectToPage("/Errors/ServerError");
+                return RedirectToPage("/Error");
             }
 
             // Authorization
@@ -149,7 +149,7 @@ namespace RazorWebApp.Pages.Data
                 return RedirectToPage("/Data/Get");
             }
 
-            # region PAGE DATA PREPARATION
+            #region PAGE DATA PREPARATION
 
             Messages = new List<Message>();
             MenuData = AccessHelper.GetMenuData(ApplicationDescriptor, rights);
@@ -222,20 +222,20 @@ namespace RazorWebApp.Pages.Data
             if (ApplicationDescriptor == null)
             {
                 Logger.LogToConsole($"Application descriptor for user with token {token.Value} not found.");
-                return RedirectToPage("/Errors/ServerError");
+                return RedirectToPage("/Error");
             }
             // Active dataset descriptor
             var rights = await AccessHelper.GetUserRights(cache, accountService, token);
             if (rights == null)
             {
                 Logger.LogToConsole($"Rights not found for user with token {token.Value}.");
-                return RedirectToPage("/Errors/ServerError");
+                return RedirectToPage("/Error");
             }
             ActiveDatasetDescriptor = AccessHelper.GetActiveDatasetDescriptor(ApplicationDescriptor, rights, DatasetName);
             if (ActiveDatasetDescriptor == null)
             {
                 Logger.LogToConsole($"Active dataset descriptor for dataset {DatasetName} and user with token {token.Value} not found.");
-                return RedirectToPage("/Errors/ServerError");
+                return RedirectToPage("/Error");
             }
 
             // Authorization
