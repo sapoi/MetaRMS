@@ -24,9 +24,9 @@ namespace Core.Helpers
         /// ControllerHelper constructor.
         /// </summary>
         /// <param name="databaseContext">Database context to be used to perform database queries</param>
-        public ControllerHelper(DatabaseContext context)
+        public ControllerHelper(DatabaseContext databaseContext)
         {
-            this.context = context;
+            this.context = databaseContext;
         }
         /// <summary>
         /// This method returns user accessing controller.

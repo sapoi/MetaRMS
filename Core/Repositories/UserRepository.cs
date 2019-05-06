@@ -12,7 +12,6 @@ namespace Core.Repositories
     /// <summary>
     /// Repository for UserModels.
     /// </summary>
-    /// <typeparam name="UserModel">The type of database model</typeparam>
     public class UserRepository: BaseRepository<UserModel>
     {
         /// <summary>

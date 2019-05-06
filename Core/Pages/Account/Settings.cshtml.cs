@@ -50,6 +50,7 @@ namespace Core.Pages.Account
         /// </summary>
         /// <value>ApplicationDescriptor class</value>
         public ApplicationDescriptor ApplicationDescriptor { get; set; }
+        /// <summary>
         /// MenuData property contains data necessary for _LoggedMenuPartial.
         /// </summary>
         /// <value>LoggedMenuPartialData structure</value>

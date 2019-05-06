@@ -9,7 +9,6 @@ namespace Core.Repositories
     /// <summary>
     /// Repository for RightsModels.
     /// </summary>
-    /// <typeparam name="RightsModel">The type of database model</typeparam>
     public class RightsRepository: BaseRepository<RightsModel>
     {
         /// <summary>

@@ -6,7 +6,6 @@ namespace Core.Repositories
     /// <summary>
     /// Repository for ApplicationModels.
     /// </summary>
-    /// <typeparam name="ApplicationModel">The type of database model</typeparam>
     public class ApplicationRepository: BaseRepository<ApplicationModel>
     {
         /// <summary>

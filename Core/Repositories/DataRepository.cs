@@ -10,7 +10,6 @@ namespace Core.Repositories
     /// <summary>
     /// Repository for DataModels.
     /// </summary>
-    /// <typeparam name="DataModel">The type of database model</typeparam>
     public class DataRepository: BaseRepository<DataModel>
     {
         /// <summary>
