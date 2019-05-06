@@ -31,16 +31,16 @@ namespace Core.Controllers.Data
         /// <param name="id">Id of the data</param>
         /// <returns>Messages about action result</returns>
         /// <response code="200">If data successfully deleted</response>
+        /// <response code="400">If input is not valid or data can not be deleted</response>
         /// <response code="401">If user is not authenticated</response>
         /// <response code="403">If user is not autorized to delete data</response>
-        /// <response code="404">If input is not valid or data can not be deleted</response>
         [Authorize]
         [HttpDelete]
         [Route("{datasetId}/{id}")]
         [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
-        [ProducesResponseType(404)]
         public IActionResult DeleteById(long datasetId, long id)
         {
             // List of messages

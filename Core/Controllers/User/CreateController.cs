@@ -36,15 +36,15 @@ namespace Core.Controllers.User
         /// <param name="fromBodyUserModel">New UserModel</param>
         /// <returns>Messages about action result</returns>
         /// <response code="200">If user successfully created</response>
+        /// <response code="400">If input is not valid</response>
         /// <response code="401">If user is not authenticated</response>
         /// <response code="403">If user is not autorized to create users</response>
-        /// <response code="404">If input is not valid</response>
         [Authorize]
         [HttpPost]
         [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
-        [ProducesResponseType(404)]
         public IActionResult Create([FromBody] UserModel fromBodyUserModel)
         {
             // List of messages to return to the client
@@ -57,7 +57,7 @@ namespace Core.Controllers.User
                 return Unauthorized();
 
             // Authorization
-            if (!AuthorizationHelper.IsAuthorized(authUserModel, (long)SystemDatasetsEnum.Users, RightsEnum.CRU))
+            if (!AuthorizationHelper.IsAuthorized(authUserModel, (long)SystemDatasetsEnum.Users, RightsEnum.CR))
                 return Forbid();
 
             #region VALIDATIONS

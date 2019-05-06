@@ -30,16 +30,16 @@ namespace Core.Controllers.Data
         /// <param name="datasetId">Id of dataset to get the data from</param>
         /// <returns>List of DataModels or messages about action result</returns>
         /// <response code="200">If data successfully sent</response>
+        /// <response code="400">If datasetId is not valid</response>
         /// <response code="401">If user is not authenticated</response>
         /// <response code="403">If user is not autorized to read data</response>
-        /// <response code="404">If datasetId is not valid</response>
         [Authorize]
         [HttpGet]
         [Route("{datasetId}")]
         [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
-        [ProducesResponseType(404)]
         public IActionResult GetAll(long datasetId)
         {
             // List of messages
@@ -73,7 +73,7 @@ namespace Core.Controllers.Data
             // Prepare data for client
             DataHelper dataHelper = new DataHelper(context, authUserModel.Application, datasetDescriptor.Id);
             foreach (var item in dataModelList)
-                dataHelper.PrepareOneRowForClient(item);
+                dataHelper.PrepareOneRecordForClient(item);
 
             return Ok(dataModelList);
         }
@@ -87,14 +87,14 @@ namespace Core.Controllers.Data
         /// <response code="200">If data successfully sent</response>
         /// <response code="401">If user is not authenticated</response>
         /// <response code="403">If user is not autorized to read data</response>
-        /// <response code="404">If datasetId and/or id is not valid</response>
+        /// <response code="400">If datasetId and/or id is not valid</response>
         [Authorize]
         [HttpGet]
         [Route("{datasetId}/{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
-        [ProducesResponseType(404)]
+        [ProducesResponseType(400)]
         public IActionResult GetById(long datasetId, long id)
         {
             // List of messages
@@ -136,7 +136,7 @@ namespace Core.Controllers.Data
 
             // Prepare data for client
             DataHelper dataHelper = new DataHelper(context, authUserModel.Application, datasetDescriptor.Id);
-            dataHelper.PrepareOneRowForClient(dataModel);
+            dataHelper.PrepareOneRecordForClient(dataModel);
             
             return Ok(dataModel);
         }

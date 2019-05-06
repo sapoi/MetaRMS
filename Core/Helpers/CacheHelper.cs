@@ -53,7 +53,7 @@ namespace Core.Helpers
                 return null;
             }
             // Set cache options - keep in cache for this time, reset time if accessed
-            var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(30));
+            var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(Constants.RazorCacheTimespanInMinutes));
             // Save data in cache
             applicationDescriptor = JsonConvert.DeserializeObject<ApplicationDescriptor>(await response.Content.ReadAsStringAsync());
             cache.Set(cacheKeyName, applicationDescriptor, cacheEntryOptions);
@@ -95,7 +95,7 @@ namespace Core.Helpers
                 return null;
             }
             // Set cache options - keep in cache for this time, reset time if accessed
-            var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(30));
+            var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(Constants.RazorCacheTimespanInMinutes));
             // Save data in cache
             rightsModel = JsonConvert.DeserializeObject<RightsModel>(await response.Content.ReadAsStringAsync());
             cache.Set(cacheKeyName, rightsModel, cacheEntryOptions);

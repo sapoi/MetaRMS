@@ -177,7 +177,7 @@ namespace Core.Pages.User
             // Authorization
             var rights = await AccessHelper.GetUserRights(cache, accountService, token);
             // If user is not authorized to delete, add message and display page again
-            if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Users, RightsEnum.RU))
+            if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Users, RightsEnum.CRU))
             {
                 // Set messages to cookie
                 TempData["Messages"] = JsonConvert.SerializeObject(

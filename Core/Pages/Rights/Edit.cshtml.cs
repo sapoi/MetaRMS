@@ -97,7 +97,7 @@ namespace Core.Pages.Rights
                 Logger.LogToConsole($"Rights not found for user with token {token.Value}.");
                 return RedirectToPage("/Error");
             }
-            if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Rights, RightsEnum.RU))
+            if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Rights, RightsEnum.CRU))
             {
                 TempData["Messages"] = JsonConvert.SerializeObject(
                     new List<Message>() {
@@ -178,7 +178,7 @@ namespace Core.Pages.Rights
             // Authorization
             var rights = await AccessHelper.GetUserRights(cache, accountService, token);
             // If user is not authorized to edit, add message and redirect to get page
-            if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Rights, RightsEnum.RU))
+            if (!AuthorizationHelper.IsAuthorized(rights, (long)SystemDatasetsEnum.Rights, RightsEnum.CRU))
             {
                 TempData["Messages"] = JsonConvert.SerializeObject(
                     new List<Message>() {

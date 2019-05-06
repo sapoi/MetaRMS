@@ -12,6 +12,7 @@ using SharedLibrary.Models;
 using SharedLibrary.Enums;
 using SharedLibrary.Helpers;
 using System.Text;
+using SharedLibrary.StaticFiles;
 
 namespace Core.Helpers
 {
@@ -110,12 +111,9 @@ namespace Core.Helpers
                                 continue;
                             }
                             List<DataModel> dataModelList = JsonConvert.DeserializeObject<List<DataModel>>(await response.Content.ReadAsStringAsync());
-                            // At most first 3 attribues of dataset are shown in select 
-                            shownAttributes.Add(sourceDataset.Attributes[0]);
-                            if (sourceDataset.Attributes.Count > 1)
-                                shownAttributes.Add(sourceDataset.Attributes[1]);
-                            if (sourceDataset.Attributes.Count > 2)
-                                shownAttributes.Add(sourceDataset.Attributes[2]);
+                            // At most first MaxAttributesDisplayedInReference attribues of dataset are shown in select 
+                            shownAttributes.AddRange(sourceDataset.Attributes.Take(Math.Min(sourceDataset.Attributes.Count, 
+                                                                                            Constants.MaxAttributesDisplayedInReference)));
                             // Get text representation for each model
                             foreach (var item in dataModelList)
                             {
@@ -136,8 +134,9 @@ namespace Core.Helpers
         string getTextForSelectItem(List<AttributeDescriptor> shownAttributes, Dictionary<string, List<object>> dataDictionary)
         {
             var sb = new StringBuilder("");
-            foreach (var attribute in shownAttributes)
+            for (int i = 0; i < shownAttributes.Count; i++)
             {
+                var attribute = shownAttributes[i];
                 // If attribute is of a basic type, return just its value
                 if (AttributeType.Types.Contains(attribute.Type))
                 {
@@ -146,24 +145,15 @@ namespace Core.Helpers
                 // If the attribute is of reference type get first at most 3 values and build them into one string
                 else 
                 {
-                    if (dataDictionary[attribute.Name].Count > 0)
+                    foreach (var reference in dataDictionary[attribute.Name].Take(Constants.MaxReferencedDisplayedInListOfReferences))
                     {
-                        sb.Append("(");
-                        sb.Append(JsonConvert.DeserializeObject<Tuple<string, string>>(dataDictionary[attribute.Name][0].ToString()).Item2);
-                        if (dataDictionary[attribute.Name].Count > 1)
-                        {
+                        // Deserialize text value of reference received from the server
+                        sb.Append(JsonConvert.DeserializeObject<Tuple<string, string>>(reference.ToString()).Item2);
+                        if (!reference.Equals(dataDictionary[attribute.Name].Take(Constants.MaxReferencedDisplayedInListOfReferences)))
                             sb.Append(", ");
-                            sb.Append(JsonConvert.DeserializeObject<Tuple<string, string>>(dataDictionary[attribute.Name][1].ToString()).Item2);
-                            if (dataDictionary[attribute.Name].Count > 2)
-                            {
-                                sb.Append(", ");
-                                sb.Append(JsonConvert.DeserializeObject<Tuple<string, string>>(dataDictionary[attribute.Name][2].ToString()).Item2);
-                            }
-                        }
-                        sb.Append(")");
                     }
                 }
-                if (attribute != shownAttributes.Last())
+                if (i + 1 != shownAttributes.Count && dataDictionary[shownAttributes[i + 1].Name].Count != 0)
                     sb.Append(" | ");
             }
             return sb.ToString();

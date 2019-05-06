@@ -28,13 +28,13 @@ namespace Core.Controllers.Account.Settings
         /// <param name="passwords">PasswordChangeStructure with passwords</param>
         /// <returns>Error of info message about action result</returns>
         /// <response code="200">If password successfully changed</response>
+        /// <response code="400">If input passwords are not valid</response>
         /// <response code="401">If user is not authenticated</response>
-        /// <response code="404">If input passwords are not valid</response>
         [Authorize]
         [HttpPost]
         [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        [ProducesResponseType(404)]
         public IActionResult PasswordChange([FromBody] PasswordChangeStructure passwords)
         {
             // List of messages to return to the client

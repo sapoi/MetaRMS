@@ -58,7 +58,7 @@ namespace Core.Controllers.User
             // Prepare data for client
             DataHelper dataHelper = new DataHelper(context, authUserModel.Application, (long)SystemDatasetsEnum.Users);
             foreach (var row in userModelList)
-                dataHelper.PrepareOneRowForClient(row);
+                dataHelper.PrepareOneRecordForClient(row);
 
             return Ok(userModelList);
         }
@@ -69,16 +69,16 @@ namespace Core.Controllers.User
         /// <param name="id">Id of user to get</param>
         /// <returns>UserModel or messages about action result</returns>
         /// <response code="200">If user successfully sent</response>
+        /// <response code="400">If id is not valid</response>
         /// <response code="401">If user is not authenticated</response>
         /// <response code="403">If user is not autorized to read users</response>
-        /// <response code="404">If id is not valid</response>
         [Authorize]
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
-        [ProducesResponseType(404)]
         public IActionResult GetById(long id)
         {
             // List of messages
@@ -107,7 +107,7 @@ namespace Core.Controllers.User
 
             // Prepare data for client
             DataHelper dataHelper = new DataHelper(context, authUserModel.Application, (long)SystemDatasetsEnum.Users);
-            dataHelper.PrepareOneRowForClient(userModel);
+            dataHelper.PrepareOneRecordForClient(userModel);
 
             return Ok(userModel);
         }

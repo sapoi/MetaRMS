@@ -31,15 +31,15 @@ namespace Core.Controllers.Data
         /// <param name="fromBodyDataModel">Changed DataModel</param>
         /// <returns>Messages about action result</returns>
         /// <response code="200">If data successfully putted</response>
+        /// <response code="400">If input is not valid</response>
         /// <response code="401">If user is not authenticated</response>
         /// <response code="403">If user is not autorized to put data</response>
-        /// <response code="404">If input is not valid</response>
         [Authorize]
         [HttpPut]
         [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
-        [ProducesResponseType(404)]
         public IActionResult Put([FromBody] DataModel fromBodyDataModel)
         {
             // List of messages to return to the client
@@ -63,7 +63,7 @@ namespace Core.Controllers.Data
             }
 
             // Authorization
-            if (!AuthorizationHelper.IsAuthorized(authUserModel, datasetDescriptor.Id, RightsEnum.RU))
+            if (!AuthorizationHelper.IsAuthorized(authUserModel, datasetDescriptor.Id, RightsEnum.CRU))
                 return Forbid();
 
             #region VALIDATIONS

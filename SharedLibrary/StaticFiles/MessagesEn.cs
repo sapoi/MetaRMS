@@ -4,7 +4,6 @@ namespace SharedLibrary.StaticFiles
 {
     public static class MessagesEn
     {
-        //TODO move this into a file
         public static Dictionary<int, string> Messages = new Dictionary<int, string>()
         {
             // 0xxx APPLICATION INITIALIZATION

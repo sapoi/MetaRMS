@@ -33,7 +33,7 @@
 -----------------------
 TODO
     HIGH PRIORITY
-        - rename RazorWebApp na MetaRMSServer
+        - ✅ rename RazorWebApp na Core
         - ✴️🔥🔥🔥 pridat detail dat - po kliknuti na referenci - nutne - kdyz ma uzivatel pouze R prava, nezobrazil by se mu detail pomoci edit
         - zdokumentovat API https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio-mac
         

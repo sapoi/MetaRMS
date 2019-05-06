@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
+using Microsoft.AspNetCore.Http;
 
 namespace Core
 {
@@ -35,18 +36,9 @@ namespace Core
             services.AddSingleton(typeof(IDataService), typeof(DataService));
             services.AddSingleton(typeof(IRightsService), typeof(RightsService));
             services.AddSingleton(typeof(IUserService), typeof(UserService));
-
-            // services.AddMvc();
-
             services.AddSession();
             // In-memory cache registration, so it can be used in controllers
             services.AddMemoryCache();
-            // services.AddDistributedMemoryCache(); // uz nevim proc to tady bylo
-            // services.AddDistributedRedisCache(options =>
-            // {
-            //     // o.Configuration = Configuration.GetConnectionString("Redis");
-            //     options.Configuration = "redis-18644.c100.us-east-1-4.ec2.cloud.redislabs.com:18644,password=3QFe1OMqrPtBtbsOPxFTiTZyojSGod02";
-            // });
             #endregion
 
             #region Server
@@ -101,6 +93,12 @@ namespace Core
             // {
             //     options.Filters.Add(new RequireHttpsAttribute());
             // });
+            // services.AddMvc();
+            // services.Configure<MvcOptions>(options =>
+            // {
+            //     options.Filters.Add(new RequireHttpsAttribute());
+            // });
+
             #endregion
         }
 
@@ -124,6 +122,11 @@ namespace Core
             
             app.UseAuthentication();
             app.UseMvc();
+
+            // var options = new RewriteOptions()
+            //     .AddRedirectToHttps(StatusCodes.Status301MovedPermanently, 63423);
+            // app.UseRewriter(options);
+            // app.UseMvc();
         }
     }
 }

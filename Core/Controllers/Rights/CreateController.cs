@@ -30,15 +30,15 @@ namespace Core.Controllers.Rights
         /// <param name="fromBodyRightsModel">New RightsModel</param>
         /// <returns>Messages about action result</returns>
         /// <response code="200">If rights successfully created</response>
+        /// <response code="400">If input is not valid</response>
         /// <response code="401">If user is not authenticated</response>
         /// <response code="403">If user is not autorized to create rights</response>
-        /// <response code="404">If input is not valid</response>
         [Authorize]
         [HttpPost]
         [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
-        [ProducesResponseType(404)]
         public IActionResult Create([FromBody] RightsModel fromBodyRightsModel)
         {
             // List of messages to return to the client
@@ -51,7 +51,7 @@ namespace Core.Controllers.Rights
                 return Unauthorized();
 
             // Authorization
-            if (!AuthorizationHelper.IsAuthorized(authUserModel, (long)SystemDatasetsEnum.Rights, RightsEnum.CRU))
+            if (!AuthorizationHelper.IsAuthorized(authUserModel, (long)SystemDatasetsEnum.Rights, RightsEnum.CR))
                 return Forbid();
 
             #region VALIDATIONS

@@ -42,11 +42,11 @@ namespace Core.Controllers.Account
         /// <param name="loginCredentials">Credentials to log int the application</param>
         /// <returns></returns>
         /// <response code="200">If user successfully authenticated</response>
-        /// <response code="404">If input is not valid</response>
+        /// <response code="400">If input is not valid</response>
         [AllowAnonymous]
         [HttpPost]
         [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
+        [ProducesResponseType(400)]
         public IActionResult Login([FromBody] LoginCredentials loginCredentials)
         {
             // List of messages to return to the client

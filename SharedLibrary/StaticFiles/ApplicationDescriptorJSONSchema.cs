@@ -2,7 +2,6 @@ namespace SharedLibrary.StaticFiles
 {
     static class ApplicationDescriptorJSONSchema
     {
-        //TODO move this into a file
         /// <summary>
         /// This method returns JSON schema to validate application descriptor against.
         /// </summary>

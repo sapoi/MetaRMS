@@ -22,7 +22,7 @@
             <h2>@ViewData["Title"]</h2>
 
             <!-- New rights creation button, if user has rights to create new rights -->
-            @if (Model.RightsRights >= RightsEnum.CRU)
+            @if (Model.RightsRights >= RightsEnum.CR)
             {
                 <form method="post" asp-page-handler="rightsCreate">
                     <button class="btn btn-success">Create</button>
@@ -70,7 +70,7 @@
                                     @rights.DataDictionary[((long)SystemDatasetsEnum.Rights)]
                                 </td>
                                 <!-- Rights edit button, if user has rights to edit rights -->
-                                @if (Model.RightsRights >= RightsEnum.RU) 
+                                @if (Model.RightsRights >= RightsEnum.CRU) 
                                 {
                                     <td>
                                         <form method="post" asp-route-dataId="@rights.Id" asp-page-handler="rightsEdit">

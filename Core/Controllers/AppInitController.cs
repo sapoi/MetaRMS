@@ -38,11 +38,11 @@ namespace Core.Controllers
         /// <param name="file">File containing application descriptor in JSON format</param>
         /// <returns>Messages about action result</returns>
         /// <response code="200">If application successfully created</response>
-        /// <response code="404">If input is not valid</response>
+        /// <response code="400">If input is not valid</response>
         [AllowAnonymous]
         [HttpPost]
         [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
+        [ProducesResponseType(400)]
         public IActionResult Create(string email, IFormFile file)
         {
             // List of messages to return to the client

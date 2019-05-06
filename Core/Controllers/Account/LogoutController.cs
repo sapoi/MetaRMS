@@ -25,8 +25,8 @@ namespace Core.Controllers.Account
         public IActionResult Logout()
         {
             //TODO 
-            // Have DB of no longer active tokens that still have some time to live
-            // Query provided token against The Blacklist on every authorized request
+            // Have database of no longer active tokens that still have some time to live
+            // Query provided token against this database on every authorized request
             return Ok();
         }
     }

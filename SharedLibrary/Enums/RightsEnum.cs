@@ -14,9 +14,9 @@ namespace SharedLibrary.Enums
         /// </summary>
         R = 1,
         /// <summary>
-        /// RightsEnum.RU represents read and update rights for a dataset.
+        /// RightsEnum.CR represents create and read rights for a dataset.
         /// </summary>
-        RU = 2,
+        CR = 2,
         /// <summary>
         /// RightsEnum.CRU represents create, read and update rights for a dataset.
         /// </summary>
@@ -24,6 +24,6 @@ namespace SharedLibrary.Enums
         /// <summary>
         /// RightsEnum.CRUD represents create, read, update and delete rights for a dataset.
         /// </summary>
-        CRUD = 4
+        CRUD = 4,
     }
 }

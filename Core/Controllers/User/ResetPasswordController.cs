@@ -29,16 +29,16 @@ namespace Core.Controllers.User
         /// <param name="id">Id of user to reset the password</param>
         /// <returns>Messages about action result</returns>
         /// <response code="200">If user pasword was sucessfully reset</response>
+        /// <response code="400">If id is not valid</response>
         /// <response code="401">If user is not authenticated</response>
         /// <response code="403">If user is not autorized to reset user passwords</response>
-        /// <response code="404">If id is not valid</response>
         [Authorize]
         [HttpPost]
         [Route("{id}")]
         [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
-        [ProducesResponseType(404)]
         public IActionResult ResetPasswordById(long id)
         {
             // List of messages to return to the client
@@ -51,7 +51,7 @@ namespace Core.Controllers.User
                 return Unauthorized();
 
             // Authorization
-            if (!AuthorizationHelper.IsAuthorized(authUserModel, (long)SystemDatasetsEnum.Rights, RightsEnum.RU))
+            if (!AuthorizationHelper.IsAuthorized(authUserModel, (long)SystemDatasetsEnum.Rights, RightsEnum.CRU))
                 return Forbid();
 
             // Get data from database

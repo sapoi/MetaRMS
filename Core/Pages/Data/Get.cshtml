@@ -26,7 +26,7 @@
             <h6>@Model.ActiveDatasetDescriptor.Description</h6>
 
             <!-- New dataset data creation button, if user has rights to create new data in the dataset -->
-            @if (Model.ActiveDatasetRights >= RightsEnum.CRU)
+            @if (Model.ActiveDatasetRights >= RightsEnum.CR)
             {
                 <form method="post" asp-route-datasetName="@Model.ActiveDatasetDescriptor.Name" asp-page-handler="dataCreate">
                     <button class="btn btn-success">Create</button>
@@ -62,7 +62,7 @@
                                     </td>
                                 }
                                 <!-- Dataset data edit button, if user has rights to edit data in the dataset -->
-                                @if (Model.ActiveDatasetRights >= RightsEnum.RU)
+                                @if (Model.ActiveDatasetRights >= RightsEnum.CRU)
                                 {
                                     <td>
                                         <form method="post" asp-route-datasetName="@Model.ActiveDatasetDescriptor.Name" asp-route-dataId="@row.Id" asp-page-handler="dataEdit">

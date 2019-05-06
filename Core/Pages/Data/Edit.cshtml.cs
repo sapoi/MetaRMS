@@ -138,7 +138,7 @@ namespace Core.Pages.Data
             }
 
             // Authorization
-            if (!AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.RU))
+            if (!AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.CRU))
             {
                 TempData["Messages"] = JsonConvert.SerializeObject(
                     new List<Message>() {
@@ -239,7 +239,7 @@ namespace Core.Pages.Data
             }
 
             // Authorization
-            if (!AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.RU))
+            if (!AuthorizationHelper.IsAuthorized(rights, ActiveDatasetDescriptor.Id, RightsEnum.CRU))
             {
                 TempData["Messages"] = JsonConvert.SerializeObject(
                     new List<Message>() {

@@ -24,7 +24,7 @@
             <h6>@Model.ApplicationDescriptor.SystemDatasets.UsersDatasetDescriptor.Description</h6>
 
             <!-- New user creation button, if user has rights to create new user -->
-            @if (Model.UsersRights >= RightsEnum.CRU) 
+            @if (Model.UsersRights >= RightsEnum.CR) 
             {
                 <form method="post" asp-page-handler="userCreate">
                     <button class="btn btn-success">Create</button>
@@ -66,7 +66,7 @@
                                     @user.Rights.Name
                                 </td>
                                 <!-- User edit and password reset button, if user has rights to edit users -->
-                                @if (Model.UsersRights >= RightsEnum.RU) 
+                                @if (Model.UsersRights >= RightsEnum.CRU) 
                                 {
                                     <td>
                                         <form method="post" asp-route-dataId="@user.Id" asp-page-handler="userEdit">
