@@ -1,0 +1,14 @@
+/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/bin/Release/netcoreapp2.0/Core.deps.json
+/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/bin/Release/netcoreapp2.0/Core.runtimeconfig.json
+/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/bin/Release/netcoreapp2.0/Core.runtimeconfig.dev.json
+/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/bin/Release/netcoreapp2.0/Core.dll
+/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/bin/Release/netcoreapp2.0/Core.pdb
+/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/bin/Release/netcoreapp2.0/Core.xml
+/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/bin/Release/netcoreapp2.0/SharedLibrary.dll
+/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/bin/Release/netcoreapp2.0/SharedLibrary.pdb
+/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/obj/Release/netcoreapp2.0/Core.csproj.CoreCompileInputs.cache
+/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/obj/Release/netcoreapp2.0/Core.AssemblyInfoInputs.cache
+/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/obj/Release/netcoreapp2.0/Core.AssemblyInfo.cs
+/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/obj/Release/netcoreapp2.0/Core.dll
+/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/obj/Release/netcoreapp2.0/Core.xml
+/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/Core/obj/Release/netcoreapp2.0/Core.pdb
