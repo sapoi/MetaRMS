@@ -17,12 +17,18 @@ namespace SharedLibrary.StaticFiles
 
         #region Security settings
         /// <summary>
-        /// 
+        /// Boolean indicator in the HTTPS connection is used.
         /// With debug configuration the usage of HTTPS protocol depends on the settings
         /// of Constants.UseHttps variable, but with release configuration HTTPS protocol is disabled
         /// </summary>
         public static bool UseHttps => false;
-        public static string HttpsCertificatePath => "/Users/sapoi/Desktop/tmp_cert2/localhost.pfx";
+        /// <summary>
+        /// Path to .pfx certificate used for HTTPS connection.
+        /// </summary>
+        public static string HttpsCertificatePath => "/localhost.pfx";
+        /// <summary>
+        /// Passwork to the certificate from variable HttpsCertificatePath
+        /// </summary>
         public static string HttpsCertificatePassword => "certificate_password";
         /// <summary>
         /// Length of salt hashed together with a password.
@@ -93,10 +99,25 @@ namespace SharedLibrary.StaticFiles
         #endregion
 
         #region Constants
+        /// <summary>
+        /// Prefix for storing descriptors in the cache.
+        /// </summary>
         public static string CacheDescriptorPrefix => "Descriptor_";
+        /// <summary>
+        /// Prefix for storing rights in the cache.
+        /// </summary>
         public static string CacheRightsPrefix => "Rights_";
+        /// <summary>
+        /// Name of the JWT claim containing application id.
+        /// </summary>
         public static string JWTClaimApplicationId => "ApplicationId";
+        /// <summary>
+        /// Name of the JWT claim containing user id.
+        /// </summary>
         public static string JWTClaimUserId => "UserId";
+        /// <summary>
+        /// Id under which is the JWT token stored in a session.
+        /// </summary>
         public static string SessionJWTKey => "sessionJWT";
         #endregion
     }

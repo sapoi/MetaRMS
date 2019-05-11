@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Core.Pages
 {
+    /// <summary>
+    /// The AboutModel class in Core.Pages namespace is used as support for About.cshtml page. 
+    /// The page is used to display information about MetaRMS.
+    /// </summary>
     public class AboutModel : PageModel
     {
-        public string Message { get; set; }
-
-        public void OnGet()
+        /// <summary>
+        /// This method is used when there is a GET request to About.cshtml page.
+        /// </summary>
+        /// <returns>The page.</returns>
+        public IActionResult OnGet()
         {
-            Message = "Your application description page.";
+            return Page();
         }
     }
 }
