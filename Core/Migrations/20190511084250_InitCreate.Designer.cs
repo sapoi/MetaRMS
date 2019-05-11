@@ -11,8 +11,8 @@ using System;
 namespace Core.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20190510114308_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190511084250_InitCreate")]
+    partial class InitCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
