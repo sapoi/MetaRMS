@@ -28,26 +28,25 @@ namespace Core.Repositories
                                              r.Id == id);
         }
         /// <summary>
-        /// This method returns List of RightsModels by application id and rights name.
+        /// This method returns collection of RightsModels by application id and rights name.
         /// Only one such should exist.
         /// </summary>
         /// <param name="applicationId">Id of application to filter by.</param>
         /// <param name="name">Name of the rights.</param>
-        /// <returns>List of RightsModels.</returns>
-        public List<RightsModel> GetByApplicationIdAndName(long applicationId, string name)
+        /// <returns>Collection of RightsModels.</returns>
+        public IQueryable<RightsModel> GetByApplicationIdAndName(long applicationId, string name)
         {
             return model.Where(r => r.ApplicationId == applicationId && 
-                                    r.Name == name)
-                        .ToList();
+                                    r.Name == name);
         }
         /// <summary>
-        /// This method returns List of RightsModels by application id.
+        /// This method returns collection of RightsModels by application id.
         /// </summary>
         /// <param name="applicationId">Id of application to filter by.</param>
-        /// <returns>List of all RightsModels for the application.</returns>
-        public List<RightsModel> GetAllByApplicationId(long applicationId)
+        /// <returns>Collection of all RightsModels for the application.</returns>
+        public IQueryable<RightsModel> GetAllByApplicationId(long applicationId)
         {
-            return model.Where(r => r.ApplicationId == applicationId).ToList();
+            return model.Where(r => r.ApplicationId == applicationId);
         }
         /// <summary>
         /// This method sets name and rights data to a RightsModel.

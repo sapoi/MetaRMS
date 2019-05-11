@@ -1,0 +1,281 @@
+{
+    "ApplicationName": "Warehouse inventory management system",
+    "LoginApplicationName": "inventory",
+    "DefaultLanguage": "en",
+    "SystemDatasets": {
+        "UsersDatasetDescriptor": {
+            "Name": "Employees",
+            "Description": "This dataset contains all employees with access to the ATS.",
+            "PasswordAttribute": {
+                "Name": "Password",
+                "Description": "Employee's password. It is required that the password contains lower- and upper-case letter and number and is between 8 and 20 characters long.",
+                "Type": "password",
+                "Required": true,
+                "Safer": true,
+                "Min": 8,
+                "Max": 20
+            },
+            "Attributes": [
+                {
+                    "Name": "Username",
+                    "Description": "Username used for login",
+                    "Type": "username",
+                    "Required": true,
+                    "Unique": true
+                },
+                {
+                    "Name": "Name",
+                    "Description": "Full name of the employee",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Position",
+                    "Description": "Employee's position within the company",
+                    "Type": "Positions",
+                    "OnDeleteAction": "protect",
+                    "Required": true
+                },
+                {
+                    "Name": "Boss",
+                    "Description": "Employee's boss and person responsible for checking responsibilities",
+                    "Type": "Employees",
+                    "Max": 1,
+                    "OnDeleteAction": "protect",
+                    "Required": false
+                },
+                {
+                    "Name": "Warehouse",
+                    "Description": "Warehouse the employee works in.",
+                    "Type": "Warehouses",
+                    "OnDeleteAction": "protect",
+                    "Required": false
+                }
+            ]
+        }
+    },
+    "Datasets": [
+        {
+            "Name": "Products",
+            "Description": "This dataset contains products within the warehouses. To be able  to locate the product it is important to fill the warehouse and exact location of the product.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Description": "Full name of the product",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Code",
+                    "Description": "Code of the product",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Categories",
+                    "Description": "Categories the product belongs to. Select between 4 and 7 categories. If the category is not in the list please add in in the Categories dataset. If you are not allowed to create new categories ask your boss to add it.",
+                    "Type": "Categories",
+                    "Required": true,
+                    "Min": 4,
+                    "Max": 7,
+                    "OnDeleteAction": "setEmpty"
+                },
+                {
+                    "Name": "Description",
+                    "Description": "Product description",
+                    "Type": "text"
+                },
+                {
+                    "Name": "Warehouse",
+                    "Description": "Warehouse where the product is located.",
+                    "Type": "Warehouses",
+                    "Min": 1,
+                    "Max": 1,
+                    "OnDeleteAction": "protect"
+                },
+                {
+                    "Name": "Location",
+                    "Description": "Exact location of the product in the warehouse",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Amount left",
+                    "Description": "Amount of the product left in the warehouse",
+                    "Type": "float",
+                    "Required": true
+                },
+                {
+                    "Name": "Price",
+                    "Description": "Price for one unit of the product",
+                    "Type": "float",
+                    "Required": true
+                },
+                {
+                    "Name": "Currency for the price",
+                    "Type": "Currencies",
+                    "OnDeleteAction": "protect"
+                }
+            ]
+        },
+        {
+            "Name": "Orders",
+            "Description": "This dataset contains orders of products from suppliers.",
+            "Attributes": [
+                {
+                    "Name": "Product",
+                    "Description": "Product ordered within this order",
+                    "Type": "Products",
+                    "Min": 1,
+                    "OnDeleteAction": "protect"
+                },
+                {
+                    "Name": "Supplier",
+                    "Description": "Supplier the product was ordered from",
+                    "Type": "Suppliers",
+                    "Min": 1,
+                    "Max": 1,
+                    "OnDeleteAction": "protect"
+                },
+                {
+                    "Name": "Date and time of order",
+                    "Description": "Date and time when the products were ordered",
+                    "Type": "datetime",
+                    "Required": true
+                },
+                {
+                    "Name": "Description",
+                    "Description": "Product description",
+                    "Type": "text"
+                },
+                {
+                    "Name": "Responsible employee",
+                    "Description": "Employee responsible for the order",
+                    "Type": "Employees",
+                    "Required": true,
+                    "Min": 1,
+                    "Max": 1,
+                    "OnDeleteAction": "protect"
+                },
+                {
+                    "Name": "Details",
+                    "Description": "Details about the order",
+                    "Type": "text",
+                    "Required": true
+                },
+                {
+                    "Name": "Price",
+                    "Description": "Price for the whole order",
+                    "Type": "float",
+                    "Required": true
+                },
+                {
+                    "Name": "Currency for the price",
+                    "Type": "Currencies",
+                    "OnDeleteAction": "protect"
+                }
+            ]
+        },
+        {
+            "Name": "Suppliers",
+            "Description": "This dataset contains product suppliers.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Description": "Name of the supplier",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Products",
+                    "Description": "Products the supplier offers",
+                    "Type": "Products",
+                    "Min": 1,
+                    "OnDeleteAction": "setEmpty"
+                },
+                {
+                    "Name": "Categories",
+                    "Description": "Categories the supplier provides. Select between 1 and 20 categories. If the category is not in the list please add in in the Categories dataset. If you are not allowed to create new categories ask your boss to add it.",
+                    "Type": "Categories",
+                    "Required": true,
+                    "Min": 1,
+                    "Max": 20,
+                    "OnDeleteAction": "setEmpty"
+                }
+            ]
+        },
+        {
+            "Name": "Warehouses",
+            "Description": "This dataset contains company warehouses.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Description": "Name of the warehouse",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Address",
+                    "Description": "Address of the warehouse",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Details",
+                    "Description": "Details about the warehouse",
+                    "Type": "text",
+                    "Required": true
+                },
+                {
+                    "Name": "Manager",
+                    "Description": "Manager of the warehouse",
+                    "Type": "Employees",
+                    "Required": true,
+                    "Min": 1,
+                    "Max": 1,
+                    "OnDeleteAction": "protect"
+                }
+            ]
+        },
+        {
+            "Name": "Categories",
+            "Description": "This dataset contains enumeration of categories.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Description": "Name of the category.",
+                    "Type": "string",
+                    "Required": true
+                }
+            ]
+        },
+        {
+            "Name": "Positions",
+            "Description": "Positions of employees.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Description": "Name of the position.",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Responsibilities",
+                    "Description": "Employee's responsibilities.",
+                    "Type": "text"
+                }
+            ]
+        },
+        {
+            "Name": "Currencies",
+            "Description": "This dataset contains enumeration of currencies.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Type": "string",
+                    "Required": true
+                }
+            ]
+        }
+    ]
+}

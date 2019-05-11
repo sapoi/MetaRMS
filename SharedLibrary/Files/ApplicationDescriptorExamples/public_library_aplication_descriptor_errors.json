@@ -19,7 +19,7 @@
                 {
                     "Name": "Username",
                     "Description": "Login username",
-                    "Type": "username",
+                    "Type": "text",
                     "Required": true,
                     "Unique": true
                 },
@@ -48,7 +48,7 @@
                     "Name": "Reader",
                     "Description": "Reader borrowing the books. If a person does not have a reader account yet, create it first at the Readers dataset.",
                     "Type": "Readers",
-                    "Required": true,
+                    "Required": false,
                     "Min": 1,
                     "Max": 1,
                     "OnDeleteAction": "cascade"
@@ -56,15 +56,14 @@
                 {
                     "Name": "State of the borrowing",
                     "Type": "Borrowing states",
-                    "Required": true,
+                    "Required": false,
                     "OnDeleteAction": "protect"
                 },
                 {
                     "Name": "Books",
                     "Description": "At most 10 books the reader is borrowing. If reader wants to borrow more books, new borrowing has to be created.",
                     "Type": "Books",
-                    "Required": true,
-                    "Min": 1,
+                    "Required": false,
                     "Max": 10,
                     "OnDeleteAction": "cascade"
                 },
@@ -72,13 +71,13 @@
                     "Name": "Date of borrowing",
                     "Description": "Date when the borrowing took place - it should always be today.",
                     "Type": "datetime",
-                    "Required": true
+                    "Required": false
                 },
                 {
                     "Name": "Expected date of return",
                     "Description": "Date when the books should be returned - it should always a month later.",
                     "Type": "date",
-                    "Required": true
+                    "Required": false
                 },
                 {
                     "Name": "Date of return",
@@ -140,7 +139,7 @@
                 {
                     "Name": "Authors",
                     "Description": "Book authors.",
-                    "Type": "Authors",
+                    "Type": "Author",
                     "Required": true,
                     "Min": 1,
                     "OnDeleteAction": "protect"

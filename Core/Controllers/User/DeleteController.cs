@@ -8,6 +8,7 @@ using Core.Helpers;
 using Core.Repositories;
 using SharedLibrary.Structures;
 using SharedLibrary.Helpers;
+using System.Linq;
 
 namespace Core.Controllers.User
 {
@@ -70,7 +71,7 @@ namespace Core.Controllers.User
                 return BadRequest(messages);
             }
             // Can not delete last user of the application
-            if (userRepository.GetAllByApplicationId(authUserModel.ApplicationId).Count <= 1)
+            if (userRepository.GetAllByApplicationId(authUserModel.ApplicationId).Count() <= 1)
             {
                 messages.Add(new Message(MessageTypeEnum.Error, 
                                                   3013, 

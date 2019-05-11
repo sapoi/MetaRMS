@@ -9,6 +9,7 @@ using Core.Helpers;
 using Core.Repositories;
 using SharedLibrary.Enums;
 using SharedLibrary.Structures;
+using System.Linq;
 
 namespace Core.Controllers.Rights
 {
@@ -65,8 +66,8 @@ namespace Core.Controllers.Rights
 
             // New rights must have a unique name
             var rightsRepository = new RightsRepository(context);
-            List<RightsModel> sameNameRights = rightsRepository.GetByApplicationIdAndName(authUserModel.ApplicationId, fromBodyRightsModel.Name);
-            if (sameNameRights.Count > 0)
+            var sameNameRights = rightsRepository.GetByApplicationIdAndName(authUserModel.ApplicationId, fromBodyRightsModel.Name);
+            if (sameNameRights.Count() > 0)
             {
                 messages.Add(new Message(MessageTypeEnum.Error, 
                                                   4001, 

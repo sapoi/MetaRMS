@@ -24,9 +24,12 @@ namespace Core.Controllers.Account
         [ProducesResponseType(200)]
         public IActionResult Logout()
         {
-            //TODO 
-            // Have database of no longer active tokens that still have some time to live
-            // Query provided token against this database on every authorized request
+            // This LogoutController sends only 200 - HTTP OK response. This approach was selected
+            // due to lack of resources and in the future it should be reimplemented.
+            // Future implementation idea:
+            //      Have database of no longer active tokens that still have some time to live
+            //      Query provided token against this database on every authorized request
+            //      Allow access only to valid tokens not contained in this database
             return Ok();
         }
     }

@@ -1,0 +1,128 @@
+{
+    "ApplicationName": "My sports tracker",
+    "LoginApplicationName": "sports_tracker",
+    "DefaultLanguage": "en",
+    "SystemDatasets": {
+        "UsersDatasetDescriptor": {
+            "Name": "Users",
+            "PasswordAttribute": {
+                "Name": "Password",
+                "Type": "password",
+                "Required": true
+            },
+            "Attributes": [
+                {
+                    "Name": "Username",
+                    "Description": "Login username",
+                    "Type": "username",
+                    "Required": true,
+                    "Unique": true
+                },
+                {
+                    "Name": "Info",
+                    "Description": "Height, weight, etc.",
+                    "Type": "text"
+                }
+            ]
+        }
+    },
+    "Datasets": [
+        {
+            "Name": "Activities done",
+            "Description": "This dataset contains done activities.",
+            "Attributes": [
+                {
+                    "Name": "Sport",
+                    "Type": "Sports",
+                    "Required": true,
+                    "Min": 1,
+                    "Max": 1,
+                    "OnDeleteAction": "protect"
+                },
+                {
+                    "Name": "Duration in minutes",
+                    "Type": "float",
+                    "Required": true
+                },
+                {
+                    "Name": "Date and time",
+                    "Type": "datetime",
+                    "Required": true
+                },
+                {
+                    "Name": "Description",
+                    "Type": "text"
+                },
+                {
+                    "Name": "Feelings",
+                    "Type": "text"
+                },
+                {
+                    "Name": "Performance rate in %",
+                    "Description": "0% = 😟, 50% = 😐, 100% = 🙂",
+                    "Type": "float",
+                    "Min": 0,
+                    "Max": 100
+                }
+            ]
+        },
+        {
+            "Name": "Food intake",
+            "Attributes": [
+                {
+                    "Name": "Name of the food",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Recipe",
+                    "Type": "Recipes",
+                    "OnDeleteAction": "setEmpty"
+                },
+                {
+                    "Name": "Description",
+                    "Type": "text"
+                },
+                {
+                    "Name": "Feelings",
+                    "Type": "text"
+                },
+                {
+                    "Name": "Rating in %",
+                    "Description": "0% = 😟, 50% = 😐, 100% = 🙂",
+                    "Type": "float",
+                    "Min": 0,
+                    "Max": 100
+                }
+            ]
+        },
+        {
+            "Name": "Sports",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Description",
+                    "Type": "text"
+                }
+            ]
+        },
+        {
+            "Name": "Recipes",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Description",
+                    "Type": "text"
+                }
+            ]
+        }
+    ]
+}

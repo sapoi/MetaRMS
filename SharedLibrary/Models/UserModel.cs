@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Newtonsoft.Json;
 using SharedLibrary.Enums;
+using SharedLibrary.Helpers;
 
 namespace SharedLibrary.Models
 {
@@ -92,6 +93,11 @@ namespace SharedLibrary.Models
         /// <returns>Returns username of the user from Data.</returns>
         public string GetUsername()
         {
+            if (this.Application == null)
+            {
+                Logger.LogToConsole($"User {this.Id} without Application loaded.");
+                return "";
+            }
             string userAttributeName = this.Application.GetUsernameAttribute().Name;
             var usernameObject = this.DataDictionary[userAttributeName].FirstOrDefault();
             if (usernameObject == null)

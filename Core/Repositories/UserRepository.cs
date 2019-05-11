@@ -53,32 +53,31 @@ namespace Core.Repositories
         /// <returns>List of UserModels with application id and username from parameters.</returns>
         public UserModel GetByApplicationIdAndUsername(long applicationId, string username)
         {
-            var allApplicationUsers = this.GetAllByApplicationId(applicationId);
+            // ToList enumeration is necessary so .GetUsername() can be called
+            var allApplicationUsers = this.GetAllByApplicationId(applicationId).ToList();
             return allApplicationUsers.Where(u => u.GetUsername() == username).FirstOrDefault();
         }
         /// <summary>
-        /// This method returns all users for given application with Application and Rights included.
+        /// This method returns collection of all users for given application with Application and Rights included.
         /// </summary>
         /// <param name="applicationId">Id of application to filter by.</param>
-        /// <returns>List of all UserModels of application from parameter.</returns>
-        public List<UserModel> GetAllByApplicationId(long applicationId)
+        /// <returns>Collection of all UserModels of application from parameter.</returns>
+        public IQueryable<UserModel> GetAllByApplicationId(long applicationId)
         {
             return model.Include(u => u.Rights)
                         .Include(u => u.Application)
-                        .Where(u => u.ApplicationId == applicationId)
-                        .ToList();
+                        .Where(u => u.ApplicationId == applicationId);
         }
         /// <summary>
-        /// This method returns List of UserModels by rights id.
+        /// This method returns collection of UserModels by rights id.
         /// </summary>
         /// <param name="rightsId">Id of rights to filter by.</param>
-        /// <returns>List of UserModels with rights id from parameter.</returns>
-        public List<UserModel> GetByRightsId(long rightsId)
+        /// <returns>Collection of UserModels with rights id from parameter.</returns>
+        public IQueryable<UserModel> GetByRightsId(long rightsId)
         {
             return model.Include(u => u.Rights)
                         .Include(u => u.Application)
-                        .Where(u => u.RightsId == rightsId)
-                        .ToList();
+                        .Where(u => u.RightsId == rightsId);
         }
         /// <summary>
         /// This method sets password of UserModel from parameter to username form parameter.
@@ -129,16 +128,15 @@ namespace Core.Repositories
             );
         }
         /// <summary>
-        /// This method returns list of UserModels for application from parametres, that also have dataDictionaryLike 
+        /// This method returns collection of UserModels for application from parametres, that also have dataDictionaryLike 
         /// value from parametres in Data attribute. This is used when looking for references.
         /// </summary>
         /// <param name="applicationId">Id of application to filter by.</param>
         /// <param name="dataDictionaryLike">Value to look for in Data attribute.</param>
-        /// <returns>List of UserModels with Data containing value from parameter dataDictionaryLike.</returns>
-        public List<UserModel> GetAllByApplicationIdAndDataContentLike(long applicationId, string dataDictionaryLike)
+        /// <returns>Collection of UserModels with Data containing value from parameter dataDictionaryLike.</returns>
+        public IQueryable<UserModel> GetAllByApplicationIdAndDataContentLike(long applicationId, string dataDictionaryLike)
         {
-            return model.Where(u => u.ApplicationId == applicationId && u.Data.Contains(dataDictionaryLike))
-                        .ToList();
+            return model.Where(u => u.ApplicationId == applicationId && u.Data.Contains(dataDictionaryLike));
         }
     }
 }

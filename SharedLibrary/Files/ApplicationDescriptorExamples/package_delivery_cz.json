@@ -1,0 +1,219 @@
+{
+    "ApplicationName": "Systém pro řízení firmy na přepravu zásilek",
+    "LoginApplicationName": "package_delivery",
+    "DefaultLanguage": "en",
+    "SystemDatasets": {
+        "UsersDatasetDescriptor": {
+            "Name": "Zaměstnanci",
+            "Description": "V tomto datasetu jsou zaměstnanci zásilkové služby.",
+            "PasswordAttribute": {
+                "Name": "Heslo",
+                "Description": "Heslo zaměstnance. Toto heslo musí obsahovat alespoň jedno malé a jedno velké písmeno a jednu číslici nebo speciální znak. Dékla hesla musí být mezi 8 a 15 znaky.",
+                "Type": "password",
+                "Required": true,
+                "Safer": true,
+                "Min": 8,
+                "Max": 15
+            },
+            "Attributes": [
+                {
+                    "Name": "Uživatelské jméno",
+                    "Description": "Toho jméno používá uživatel při přihlašování do svého účtu",
+                    "Type": "username",
+                    "Required": true,
+                    "Unique": true
+                },
+                {
+                    "Name": "Jméno",
+                    "Description": "Celé jméno zaměstnance",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Pozice",
+                    "Description": "Pozice zaměstnance v rámci firmy",
+                    "Type": "Pozice",
+                    "OnDeleteAction": "protect",
+                    "Required": true
+                },
+                {
+                    "Name": "Nadřízený",
+                    "Description": "Nadřízený zaměstnance. Tato osoba je zodpovědná z převzetí práce zaměstnance a za kontrolu splnění veškerých zodpovědností.",
+                    "Type": "Zaměstnanci",
+                    "Max": 1,
+                    "OnDeleteAction": "protect",
+                    "Required": false
+                },
+                {
+                    "Name": "Pobočka",
+                    "Description": "Pobočka, pro kterou zaměstnanec pracuje",
+                    "Type": "Pobočky",
+                    "OnDeleteAction": "protect",
+                    "Required": false
+                }
+            ]
+        }
+    },
+    "Datasets": [
+        {
+            "Name": "Zásilky",
+            "Description": "V tomto datasetu se vyskytují všchny zásilky bez ohledu na jejich stav.",
+            "Attributes": [
+                {
+                    "Name": "Identifikátor zásilky",
+                    "Description": "Identifikátor zásilky je číslo napsané na boku krabice se zásilkou.",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Zákazník",
+                    "Description": "Zákazník, který posílá zásilku",
+                    "Type": "Zákazníci",
+                    "Required": true,
+                    "Min": 1,
+                    "Max": 1,
+                    "OnDeleteAction": "cascade"
+                },
+                {
+                    "Name": "Status",
+                    "Description": "Status zásilky z výčtu statusů v datasetu Statusy.",
+                    "Type": "Statusy",
+                    "Required": true,
+                    "Min": 1,
+                    "Max": 1,
+                    "OnDeleteAction": "protect"
+                },
+                {
+                    "Name": "Adresa adresáta",
+                    "Description": "Adresa, na kterou se má zásilka poslat",
+                    "Type": "text"
+                },
+                {
+                    "Name": "Adresa odesílatele",
+                    "Description": "Adresa, na kterou se má zásilka poslat v případě nenalezení adresáta",
+                    "Type": "text"
+                },
+                {
+                    "Name": "Datum odeslání zásilky",
+                    "Description": "Datum, kdy byla zásilka odeslána",
+                    "Type": "datetime",
+                    "Required": true
+                },
+                {
+                    "Name": "Zodpovědná osoba",
+                    "Description": "Zaměstnanec, který má zásilku na starosti",
+                    "Type": "Zaměstnanci",
+                    "Min": 1,
+                    "Max": 1,
+                    "OnDeleteAction": "protect"
+                },
+                {
+                    "Name": "Současná poloha",
+                    "Description": "Současná poloha zásilky",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Cena zásilky",
+                    "Description": "Cena za celou zásilku",
+                    "Type": "float",
+                    "Required": true
+                },
+                {
+                    "Name": "Měna ceny zásilky",
+                    "Type": "Měny",
+                    "OnDeleteAction": "protect",
+                    "Required": true
+                },
+                {
+                    "Name": "Ukončená zásilka",
+                    "Description": "Je již zásilka ukončená?",
+                    "Type": "bool",
+                    "Required": true
+                }
+            ]
+        },
+        {
+            "Name": "Zákazníci",
+            "Description": "Tento dataset obsahuje zákazníky zásilkové společnosti.",
+            "Attributes": [
+                {
+                    "Name": "Jméno",
+                    "Description": "Jméno zákazníka",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Adresa",
+                    "Description": "Adresa zákazníka pro doručení zásilek",
+                    "Type": "text",
+                    "Required": true
+                }
+            ]
+        },
+        {
+            "Name": "Pobočky",
+            "Description": "Tento dataset obsahuje pobočky zásilkové firmy.",
+            "Attributes": [
+                {
+                    "Name": "Název",
+                    "Description": "Název pobočky",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Adresa",
+                    "Description": "Adresa pobočky",
+                    "Type": "text",
+                    "Required": true
+                }
+            ]
+        },
+        {
+            "Name": "Statusy",
+            "Description": "Tento dataset obsahuje jednotlivé statusy zásilek.",
+            "Attributes": [
+                {
+                    "Name": "Název",
+                    "Description": "Název statusu",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Popis",
+                    "Description": "Popis statusu",
+                    "Type": "text"
+                }
+            ]
+        },
+        {
+            "Name": "Měny",
+            "Description": "Tento dataset obsahuje jednotlivé měny.",
+            "Attributes": [
+                {
+                    "Name": "Název",
+                    "Description": "Název měny",
+                    "Type": "string",
+                    "Required": true
+                }
+            ]
+        },
+        {
+            "Name": "Pozice",
+            "Description": "Tento dataset obsahuje pozice v rámci firmy společně s popisem povinností pro danou pozici.",
+            "Attributes": [
+                {
+                    "Name": "Název",
+                    "Description": "Název pozice",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Povinnosti",
+                    "Description": "Popis povinností v rámci pozice",
+                    "Type": "text"
+                }
+            ]
+        }
+    ]
+}

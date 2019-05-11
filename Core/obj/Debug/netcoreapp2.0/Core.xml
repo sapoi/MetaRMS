@@ -1730,11 +1730,11 @@
         </member>
         <member name="M:Core.Repositories.DataRepository.GetAllByApplicationIdAndDatasetId(System.Int64,System.Int64)">
             <summary>
-            This methods returns List of DataModels filtered by application and dataset ids.
+            This methods returns collection of DataModels filtered by application and dataset ids.
             </summary>
             <param name="applicationId">Id of application to filter by.</param>
             <param name="datasetId">Id of dataset to filter by.</param>
-            <returns>List of DataModels with application and dataset ids from parameters.</returns>
+            <returns>Collection of DataModels with application and dataset ids from parameters.</returns>
         </member>
         <member name="M:Core.Repositories.DataRepository.SetData(SharedLibrary.Models.DataModel,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.Object}})">
             <summary>
@@ -1753,13 +1753,13 @@
         </member>
         <member name="M:Core.Repositories.DataRepository.GetAllByApplicationIdAndDatasetIdAndDataContentLike(System.Int64,System.Int64,System.String)">
             <summary>
-            This method returns list of DataModels for application and dataset from parametres, that also have 
+            This method returns collection of DataModels for application and dataset from parametres, that also have 
             dataDictionaryLike value from parametres in Data attribute. This is used when looking for references.
             </summary>
             <param name="applicationId">Id of application to filter by.</param>
             <param name="datasetId">Id of dataset to filter by.</param>
             <param name="dataDictionaryLike">Value to look for in Data attribute.</param>
-            <returns>List of DataModels with Data containing value from parameter dataDictionaryLike.</returns>
+            <returns>Collection of DataModels with Data containing value from parameter dataDictionaryLike.</returns>
         </member>
         <member name="T:Core.Repositories.RightsRepository">
             <summary>
@@ -1782,19 +1782,19 @@
         </member>
         <member name="M:Core.Repositories.RightsRepository.GetByApplicationIdAndName(System.Int64,System.String)">
             <summary>
-            This method returns List of RightsModels by application id and rights name.
+            This method returns collection of RightsModels by application id and rights name.
             Only one such should exist.
             </summary>
             <param name="applicationId">Id of application to filter by.</param>
             <param name="name">Name of the rights.</param>
-            <returns>List of RightsModels.</returns>
+            <returns>Collection of RightsModels.</returns>
         </member>
         <member name="M:Core.Repositories.RightsRepository.GetAllByApplicationId(System.Int64)">
             <summary>
-            This method returns List of RightsModels by application id.
+            This method returns collection of RightsModels by application id.
             </summary>
             <param name="applicationId">Id of application to filter by.</param>
-            <returns>List of all RightsModels for the application.</returns>
+            <returns>Collection of all RightsModels for the application.</returns>
         </member>
         <member name="M:Core.Repositories.RightsRepository.SetNameAndData(SharedLibrary.Models.RightsModel,System.String,System.Collections.Generic.Dictionary{System.Int64,SharedLibrary.Enums.RightsEnum})">
             <summary>
@@ -1843,17 +1843,17 @@
         </member>
         <member name="M:Core.Repositories.UserRepository.GetAllByApplicationId(System.Int64)">
             <summary>
-            This method returns all users for given application with Application and Rights included.
+            This method returns collection of all users for given application with Application and Rights included.
             </summary>
             <param name="applicationId">Id of application to filter by.</param>
-            <returns>List of all UserModels of application from parameter.</returns>
+            <returns>Collection of all UserModels of application from parameter.</returns>
         </member>
         <member name="M:Core.Repositories.UserRepository.GetByRightsId(System.Int64)">
             <summary>
-            This method returns List of UserModels by rights id.
+            This method returns collection of UserModels by rights id.
             </summary>
             <param name="rightsId">Id of rights to filter by.</param>
-            <returns>List of UserModels with rights id from parameter.</returns>
+            <returns>Collection of UserModels with rights id from parameter.</returns>
         </member>
         <member name="M:Core.Repositories.UserRepository.SetPassword(SharedLibrary.Models.UserModel,System.String)">
             <summary>
@@ -1888,12 +1888,12 @@
         </member>
         <member name="M:Core.Repositories.UserRepository.GetAllByApplicationIdAndDataContentLike(System.Int64,System.String)">
             <summary>
-            This method returns list of UserModels for application from parametres, that also have dataDictionaryLike 
+            This method returns collection of UserModels for application from parametres, that also have dataDictionaryLike 
             value from parametres in Data attribute. This is used when looking for references.
             </summary>
             <param name="applicationId">Id of application to filter by.</param>
             <param name="dataDictionaryLike">Value to look for in Data attribute.</param>
-            <returns>List of UserModels with Data containing value from parameter dataDictionaryLike.</returns>
+            <returns>Collection of UserModels with Data containing value from parameter dataDictionaryLike.</returns>
         </member>
         <member name="T:Core.Structures.GetBuilderPartialData">
             <summary>

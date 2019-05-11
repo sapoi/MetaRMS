@@ -281,7 +281,7 @@ namespace SharedLibrary.Helpers
                     parsedNumber = parsedYear;
                     break;
                 case "phone":
-                    if (!dataDictionaryValues[0].ToString().All(c => "0123456789!().-,".Contains(c)))
+                    if (!dataDictionaryValues[0].ToString().All(c => "0123456789!().-, ".Contains(c)))
                         hasTypeError = true;
                     break;
                 case "string":

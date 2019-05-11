@@ -68,14 +68,14 @@ namespace Core.Controllers.Data
 
             // Get data from database
             var dataRepository = new DataRepository(context);
-            var dataModelList = dataRepository.GetAllByApplicationIdAndDatasetId(authUserModel.ApplicationId, datasetDescriptor.Id);
+            var allDataModels = dataRepository.GetAllByApplicationIdAndDatasetId(authUserModel.ApplicationId, datasetDescriptor.Id);
 
             // Prepare data for client
             DataHelper dataHelper = new DataHelper(context, authUserModel.Application, datasetDescriptor.Id);
-            foreach (var item in dataModelList)
+            foreach (var item in allDataModels)
                 dataHelper.PrepareOneRecordForClient(item);
 
-            return Ok(dataModelList);
+            return Ok(allDataModels);
         }
 
         /// <summary>

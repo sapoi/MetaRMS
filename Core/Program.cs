@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+﻿using System.Net;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using SharedLibrary.StaticFiles;
 
 namespace Core
 {
@@ -20,19 +14,33 @@ namespace Core
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                // .UseKestrel(options =>
-                // {
-                //     // Easy mode (http only)
-                //     options.Listen(IPAddress.Any, 80); // HTTP port
+                .UseKestrel(options =>
+                {
+                    // With debug configuration the usage of HTTPS protocol depends on the settings
+                    // of Constants.UseHttps variable, but with release configuration HTTPS
+                    // protocol is disabled
+                    #if DEBUG
+                        if (Constants.UseHttps)
+                        {
+                            // HTTPS on standard HTTPS port 443
+                            options.Listen(IPAddress.Any, 443, listenOptions => 
+                            {
+                                listenOptions.NoDelay = false;
+                                // Certificate
+                                listenOptions.UseHttps(Constants.HttpsCertificatePath, Constants.HttpsCertificatePassword);
+                            });
+                        }
+                        else
+                        {
+                            // HTTP on standard HTTP port 80
+                            options.Listen(IPAddress.Any, 80);
+                        }
+                    #else
+                        // HTTP on standard HTTP port 80
+                        options.Listen(IPAddress.Any, 80);
+                    #endif
 
-                //     // Verbose
-                //     options.Listen(IPAddress.Any, 443, listenOptions => // HTTPS port
-                //     {
-                //         listenOptions.NoDelay = false;
-                //         // Enable https
-                //         listenOptions.UseHttps("/Users/sapoi/Desktop/tmp_https_certificate/certificate.pfx", "PEMpass");
-                //     });
-                // })
+                })
                 .UseStartup<Startup>()
                 .Build();
     }

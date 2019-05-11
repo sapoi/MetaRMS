@@ -1,0 +1,75 @@
+{
+    "ApplicationName": "My ToDo list",
+    "LoginApplicationName": "todo_list",
+    "DefaultLanguage": "en",
+    "SystemDatasets": {
+        "UsersDatasetDescriptor": {
+            "Name": "Users",
+            "PasswordAttribute": {
+                "Name": "Password",
+                "Type": "password",
+                "Required": true
+            },
+            "Attributes": [
+                {
+                    "Name": "Username",
+                    "Description": "Login username",
+                    "Type": "username",
+                    "Required": true,
+                    "Unique": true
+                }
+            ]
+        }
+    },
+    "Datasets": [
+        {
+            "Name": "ToDo list",
+            "Description": "",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Description": "",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Deadline",
+                    "Description": "",
+                    "Type": "datetime"
+                },
+                {
+                    "Name": "Status",
+                    "Description": "",
+                    "Type": "Statuses",
+                    "OnDeleteAction": "protect"
+                },
+                {
+                    "Name": "Description",
+                    "Type": "text"
+                },
+                {
+                    "Name": "Related tasks",
+                    "Description": "",
+                    "Type": "ToDo list",
+                    "OnDeleteAction": "setEmpty"
+                },
+                {
+                    "Name": "Owner",
+                    "Description": "",
+                    "Type": "Users",
+                    "OnDeleteAction": "cascade"
+                }
+            ]
+        },
+        {
+            "Name": "Statuses",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Type": "string",
+                    "Required": true
+                }
+            ]
+        }
+    ]
+}

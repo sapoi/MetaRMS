@@ -9,6 +9,8 @@ using Core.Repositories;
 using SharedLibrary.Enums;
 using SharedLibrary.Structures;
 using SharedLibrary.Helpers;
+using System.Linq;
+using System;
 
 namespace Core.Controllers.Rights
 {
@@ -73,14 +75,12 @@ namespace Core.Controllers.Rights
             
             // Check if no users are using rights to delete
             var userRepository = new UserRepository(context);
-            List<UserModel> users = userRepository.GetByRightsId(rightsModel.Id);
-            if (users.Count > 0)
+            var users = userRepository.GetByRightsId(rightsModel.Id);
+            if (users.Count() > 0)
             {
-                string usernames = users[0].GetUsername();
-                for (int i = 1; i < users.Count; i++)
-                    usernames += ", " + users[i].GetUsername();
+                var usernames = String.Join(", ", users.Select(u => u.GetUsername()));
                 messages.Add(new Message(MessageTypeEnum.Error, 
-                                         4003, 
+                                         4004, 
                                          new List<string>(){ rightsModel.Name,
                                                              usernames
                                                             }));

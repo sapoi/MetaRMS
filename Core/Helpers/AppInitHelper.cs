@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using SharedLibrary.Descriptors;
 using SharedLibrary.Enums;
 using SharedLibrary.Models;
+using SharedLibrary.StaticFiles;
 
 namespace Core.Helpers
 {
@@ -70,17 +71,17 @@ namespace Core.Helpers
             // Create SMTP client
             var client = new SmtpClient
                 {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
-                    EnableSsl = true,
+                    Host = Constants.AppInitEmailHost,
+                    Port = Constants.AppInitEmailPort,
+                    EnableSsl = Constants.AppInitEmailEnableSsl,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential("sapoiapps@gmail.com", "sapoisapoi")
+                    Credentials = new NetworkCredential(Constants.AppInitEmail, Constants.AppInitEmailPassword)
                 };
 
             // Create message
             MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("sapoiapps@gmail.com");
+            mailMessage.From = new MailAddress(Constants.AppInitEmail);
             mailMessage.To.Add(email);
             mailMessage.Body = $"Application Name: {loginApplicationName} \nUsername: admin \nPassword: {password}";
             mailMessage.Subject = $"MetaRMS - {applicationName} admin login credentials";

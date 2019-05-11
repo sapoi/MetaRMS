@@ -1,5 +1,7 @@
 using System;
 using System.Net.Http;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using SharedLibrary.StaticFiles;
 
 namespace SharedLibrary.Services
@@ -18,12 +20,12 @@ namespace SharedLibrary.Services
             /// <summary>
             /// Local base address to connect to the server
             /// </summary>
-            protected Uri baseAddress = new Uri(Constants.LocalServerBaseAddress);
+            protected Uri baseAddress = new Uri(Constants.DebugServerBaseAddress);
         #else
             /// <summary>
             /// Production base address to connect to the server
             /// </summary>
-            protected Uri baseAddress = new Uri(Constants.SapoiAspifyServerBaseAddress);
+            protected Uri baseAddress = new Uri(Constants.ReleaseServerBaseAddress);
         #endif
         /// <summary>
         /// BaseService constructor for client initialization

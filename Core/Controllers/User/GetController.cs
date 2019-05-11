@@ -53,14 +53,14 @@ namespace Core.Controllers.User
 
             // Get data from database
             var userRepository = new UserRepository(context);
-            var userModelList = userRepository.GetAllByApplicationId(authUserModel.ApplicationId);
+            var allUserModels = userRepository.GetAllByApplicationId(authUserModel.ApplicationId);
 
             // Prepare data for client
             DataHelper dataHelper = new DataHelper(context, authUserModel.Application, (long)SystemDatasetsEnum.Users);
-            foreach (var row in userModelList)
+            foreach (var row in allUserModels)
                 dataHelper.PrepareOneRecordForClient(row);
 
-            return Ok(userModelList);
+            return Ok(allUserModels);
         }
 
         /// <summary>

@@ -1,0 +1,353 @@
+{
+    "ApplicationName": "Aplicant tracking system",
+    "LoginApplicationName": "ats",
+    "DefaultLanguage": "en",
+    "SystemDatasets": {
+        "UsersDatasetDescriptor": {
+            "Name": "Employees",
+            "Description": "This dataset contains all employees with access to the ATS.",
+            "PasswordAttribute": {
+                "Name": "Password",
+                "Description": "Employee's password. It is required that the password contains lower- and upper-case letter and number and is between 10 and 20 characters long.",
+                "Type": "password",
+                "Required": true,
+                "Safer": true,
+                "Min": 10,
+                "Max": 20
+            },
+            "Attributes": [
+                {
+                    "Name": "Username",
+                    "Description": "Username used for login",
+                    "Type": "username",
+                    "Required": true,
+                    "Unique": true
+                },
+                {
+                    "Name": "Name",
+                    "Description": "Full name of the employee",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Position",
+                    "Description": "Employee's position within the company",
+                    "Type": "Positions",
+                    "OnDeleteAction": "protect",
+                    "Required": true
+                },
+                {
+                    "Name": "Email",
+                    "Description": "Employee's email",
+                    "Type": "email"
+                },
+                {
+                    "Name": "Telephone",
+                    "Description": "Employee's phone",
+                    "Type": "phone"
+                },
+                {
+                    "Name": "LinkedIn",
+                    "Description": "Employee's LinkedIn account",
+                    "Type": "url"
+                },
+                {
+                    "Name": "Boss",
+                    "Description": "Employee's boss and person responsible for checking responsibilities",
+                    "Type": "Employees",
+                    "Max": 1,
+                    "OnDeleteAction": "protect",
+                    "Required": false
+                },
+                {
+                    "Name": "Start date",
+                    "Description": "The date when the employee has started working for the company",
+                    "Type": "datetime",
+                    "Required": true
+                }
+            ]
+        }
+    },
+    "Datasets": [
+        {
+            "Name": "Candidates",
+            "Description": "This dataset contains candidates. It is important to fill all the important information about a candidate. This especially means fill all the contact information.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Description": "Full name of the candidate",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Birth date",
+                    "Description": "Date when the candidate was born",
+                    "Type": "date",
+                    "Required": true
+                },
+                {
+                    "Name": "Specializations",
+                    "Description": "Candidate's specializations. Select between 3 and 10 specializations. If the specialization is not in the list please add in in the Specializations dataset. If you are not allowed to create new specializations ask your boss to add it.",
+                    "Type": "Specializations",
+                    "Required": true,
+                    "Min": 3,
+                    "Max": 10,
+                    "OnDeleteAction": "setEmpty"
+                },
+                {
+                    "Name": "Details",
+                    "Description": "Details about the candidate. Information about previous jobs, personality or interests belong here.",
+                    "Type": "text"
+                },
+                {
+                    "Name": "Languages",
+                    "Description": "Languages the candidate can speak. If the language is not in the list please add in in the Languages dataset. If you are not allowed to create new languages ask your boss to add it.",
+                    "Type": "Languages",
+                    "OnDeleteAction": "setEmpty"
+                },
+                {
+                    "Name": "Highest education",
+                    "Description": "The highest education of the candidate. If the education type is not in the list please add in in the Education types dataset. If you are not allowed to create new education types ask your boss to add it.",
+                    "Type": "Education types",
+                    "OnDeleteAction": "setEmpty"
+                },
+                {
+                    "Name": "Minimum wage",
+                    "Description": "Minimal wage the candidate requires. When filling the wage, do not forget to fill the Wage units as well.",
+                    "Type": "float"
+                },
+                {
+                    "Name": "Wage units",
+                    "Type": "Wage units",
+                    "OnDeleteAction": "protect"
+                },
+                {
+                    "Name": "LinkedIn profile",
+                    "Description": "Link to candidate's LinkedIn profile",
+                    "Type": "url"
+                },
+                {
+                    "Name": "Email",
+                    "Description": "Candidate's email",
+                    "Type": "email"
+                },
+                {
+                    "Name": "Telephone",
+                    "Description": "Candidate's phone",
+                    "Type": "phone"
+                },
+                {
+                    "Name": "Available start date",
+                    "Description": "Date when the candidate can start a job",
+                    "Type": "month"
+                }
+            ]
+        },
+        {
+            "Name": "Jobs",
+            "Description": "This dataset contains jobs.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Description": "Name of the position.",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Open from",
+                    "Description": "Date when the job has been opened.",
+                    "Type": "date",
+                    "Required": true
+                },
+                {
+                    "Name": "Specializations",
+                    "Description": "Specializations necessary for the job. Select between 3 and 10 specializations. If the specialization is not in the list please add in in the Specializations dataset. If you are not allowed to create new specializations ask your boss to add it.",
+                    "Type": "Specializations",
+                    "Required": true,
+                    "Min": 3,
+                    "Max": 10,
+                    "OnDeleteAction": "setEmpty"
+                },
+                {
+                    "Name": "Description",
+                    "Description": "Job description.",
+                    "Type": "text"
+                },
+                {
+                    "Name": "Languages",
+                    "Description": "Languages necessary for the position. If the language is not in the list please add it in the Languages dataset. If you are not allowed to create new languages ask your boss to add it.",
+                    "Type": "Languages",
+                    "OnDeleteAction": "setEmpty"
+                },
+                {
+                    "Name": "Education",
+                    "Description": "The lowest education necessary for the position. If the education type is not in the list please add in in the Education types dataset. If you are not allowed to create new education types ask your boss to add it.",
+                    "Type": "Education types",
+                    "OnDeleteAction": "setEmpty"
+                },
+                {
+                    "Name": "Maximum wage",
+                    "Description": "Maximum wage for the position. When filling the wage, do not forget to fill the Wage units as well.",
+                    "Type": "float"
+                },
+                {
+                    "Name": "Wage units",
+                    "Type": "Wage units",
+                    "OnDeleteAction": "protect"
+                }
+            ]
+        },
+        {
+            "Name": "Interviews",
+            "Description": "This dataset contains interviews. Each interview in between a candidate an employee mentioned in the Created by field. If the interview builds on a previous interview it is important to mention this interview in the Previous interview field. Also in the following interview is arranged it should be mentioned in the Following interview field.",
+            "Attributes": [
+                {
+                    "Name": "Candidate",
+                    "Description": "Candidate that has been interviewed.",
+                    "Type": "Candidates",
+                    "Required": true,
+                    "Min": 1,
+                    "Max": 1,
+                    "OnDeleteAction": "cascade"
+                },
+                {
+                    "Name": "Job",
+                    "Description": "Job about which was the candidate interviewed.",
+                    "Type": "Jobs",
+                    "Required": true,
+                    "Min": 1,
+                    "Max": 1,
+                    "OnDeleteAction": "protect"
+                },
+                {
+                    "Name": "Date and time",
+                    "Description": "Date and time of the interview. If the interview in planned in the future, fill the planned date and time.",
+                    "Type": "datetime",
+                    "Required": true
+                },
+                {
+                    "Name": "Created by",
+                    "Description": "Emplyee who has created the interview.",
+                    "Type": "Employees",
+                    "Min": 1,
+                    "Max": 1,
+                    "Required": true,
+                    "OnDeleteAction": "protect"
+                },
+                {
+                    "Name": "Details",
+                    "Description": "Details about the interview.",
+                    "Type": "text"
+                },
+                {
+                    "Name": "Interview result",
+                    "Description": "Result of the interview. If the interview result is not in the list please add in in the Interview results dataset. If you are not allowed to create new interview results ask your boss to add it.",
+                    "Type": "Interview results",
+                    "Min": 1,
+                    "Max": 1,
+                    "OnDeleteAction": "setEmpty"
+                },
+                {
+                    "Name": "Previous interview",
+                    "Description": "In case this is not the first interview with the candidate on the position, select the previous interview.",
+                    "Type": "Interviews",
+                    "Max": 1,
+                    "OnDeleteAction": "setEmpty"
+                },
+                {
+                    "Name": "Following interview",
+                    "Description": "In case the following interview has been agreen on and created, select it.",
+                    "Type": "Interviews",
+                    "Max": 1,
+                    "OnDeleteAction": "setEmpty"
+                }
+            ]
+        },
+        {
+            "Name": "Specializations",
+            "Description": "This dataset contains enumeration of specializations.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Description": "Name of the specialization.",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Subspecializations",
+                    "Description": "List of subspecializations.",
+                    "Type": "Specializations",
+                    "OnDeleteAction": "setEmpty"
+                }
+            ]
+        },
+        {
+            "Name": "Interview results",
+            "Description": "This dataset contains enumeration of interview results.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Description": "Name",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Color",
+                    "Description": "Color of the result",
+                    "Type": "color",
+                    "Required": true
+                }
+            ]
+        },
+        {
+            "Name": "Education types",
+            "Description": "This dataset contains enumeration of education levels.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Type": "string",
+                    "Required": true
+                }
+            ]
+        },
+        {
+            "Name": "Languages",
+            "Description": "This dataset contains enumeration of languages.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Type": "string",
+                    "Required": true
+                }
+            ]
+        },
+        {
+            "Name": "Positions",
+            "Description": "Positions of employees.",
+            "Attributes": [
+                {
+                    "Name": "Name",
+                    "Description": "Name of the position.",
+                    "Type": "string",
+                    "Required": true
+                },
+                {
+                    "Name": "Responsibilities",
+                    "Description": "Employee's responsibilities.",
+                    "Type": "text"
+                }
+            ]
+        },
+        {
+            "Name": "Wage units",
+            "Description": "This dataset contains enumeration of wage units.",
+            "Attributes": [
+                {
+                    "Name": "Wage unit",
+                    "Type": "string",
+                    "Required": true
+                }
+            ]
+        }
+    ]
+}

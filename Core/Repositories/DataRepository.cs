@@ -31,14 +31,14 @@ namespace Core.Repositories
                                              d.Id == dataId);
         }
         /// <summary>
-        /// This methods returns List of DataModels filtered by application and dataset ids.
+        /// This methods returns collection of DataModels filtered by application and dataset ids.
         /// </summary>
         /// <param name="applicationId">Id of application to filter by.</param>
         /// <param name="datasetId">Id of dataset to filter by.</param>
-        /// <returns>List of DataModels with application and dataset ids from parameters.</returns>
-        public List<DataModel> GetAllByApplicationIdAndDatasetId(long applicationId, long datasetId)
+        /// <returns>Collection of DataModels with application and dataset ids from parameters.</returns>
+        public IQueryable<DataModel> GetAllByApplicationIdAndDatasetId(long applicationId, long datasetId)
         {
-            return model.Where(d => d.ApplicationId == applicationId && d.DatasetId == datasetId).ToList();
+            return model.Where(d => d.ApplicationId == applicationId && d.DatasetId == datasetId);
         }
         /// <summary>
         /// This method sets data to a DataModel.
@@ -64,18 +64,17 @@ namespace Core.Repositories
                         .ToDictionary(key => key.Key, value => value.Select(d => d.Id).ToList());
         }
         /// <summary>
-        /// This method returns list of DataModels for application and dataset from parametres, that also have 
+        /// This method returns collection of DataModels for application and dataset from parametres, that also have 
         /// dataDictionaryLike value from parametres in Data attribute. This is used when looking for references.
         /// </summary>
         /// <param name="applicationId">Id of application to filter by.</param>
         /// <param name="datasetId">Id of dataset to filter by.</param>
         /// <param name="dataDictionaryLike">Value to look for in Data attribute.</param>
-        /// <returns>List of DataModels with Data containing value from parameter dataDictionaryLike.</returns>
-        public List<DataModel> GetAllByApplicationIdAndDatasetIdAndDataContentLike(long applicationId, long datasetId, string dataDictionaryLike)
+        /// <returns>Collection of DataModels with Data containing value from parameter dataDictionaryLike.</returns>
+        public IQueryable<DataModel> GetAllByApplicationIdAndDatasetIdAndDataContentLike(long applicationId, long datasetId, string dataDictionaryLike)
         {
             return model.Where(d => d.ApplicationId == applicationId && d.DatasetId == datasetId && 
-                               d.Data.Contains(dataDictionaryLike))
-                        .ToList();
+                               d.Data.Contains(dataDictionaryLike));
         }
     }
 }
