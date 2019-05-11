@@ -1,8 +1,0 @@
-/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/SharedLibrary/bin/Release/netstandard2.0/SharedLibrary.deps.json
-/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/SharedLibrary/bin/Release/netstandard2.0/SharedLibrary.dll
-/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/SharedLibrary/bin/Release/netstandard2.0/SharedLibrary.pdb
-/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/SharedLibrary/obj/Release/netstandard2.0/SharedLibrary.csproj.CoreCompileInputs.cache
-/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/SharedLibrary/obj/Release/netstandard2.0/SharedLibrary.AssemblyInfoInputs.cache
-/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/SharedLibrary/obj/Release/netstandard2.0/SharedLibrary.AssemblyInfo.cs
-/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/SharedLibrary/obj/Release/netstandard2.0/SharedLibrary.dll
-/Users/sapoi/Dropbox/bakalarka/180619/MetaRMS/SharedLibrary/obj/Release/netstandard2.0/SharedLibrary.pdb
