@@ -58,7 +58,17 @@ namespace Core.Controllers.User
             // Prepare data for client
             DataHelper dataHelper = new DataHelper(context, authUserModel.Application, (long)SystemDatasetsEnum.Users);
             foreach (var row in allUserModels)
+            {
                 dataHelper.PrepareOneRecordForClient(row);
+                // Remove unnecessary data
+                row.Application.Users = null;
+                row.Application.Rights = null;
+                row.Application.Datas = null;
+                row.PasswordHash = null;
+                row.PasswordSalt = null;
+                row.Rights.Application = null;
+                row.Rights.Users = null;
+            }
 
             return Ok(allUserModels);
         }
@@ -108,6 +118,15 @@ namespace Core.Controllers.User
             // Prepare data for client
             DataHelper dataHelper = new DataHelper(context, authUserModel.Application, (long)SystemDatasetsEnum.Users);
             dataHelper.PrepareOneRecordForClient(userModel);
+
+            // Remove unnecessary data
+            userModel.Application.Users = null;
+            userModel.Application.Rights = null;
+            userModel.Application.Datas = null;
+            userModel.PasswordHash = null;
+            userModel.PasswordSalt = null;
+            userModel.Rights.Application = null;
+            userModel.Rights.Users = null;
 
             return Ok(userModel);
         }

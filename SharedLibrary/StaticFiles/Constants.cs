@@ -8,7 +8,7 @@ namespace SharedLibrary.StaticFiles
         /// <summary>
         /// Base address of API used with debug configuration on HTTP or HTTPS based on Constants.UseHttp value
         /// </summary>
-        public static string DebugServerBaseAddress => UseHttps ? "https://0.0.0.0:443/api/" : "http://localhost:80/api/";
+        public static string DebugServerBaseAddress => UseHttps ? "https://localhost:443/api/" : "http://localhost:80/api/";
         /// <summary>
         /// Base address of API used with release configuration.
         /// </summary>
@@ -22,8 +22,8 @@ namespace SharedLibrary.StaticFiles
         /// of Constants.UseHttps variable, but with release configuration HTTPS protocol is disabled
         /// </summary>
         public static bool UseHttps => false;
-        public static string HttpsCertificatePath => "/Users/sapoi/Desktop/tmp_https_certificate/certificate.pfx";
-        public static string HttpsCertificatePassword => "PEMpass";
+        public static string HttpsCertificatePath => "/Users/sapoi/Desktop/tmp_cert2/localhost.pfx";
+        public static string HttpsCertificatePassword => "certificate_password";
         /// <summary>
         /// Length of salt hashed together with a password.
         /// </summary>

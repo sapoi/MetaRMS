@@ -73,7 +73,11 @@ namespace Core.Controllers.Data
             // Prepare data for client
             DataHelper dataHelper = new DataHelper(context, authUserModel.Application, datasetDescriptor.Id);
             foreach (var item in allDataModels)
+            {
                 dataHelper.PrepareOneRecordForClient(item);
+                // Remove unnecessary data
+                item.Application = null;
+            }
 
             return Ok(allDataModels);
         }
@@ -137,6 +141,9 @@ namespace Core.Controllers.Data
             // Prepare data for client
             DataHelper dataHelper = new DataHelper(context, authUserModel.Application, datasetDescriptor.Id);
             dataHelper.PrepareOneRecordForClient(dataModel);
+
+            // Remove unnecessary data
+            dataModel.Application = null;
             
             return Ok(dataModel);
         }

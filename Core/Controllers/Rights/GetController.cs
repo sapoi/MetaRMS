@@ -55,6 +55,13 @@ namespace Core.Controllers.Rights
             var rightsRepository = new RightsRepository(context);
             var rightsModelList = rightsRepository.GetAllByApplicationId(userModel.ApplicationId);
 
+            // Remove unnecessary data
+            foreach (var item in rightsModelList)
+            {
+                item.Application = null;
+                item.Users = null;
+            }
+
             return Ok(rightsModelList);
         }
 
@@ -99,6 +106,10 @@ namespace Core.Controllers.Rights
                                                   new List<string>(){ id.ToString() }));
                 return BadRequest(messages);
             }
+
+            // Remove unnecessary data
+            rightsModel.Application = null;
+            rightsModel.Users = null;
             
             return Ok(rightsModel);
         }

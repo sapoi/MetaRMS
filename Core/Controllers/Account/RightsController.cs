@@ -43,8 +43,13 @@ namespace Core.Controllers.Account
                 return Unauthorized();
 
             // Authorization - none, because every logged user is authorized to read own rights.
+
+            // Remove unnecessary data
+            var rightsModel = authUserModel.Rights;
+            rightsModel.Application = null;
+            rightsModel.Users = null;
             
-            return Ok(authUserModel.Rights);
+            return Ok(rightsModel);
         }
 
     }
