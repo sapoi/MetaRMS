@@ -15,7 +15,7 @@ Our solution contains an ASP.NET Core server application and an example web clie
 ```
 ├── .vscode - configuration for VisualStudio Code
 ├── Core - Core project
-├── Shared library - SharedLibrary project
+├── SharedLibrary - SharedLibrary project
 ├── MetaRMS.sln - solution file
 ├── thesis.pdf - text of the thesis
 └── LICENSE.txt - licensing information
