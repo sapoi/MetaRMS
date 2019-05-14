@@ -12,8 +12,8 @@
                 "Description": "optional password description - useful especially if safer is set to true",
                 "Type": "password",
                 "Required": true,
-                "Safer": "optional boolean value, true means that the password must contain lower- and upper-case character and number, if this value is not present false is filled automatically",
-                "Min": "optional positive integer number value of minimum password length",
+                "Safer": "optional boolean value, true means that the password must be at leats 8 characters long, must contain lower- and upper-case character and number, if this value is not present false is filled automatically",
+                "Min": "optional positive integer number value of minimal password length",
                 "Max": "optional positive integer number value of maximal password length"
             },
             "Attributes": [
@@ -23,11 +23,10 @@
                     "Type": "username",
                     "Required": true,
                     "Unique": true,
-                    "Min": "optional positive integer number value of minimum username length",
+                    "Min": "optional positive integer number value of minimal username length",
                     "Max": "optional positive integer number value of maximal username length"
                 }
                 // Other system users dataset attributes ... - the structure is the same as for attributes in the the user-defined datasets described below
-                // Except that reference type attributes cannot have OnDeleteFunction set to cascade
             ]
         }
     },
@@ -43,8 +42,8 @@
                     "Description": "optional attribute description",
                     "Type": "type of attribute data, available values for basic type are color, date, datetime, email, month, int, float, year, phone, string, time, url, bool, text",
                     "Required": "optional boolean value, if set to true, the attribute is required to be filled, if this value is not present false is filled automatically",
-                    "Min": "optional positive integer number value that means for numeric types (int, float, year) minimal value and for text types (text, string, username, password) means minimal string length",
-                    "Max": "optional positive integer number value that means for numeric types (int, float, year) maximal value and for text types (text, string, username, password) means maximal string length"
+                    "Min": "optional integer number value that means for numeric types (int, float, year) minimum value and for text types (text, string, username, password) means minimal string length",
+                    "Max": "optional integer number value that means for numeric types (int, float, year) maximum value and for text types (text, string, username, password) means maximal string length"
                 },
                 {
                     // Example of attribute of type reference
